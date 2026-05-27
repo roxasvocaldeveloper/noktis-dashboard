@@ -999,13 +999,13 @@ function updateTaskCounter() {
 
         <!-- Spotify Audience: Top Cities -->
         <div class="glass-card p-5 rounded-2xl animate-entrance" style="animation-delay:.3s">
-          <div class="flex items-center gap-2 mb-4">
-            <span class="material-symbols-outlined text-spotify-green text-[18px]">location_on</span>
-            <h4 class="text-label-md font-bold text-on-surface">Top Cities · Monthly Listeners</h4>
-            <span class="text-[10px] text-outline ml-auto">Audience · Songstats</span>
+          <div class="flex items-center gap-2 mb-3">
+            <span class="material-symbols-outlined text-spotify-green text-[16px]">location_on</span>
+            <h4 class="text-label-md font-bold text-on-surface">Audience · Top Cities per Monthly Listeners</h4>
+            <span class="text-[10px] text-outline ml-auto">Songstats</span>
           </div>
-          <div id="audience-spotify-cities" class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-0.5">
-            <div class="text-outline text-[11px] col-span-2">Caricamento...</div>
+          <div id="audience-spotify-cities" class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
+            <div class="text-outline text-[11px] py-2">Caricamento...</div>
           </div>
         </div>
 
@@ -1075,18 +1075,6 @@ function updateTaskCounter() {
               <div class="w-full bg-surface-container-high rounded-full h-2 mb-1"><div class="bg-tiktok-cyan h-2 rounded-full" style="width:30%"></div></div>
               <p class="text-[11px] text-outline">155 / 500 · 31%</p>
             </div>
-          </div>
-        </div>
-
-        <!-- TikTok Audience: Creator Reach by Country -->
-        <div class="glass-card p-5 rounded-2xl animate-entrance" style="animation-delay:.2s">
-          <div class="flex items-center gap-2 mb-4">
-            <span class="material-symbols-outlined text-tiktok-cyan text-[18px]">public</span>
-            <h4 class="text-label-md font-bold text-on-surface">Creator Reach · Paesi</h4>
-            <span class="text-[10px] text-outline ml-auto">Audience · Songstats</span>
-          </div>
-          <div id="audience-tiktok-countries" class="grid grid-cols-2 md:grid-cols-5 gap-x-6 gap-y-0.5">
-            <div class="text-outline text-[11px]">Caricamento...</div>
           </div>
         </div>
 
@@ -1325,6 +1313,18 @@ function updateTaskCounter() {
         </div>
 
 
+        <!-- TikTok Audience: Creator Reach by Country -->
+        <div class="glass-card p-5 rounded-2xl">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="material-symbols-outlined text-tiktok-cyan text-[16px]">public</span>
+            <h4 class="text-label-md font-bold text-on-surface">Audience · Creator Reach per Paese</h4>
+            <span class="text-[10px] text-outline ml-auto">Songstats</span>
+          </div>
+          <div id="audience-tiktok-countries" class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
+            <div class="text-outline text-[11px] py-2">Caricamento...</div>
+          </div>
+        </div>
+
       </div><!-- /view-tiktok-ig -->
 
       <!-- Instagram -->
@@ -1533,6 +1533,18 @@ function updateTaskCounter() {
         </div>
 
 
+        <!-- Instagram Audience -->
+        <div class="glass-card p-5 rounded-2xl">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="material-symbols-outlined text-[#E1306C] text-[16px]">public</span>
+            <h4 class="text-label-md font-bold text-on-surface">Audience · Instagram</h4>
+            <span class="text-[10px] text-outline ml-auto">Songstats</span>
+          </div>
+          <div id="audience-instagram-note">
+            <p class="text-[11px] text-outline text-center py-2">Caricamento...</p>
+          </div>
+        </div>
+
       </div><!-- /view-instagram -->
 
       <!-- YouTube -->
@@ -1602,18 +1614,6 @@ function updateTaskCounter() {
               <div class="w-full bg-surface-container-high rounded-full h-2 mb-1"><div class="bg-[#FF0000]/60 h-2 rounded-full" style="width:96%"></div></div>
               <p class="text-[11px] text-outline">95,700 / 100,000 · 96%</p>
             </div>
-          </div>
-        </div>
-
-        <!-- YouTube Audience: Creator Reach by Country -->
-        <div class="glass-card p-5 rounded-2xl animate-entrance">
-          <div class="flex items-center gap-2 mb-4">
-            <span class="material-symbols-outlined text-[#FF0000] text-[18px]">public</span>
-            <h4 class="text-label-md font-bold text-on-surface">Creator Reach · Paesi</h4>
-            <span class="text-[10px] text-outline ml-auto">Audience · Songstats</span>
-          </div>
-          <div id="audience-youtube-countries" class="grid grid-cols-2 md:grid-cols-5 gap-x-6 gap-y-0.5">
-            <div class="text-outline text-[11px]">Caricamento...</div>
           </div>
         </div>
 
@@ -1783,6 +1783,17 @@ function updateTaskCounter() {
           </div>
         </div>
 
+        <!-- YouTube Audience: Creator Reach by Country -->
+        <div class="glass-card p-5 rounded-2xl">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="material-symbols-outlined text-[#FF0000] text-[16px]">public</span>
+            <h4 class="text-label-md font-bold text-on-surface">Audience · Creator Reach per Paese</h4>
+            <span class="text-[10px] text-outline ml-auto">Songstats</span>
+          </div>
+          <div id="audience-youtube-countries" class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
+            <div class="text-outline text-[11px] py-2">Caricamento...</div>
+          </div>
+        </div>
 
       </div>
 
@@ -1821,13 +1832,13 @@ function updateTaskCounter() {
 
         <!-- Apple Music Audience: Chart Countries -->
         <div class="glass-card p-5 rounded-2xl">
-          <div class="flex items-center gap-2 mb-4">
-            <span class="material-symbols-outlined text-[#FA243C] text-[18px]">public</span>
-            <h4 class="text-label-md font-bold text-on-surface">Paesi in Classifica · Apple Music</h4>
-            <span class="text-[10px] text-outline ml-auto">Audience · Songstats</span>
+          <div class="flex items-center gap-2 mb-3">
+            <span class="material-symbols-outlined text-[#FA243C] text-[16px]">public</span>
+            <h4 class="text-label-md font-bold text-on-surface">Audience · Paesi in Classifica Apple Music</h4>
+            <span class="text-[10px] text-outline ml-auto">Songstats</span>
           </div>
-          <div id="audience-apple-countries" class="flex flex-wrap gap-2">
-            <div class="text-outline text-[11px]">Caricamento...</div>
+          <div id="audience-apple-countries" class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
+            <div class="text-outline text-[11px] py-2">Caricamento...</div>
           </div>
         </div>
 
@@ -2320,41 +2331,95 @@ function updateTaskCounter() {
 
 <script>
 // ── Track Playlists Modal ──
-function openTrackPlaylists() {
+// Cache of track-specific playlists loaded from API
+window._trackPlaylists = null;
+
+async function openTrackPlaylists() {
   const modal = document.getElementById('track-playlists-modal');
   const listEl = document.getElementById('tpl-list');
   modal.style.removeProperty('display');
   document.body.style.overflow = 'hidden';
+  listEl.innerHTML = '<p class="text-center text-outline text-[12px] py-6">Caricamento playlist...</p>';
 
-  // Try to grab live data from pl-active (already populated by API)
-  const liveRows = document.querySelectorAll('#pl-active a');
-  if (liveRows && liveRows.length > 0) {
-    listEl.innerHTML = Array.from(liveRows).map(r => r.outerHTML).join('');
-  } else {
-    // Static fallback — most prominent playlists
-    const staticPls = [
-      { name:'Calm songs but sad but comforting', followers:'177K', img:'https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84be3d12c630139ffb11534219' },
-      { name:'Best Pop Music 2025', followers:'160K', img:'https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84c50045346e894c55bf5dcb0f' },
-      { name:'Tik Tok Saddest Songs 2026', followers:'151K', img:'https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84b8fef7bc9526cb1ad972acb6' },
-      { name:'songs that awaken the inner strip…', followers:'143K', img:'https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da847b89a728fcc1090f6c3d8eb1' },
-      { name:'Suicide thoughts 🫀', followers:'110K', img:'https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84be3d12c630139ffb11534219' },
-      { name:'TOP POP HITS', followers:'18.8K', img:'https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84c50045346e894c55bf5dcb0f' },
-      { name:'Road Trip | Summer Hits 2026', followers:'10.1K', img:'https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84b8fef7bc9526cb1ad972acb6' },
-      { name:'Nordic Noir 🌙', followers:'8K', img:'https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84be3d12c630139ffb11534219' },
-    ];
-    listEl.innerHTML = staticPls.map(p => `
-      <div class="flex justify-between items-center bg-surface-container/30 p-3 rounded-lg border border-white/5 hover:border-spotify-green/30 transition-colors">
-        <div class="flex items-center gap-3">
-          <img src="${p.img}" class="w-10 h-10 rounded-lg object-cover flex-shrink-0" alt="" onerror="this.style.display='none'">
-          <p class="text-label-md font-bold text-on-surface">${p.name}</p>
-        </div>
-        <div class="text-right flex-shrink-0 ml-3">
-          <p class="text-label-sm text-spotify-green font-bold">${p.followers}</p>
-          <p class="text-[9px] text-outline">followers</p>
-        </div>
-      </div>`).join('');
+  // Use cached data if available
+  if (window._trackPlaylists) {
+    renderTrackPlaylists(window._trackPlaylists, listEl);
+    return;
   }
+
+  // Try to get track-specific playlists from activities filtered by track name
+  // Also try track_playlists endpoint (may 404 on enterprise)
+  let playlists = [];
+  const TRACK_KEYWORDS = ['i killed all your plants', 'killed all your plants'];
+
+  try {
+    // 1. Try activities endpoint — filter by track name in activity_text
+    const rAct = await fetch('/api/activities?songstats_artist_id=snkjruw5&source=spotify&limit=200');
+    if (rAct.ok) {
+      const dAct = await rAct.json();
+      const acts = (dAct.data || []).filter(a => {
+        const txt = (a.activity_text || '').toLowerCase();
+        return a.activity_type === 'playlist' && TRACK_KEYWORDS.some(k => txt.includes(k));
+      });
+      playlists = acts.map(a => ({
+        name: (a.activity_text||'').replace(/^Aggiunto a\s*/i,'').replace(/"([^"]+)".*/,'$1').replace(/\s*\(.*$/,'').trim() || a.activity_text,
+        followers: a.followers ? (a.followers >= 1000 ? Math.round(a.followers/1000)+'K' : a.followers) : '—',
+        img: a.activity_avatar || '',
+        url: a.activity_url || '#',
+        date: a.activity_date || '',
+      }));
+    }
+  } catch(e) {}
+
+  // 2. Fallback: show active playlists from pl-recent that mention the track
+  if (playlists.length === 0) {
+    const recentEls = document.querySelectorAll('#pl-recent a');
+    recentEls.forEach(el => {
+      const txt = el.querySelector('p:last-child')?.textContent?.toLowerCase() || '';
+      if (TRACK_KEYWORDS.some(k => txt.includes(k))) {
+        const name = el.querySelector('p:first-child')?.textContent || '';
+        const followers = el.querySelector('.text-label-sm.font-bold')?.textContent || '—';
+        const img = el.querySelector('img')?.src || '';
+        const url = el.href || '#';
+        playlists.push({ name, followers, img, url });
+      }
+    });
+  }
+
+  // 3. Final fallback: static known playlists for this track
+  if (playlists.length === 0) {
+    playlists = [
+      { name:'TOP POP HITS', followers:'18.8K', img:'https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84c50045346e894c55bf5dcb0f', url:'https://open.spotify.com/playlist/37i9dQZF1DX4JAvHpjipBk', date:'25 Mag' },
+      { name:'Road Trip | Summer Hits 2026', followers:'10.1K', img:'https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84b8fef7bc9526cb1ad972acb6', url:'#', date:'23 Mag' },
+      { name:'Neon Pop Vibes | 2025', followers:'994', img:'https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da840bba586f5a6a382981d1fc5f', url:'#', date:'23 Mag' },
+    ];
+  }
+
+  window._trackPlaylists = playlists;
+  renderTrackPlaylists(playlists, listEl);
+  const countEl = document.getElementById('tpl-count');
+  if (countEl) countEl.textContent = playlists.length;
 }
+
+function renderTrackPlaylists(playlists, listEl) {
+  if (!playlists.length) {
+    listEl.innerHTML = '<p class="text-center text-outline text-[12px] py-6">Nessuna playlist trovata per questo brano.</p>';
+    return;
+  }
+  listEl.innerHTML = playlists.map(p => `
+    <a href="${p.url}" target="_blank" class="flex items-center gap-3 bg-surface-container/30 p-3 rounded-xl border border-white/5 hover:border-spotify-green/30 transition-colors group">
+      ${p.img ? `<img src="${p.img}" class="w-10 h-10 rounded-lg object-cover flex-shrink-0" alt="" onerror="this.style.display='none'">` : '<div class="w-10 h-10 rounded-lg bg-surface-container-high flex-shrink-0"></div>'}
+      <div class="flex-1 min-w-0">
+        <p class="text-label-md font-bold text-on-surface group-hover:text-spotify-green truncate">${p.name}</p>
+        ${p.date ? `<p class="text-[10px] text-outline">${p.date} · "i killed all your plants"</p>` : ''}
+      </div>
+      <div class="text-right flex-shrink-0 ml-2">
+        <p class="text-label-sm text-spotify-green font-bold">${p.followers}</p>
+        <p class="text-[9px] text-outline">followers</p>
+      </div>
+    </a>`).join('');
+}
+
 function closeTrackPlaylists() {
   const modal = document.getElementById('track-playlists-modal');
   modal.style.setProperty('display','none','important');
@@ -2950,6 +3015,48 @@ window._liveKpiValues = {};
   }));
 
   console.log('[LiveStats] historic data loaded');
+
+  // ── Fetch track-specific data for "i killed all your plants" ──
+  // ISRC: ITUM72600351
+  const ISRC = 'ITUM72600351';
+  try {
+    const rTrack = await fetch(`/api/track_stats?isrc=${ISRC}&source=spotify`);
+    if (rTrack.ok) {
+      const dTrack = await rTrack.json();
+      const trackStats = dTrack?.stats?.[0]?.data || {};
+      // Track-specific streams
+      const trackStreams = trackStats.streams_total;
+      if (trackStreams) { set('lr-streams', fmtBig(trackStreams)); }
+      // Track-specific shazams (if available)
+      const trackShazams = trackStats.shazams_total;
+      if (trackShazams) { set('lr-shazams', fmtBig(trackShazams)); }
+      // Track-specific playlists
+      const trackPls = trackStats.playlists_current;
+      if (trackPls) { set('lr-playlists', loc(trackPls) + ' →'); }
+      console.log('[Track] i killed all your plants — streams:', trackStreams, '| playlists:', trackPls);
+    }
+  } catch(e) { console.warn('[Track] stats fetch failed:', e.message); }
+
+  // Track-specific TikTok data
+  try {
+    const rTT = await fetch(`/api/track_stats?isrc=${ISRC}&source=tiktok`);
+    if (rTT.ok) {
+      const dTT = await rTT.json();
+      const ttTrack = dTT?.stats?.[0]?.data || {};
+      if (ttTrack.videos_total) { set('lr-tt-videos', loc(ttTrack.videos_total)); }
+      if (ttTrack.views_total)  { set('lr-tt-views', fmtBig(ttTrack.views_total)); }
+    }
+  } catch(e) {}
+
+  // Track-specific Shazam data
+  try {
+    const rSh = await fetch(`/api/track_stats?isrc=${ISRC}&source=shazam`);
+    if (rSh.ok) {
+      const dSh = await rSh.json();
+      const shTrack = dSh?.stats?.[0]?.data || {};
+      if (shTrack.shazams_total) { set('lr-shazams', fmtBig(shTrack.shazams_total)); }
+    }
+  } catch(e) {}
 })();
 
 // ── Playlist fetch from Songstats API ──
@@ -3048,8 +3155,18 @@ window._liveKpiValues = {};
 // ── Audience fetch ──
 (async function fetchAudience() {
   const ARTIST = 'snkjruw5';
-  const FLAG = cc => cc.toUpperCase().replace(/./g, c => String.fromCodePoint(0x1F1E0 - 65 + c.charCodeAt(0)));
-  const fmtBig = n => n >= 1000000 ? (n/1000000).toFixed(1)+'M' : n >= 1000 ? (n/1000).toFixed(0)+'K' : n;
+  const fmtBig = n => n >= 1000000 ? (n/1000000).toFixed(1)+'M' : n >= 1000 ? Math.round(n/1000)+'K' : String(n);
+  // Proper flag image using flagcdn.com (rectangular, consistent across platforms)
+  const flagImg = cc => `<img src="https://flagcdn.com/w20/${cc.toLowerCase()}.png" width="24" height="16" class="rounded-sm object-cover flex-shrink-0 shadow-sm" alt="${cc}" onerror="this.style.display='none'">`;
+
+  // Rank row template - clean leaderboard style
+  const rankRow = (rank, flagHtml, label, value, valueColor) => `
+    <div class="flex items-center gap-3 px-1 py-1.5 hover:bg-white/3 rounded-lg transition-colors">
+      <span class="text-[11px] font-bold text-outline w-5 text-right flex-shrink-0 tabular-nums">${rank}</span>
+      ${flagHtml}
+      <p class="text-[12px] font-semibold text-on-surface truncate flex-1">${label}</p>
+      <p class="text-[12px] font-bold flex-shrink-0 tabular-nums" style="color:${valueColor}">${value}</p>
+    </div>`;
 
   try {
     const r = await fetch(`/api/audience?songstats_artist_id=${ARTIST}`);
@@ -3058,64 +3175,67 @@ window._liveKpiValues = {};
     const sources = {};
     (d.audience || []).forEach(s => sources[s.source] = s.data || {});
 
-    // ── Spotify top cities (compact: rank + flag + city + value) ──
+    // ── Spotify top cities ──
     const cities = (sources.spotify?.monthly_listeners || [])
       .sort((a,b) => b.current_listeners - a.current_listeners).slice(0, 20);
     const citiesEl = document.getElementById('audience-spotify-cities');
     if (citiesEl && cities.length) {
-      citiesEl.innerHTML = cities.map((c, i) => `
-        <div class="flex items-center gap-1.5 py-1">
-          <span class="text-[10px] font-bold text-outline w-4 text-right flex-shrink-0">${i+1}</span>
-          <span class="text-[13px] flex-shrink-0">${FLAG(c.country_code)}</span>
-          <p class="text-[11px] font-semibold text-on-surface truncate flex-1">${c.city_name}</p>
-          <p class="text-[11px] font-bold text-spotify-green flex-shrink-0">${fmtBig(c.current_listeners)}</p>
-        </div>`).join('');
+      citiesEl.innerHTML = cities.map((c, i) =>
+        rankRow(i+1, flagImg(c.country_code), c.city_name, fmtBig(c.current_listeners), '#1DB954')
+      ).join('');
     }
 
-    // ── TikTok creators by country (compact) ──
+    // ── TikTok creators by country ──
     const ttCreators = (sources.tiktok?.creators || [])
       .sort((a,b) => b.creator_reach_total - a.creator_reach_total).slice(0, 10);
     const ttEl = document.getElementById('audience-tiktok-countries');
     if (ttEl && ttCreators.length) {
-      ttEl.innerHTML = ttCreators.map((c, i) => `
-        <div class="flex items-center gap-1.5 py-1">
-          <span class="text-[10px] font-bold text-outline w-4 text-right flex-shrink-0">${i+1}</span>
-          <span class="text-[13px] flex-shrink-0">${FLAG(c.country_code)}</span>
-          <p class="text-[11px] font-semibold text-on-surface flex-1">${c.country_code}</p>
-          <p class="text-[11px] font-bold text-tiktok-cyan flex-shrink-0">${fmtBig(c.creator_reach_total)}</p>
-        </div>`).join('');
+      // build country name lookup
+      const CN = {IT:'Italia',US:'Stati Uniti',GB:'UK',BR:'Brasile',DE:'Germania',FR:'Francia',
+                  NG:'Nigeria',ID:'Indonesia',MX:'Messico',AR:'Argentina',CO:'Colombia',
+                  PH:'Filippine',TR:'Turchia',ES:'Spagna',PL:'Polonia',NL:'Olanda',
+                  CA:'Canada',AU:'Australia',RO:'Romania',PT:'Portogallo',CL:'Cile',PE:'Perù'};
+      ttEl.innerHTML = ttCreators.map((c, i) =>
+        rankRow(i+1, flagImg(c.country_code), CN[c.country_code]||c.country_code, fmtBig(c.creator_reach_total), '#25F4EE')
+      ).join('');
     }
 
-    // ── YouTube creators by country (compact) ──
+    // ── YouTube creators by country ──
     const ytCreators = (sources.youtube?.creators || [])
       .sort((a,b) => b.creator_reach_total - a.creator_reach_total).slice(0, 10);
     const ytEl = document.getElementById('audience-youtube-countries');
     if (ytEl && ytCreators.length) {
-      ytEl.innerHTML = ytCreators.map((c, i) => `
-        <div class="flex items-center gap-1.5 py-1">
-          <span class="text-[10px] font-bold text-outline w-4 text-right flex-shrink-0">${i+1}</span>
-          <span class="text-[13px] flex-shrink-0">${FLAG(c.country_code)}</span>
-          <p class="text-[11px] font-semibold text-on-surface flex-1">${c.country_code}</p>
-          <p class="text-[11px] font-bold text-[#FF0000] flex-shrink-0">${fmtBig(c.creator_reach_total)}</p>
-        </div>`).join('');
+      const CN = {IT:'Italia',US:'Stati Uniti',GB:'UK',BR:'Brasile',DE:'Germania',FR:'Francia',
+                  NG:'Nigeria',ID:'Indonesia',MX:'Messico',AR:'Argentina',CO:'Colombia',
+                  PH:'Filippine',TR:'Turchia',ES:'Spagna',PL:'Polonia',NL:'Olanda',
+                  CA:'Canada',AU:'Australia',RO:'Romania',PT:'Portogallo',CL:'Cile',PE:'Perù'};
+      ytEl.innerHTML = ytCreators.map((c, i) =>
+        rankRow(i+1, flagImg(c.country_code), CN[c.country_code]||c.country_code, fmtBig(c.creator_reach_total), '#FF0000')
+      ).join('');
     }
 
     // ── Apple Music charts by country ──
     const appleCharts = (sources.apple_music?.track_charts || []);
     const appleEl = document.getElementById('audience-apple-countries');
     if (appleEl && appleCharts.length) {
-      appleEl.innerHTML = appleCharts
-        .sort((a,b) => b.charted_tracks_total - a.charted_tracks_total)
-        .map(c => `
-          <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border ${c.charted_tracks_current > 0 ? 'border-[#FA243C]/40 bg-[#FA243C]/10' : 'border-white/10 bg-surface-container/30'}">
-            <span class="text-[16px]">${FLAG(c.country_code)}</span>
-            <span class="text-label-sm font-bold text-on-surface">${c.country_code}</span>
-            ${c.charted_tracks_current > 0 ? '<span class="text-[9px] font-bold text-[#FA243C] ml-1">LIVE</span>' : ''}
-            <span class="text-[10px] text-outline ml-1">${c.charted_tracks_total} track</span>
-          </div>`).join('');
+      const sorted = appleCharts.sort((a,b) => b.charted_tracks_total - a.charted_tracks_total);
+      appleEl.innerHTML = sorted.map((c, i) => `
+        <div class="flex items-center gap-3 px-1 py-1.5 hover:bg-white/3 rounded-lg transition-colors">
+          <span class="text-[11px] font-bold text-outline w-5 text-right flex-shrink-0">${i+1}</span>
+          ${flagImg(c.country_code)}
+          <p class="text-[12px] font-semibold text-on-surface flex-1">${c.country_code}</p>
+          ${c.charted_tracks_current > 0 ? '<span class="text-[9px] font-bold text-[#FA243C] bg-[#FA243C]/10 border border-[#FA243C]/30 px-1.5 py-0.5 rounded-full flex-shrink-0">LIVE</span>' : ''}
+          <p class="text-[12px] font-bold text-on-surface-variant flex-shrink-0">${c.charted_tracks_total} brani</p>
+        </div>`).join('');
     }
 
-    console.log('[Audience] loaded — Spotify cities:', cities.length, '| TikTok countries:', ttCreators.length);
+    // ── Instagram (note: API returns empty arrays) ──
+    const igAudienceEl = document.getElementById('audience-instagram-note');
+    if (igAudienceEl) {
+      igAudienceEl.innerHTML = `<p class="text-[11px] text-outline text-center py-2">Dati audience Instagram non disponibili via API · controlla Instagram Insights</p>`;
+    }
+
+    console.log('[Audience] loaded — Spotify cities:', cities.length, '| TikTok:', ttCreators.length, '| YT:', ytCreators.length);
   } catch(e) { console.warn('[Audience] fetch failed:', e.message); }
 })();
 
