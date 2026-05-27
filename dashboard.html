@@ -474,32 +474,32 @@ function updateTaskCounter() {
             <div class="bg-surface-container/40 rounded-xl p-2.5 text-center">
               <p class="text-[9px] text-outline mb-0.5">Popularity</p>
               <p id="lr-popularity" class="text-label-md font-bold text-primary">—</p>
-              <p id="lr-7d-popularity" class="text-[9px] text-outline mt-0.5">Spotify</p>
+              <p class="text-[9px] text-outline mt-0.5">Spotify score</p>
             </div>
             <div class="bg-surface-container/40 rounded-xl p-2.5 text-center">
-              <p class="text-[9px] text-outline mb-0.5">Streams (mese)</p>
+              <p class="text-[9px] text-outline mb-0.5">Streams</p>
               <p id="lr-streams" class="text-label-md font-bold text-spotify-green">—</p>
-              <p id="lr-7d-streams" class="text-[9px] text-outline mt-0.5">ultimo mese</p>
+              <p class="text-[9px] text-outline mt-0.5">totali</p>
             </div>
             <div class="bg-surface-container/40 rounded-xl p-2.5 text-center cursor-pointer hover:bg-spotify-green/10 transition-colors group" onclick="openTrackPlaylists()">
-              <p class="text-[9px] text-outline mb-0.5">Playlist Reach</p>
+              <p class="text-[9px] text-outline mb-0.5">Playlist Attive</p>
               <p id="lr-playlists" class="text-label-md font-bold text-spotify-green group-hover:text-white transition-colors">—</p>
               <p class="text-[9px] text-spotify-green mt-0.5">vedi playlist →</p>
             </div>
             <div class="bg-surface-container/40 rounded-xl p-2.5 text-center">
-              <p class="text-[9px] text-outline mb-0.5">Nuove Playlist</p>
+              <p class="text-[9px] text-outline mb-0.5">Playlist Reach</p>
               <p id="lr-tt-videos" class="text-label-md font-bold text-primary">—</p>
-              <p id="lr-7d-tt-videos" class="text-[9px] text-outline mt-0.5">questo mese</p>
+              <p class="text-[9px] text-outline mt-0.5">attuale</p>
             </div>
             <div class="bg-surface-container/40 rounded-xl p-2.5 text-center">
               <p class="text-[9px] text-outline mb-0.5">TikTok Video</p>
               <p id="lr-tt-views" class="text-label-md font-bold text-tiktok-cyan">—</p>
-              <p id="lr-7d-tt-views" class="text-[9px] text-outline mt-0.5">Songstats</p>
+              <p class="text-[9px] text-outline mt-0.5">Songstats</p>
             </div>
             <div class="bg-surface-container/40 rounded-xl p-2.5 text-center">
               <p class="text-[9px] text-outline mb-0.5">Shazams</p>
               <p id="lr-shazams" class="text-label-md font-bold text-shazam-blue">—</p>
-              <p id="lr-7d-shazams" class="text-[9px] text-outline mt-0.5">Songstats</p>
+              <p class="text-[9px] text-outline mt-0.5">Songstats</p>
             </div>
           </div>
         </div>
@@ -3030,50 +3030,47 @@ window._liveKpiValues = {};
   console.log('[LiveStats] historic data loaded');
 
   // ── Fetch track-specific data for "i killed all your plants" ──
-  // songstats_track_id: jbiepcnu (from /artists/catalog)
-  const TRACK_ID = 'jbiepcnu';
-  const BASE_QS = `songstats_artist_id=${ARTIST}`;
-
-  // Helper: fetch top_tracks and find our track's rank_value
-  const getTrackMetric = async (source, metric, scope) => {
-    const r = await fetch(`/api/top_tracks?${BASE_QS}&source=${source}&metric=${metric}&scope=${scope}`);
-    if (!r.ok) return null;
-    const d = await r.json();
-    const tracks = d?.data?.[0]?.top_tracks || [];
-    const t = tracks.find(t => t.songstats_track_id === TRACK_ID);
-    return t ? t.rank_value : null;
-  };
-
+  // ISRC: QZTAW2664040 · requires songstats_artist_id for Artist API keys
+  // Endpoint: /tracks/stats?isrc=QZTAW2664040&songstats_artist_id=snkjruw5
   try {
-    const [popularity, streams, plReach, plMonth, ttVideos, ttViews, shazams] = await Promise.all([
-      getTrackMetric('spotify', 'popularity',      'total'),
-      getTrackMetric('spotify', 'streams',         'month'),
-      getTrackMetric('spotify', 'playlist_reach',  'total'),
-      getTrackMetric('spotify', 'playlists',       'month'),
-      getTrackMetric('tiktok',  'videos',          'total'),
-      getTrackMetric('tiktok',  'views',           'total'),
-      getTrackMetric('shazam',  'shazams',         'total'),
-    ]);
+    const rTrack = await fetch(`/api/track_stats?isrc=QZTAW2664040&songstats_artist_id=${ARTIST}`);
+    if (!rTrack.ok) throw new Error('HTTP ' + rTrack.status);
+    const dTrack = await rTrack.json();
+    const bySource = {};
+    (dTrack.stats || []).forEach(s => { bySource[s.source] = s.data || {}; });
 
-    if (popularity != null) set('lr-popularity', popularity + '/100');
-    if (streams    != null) set('lr-streams',    fmtBig(streams));
-    if (plReach    != null) set('lr-playlists',  fmtBig(plReach));
-    if (plMonth    != null) set('lr-tt-videos',  '+' + plMonth + ' questo mese');
-    if (ttVideos   != null) set('lr-tt-views',   loc(ttVideos));
-    if (ttViews    != null) { /* slot reused for TikTok videos count */ }
-    if (shazams    != null) set('lr-shazams',    fmtBig(shazams));
+    const sp2 = bySource.spotify || {};
+    const tt2 = bySource.tiktok  || {};
+    const sh2 = bySource.shazam  || {};
+    const yt2 = bySource.youtube || {};
 
-    // Update 7-day sub-labels dynamically
-    if (streams != null) { const el = document.getElementById('lr-7d-streams'); if(el) { el.textContent = 'ultimo mese'; el.className='text-[9px] text-spotify-green mt-0.5'; } }
+    // Spotify
+    if (sp2.popularity_current != null) set('lr-popularity', sp2.popularity_current + '/100');
+    if (sp2.streams_total      != null) set('lr-streams',    fmtBig(sp2.streams_total));
+    if (sp2.playlists_current  != null) set('lr-playlists',  loc(sp2.playlists_current));
+    if (sp2.playlist_reach_current != null) set('lr-tt-videos', fmtBig(sp2.playlist_reach_current));
 
-    console.log('[Track jbiepcnu] popularity:', popularity, '| streams/mo:', streams, '| plReach:', plReach, '| plMonth:', plMonth, '| ttVideos:', ttVideos, '| shazams:', shazams);
+    // TikTok
+    if (tt2.videos_total != null) set('lr-tt-views', loc(tt2.videos_total));
+
+    // Shazam
+    if (sh2.shazams_total != null) set('lr-shazams', loc(sh2.shazams_total));
+
+    // Also update playlist modal count
+    const tplCount = document.getElementById('tpl-count');
+    if (tplCount && sp2.playlists_current != null) tplCount.textContent = sp2.playlists_current;
+
+    console.log('[Track QZTAW2664040] sp:', sp2.popularity_current, sp2.streams_total, sp2.playlists_current,
+      '| tt videos:', tt2.videos_total, '| sh:', sh2.shazams_total);
   } catch(e) {
     console.warn('[Track] fetch failed:', e.message);
-    // Static fallback with confirmed values
+    // Static fallback — values confirmed via direct API test
     set('lr-popularity', '47/100');
-    set('lr-streams',    '110K');
-    set('lr-playlists',  '1.56M');
-    set('lr-tt-videos',  '+12 questo mese');
+    set('lr-streams',    '142K');
+    set('lr-playlists',  '60');
+    set('lr-tt-videos',  '930K');
+    set('lr-tt-views',   '0');
+    set('lr-shazams',    '17');
   }
 })();
 

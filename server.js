@@ -32,6 +32,7 @@ const server = http.createServer((req, res) => {
     '/api/audience':            'artists/audience',
     '/api/top_tracks':          'artists/top_tracks',
     '/api/catalog':             'artists/catalog',
+    '/api/track_stats':         'tracks/stats',
   };
 
   if (PROXY_ROUTES[url.pathname]) {
