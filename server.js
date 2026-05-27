@@ -4,7 +4,7 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
-const PORT = process.env.PORT || 8765;
+const PORT = process.env.PORT || 8080;
 const SONGSTATS_KEY = '92da5d29-82a1-412c-82b4-770efb2f518f';
 
 const MIME = {
@@ -29,6 +29,7 @@ const server = http.createServer((req, res) => {
     '/api/playlists/all':       'artists/top_playlists',
     '/api/activities':          'artists/activities',
     '/api/historic_stats':      'artists/historic_stats',
+    '/api/audience':            'artists/audience',
   };
 
   if (PROXY_ROUTES[url.pathname]) {
