@@ -24,6 +24,7 @@ const server = http.createServer((req, res) => {
   // ── Proxy endpoints ────────────────────────────────────────────
   // Route any /api/songstats/* to the corresponding Songstats endpoint
   const PROXY_ROUTES = {
+    '/api/artist_info':         'artists/info',
     '/api/songstats':           'artists/stats',
     '/api/playlists/current':   'artists/top_playlists',
     '/api/playlists/all':       'artists/top_playlists',
