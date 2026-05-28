@@ -324,7 +324,7 @@
         <h4 class="mb-2.5 text-sm font-black">Next Step Goals</h4>
         <!-- Completed -->
         <div data-goal="100K Monthly Listeners" class="goal-done mb-2.5">
-          <span class="goal-done-text"><span data-countup="100000" data-countup-format="K">100K</span> Monthly Listeners</span>
+          <span class="goal-done-text">100K Monthly Listeners</span>
           <div class="flex items-center gap-2 shrink-0">
             <button class="share-goal-btn rounded-full border border-white/30 bg-white/10 px-2.5 py-0.5 text-xs font-bold uppercase tracking-wider text-white transition hover:bg-white/20" style="font-size:0.6rem;letter-spacing:.08em">Share</button>
           </div>
@@ -421,7 +421,7 @@
       <h4 class="mb-2.5 text-sm font-black flex items-center gap-1.5"><svg class="h-4 w-4"><use href="#logo-spotify"/></svg>Next Step Goals · Spotify</h4>
       <div class="grid gap-3 md:grid-cols-3">
         <div data-goal="100 playlist attive" class="goal-done">
-          <div><span class="goal-done-text">100 playlist attive</span><p class="text-xs text-white/50">Sei in <span data-countup="151">151</span> </p></div>
+          <div><span class="goal-done-text">100 playlist attive</span><p class="text-xs text-white/50">Sei in 151 </p></div>
           <div class="flex items-center gap-2 shrink-0">
             <button class="share-goal-btn rounded-full border border-white/30 bg-white/10 px-2.5 py-0.5 text-xs font-bold uppercase tracking-wider text-white transition hover:bg-white/20" style="font-size:0.6rem;letter-spacing:.08em">Share</button>
           </div>
@@ -574,7 +574,7 @@
       <h4 class="mb-2.5 text-sm font-black">Next Step Goals · Socials</h4>
       <div class="grid gap-3 md:grid-cols-4">
         <div data-goal="100 video" class="goal-done">
-          <div><span class="goal-done-text"><svg class="h-3 w-3"><use href="#logo-tiktok"/></svg>100 video</span><p class="text-xs text-white/50">"obsessed" <span data-countup="103">103</span> </p></div>
+          <div><span class="goal-done-text"><svg class="h-3 w-3"><use href="#logo-tiktok"/></svg>100 video</span><p class="text-xs text-white/50">"obsessed" 103 </p></div>
           <div class="flex items-center gap-2 shrink-0">
             <button class="share-goal-btn rounded-full border border-white/30 bg-white/10 px-2.5 py-0.5 text-xs font-bold uppercase tracking-wider text-white transition hover:bg-white/20" style="font-size:0.6rem;letter-spacing:.08em">Share</button>
           </div>
@@ -585,7 +585,7 @@
           <p class="mt-0.5 text-xs text-muted">155 / 500</p>
         </div>
         <div data-goal="5K followers" class="goal-done">
-          <div><span class="goal-done-text"><svg class="h-3 w-3"><use href="#logo-instagram"/></svg>5K followers</span><p class="text-xs text-white/50">Ora <span data-countup="7368" data-countup-suffix="">7,368</span> </p></div>
+          <div><span class="goal-done-text"><svg class="h-3 w-3"><use href="#logo-instagram"/></svg>5K followers</span><p class="text-xs text-white/50">Ora 7,368 </p></div>
           <div class="flex items-center gap-2 shrink-0">
             <button class="share-goal-btn rounded-full border border-white/30 bg-white/10 px-2.5 py-0.5 text-xs font-bold uppercase tracking-wider text-white transition hover:bg-white/20" style="font-size:0.6rem;letter-spacing:.08em">Share</button>
           </div>
@@ -750,7 +750,7 @@
       <h4 class="mb-2.5 text-sm font-black flex items-center gap-1.5"><svg class="h-4 w-4"><use href="#logo-youtube"/></svg>Next Step Goals · YouTube</h4>
       <div class="grid gap-3 md:grid-cols-3">
         <div data-goal="1M Views YouTube" class="goal-done">
-          <div><span class="goal-done-text">1M Views YouTube</span><p class="text-xs text-white/50"><span data-countup="2850000" data-countup-format="M">2.85M</span> totali </p></div>
+          <div><span class="goal-done-text">1M Views YouTube</span><p class="text-xs text-white/50">2.85M totali </p></div>
           <div class="flex items-center gap-2 shrink-0">
             <button class="share-goal-btn rounded-full border border-white/30 bg-white/10 px-2.5 py-0.5 text-xs font-bold uppercase tracking-wider text-white transition hover:bg-white/20" style="font-size:0.6rem;letter-spacing:.08em">Share</button>
           </div>
@@ -1969,48 +1969,6 @@
   if (trList) { trList.id = 'tracks-list'; wrapListForPagination(trList, 'tracks-pagination'); }
 })();
 </script>
-<!-- ═══ COUNTUP ANIMATION ═══ -->
-<script>
-(function() {
-  function formatVal(n, fmt) {
-    if (fmt === 'K')  return (n / 1000).toFixed(n % 1000 === 0 ? 0 : 1) + 'K';
-    if (fmt === 'M')  return (n / 1000000).toFixed(2) + 'M';
-    if (n >= 1000)    return n.toLocaleString('it-IT');
-    return String(n);
-  }
-
-  function animateCountup(el) {
-    const target = parseInt(el.dataset.countup, 10);
-    const fmt    = el.dataset.countupFormat || '';
-    const dur    = 1800;
-    const start  = performance.now();
-    function tick(now) {
-      const p = Math.min((now - start) / dur, 1);
-      // Ease out cubic
-      const ease = 1 - Math.pow(1 - p, 3);
-      el.textContent = formatVal(Math.round(target * ease), fmt);
-      if (p < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  }
-
-  // Trigger when goal-done enters viewport
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      entry.target.querySelectorAll('[data-countup]').forEach(el => {
-        if (el.dataset.animated) return;
-        el.dataset.animated = '1';
-        // Small delay for stagger effect
-        setTimeout(() => animateCountup(el), 300);
-      });
-    });
-  }, { threshold: 0.6 });
-
-  document.querySelectorAll('.goal-done').forEach(el => observer.observe(el));
-})();
-</script>
-
 <!-- ═══ SHARE GOAL MODAL ═══ -->
 <dialog id="share-goal-modal" class="rounded-3xl border-0 bg-transparent p-0 backdrop:bg-black/80 backdrop:backdrop-blur-sm w-full max-w-xs text-white">
   <div class="flex flex-col gap-4 p-3">
