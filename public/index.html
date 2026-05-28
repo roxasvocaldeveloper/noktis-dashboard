@@ -19,7 +19,7 @@
     border: 1px solid rgba(255,255,255,.05);
     transition: all .3s cubic-bezier(.4,0,.2,1);
   }
-  .glass-card:hover {
+  .glass-card.cursor-pointer:hover, .glass-card[onclick]:hover {
     transform: translateY(-4px);
     background: rgba(29,30,50,.6);
     border-color: rgba(255,255,255,.15);
@@ -45,8 +45,8 @@
 
   .animate-entrance { opacity:0; animation: slide-up-fade .6s cubic-bezier(.16,1,.3,1) forwards; }
 
-  .nav-item { position:relative; transition: all .2s ease; }
-  .hover-shake:hover .material-symbols-outlined { animation: shake .4s ease-in-out infinite; }
+  .glass-card.cursor-pointer { transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+  .glass-card.cursor-pointer:hover { transform: translateY(-2px) scale(1.01); box-shadow: 0 0 18px rgba(208,188,255,.18); }
 
   .task-completed { background: linear-gradient(to right, rgba(102,85,144,.2), rgba(3,181,212,.2)) !important; border-color: rgba(208,188,255,.3) !important; box-shadow: 0 0 15px rgba(208,188,255,.15) !important; }
   .task-completed .task-text { text-decoration: line-through; color:#948f9a !important; }
@@ -57,9 +57,6 @@
   .view-section.active { display:block; }
   .platform-tab.active { border-color:#d0bcff; background-color: rgba(208,188,255,.1); }
   .platform-tab.active p.platform-name { color: white; }
-
-  #history-panel { max-height:0; overflow:hidden; transition: max-height .4s ease, opacity .3s ease; opacity:0; }
-  #history-panel.expanded { max-height:600px; opacity:1; margin-top:1rem; }
 
   .sparkline { fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
 
@@ -251,6 +248,150 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+const _KPI={
+  tiktok:{cols:'grid-cols-2 md:grid-cols-4',color:'#25F4EE',hover:'hover:border-tiktok-cyan/40',th:'group-hover:text-tiktok-cyan',logo:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.27 8.27 0 004.84 1.56V6.8a4.85 4.85 0 01-1.07-.11z"/></svg>',cards:[
+    {l:'Views',id:'tt-views',v:'260K',s:'Total',c:['TikTok Views','Total · Songstats','#25F4EE',[215000,220000,225000,228000,231000,234000,237000,240000,243000,245000,247000,249000,250000,251000,252000,253000,254000,255000,256000,257000,258000,259000,259500,260000,260000,260000,260000,260000,260000,260000],'260,000','Total','+45K']},
+    {l:'Likes',id:'tt-likes',v:'12.3K',s:'Total',c:['TikTok Likes','Total · Songstats','#25F4EE',[10200,10400,10600,10800,11000,11100,11200,11300,11400,11500,11600,11700,11800,11850,11900,11950,12000,12050,12100,12150,12200,12230,12250,12270,12290,12300,12300,12300,12300,12300],'12,300','Total','+2.1K']},
+    {l:'Comments',id:'tt-comments',v:'249',s:'Total',c:['TikTok Comments','Total · Songstats','#25F4EE',[220,225,228,230,232,234,236,238,240,242,243,244,245,246,247,248,249,249,249,249,249,249,249,249,249,249,249,249,249,249],'249','Total','+29']},
+    {l:'Shares',id:'tt-shares',v:'199',s:'Total',c:['TikTok Shares','Total · Songstats','#25F4EE',[165,168,170,172,174,176,178,180,182,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,199,199,199,199,199],'199','Total','+34']},
+  ]},
+  instagram:{cols:'grid-cols-2 md:grid-cols-4',color:'#f97ab4',hover:'hover:border-[#f97ab4]/40',th:'group-hover:text-[#f97ab4]',logo:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12s.014 3.668.072 4.948c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.668-.014 4.948-.072c4.354-.2 6.782-2.618 6.979-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>',cards:[
+    {l:'Followers',id:'ig-followers-kpi',v:'7,368',s:'Total',c:['Instagram Followers','Crescita · Instagram','#f97ab4',[6900,6950,7000,7050,7080,7110,7140,7160,7180,7200,7220,7240,7255,7270,7280,7290,7300,7310,7320,7330,7340,7345,7350,7355,7360,7363,7365,7366,7367,7368],'7,368','@noktis__','+468']},
+    {l:'Views',v:'N/D',s:'non in API',x:'Enterprise plan'},
+    {l:'Likes',v:'N/D',s:'non in API',x:'Enterprise plan'},
+    {l:'Comments',v:'N/D',s:'non in API',x:'Enterprise plan'},
+  ]},
+  youtube:{cols:'grid-cols-2 md:grid-cols-5',color:'#FF0000',hover:'hover:border-[#FF0000]/40',th:'group-hover:text-[#FF0000]',logo:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>',cards:[
+    {l:'Subscribers',id:'yt-subscribers',v:'537',s:'Current',c:['YouTube Subscribers','Crescita · Songstats','#FF0000',[480,485,490,495,498,500,503,506,509,512,515,518,520,522,524,526,527,528,529,530,531,532,533,534,535,536,536,537,537,537],'537','Current','+57']},
+    {l:'Video Views',id:'yt-video-views',v:'2.85M',s:'Total',c:['YouTube Video Views','Total · Songstats','#FF0000',[1800000,1900000,1980000,2050000,2100000,2150000,2200000,2280000,2350000,2420000,2500000,2560000,2620000,2680000,2720000,2760000,2790000,2810000,2820000,2830000,2835000,2838000,2840000,2843000,2845000,2847000,2848000,2849000,2849000,2849295],'2.85M','Total','+1.05M']},
+    {l:'Video Likes',id:'yt-video-likes',v:'25.7K',s:'Total',c:['YouTube Video Likes','Total · Songstats','#FF0000',[22000,22500,23000,23500,24000,24300,24500,24700,24900,25000,25100,25200,25300,25400,25500,25550,25600,25620,25640,25660,25680,25690,25695,25698,25700,25700,25700,25700,25700,25696],'25,696','Total','+3.7K']},
+    {l:'Video Comments',id:'yt-video-comments',v:'1,024',s:'Total',x:'Songstats'},
+    {l:'Shorts',id:'yt-shorts',v:'142',s:'Total',x:'Songstats'},
+  ]},
+  shazam:{cols:'grid-cols-2 md:grid-cols-3 lg:grid-cols-6',color:'#0088FF',hover:'hover:border-shazam-blue/40',th:'group-hover:text-shazam-blue',logo:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.4 17.4c-.3.3-.7.4-1.1.4-.4 0-.7-.1-1-.3-2.1-1.5-4-2-5.7-1.4-.5.2-1 0-1.2-.5s0-1 .5-1.2c2.2-.8 4.6-.2 7.1 1.5.4.3.5.9.4 1.5zm1.3-2.5c-.4.4-1 .4-1.4.1-2.6-2-6-2.5-8.9-1.4-.5.2-1.1-.1-1.3-.6s.1-1.1.6-1.3c3.4-1.3 7.4-.7 10.5 1.6.4.3.5.9.1 1.6z"/></svg>',cards:[
+    {l:'Total Shazams',id:'sh-shazams',v:'17.1K',s:'Lifetime',span:'lg:col-span-2',big:true,c:['Total Shazams','Ultimi 30 giorni · Songstats','#0088FF',[17041,17041,17041,17041,17041,17041,17041,17041,17041,17041,17042,17043,17044,17047,17050,17053,17056,17058,17060,17063,17068,17072],'17,068','Total','+31']},
+    {l:'Delta 30gg',id:'sh-delta',v:'+31',s:'Crescita',x:'Songstats'},
+    {l:'Charts Active',id:'sh-charts-current',v:'0',s:'Current',x:'Songstats'},
+    {l:'Charted Cities',id:'sh-charted-cities',v:'0',s:'Total',x:'Songstats'},
+    {l:'Charted Countries',id:'sh-charted-countries',v:'0',s:'Total',x:'Songstats'},
+  ]},
+};
+function renderKPIs(id,key){
+  const el=document.getElementById(id); if(!el)return;
+  const s=_KPI[key];
+  el.className=`grid ${s.cols} gap-3 animate-entrance`;
+  const logoBadge=s.logo?`<div class="absolute top-2.5 right-2.5 w-4 h-4 flex-shrink-0" style="color:${s.color};opacity:.6">${s.logo}</div>`:'';
+  el.innerHTML=s.cards.map(c=>{
+    const ok=!!c.c, cls=ok?`cursor-pointer ${s.hover} group`:'opacity-50', oc=ok?`onclick="openKpiChart(${c.c.map(v=>JSON.stringify(v)).join(',')})"`:'' ;
+    return `<div class="glass-card relative p-4 rounded-xl border border-white/5 transition-colors ${cls} ${c.span||''}" ${oc}>${logoBadge}<p class="text-label-sm text-outline">${c.l}</p><h3 id="${c.id||''}" class="${c.big?'text-headline-lg':'text-headline-md'} font-bold text-on-surface ${ok?s.th:''}">${c.v}</h3><p class="text-[10px] mt-1 ${ok?'':'text-outline'}" ${ok?`style="color:${s.color}"`:''}>${c.s}</p>${c.x?`<p class="text-[9px] text-outline mt-1">${c.x}</p>`:''}</div>`;
+  }).join('');
+}
+
+const _GOALS={
+  tiktok:{color:'#25F4EE',bc:'border-tiktok-cyan',bg:'bg-tiktok-cyan',title:'Next Step Goals · TikTok',cols:'md:grid-cols-2',
+    done:{text:'100 video TikTok raggiunti!',desc:'"obsessed" ha 103 video · traguardo storico 🎉',share:['100 Video su TikTok','La tua musica è stata usata in oltre 100 video su TikTok 🎵','obsessed · 103 video · 8.5M creator reach']},
+    bars:[{label:'500 video TikTok totali',bar:'bg-tiktok-cyan',pct:30,text:'155 / 500 · 31%'}]},
+  instagram:{color:'#f97ab4',bc:'border-[#E1306C]',bg:'bg-[#E1306C]',title:'Next Step Goals · Instagram',cols:'md:grid-cols-2',
+    done:{text:'5K followers raggiunti! 🎉',desc:'Ora sei a 7,368 followers · ottima crescita',share:['7K Followers su Instagram','Il mio profilo Instagram ha superato 7.000 followers 📸','@noktis__ · 7.368 followers']},
+    bars:[{id:'goal-ig-bar',label:'10K followers Instagram',bar:'bg-[#f97ab4]',pct:74,tid:'goal-ig-label',text:'7,368 / 10,000 · 74%'}]},
+  youtube:{color:'#FF0000',bc:'border-[#FF0000]',bg:'bg-[#FF0000]',title:'Next Step Goals · YouTube',cols:'md:grid-cols-3',
+    done:{text:'1M Views su YouTube! 🎉',desc:'Superati 1.61M video views totali 🔴',share:['1M Views su YouTube','Il canale YouTube di Noktis ha superato 1 milione di views 🔴','Noktis · 1.61M video views']},
+    bars:[{id:'goal-yt-subs-bar',label:'1,000 Subscribers',bar:'bg-[#FF0000]',pct:54,tid:'goal-yt-subs-label',text:'537 / 1,000 · 54%'},{label:'100K Channel Views',bar:'bg-[#FF0000]/60',pct:96,text:'95,700 / 100,000 · 96%'}]},
+  overview:{color:'#d0bcff',bc:'border-primary',bg:'bg-primary',title:'Next Step Goals',cols:'md:grid-cols-2',
+    done:{text:'100K Monthly Listeners! 🎉',desc:'111,686 ascoltatori mensili · peak 112,434',share:['100K Monthly Listeners','La tua musica è ascoltata da oltre 100.000 persone al mese su Spotify 🎧','111,686 ascoltatori mensili · peak 112,434']},
+    bars:[{label:'150K Monthly Listeners',bar:'bg-primary',pct:74,text:'111,686 / 150,000 · 75%'},{label:'Top 50 Italia',bar:'bg-secondary',pct:42,text:'Pop. 47 → 65+ · 42%'}]},
+  shazam:{color:'#0088FF',bc:'border-shazam-blue',bg:'bg-shazam-blue',title:'Next Step Goals · Shazam',cols:'md:grid-cols-3',
+    done:{text:'10K Shazam superati! 🔵',desc:'17.1K Shazam totali · "goodbyes" #1 con 7,813',share:['17K Shazam su Noktis','La mia musica è stata riconosciuta su Shazam oltre 17.000 volte 🔵','goodbyes · 7.813 Shazams']},
+    bars:[{id:'goal-sh-bar',label:'25K Shazam totali',bar:'bg-shazam-blue',pct:68,tid:'goal-sh-label',text:'17,068 / 25,000 · 68%'},{label:'Shazam Top 200 Italia',bar:'bg-shazam-blue/60',pct:30,text:'Crescita +167 ultimi 3 mesi · in corso'}]},
+};
+function renderGoals(id,key){
+  const el=document.getElementById(id); if(!el)return;
+  const g=_GOALS[key]; const d=g.done;
+  const bars=g.bars.map(b=>`<div class="rounded-xl border border-white/10 bg-surface-container/30 p-4"><p class="text-label-md font-semibold text-on-surface mb-2">${b.label}</p><div class="w-full bg-surface-container-high rounded-full h-2 mb-1"><div id="${b.id||''}" class="${b.bar} h-2 rounded-full" style="width:${b.pct}%"></div></div><p id="${b.tid||''}" class="text-[11px] text-outline">${b.text}</p></div>`).join('');
+  el.innerHTML=`<div class="glass-card p-6 rounded-2xl"><h4 class="text-headline-sm text-on-surface mb-4">${g.title}</h4><div class="grid grid-cols-1 ${g.cols} gap-4"><div class="rounded-xl border ${g.bc}/30 ${g.bg}/5 p-4 flex flex-col gap-2"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px]" style="color:${g.color}">check_circle</span><p class="text-label-md font-bold" style="color:${g.color}">${d.text}</p></div><p class="text-[11px] text-outline">${d.desc}</p><button onclick="openShareCard(${d.share.map(v=>JSON.stringify(v)).join(',')})" class="mt-auto flex items-center gap-1 text-[11px] font-bold border rounded-lg px-3 py-1.5 w-fit" style="color:${g.color};border-color:${g.color}66"><span class="material-symbols-outlined text-[14px]">share</span>Condividi</button></div>${bars}</div></div>`;
+}
+
+const _MS={
+  tiktok:[
+    {icon:'stars',bg:'bg-tiktok-cyan/20',c:'#25F4EE',t:'103 video su "obsessed"',s:'Traguardo storico · ft. Lyhre',hi:true},
+    {icon:'emoji_events',bg:'bg-tiktok-cyan/10',c:'#25F4EE',t:'260K views totali',s:'+45K nell\'ultimo mese'},
+    {icon:'trending_up',bg:'bg-tiktok-cyan/10',c:'#25F4EE',t:'155 video totali',s:'Obiettivo: 500 · 31% raggiunto'},
+    {icon:'music_note',bg:'bg-tiktok-cyan/10',c:'#25F4EE',t:'5 brani usati su TikTok',s:'obsessed · goodbyes · Berlin · +2'},
+  ],
+  instagram:[
+    {icon:'stars',bg:'bg-gradient-to-br from-[#f09433] to-[#bc1888]',c:'white',t:'250,000 views su artist profile',s:'13 Marzo 2026'},
+    {icon:'emoji_events',bg:'bg-gradient-to-br from-[#f09433] to-[#bc1888]',c:'white',t:'50,000 views su "obsessed"',s:'31 Marzo 2026 · ft. Lyhre'},
+    {icon:'emoji_events',bg:'bg-gradient-to-br from-[#f09433] to-[#bc1888]',c:'white',t:'20,000 views su "goodbyes"',s:'18 Marzo 2026 · ft. townsend'},
+  ],
+  youtube:[
+    {icon:'stars',bg:'bg-[#FF0000]/20',c:'#FF0000',t:'1M Views YouTube',s:'Superati · 2.85M totali',hi:true},
+    {icon:'emoji_events',bg:'bg-[#FF0000]/10',c:'#FF0000',t:'1.28M views · Unforgettable',s:'Track più vista del canale'},
+    {icon:'trending_up',bg:'bg-[#FF0000]/10',c:'#FF0000',t:'537 iscritti',s:'Obiettivo: 1K · 54% raggiunto'},
+    {icon:'video_library',bg:'bg-[#FF0000]/10',c:'#FF0000',t:'142 YouTube Shorts',s:'Contenuto short-form attivo'},
+  ],
+};
+function renderMilestones(id,key){
+  const el=document.getElementById(id); if(!el)return;
+  el.innerHTML=_MS[key].map(m=>`<div class="flex items-center gap-3 p-2.5 rounded-xl ${m.hi?m.bg+' border border-white/10':'bg-surface-container/30 border border-white/5'}"><div class="w-8 h-8 rounded-full ${m.hi?'':''+m.bg} flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-[16px]" style="color:${m.c}">${m.icon}</span></div><div><p class="text-label-sm font-bold text-on-surface">${m.t}</p><p class="text-[9px] text-outline">${m.s}</p></div></div>`).join('');
+}
+
+const _TT_TRACKS=[
+  {n:'obsessed',a:'ft. Lyhre',v:103,img:'https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e'},
+  {n:'goodbyes',a:'ft. townsend',v:15,img:'https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47'},
+  {n:'why did i fail',a:'ft. townsend',v:9,img:'https://i.scdn.co/image/ab67616d00001e02886b188290fbcff15d6fe521'},
+  {n:'Berlin',a:'ft. kaii',v:7,img:'https://i.scdn.co/image/ab67616d00001e029494eeac6a088d0460830996'},
+  {n:'In My Blood',a:'Townsend, Noktis',v:6,img:'https://i.scdn.co/image/ab67616d00001e0282f0c758749ba067a169bbec'},
+];
+function renderTTTracks(id){
+  const el=document.getElementById(id); if(!el)return;
+  el.innerHTML=_TT_TRACKS.map((t,i)=>`<div class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-tiktok-cyan/5 border border-white/0 hover:border-tiktok-cyan/20 transition-all cursor-pointer group" onclick="openTikTokVideos('${t.n}','${t.img}','${t.a}')"><span class="text-[11px] font-bold text-outline w-4 text-center">${i+1}</span><img src="${t.img}" class="w-9 h-9 rounded-lg object-cover flex-shrink-0" alt=""><div class="flex-1 min-w-0"><p class="text-label-md font-bold text-on-surface group-hover:text-tiktok-cyan truncate">${t.n}</p><p class="text-[10px] text-outline">${t.a}</p></div><p class="text-label-md font-extrabold text-tiktok-cyan flex-shrink-0">${t.v} <span class="text-[10px] font-normal text-outline">video</span></p></div>`).join('');
+}
+
+const _IG_POSTS=[
+  {url:'https://www.instagram.com/p/DBjk1lnOp7Z/',img:'https://i.scdn.co/image/ab67616d00001e029e0b677a2b31265dc3e8ae70',title:'another life · Reel',date:'24 Nov 2024',v:'50K',l:'2.1K',e:'4.5%'},
+  {url:'https://www.instagram.com/p/DAa53mBsKXk/',img:'https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e',title:'obsessed · Reel',date:'24 Nov 2024',v:'38K',l:'1.7K',e:'4.7%'},
+  {url:'https://www.instagram.com/noktis__',img:'https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47',title:'goodbyes · Reel',date:'Mar 2025',v:'22K',l:'980',e:'4.1%'},
+  {url:'https://www.instagram.com/noktis__',img:'https://i.scdn.co/image/ab67616d00001e02886b188290fbcff15d6fe521',title:'why did i fail · Reel',date:'Apr 2025',v:'18K',l:'740',e:'3.9%'},
+  {url:'https://www.instagram.com/noktis__',img:'https://i.scdn.co/image/ab67616d00001e029494eeac6a088d0460830996',title:'Berlin · Reel',date:'Mag 2025',v:'14K',l:'610',e:'3.7%'},
+];
+function renderIGPosts(id){
+  const el=document.getElementById(id); if(!el)return;
+  el.innerHTML=_IG_POSTS.map(p=>`<a href="${p.url}" target="_blank" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-[#E1306C]/5 border border-white/0 hover:border-[#E1306C]/20 transition-all group"><img src="${p.img}" class="w-9 h-9 rounded-lg object-cover flex-shrink-0" alt=""><div class="flex-1 min-w-0"><p class="text-label-sm font-bold text-on-surface group-hover:text-[#f97ab4] truncate">${p.title}</p><p class="text-[9px] text-outline">${p.date}</p></div><div class="flex gap-2 text-right flex-shrink-0"><div><p class="text-[10px] font-bold text-on-surface">${p.v}</p><p class="text-[8px] text-outline">views</p></div><div><p class="text-[10px] font-bold text-[#f97ab4]">${p.l}</p><p class="text-[8px] text-outline">likes</p></div><div><p class="text-[10px] font-bold text-outline">${p.e}</p><p class="text-[8px] text-outline">eng</p></div></div></a>`).join('');
+}
+
+const _OV_ACTIVITIES=[
+  {img:'https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84c50045346e894c55bf5dcb0f',t:'Playlisted su "TOP POP HITS"',s:'by Analias · 18.8K followers',date:'25 Mag',p:'Spotify',c:'#1ED760'},
+  {img:'https://i.scdn.co/image/ab67616d00001e028ed7959c2360cc3fcfccd9c6',t:'"i killed all your plants" → "Road Trip Summer Hits"',s:'Curator · 10.1K followers',date:'23 Mag',p:'Spotify',c:'#1ED760'},
+  {img:'https://p16-common.tiktokcdn.com/tos-maliva-avt-0068/2031f2a7617d3630fe1db5eeb764e7d7~c5_300x300.webp',t:'✨GlamPharm ha usato "obsessed" — 2.1K views',s:'TikTok · 25 Maggio',date:'25 Mag',p:'TikTok',c:'#25F4EE'},
+  {img:'https://i.scdn.co/image/ab67616d00001e02886b188290fbcff15d6fe521',t:'"why did i fail" → "Nordic Noir"',s:'Tomas Raae · 8K followers',date:'21 Mag',p:'Spotify',c:'#1ED760'},
+  {img:'https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e',t:'Mylla Ramos ❤️‍🔥 ha usato "obsessed" — 5.2K views',s:'TikTok · 10 Maggio',date:'10 Mag',p:'TikTok',c:'#25F4EE'},
+  {img:'https://i.scdn.co/image/ab67616d00001e029e0b677a2b31265dc3e8ae70',t:'Reel "another life" — 50K views',s:'@noktis__ · 7 Maggio',date:'7 Mag',p:'Instagram',c:'#f97ab4'},
+];
+const _OV_MILESTONES=[
+  {img:'https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e',t:'"obsessed" — 100 video TikTok',s:'Traguardo storico · ft. Lyhre',date:'8 Mag',p:'TikTok',c:'#25F4EE'},
+  {img:'https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e',t:'"obsessed" — 50K views IG',s:'Milestone Reel',date:'31 Mar',p:'Instagram',c:'#f97ab4'},
+  {img:'https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47',t:'"goodbyes" — 20K views IG',s:'Milestone Reel · townsend',date:'18 Mar',p:'Instagram',c:'#f97ab4'},
+  {img:'https://i.scdn.co/image/ab67616d00001e028ed7959c2360cc3fcfccd9c6',t:'Artist profile — 250K views IG',s:'Milestone @noktis__',date:'13 Mar',p:'Instagram',c:'#f97ab4'},
+  {img:'https://i.scdn.co/image/ab67616d00001e02fbdcd32a01bd6e32ab578e1a',t:'1M Views YouTube',s:'Canale superato',date:'Feb',p:'YouTube',c:'#FF0000'},
+  {img:'https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47',t:'10K Shazam superati',s:'17.1K totali · "goodbyes" #1',date:'Gen',p:'Shazam',c:'#0088FF'},
+];
+function renderOvList(id,data){
+  const el=document.getElementById(id); if(!el)return;
+  el.innerHTML=data.map(m=>`<div class="flex items-center gap-2.5 px-4 py-2.5 hover:bg-white/5 border-b border-white/5 last:border-0 group cursor-pointer transition-colors"><img src="${m.img}" class="w-8 h-8 rounded-md object-cover flex-shrink-0 border border-white/10"/><div class="flex-1 min-w-0"><p class="text-[11px] font-bold text-on-surface truncate">${m.t}</p><p class="text-[9px] text-outline truncate">${m.s}</p></div><p class="text-[9px] text-outline whitespace-nowrap">${m.date}</p><span class="text-[9px] font-bold px-1.5 py-0.5 rounded-full border flex-shrink-0" style="color:${m.c};border-color:${m.c}44">${m.p}</span></div>`).join('');
+}
+
+function initComponents(){
+  renderKPIs('kpi-tiktok','tiktok'); renderKPIs('kpi-instagram','instagram');
+  renderKPIs('kpi-youtube','youtube'); renderKPIs('kpi-shazam','shazam');
+  renderGoals('goals-overview','overview');
+  renderGoals('goals-tiktok','tiktok'); renderGoals('goals-instagram','instagram');
+  renderGoals('goals-youtube','youtube'); renderGoals('goals-shazam','shazam');
+  renderMilestones('ms-tiktok','tiktok'); renderMilestones('ms-instagram','instagram'); renderMilestones('ms-youtube','youtube');
+  renderTTTracks('tt-tracks-list'); renderIGPosts('ig-posts-list');
+  renderOvList('ov-activities',_OV_ACTIVITIES); renderOvList('ov-milestones',_OV_MILESTONES);
+}
+document.addEventListener('DOMContentLoaded', initComponents);
+
 function updateTaskCounter() {
   const total = document.querySelectorAll('.task-item').length;
   const done = document.querySelectorAll('.task-completed').length;
@@ -266,159 +407,69 @@ function updateTaskCounter() {
 
 <div class="flex min-h-screen relative z-10">
 
-  <!-- SideNavBar -->
-  <aside class="hidden md:flex flex-col h-screen sticky top-0 w-64 bg-surface-container-lowest/80 backdrop-blur-2xl border-r border-white/5 z-30">
-    <div class="flex flex-col h-full py-6">
-      <div class="px-6 mb-10 flex items-center gap-2.5">
-        <div class="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
-          <span class="material-symbols-outlined text-primary" style="font-size:18px">equalizer</span>
-        </div>
-        <div>
-          <p class="font-extrabold text-[15px] tracking-tight leading-none">Soundvertise</p>
-          <p class="text-[10px] text-outline tracking-widest uppercase font-semibold mt-1">Creator Analytics</p>
-        </div>
-      </div>
-      <nav class="flex-1 space-y-2 px-3">
-        <a href="#" class="nav-item flex items-center space-x-3 bg-surface-container/50 text-primary px-4 py-3 rounded-lg border border-white/5 shadow-sm">
-          <span class="material-symbols-outlined text-[20px]">dashboard</span>
-          <span class="text-label-md font-label-md">Dashboard</span>
-        </a>
-        <a href="#" class="nav-item flex items-center space-x-3 text-on-surface-variant px-4 py-3 rounded-lg hover:bg-white/5 hover:text-on-surface">
-          <span class="material-symbols-outlined text-[20px]">analytics</span>
-          <span class="text-label-md font-label-md">Platform Stats</span>
-        </a>
-        <a href="#" class="nav-item flex items-center space-x-3 text-on-surface-variant px-4 py-3 rounded-lg hover:bg-white/5 hover:text-on-surface">
-          <span class="material-symbols-outlined text-[20px]">task_alt</span>
-          <span class="text-label-md font-label-md">Weekly Tasks</span>
-        </a>
-        <a href="#" class="nav-item flex items-center space-x-3 text-on-surface-variant px-4 py-3 rounded-lg hover:bg-white/5 hover:text-on-surface">
-          <span class="material-symbols-outlined text-[20px]">groups</span>
-          <span class="text-label-md font-label-md">Audience</span>
-        </a>
-        <a href="#" class="nav-item flex items-center space-x-3 text-on-surface-variant px-4 py-3 rounded-lg hover:bg-white/5 hover:text-on-surface">
-          <span class="material-symbols-outlined text-[20px]">campaign</span>
-          <span class="text-label-md font-label-md">Campaigns</span>
-        </a>
-      </nav>
-      <div class="mt-auto px-4 space-y-4">
-        <div class="border-t border-white/5 pt-4 space-y-1">
-          <a href="#" class="nav-item flex items-center space-x-3 text-on-surface-variant px-4 py-2 rounded-lg hover:bg-white/5 hover:text-on-surface">
-            <span class="material-symbols-outlined text-[20px]">help</span>
-            <span class="text-label-md font-label-md">Support</span>
-          </a>
-          <a href="#" class="nav-item flex items-center space-x-3 text-on-surface-variant px-4 py-2 rounded-lg hover:bg-white/5 hover:text-on-surface">
-            <span class="material-symbols-outlined text-[20px]">logout</span>
-            <span class="text-label-md font-label-md">Logout</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </aside>
 
-  <!-- Main -->
   <main class="flex-1 min-w-0 flex flex-col">
 
-    <!-- Header -->
     <header class="sticky top-0 z-40 bg-background/80 backdrop-blur-xl border-b border-white/5">
-      <div class="flex justify-between items-center w-full px-margin-desktop py-4">
-        <div class="flex items-center gap-2">
-          <span class="w-2 h-2 bg-spotify-green rounded-full animate-pulse"></span>
-          <span class="text-[11px] text-spotify-green font-bold tracking-widest uppercase">Songstats · Live</span>
-        </div>
-        <div class="flex items-center space-x-6">
-          <button class="p-2 rounded-full hover:bg-white/5 text-on-surface-variant hover:text-on-surface relative group hover-shake">
-            <span class="material-symbols-outlined text-[24px]">notifications</span>
-            <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border border-surface"></span>
-          </button>
-          <div class="flex items-center space-x-3 pl-6 border-l border-white/10 group cursor-pointer">
-            <div class="text-right hidden sm:block">
-              <p class="text-label-md font-bold leading-none group-hover:text-primary transition-colors">Noktis</p>
-              <p class="text-label-sm text-outline mt-1">🇮🇹 Indie · Alt · Pop</p>
-            </div>
-            <img src="https://i.scdn.co/image/ab6761610000517458018e0e6639805cf726f87f"
-                 class="w-10 h-10 rounded-full border-2 border-surface-container-highest p-0.5 group-hover:border-primary group-hover:scale-105 object-cover transition-all" alt="Noktis"/>
+      <div class="flex justify-between items-center w-full px-margin-desktop py-3">
+        <div class="flex items-center gap-3">
+          <img src="https://i.scdn.co/image/ab6761610000517458018e0e6639805cf726f87f"
+               class="w-10 h-10 rounded-full object-cover border-2 border-primary/40 shadow-md shadow-primary/20" alt="Noktis"/>
+          <div>
+            <p class="text-label-lg font-extrabold leading-none text-on-surface tracking-tight">Noktis</p>
+            <p class="text-[10px] text-outline mt-0.5">🇮🇹 Indie · Alt · Pop</p>
           </div>
+        </div>
+        <div class="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/5 border border-white/8 text-outline" title="Righe totali del codice sorgente">
+          <span class="material-symbols-outlined text-[13px]">code</span>
+          <span class="text-[11px] font-mono font-bold tabular-nums" id="line-counter">1933</span>
+          <span class="text-[10px] font-semibold uppercase tracking-wider">lines</span>
         </div>
       </div>
     </header>
 
     <div class="p-margin-desktop space-y-8">
 
-      <!-- Welcome -->
-      <div class="animate-entrance flex flex-col md:flex-row md:items-end justify-between gap-4" style="animation-delay:.1s">
-        <div class="flex items-center space-x-4">
-          <img src="https://i.scdn.co/image/ab6761610000517458018e0e6639805cf726f87f"
-               class="w-16 h-16 rounded-full object-cover border-2 border-primary/50 shadow-lg shadow-primary/20" alt="Noktis"/>
-          <div>
-            <h2 class="text-headline-md font-bold text-on-surface tracking-tight">Good morning, Noktis.</h2>
-            <p class="text-body-md text-on-surface-variant mt-1">Stay focused, stay creative. Ecco la tua roadmap di oggi.</p>
-          </div>
+
+      <div class="animate-entrance flex items-center space-x-4 mb-2" style="animation-delay:.1s">
+        <img src="https://i.scdn.co/image/ab6761610000517458018e0e6639805cf726f87f"
+             class="w-16 h-16 rounded-full object-cover border-2 border-primary/50 shadow-lg shadow-primary/20" alt="Noktis"/>
+        <div>
+          <h2 class="text-headline-md font-bold text-on-surface tracking-tight">Good morning, Noktis.</h2>
+          <p class="text-body-md text-on-surface-variant mt-1">Stay focused, stay creative. Ecco la tua roadmap di oggi.</p>
         </div>
       </div>
 
-      <!-- Platform Tabs -->
-      <section class="animate-entrance grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2 pb-2" style="animation-delay:.2s">
-        <!-- Overview -->
+      <section class="animate-entrance grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-5 gap-2 pb-2" style="animation-delay:.2s">
         <div class="glass-card platform-tab active p-2 rounded-xl flex items-center justify-center gap-2 cursor-pointer group" data-target="view-overview">
           <div class="p-1.5 rounded-lg bg-primary/10 group-hover:bg-primary/20"><span class="material-symbols-outlined text-[16px] text-primary">dashboard</span></div>
           <p class="platform-name text-[12px] font-bold text-on-surface">Overview</p>
         </div>
-        <!-- Spotify -->
         <div class="glass-card platform-tab p-2 rounded-xl flex items-center justify-center gap-2 cursor-pointer group opacity-70 hover:opacity-100" data-target="view-spotify">
-          <div class="p-1.5 rounded-lg bg-[#1DB954]/10 group-hover:bg-[#1DB954]/20">
+          <div class="p-1.5 rounded-lg bg-[#1DB954]/10 group-hover:bg-[#1DB954]/20 flex items-center gap-1">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#1DB954"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+            <svg viewBox="0 0 24 24" class="w-3 h-3" fill="#FA243C"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            <svg viewBox="0 0 24 24" class="w-3 h-3" fill="#FF9900"><path d="M13.958 10.09c0 1.232.029 2.256-.591 3.351-.502.891-1.301 1.438-2.186 1.438-1.214 0-1.922-.924-1.922-2.292 0-2.692 2.415-3.182 4.699-3.182v.685zm3.186 7.705c-.209.189-.512.201-.745.074-1.052-.872-1.238-1.276-1.814-2.106-1.734 1.767-2.962 2.297-5.209 2.297-2.66 0-4.731-1.641-4.731-4.925 0-2.565 1.391-4.309 3.37-5.164 1.715-.754 4.11-.891 5.942-1.099v-.41c0-.753.06-1.642-.384-2.294-.385-.578-1.124-.816-1.776-.816-1.205 0-2.277.618-2.54 1.897-.054.285-.261.567-.547.582l-3.065-.33c-.259-.056-.548-.266-.472-.66.704-3.716 4.06-4.838 7.066-4.838 1.537 0 3.547.41 4.758 1.574 1.537 1.436 1.39 3.352 1.39 5.438v4.923c0 1.481.614 2.132 1.192 2.933.201.287.246.63-.01.839-.647.541-1.794 1.537-2.425 2.097l-.001-.012z"/></svg>
+            <span class="material-symbols-outlined text-[13px] text-shazam-blue">graphic_eq</span>
           </div>
-          <p class="platform-name text-[12px] font-bold text-on-surface">Spotify</p>
+          <p class="platform-name text-[12px] font-bold text-on-surface">Streaming</p>
         </div>
-        <!-- TikTok -->
         <div class="glass-card platform-tab p-2 rounded-xl flex items-center justify-center gap-2 cursor-pointer group opacity-70 hover:opacity-100" data-target="view-tiktok-ig">
-          <div class="p-1.5 rounded-lg bg-[#00f2ea]/10 group-hover:bg-[#00f2ea]/20 flex items-center gap-1">
-            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.27 8.27 0 004.84 1.56V6.8a4.85 4.85 0 01-1.07-.11z"/></svg>
-          </div>
+          <div class="p-1.5 rounded-lg bg-[#00f2ea]/10 group-hover:bg-[#00f2ea]/20"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.27 8.27 0 004.84 1.56V6.8a4.85 4.85 0 01-1.07-.11z"/></svg></div>
           <p class="platform-name text-[12px] font-bold text-on-surface">TikTok</p>
         </div>
-        <!-- Instagram -->
         <div class="glass-card platform-tab p-2 rounded-xl flex items-center justify-center gap-2 cursor-pointer group opacity-70 hover:opacity-100" data-target="view-instagram">
-          <div class="p-1.5 rounded-lg bg-[#E1306C]/10 group-hover:bg-[#E1306C]/20">
-            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="url(#ig-nav-grad)">
-              <defs><linearGradient id="ig-nav-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f09433"/><stop offset="50%" stop-color="#dc2743"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs>
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-            </svg>
-          </div>
+          <div class="p-1.5 rounded-lg bg-[#E1306C]/10 group-hover:bg-[#E1306C]/20"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="url(#ig-nav-grad)"><defs><linearGradient id="ig-nav-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f09433"/><stop offset="50%" stop-color="#dc2743"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
           <p class="platform-name text-[12px] font-bold text-on-surface">Instagram</p>
         </div>
-        <!-- YouTube -->
         <div class="glass-card platform-tab p-2 rounded-xl flex items-center justify-center gap-2 cursor-pointer group opacity-50" data-target="view-youtube">
           <div class="p-1.5 rounded-lg bg-[#FF0000]/10"><span class="material-symbols-outlined text-[16px] text-[#FF0000]">play_circle</span></div>
           <p class="platform-name text-[12px] font-bold text-on-surface">YouTube</p>
         </div>
-        <!-- Apple -->
-        <div class="glass-card platform-tab p-2 rounded-xl flex items-center justify-center gap-2 cursor-pointer group opacity-50" data-target="view-apple">
-          <div class="p-1.5 rounded-lg bg-[#FA243C]/10">
-            <svg viewBox="0 0 24 24" class="w-4 h-4" fill="#FA243C"><path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 00-1.877-.726 10.496 10.496 0 00-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026C4.786.07 4.043.15 3.34.428 2.004.958 1.04 1.88.475 3.208a5.494 5.494 0 00-.37 1.548c-.06.547-.08 1.095-.084 1.644Q.016 6.5.014 6.6v10.8c.002.05.004.1.007.15.01.463.04.927.13 1.383.195.975.62 1.856 1.306 2.6.7.76 1.565 1.28 2.58 1.532.49.12.99.175 1.495.196.342.014.684.02 1.026.02H18.45c.358 0 .716-.006 1.073-.025.51-.026 1.016-.09 1.507-.24.98-.297 1.8-.836 2.44-1.61.64-.77 1.02-1.67 1.15-2.66.07-.52.09-1.04.09-1.56l.003-1.38V6.6c-.002-.16-.006-.318-.02-.476zm-12.66 9.386h-1.44V9.578h1.44v5.93zm-.72-6.74c-.46 0-.834-.38-.834-.846s.375-.845.834-.845.834.378.834.845-.374.845-.834.845zM18.54 15.5h-1.44v-2.984c0-.73-.264-1.226-.92-1.226-.503 0-.803.338-.935.665-.048.117-.06.28-.06.444V15.5h-1.44V9.578h1.44v.63c.19-.295.534-.717 1.296-.717 1.06 0 1.86.694 1.86 2.188V15.5z"/></svg>
-          </div>
-          <p class="platform-name text-[12px] font-bold text-on-surface">Apple</p>
-        </div>
-        <!-- Amazon -->
-        <div class="glass-card platform-tab p-2 rounded-xl flex items-center justify-center gap-2 cursor-pointer group opacity-50" data-target="view-amazon">
-          <div class="p-1.5 rounded-lg bg-[#FF9900]/10">
-            <svg viewBox="0 0 24 24" class="w-4 h-4" fill="#FF9900"><path d="M13.958 10.09c0 1.232.029 2.256-.591 3.351-.502.891-1.301 1.438-2.186 1.438-1.214 0-1.922-.924-1.922-2.292 0-2.692 2.415-3.182 4.699-3.182v.685zm3.186 7.705c-.209.189-.512.201-.745.074-1.052-.872-1.238-1.276-1.814-2.106-1.734 1.767-2.962 2.297-5.209 2.297-2.66 0-4.731-1.641-4.731-4.925 0-2.565 1.391-4.309 3.37-5.164 1.715-.754 4.11-.891 5.942-1.099v-.41c0-.753.06-1.642-.384-2.294-.385-.578-1.124-.816-1.776-.816-1.205 0-2.277.618-2.54 1.897-.054.285-.261.567-.547.582l-3.065-.33c-.259-.056-.548-.266-.472-.66.704-3.716 4.06-4.838 7.066-4.838 1.537 0 3.547.41 4.758 1.574 1.537 1.436 1.39 3.352 1.39 5.438v4.923c0 1.481.614 2.132 1.192 2.933.201.287.246.63-.01.839-.647.541-1.794 1.537-2.425 2.097l-.001-.012zM21.479 19.065c-3.039 2.254-7.446 3.453-11.239 3.453-5.321 0-10.112-1.966-13.733-5.236-.284-.258-.029-.611.313-.411 3.916 2.277 8.751 3.651 13.742 3.651 3.368 0 7.072-.698 10.479-2.146.516-.22.948.338.438.689zm1.236-1.411c-.388-.496-2.553-.234-3.527-.117-.292.035-.338-.223-.073-.41 1.726-1.214 4.561-.863 4.889-.457.328.406-.086 3.225-1.705 4.568-.249.208-.487.098-.375-.178.364-.908 1.18-2.94.791-3.406z"/></svg>
-          </div>
-          <p class="platform-name text-[12px] font-bold text-on-surface">Amazon</p>
-        </div>
-        <!-- Shazam -->
-        <div class="glass-card platform-tab p-2 rounded-xl flex items-center justify-center gap-2 cursor-pointer group opacity-50" data-target="view-shazam">
-          <div class="p-1.5 rounded-lg bg-[#0088ff]/10"><span class="material-symbols-outlined text-[16px] text-shazam-blue">graphic_eq</span></div>
-          <p class="platform-name text-[12px] font-bold text-on-surface">Shazam</p>
-        </div>
       </section>
 
-      <!-- ════════════════════
-           OVERVIEW SECTION
-      ═══════════════════════ -->
       <div class="view-section active space-y-8 mt-4" id="view-overview">
 
-      <!-- KPI Strip — multi-platform -->
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 animate-entrance" style="animation-delay:.3s">
         <div class="glass-card p-4 rounded-xl cursor-pointer hover:border-spotify-green/40 border border-white/5 transition-colors group" onclick="openKpiChart('Monthly Listeners','Ultimi 30 giorni · Spotify','#1ED760',[57200,58600,60100,62400,68900,71300,73800,77200,79400,80900,82300,83700,85100,87600,90800,94200,98500,102300,105100,107747,112434,112200,111900,111800,111700,111750,111690,111680,111686,111686],'111,686','+54,486','+54,486')">
           <p class="text-label-sm text-outline mb-1">Spotify Listeners</p>
@@ -430,10 +481,10 @@ function updateTaskCounter() {
           <h5 id="ov-playlists" class="text-headline-md font-bold text-on-surface group-hover:text-spotify-green transition-colors">151</h5>
           <p id="ov-playlists-sub" class="text-xs text-spotify-green mt-2 flex items-center"><span class="material-symbols-outlined text-[14px] mr-1">trending_up</span>+23 last 30 days</p>
         </div>
-        <div class="glass-card p-4 rounded-xl cursor-pointer hover:border-spotify-green/40 border border-white/5 transition-colors group" onclick="openKpiChart('Total Streams','Cumulativo lifetime · Spotify','#1ED760',[9100000,9150000,9200000,9250000,9300000,9340000,9380000,9420000,9460000,9500000,9540000,9580000,9620000,9660000,9700000,9730000,9760000,9790000,9820000,9840000,9860000,9870000,9880000,9890000,9900000,9900000,9900000,9900000,9900000,9900000],'9.9M','lifetime','+800K')">
-          <p class="text-label-sm text-outline mb-1">Streams Totali</p>
-          <h5 id="ov-streams" class="text-headline-md font-bold text-on-surface group-hover:text-spotify-green transition-colors">9.9M</h5>
-          <p id="ov-streams-sub" class="text-xs text-spotify-green mt-2 flex items-center"><span class="material-symbols-outlined text-[14px] mr-1">music_note</span>Spotify lifetime</p>
+        <div class="glass-card p-4 rounded-xl cursor-pointer hover:border-[#FF0000]/40 border border-white/5 transition-colors group" onclick="openKpiChart('YouTube Video Views','Total · Songstats','#FF0000',[2700000,2710000,2720000,2730000,2740000,2750000,2760000,2770000,2780000,2790000,2800000,2810000,2820000,2825000,2830000,2832000,2835000,2838000,2840000,2842000,2845000,2847000,2848000,2849000,2850000,2850000,2850000,2850000,2850000,2850000],'2.85M','Total','+150K')">
+          <p class="text-label-sm text-outline mb-1">YouTube Views</p>
+          <h5 id="ov-yt-views" class="text-headline-md font-bold text-on-surface group-hover:text-[#FF0000] transition-colors">2.85M</h5>
+          <p id="ov-yt-views-sub" class="text-xs text-[#FF0000] mt-2 flex items-center"><span class="material-symbols-outlined text-[14px] mr-1">smart_display</span>+150K · 30gg</p>
         </div>
         <div class="glass-card p-4 rounded-xl cursor-pointer hover:border-tiktok-cyan/40 border border-white/5 transition-colors group" onclick="openKpiChart('TikTok Views','Total · Songstats','#25F4EE',[215000,220000,225000,228000,231000,234000,237000,240000,243000,245000,247000,249000,250000,251000,252000,253000,254000,255000,256000,257000,258000,259000,259500,260000,260000,260000,260000,260000,260000,260000],'260,000','Total','+45K')">
           <p class="text-label-sm text-outline mb-1">TikTok Views</p>
@@ -452,257 +503,103 @@ function updateTaskCounter() {
         </div>
       </div>
 
-      <!-- Last Release + Goal (overview) -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-entrance" style="animation-delay:.4s">
-        <!-- Last Release -->
-        <div class="glass-card p-6 rounded-2xl">
-          <h4 class="text-headline-sm text-on-surface mb-4">Last Release Performance</h4>
-          <div class="flex items-center space-x-6">
-            <img src="https://i.scdn.co/image/ab67616d00001e028ed7959c2360cc3fcfccd9c6" class="w-24 h-24 rounded-lg shadow-lg" alt="i killed all your plants"/>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-entrance" style="animation-delay:.4s">
+        <div class="glass-card p-5 rounded-2xl flex flex-col gap-4">
+          <h4 class="text-headline-sm text-on-surface">Last Release</h4>
+          <div class="flex items-center gap-4">
+            <img src="https://i.scdn.co/image/ab67616d00001e028ed7959c2360cc3fcfccd9c6" class="w-20 h-20 rounded-xl shadow-lg flex-shrink-0" alt="i killed all your plants"/>
             <div>
-              <h5 class="text-body-lg font-bold text-on-surface">i killed all your plants</h5>
-              <p class="text-label-sm text-outline mb-3">Noktis · Released Apr 2026</p>
-              <div class="flex space-x-6">
-                <div><p class="text-xs text-outline">Popularity</p><p class="text-label-md font-bold text-primary">47/100</p></div>
-                <div><p class="text-xs text-outline">Playlists</p><p class="text-label-md font-bold text-on-surface">+6 new</p></div>
-                <div><p class="text-xs text-outline">Top tier</p><p class="text-label-md font-bold text-spotify-green">T2 · 18.8K</p></div>
+              <h5 class="text-label-lg font-bold text-on-surface leading-tight">i killed all your plants</h5>
+              <p class="text-[11px] text-outline mt-1">Noktis · Apr 2026</p>
+              <div class="flex gap-4 mt-3">
+                <div><p class="text-[10px] text-outline">Pop.</p><p class="text-label-md font-bold text-primary">47/100</p></div>
+                <div><p class="text-[10px] text-outline">Playlist</p><p class="text-label-md font-bold text-on-surface">60 attive</p></div>
+                <div><p class="text-[10px] text-outline">Top</p><p class="text-label-md font-bold text-spotify-green">18.8K</p></div>
               </div>
             </div>
           </div>
         </div>
-        <!-- Goals: overview -->
-        <div class="glass-card p-6 rounded-2xl flex flex-col gap-4">
-          <h4 class="text-headline-sm text-on-surface">Next Step Goals</h4>
-          <!-- Completed Goal -->
-          <div class="rounded-xl border border-spotify-green/30 bg-spotify-green/5 p-4 flex items-start gap-3 relative" id="goal-completed-overview">
-            <span class="material-symbols-outlined text-spotify-green text-[20px] mt-0.5">check_circle</span>
-            <div class="flex-1">
-              <p class="text-label-md font-bold text-spotify-green">100K Monthly Listeners raggiunti! 🎉</p>
-              <p class="text-[11px] text-outline mt-0.5">Traguardo storico — continua così!</p>
-            </div>
-            <button onclick="openShareCard('100K Monthly Listeners','La tua musica è ascoltata da oltre 100.000 persone al mese su Spotify 🎧','111,686 ascoltatori mensili · peak 112,434')" class="flex-shrink-0 flex items-center gap-1 text-[11px] font-bold text-spotify-green border border-spotify-green/40 rounded-lg px-3 py-1.5 hover:bg-spotify-green/10 transition-colors">
-              <span class="material-symbols-outlined text-[14px]">share</span>Condividi
-            </button>
+        <div id="goals-overview"></div>
+        <div class="glass-card p-5 rounded-2xl flex flex-col">
+          <div class="flex items-center justify-between mb-4">
+            <h4 class="text-headline-sm text-on-surface">Weekly Tasks</h4>
+            <span id="task-counter" class="bg-surface-container text-outline border border-white/10 text-[10px] px-2.5 py-1 rounded-full font-bold tracking-wider">3 PENDING</span>
           </div>
-          <!-- Goal 1 -->
-          <div>
-            <div class="flex items-center justify-between mb-1.5">
-              <span class="text-label-md font-semibold text-on-surface">Reach 150K Monthly Listeners</span>
-              <span id="goal-reach-pct" class="text-label-sm text-primary font-bold">75%</span>
+          <div class="space-y-2.5" id="task-list">
+            <div class="task-item flex items-start p-3 rounded-xl bg-surface-container-low border border-white/5 hover:border-primary/30 cursor-pointer group" onclick="this.classList.toggle('task-completed'); updateTaskCounter();">
+              <div class="check-circle w-4 h-4 rounded-full border border-outline group-hover:border-primary flex items-center justify-center mr-3 mt-0.5 flex-shrink-0"><span class="check-icon material-symbols-outlined text-[12px] opacity-0 group-hover:opacity-50 text-primary">check</span></div>
+              <div class="flex-1 min-w-0"><p class="task-text text-[12px] font-semibold text-on-surface group-hover:text-primary truncate">Promuovi "obsessed" su TikTok</p><p class="task-text text-[10px] text-outline mt-0.5">Track con più video (103)</p></div>
             </div>
-            <div class="w-full bg-surface-container-high rounded-full h-2"><div id="goal-reach-bar" class="bg-primary h-2 rounded-full" style="width:74%"></div></div>
-            <p id="goal-reach-label" class="text-[11px] text-outline mt-1">38,314 mancanti · sei a 111,686</p>
-          </div>
-          <!-- Goal 2 -->
-          <div>
-            <div class="flex items-center justify-between mb-1.5">
-              <span class="text-label-md font-semibold text-on-surface">Entra nella Top 50 Italia Spotify</span>
-              <span class="text-label-sm text-secondary font-bold">42%</span>
+            <div class="task-item flex items-start p-3 rounded-xl bg-surface-container-low border border-white/5 hover:border-primary/30 cursor-pointer group" onclick="this.classList.toggle('task-completed'); updateTaskCounter();">
+              <div class="check-circle w-4 h-4 rounded-full border border-outline group-hover:border-primary flex items-center justify-center mr-3 mt-0.5 flex-shrink-0"><span class="check-icon material-symbols-outlined text-[12px] opacity-0 group-hover:opacity-50 text-primary">check</span></div>
+              <div class="flex-1 min-w-0"><p class="task-text text-[12px] font-semibold text-on-surface group-hover:text-primary truncate">Reel su "i killed all your plants"</p><p class="task-text text-[10px] text-outline mt-0.5">Popolarità in crescita: 47</p></div>
             </div>
-            <div class="w-full bg-surface-container-high rounded-full h-2"><div class="bg-secondary h-2 rounded-full" style="width:42%"></div></div>
-            <p class="text-[11px] text-outline mt-1">Popularity attuale 47 · obiettivo 65+</p>
+            <div class="task-item flex items-start p-3 rounded-xl bg-surface-container-low border border-white/5 hover:border-primary/30 cursor-pointer group" onclick="this.classList.toggle('task-completed'); updateTaskCounter();">
+              <div class="check-circle w-4 h-4 rounded-full border border-outline group-hover:border-primary flex items-center justify-center mr-3 mt-0.5 flex-shrink-0"><span class="check-icon material-symbols-outlined text-[12px] opacity-0 group-hover:opacity-50 text-primary">check</span></div>
+              <div class="flex-1 min-w-0"><p class="task-text text-[12px] font-semibold text-on-surface group-hover:text-primary truncate">Ringrazia curator "Nordic Noir"</p><p class="task-text text-[10px] text-outline mt-0.5">Tomas Raae · 8K followers</p></div>
+            </div>
           </div>
         </div>
       </div>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-          <!-- Recent Milestones table -->
-          <div class="lg:col-span-2 glass-card animate-entrance rounded-2xl overflow-hidden flex flex-col" style="animation-delay:.5s">
-            <div class="p-6 border-b border-white/5 flex justify-between items-center bg-surface-container/30">
-              <div>
-                <h4 class="text-headline-sm flex items-center gap-2 text-on-surface">
-                  <span class="material-symbols-outlined text-primary text-[20px]">auto_awesome</span>Recent Milestones
-                </h4>
-                <p class="text-body-md text-on-surface-variant mt-1">Dati Songstats · ultimi eventi</p>
-              </div>
-              <button class="text-primary font-semibold text-label-md hover:text-primary-fixed-dim flex items-center gap-1 group" id="view-all-btn">
-                View All
-                <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-entrance" style="animation-delay:.5s">
+          <div class="glass-card rounded-2xl overflow-hidden">
+            <div class="px-4 py-3 border-b border-white/5 flex justify-between items-center bg-surface-container/30">
+              <h4 class="text-label-lg font-bold flex items-center gap-2 text-on-surface">
+                <span class="material-symbols-outlined text-primary text-[18px]">bolt</span>Recent Activities
+              </h4>
+              <button class="text-primary font-semibold text-[11px] hover:text-primary-fixed-dim flex items-center gap-1 group" id="view-all-btn">
+                View All <span class="material-symbols-outlined text-[14px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
               </button>
             </div>
-            <div class="overflow-x-auto flex-1">
-              <table class="w-full text-left">
-                <tbody class="divide-y divide-white/5">
-
-                  <tr class="hover:bg-white/5 group cursor-pointer">
-                    <td class="px-6 py-5">
-                      <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 rounded-lg overflow-hidden border border-white/10 group-hover:border-spotify-green/50">
-                          <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84c50045346e894c55bf5dcb0f" class="w-full h-full object-cover" alt=""/>
-                        </div>
-                        <div>
-                          <p class="font-bold text-body-md text-on-surface group-hover:text-spotify-green">Playlisted on "TOP POP HITS"</p>
-                          <p class="text-label-sm text-on-surface-variant mt-0.5">by Analias · 18.8K followers · "i killed all your plants"</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-6 py-5 text-label-sm text-outline whitespace-nowrap">25 May</td>
-                    <td class="px-6 py-5 text-right">
-                      <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-spotify-green/10 border border-spotify-green/20">
-                        <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 flex-shrink-0" fill="#1ED760"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-                        <span class="text-spotify-green text-[11px] font-bold">Spotify</span>
-                      </span>
-                    </td>
-                  </tr>
-
-                  <tr class="hover:bg-white/5 group cursor-pointer">
-                    <td class="px-6 py-5">
-                      <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 rounded-lg overflow-hidden border border-white/10 group-hover:border-tiktok-cyan/50">
-                          <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" class="w-full h-full object-cover" alt=""/>
-                        </div>
-                        <div>
-                          <p class="font-bold text-body-md text-on-surface group-hover:text-tiktok-cyan">"obsessed" ha raggiunto 100 video su TikTok</p>
-                          <p class="text-label-sm text-on-surface-variant mt-0.5">milestone · ft. Lyhre · 8 Maggio</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-6 py-5 text-label-sm text-outline whitespace-nowrap">8 May</td>
-                    <td class="px-6 py-5 text-right">
-                      <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-tiktok-cyan/10 border border-tiktok-cyan/20">
-                        <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 flex-shrink-0" fill="#25F4EE"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.27 8.27 0 004.84 1.56V6.8a4.85 4.85 0 01-1.07-.11z"/></svg>
-                        <span class="text-tiktok-cyan text-[11px] font-bold">TikTok</span>
-                      </span>
-                    </td>
-                  </tr>
-
-                  <tr class="hover:bg-white/5 group cursor-pointer">
-                    <td class="px-6 py-5">
-                      <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 rounded-lg overflow-hidden border border-white/10 group-hover:border-[#f97ab4]/50">
-                          <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" class="w-full h-full object-cover" alt=""/>
-                        </div>
-                        <div>
-                          <p class="font-bold text-body-md text-on-surface group-hover:text-[#f97ab4]">"obsessed" ha superato 50,000 views su Instagram</p>
-                          <p class="text-label-sm text-on-surface-variant mt-0.5">milestone Reel · 31 Marzo</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-6 py-5 text-label-sm text-outline whitespace-nowrap">31 Mar</td>
-                    <td class="px-6 py-5 text-right">
-                      <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#f97ab4]/10 border border-[#f97ab4]/20">
-                        <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 flex-shrink-0" fill="#f97ab4"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                        <span class="text-[#f97ab4] text-[11px] font-bold">Instagram</span>
-                      </span>
-                    </td>
-                  </tr>
-
-                </tbody>
-              </table>
-            </div>
-            <!-- History expand panel -->
-            <div class="px-6 pb-6 bg-surface-container/20 border-t border-white/5" id="history-panel">
-              <h5 class="text-label-md font-bold text-on-surface my-4">Older Milestones (Songstats)</h5>
-              <div class="space-y-4">
-                <div class="flex items-start gap-3">
-                  <span class="material-symbols-outlined text-outline text-[18px] mt-0.5">trending_up</span>
-                  <div>
-                    <p class="text-label-sm text-on-surface">Instagram artist profile ha raggiunto 250,000 views</p>
-                    <p class="text-[10px] text-outline">13 Marzo 2026</p>
-                  </div>
-                </div>
-                <div class="flex items-start gap-3">
-                  <span class="material-symbols-outlined text-outline text-[18px] mt-0.5">library_music</span>
-                  <div>
-                    <p class="text-label-sm text-on-surface">"goodbyes" ha superato 20,000 views su Instagram</p>
-                    <p class="text-[10px] text-outline">18 Marzo 2026</p>
-                  </div>
-                </div>
-                <div class="flex items-start gap-3">
-                  <span class="material-symbols-outlined text-outline text-[18px] mt-0.5">playlist_add_check</span>
-                  <div>
-                    <p class="text-label-sm text-on-surface">"why did i fail" aggiunto a "Nordic Noir" (8K followers)</p>
-                    <p class="text-[10px] text-outline">21 Maggio 2026</p>
-                  </div>
-                </div>
-                <div class="flex items-start gap-3">
-                  <span class="material-symbols-outlined text-outline text-[18px] mt-0.5">playlist_add</span>
-                  <div>
-                    <p class="text-label-sm text-on-surface">"i killed all your plants" aggiunto a "Road Trip | Summer Hits 2026" (10.1K followers)</p>
-                    <p class="text-[10px] text-outline">23 Maggio 2026</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <div id="ov-activities"></div>
           </div>
-
-          <!-- Weekly Tasks -->
-          <div class="glass-card animate-entrance p-6 rounded-2xl flex flex-col" style="animation-delay:.6s">
-            <div class="flex items-center justify-between mb-6">
-              <h4 class="text-headline-sm text-on-surface">Weekly Tasks</h4>
-              <span id="task-counter" class="bg-surface-container text-outline border border-white/10 text-[10px] px-2.5 py-1 rounded-full font-bold tracking-wider">3 PENDING</span>
+          <div class="glass-card rounded-2xl overflow-hidden">
+            <div class="px-4 py-3 border-b border-white/5 flex justify-between items-center bg-surface-container/30">
+              <h4 class="text-label-lg font-bold flex items-center gap-2 text-on-surface">
+                <span class="material-symbols-outlined text-primary text-[18px]">auto_awesome</span>Recent Milestones
+              </h4>
+              <span class="text-[10px] text-outline">tutte le piattaforme</span>
             </div>
-            <div class="space-y-3" id="task-list">
-              <div class="task-item flex items-start p-3.5 rounded-xl bg-surface-container-low border border-white/5 hover:border-primary/30 cursor-pointer group" onclick="this.classList.toggle('task-completed'); updateTaskCounter();">
-                <div class="check-circle w-5 h-5 rounded-full border border-outline group-hover:border-primary flex items-center justify-center mr-3 mt-0.5">
-                  <span class="check-icon material-symbols-outlined text-[14px] opacity-0 group-hover:opacity-50 text-primary">check</span>
-                </div>
-                <div class="flex-1">
-                  <p class="task-text text-label-md font-semibold text-on-surface group-hover:text-primary">Promuovi "obsessed" su TikTok</p>
-                  <p class="task-text text-[11px] text-outline mt-1">È la tua track con più video (103)</p>
-                </div>
-              </div>
-              <div class="task-item flex items-start p-3.5 rounded-xl bg-surface-container-low border border-white/5 hover:border-primary/30 cursor-pointer group" onclick="this.classList.toggle('task-completed'); updateTaskCounter();">
-                <div class="check-circle w-5 h-5 rounded-full border border-outline group-hover:border-primary flex items-center justify-center mr-3 mt-0.5">
-                  <span class="check-icon material-symbols-outlined text-[14px] opacity-0 group-hover:opacity-50 text-primary">check</span>
-                </div>
-                <div class="flex-1">
-                  <p class="task-text text-label-md font-semibold text-on-surface group-hover:text-primary">Reel su "i killed all your plants"</p>
-                  <p class="task-text text-[11px] text-outline mt-1">Popolarità in crescita: 47</p>
-                </div>
-              </div>
-              <div class="task-item flex items-start p-3.5 rounded-xl bg-surface-container-low border border-white/5 hover:border-primary/30 cursor-pointer group" onclick="this.classList.toggle('task-completed'); updateTaskCounter();">
-                <div class="check-circle w-5 h-5 rounded-full border border-outline group-hover:border-primary flex items-center justify-center mr-3 mt-0.5">
-                  <span class="check-icon material-symbols-outlined text-[14px] opacity-0 group-hover:opacity-50 text-primary">check</span>
-                </div>
-                <div class="flex-1">
-                  <p class="task-text text-label-md font-semibold text-on-surface group-hover:text-primary">Ringrazia curator di "Nordic Noir"</p>
-                  <p class="task-text text-[11px] text-outline mt-1">Tomas Raae · 8K followers</p>
-                </div>
-              </div>
-            </div>
+            <div id="ov-milestones"></div>
           </div>
         </div>
       </div>
 
-      <!-- ════════════════════
-           SPOTIFY SECTION
-      ═══════════════════════ -->
       <div class="view-section space-y-8 mt-4" id="view-spotify">
 
-        <!-- Spotify KPI -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 animate-entrance" style="animation-delay:.1s">
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 animate-entrance" style="animation-delay:.1s">
           <div class="glass-card p-4 rounded-xl cursor-pointer hover:border-spotify-green/40 border border-white/5 transition-colors group" onclick="openKpiChart('Monthly Listeners','Ultimi 30 giorni · Spotify','#1ED760',[57200,58600,60100,62400,68900,71300,73800,77200,79400,80900,82300,83700,85100,87600,90800,94200,98500,102300,105100,107747,112434,112200,111900,111800,111700,111750,111690,111680,111686,111686],'111,686','+54,486','+54,486')">
             <p class="text-label-sm text-outline">Monthly Listeners</p>
             <h3 id="sp-monthly-listeners" class="text-headline-lg font-bold text-on-surface group-hover:text-spotify-green transition-colors">111.7K</h3>
             <p id="sp-monthly-listeners-sub" class="text-xs text-spotify-green mt-1 flex items-center"><span class="material-symbols-outlined text-[14px] mr-1">trending_up</span>+54.5K · 30gg</p>
-            <p class="text-[9px] text-outline mt-1">clicca per il grafico →</p>
           </div>
           <div class="glass-card p-4 rounded-xl cursor-pointer hover:border-spotify-green/40 border border-white/5 transition-colors group" onclick="openKpiChart('Total Streams','Cumulativo lifetime · Spotify','#1ED760',[9100000,9150000,9200000,9250000,9300000,9340000,9380000,9420000,9460000,9500000,9540000,9580000,9620000,9660000,9700000,9730000,9760000,9790000,9820000,9840000,9860000,9870000,9880000,9890000,9900000,9900000,9900000,9900000,9900000,9900000],'9.9M','lifetime','+800K')">
             <p class="text-label-sm text-outline">Total Streams</p>
             <h3 id="sp-streams" class="text-headline-lg font-bold text-on-surface group-hover:text-spotify-green transition-colors">9.9M</h3>
             <p id="sp-streams-sub" class="text-xs text-spotify-green mt-1 flex items-center"><span class="material-symbols-outlined text-[14px] mr-1">trending_up</span>+800K · 30gg</p>
-            <p class="text-[9px] text-outline mt-1">clicca per il grafico →</p>
           </div>
           <div class="glass-card p-4 rounded-xl cursor-pointer hover:border-primary/40 border border-white/5 transition-colors group" onclick="openKpiChart('Popularity Score','Artist-level · Spotify · media 34.4%','#d0bcff',[33,33,33,33,33,33,33,33,33,33,33,33,34,34,34,35,35,36,36,36,37,36,35,35,34,34,33,33,33,33],'33','avg 34.4%','+4 pts peak')">
             <p class="text-label-sm text-outline">Popularity Score</p>
             <h3 id="sp-popularity" class="text-headline-lg font-bold text-on-surface group-hover:text-primary transition-colors">33/100</h3>
             <p class="text-xs text-outline mt-1 flex items-center"><span class="material-symbols-outlined text-[14px] mr-1">person</span>avg 34.4% · peak 37</p>
-            <p class="text-[9px] text-outline mt-1">clicca per il grafico →</p>
           </div>
           <div class="glass-card p-4 rounded-xl cursor-pointer hover:border-spotify-green/40 border border-white/5 transition-colors group" onclick="openKpiChart('Followers','Crescita · Spotify','#1ED760',[6100,6120,6140,6160,6175,6190,6210,6230,6250,6265,6280,6300,6315,6330,6345,6360,6375,6385,6395,6400,6405,6408,6410,6412,6415,6418,6420,6421,6422,6423],'6,423','growing','+323')">
             <p class="text-label-sm text-outline">Followers</p>
             <h3 id="sp-followers" class="text-headline-lg font-bold text-on-surface group-hover:text-spotify-green transition-colors">6,423</h3>
             <p id="sp-followers-sub" class="text-xs text-spotify-green mt-1 flex items-center"><span class="material-symbols-outlined text-[14px] mr-1">trending_up</span>+323 · 30gg</p>
-            <p class="text-[9px] text-outline mt-1">clicca per il grafico →</p>
+          </div>
+          <div class="glass-card relative p-4 rounded-xl cursor-pointer hover:border-shazam-blue/40 border border-white/5 transition-colors group" onclick="openKpiChart('Total Shazams','Lifetime · Songstats','#0088FF',[16800,16830,16850,16870,16890,16905,16920,16935,16950,16960,16970,16980,16990,17000,17010,17020,17030,17041,17045,17050,17055,17060,17063,17066,17068,17070,17071,17072,17072,17072],'17,072','Lifetime','+272')">
+            <div class="absolute top-2.5 right-2.5 w-4 h-4" style="color:#0088FF;opacity:.6"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.4 17.4c-.3.3-.7.4-1.1.4-.4 0-.7-.1-1-.3-2.1-1.5-4-2-5.7-1.4-.5.2-1 0-1.2-.5s0-1 .5-1.2c2.2-.8 4.6-.2 7.1 1.5.4.3.5.9.4 1.5zm1.3-2.5c-.4.4-1 .4-1.4.1-2.6-2-6-2.5-8.9-1.4-.5.2-1.1-.1-1.3-.6s.1-1.1.6-1.3c3.4-1.3 7.4-.7 10.5 1.6.4.3.5.9.1 1.6z"/></svg></div>
+            <p class="text-label-sm text-outline">Total Shazams</p>
+            <h3 id="sp-shazams" class="text-headline-lg font-bold text-on-surface group-hover:text-shazam-blue transition-colors">17,072</h3>
+            <p class="text-xs text-shazam-blue mt-1 flex items-center"><span class="material-symbols-outlined text-[14px] mr-1">graphic_eq</span>+272 · 3 mesi</p>
           </div>
         </div>
 
-        <!-- Spotify Goals -->
         <div class="glass-card p-6 rounded-2xl animate-entrance" style="animation-delay:.15s">
           <h4 class="text-headline-sm text-on-surface mb-4">Next Step Goals · Spotify</h4>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <!-- Completed -->
             <div class="rounded-xl border border-spotify-green/30 bg-spotify-green/5 p-4 flex flex-col gap-2">
               <div class="flex items-center gap-2">
                 <span class="material-symbols-outlined text-spotify-green text-[18px]">check_circle</span>
@@ -713,13 +610,11 @@ function updateTaskCounter() {
                 <span class="material-symbols-outlined text-[14px]">share</span>Condividi
               </button>
             </div>
-            <!-- Goal 1 -->
             <div class="rounded-xl border border-white/10 bg-surface-container/30 p-4">
               <p class="text-label-md font-semibold text-on-surface mb-2">200 playlist attive</p>
               <div class="w-full bg-surface-container-high rounded-full h-2 mb-1"><div class="bg-primary h-2 rounded-full" style="width:75%"></div></div>
               <p class="text-[11px] text-outline">151 / 200 · 75%</p>
             </div>
-            <!-- Goal 2 -->
             <div class="rounded-xl border border-white/10 bg-surface-container/30 p-4">
               <p class="text-label-md font-semibold text-on-surface mb-2">Popularity 50 su "i killed all your plants"</p>
               <div class="w-full bg-surface-container-high rounded-full h-2 mb-1"><div class="bg-secondary h-2 rounded-full" style="width:94%"></div></div>
@@ -730,7 +625,6 @@ function updateTaskCounter() {
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-entrance" style="animation-delay:.2s">
 
-          <!-- Popularity by Track + 30d trend -->
           <div class="glass-card p-6 rounded-2xl">
             <div class="flex justify-between items-start mb-1">
               <h4 class="text-headline-sm text-on-surface">Popularity by Track</h4>
@@ -739,7 +633,6 @@ function updateTaskCounter() {
             <p class="text-label-sm text-outline mb-5">Scala 0 → 100 · trend ultimi 30 giorni</p>
 
             <div class="space-y-1">
-              <!-- 1 -->
               <div class="track-row p-3" onclick="openPopChart('i killed all your plants','Noktis · Apr 2026','https://i.scdn.co/image/ab67616d00001e028ed7959c2360cc3fcfccd9c6',47,'#d0bcff',[38,39,40,41,42,43,44,44,45,45,45,46,46,46,47,47,47,47,48,48,47,47,47,47,47,47,47,47,47,47],44.7,'+17')">
                 <div class="flex items-center gap-3">
                   <img src="https://i.scdn.co/image/ab67616d00001e028ed7959c2360cc3fcfccd9c6" class="w-9 h-9 rounded-lg object-cover flex-shrink-0" alt="">
@@ -754,7 +647,6 @@ function updateTaskCounter() {
                   </div>
                 </div>
               </div>
-              <!-- 2 -->
               <div class="track-row p-3" onclick="openPopChart('goodbyes','Noktis, townsend · Sep 2022','https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47',41,'#4cd7f6',[43,43,43,42,42,42,42,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41],41.7,'−2')">
                 <div class="flex items-center gap-3">
                   <img src="https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47" class="w-9 h-9 rounded-lg object-cover flex-shrink-0" alt="">
@@ -769,7 +661,6 @@ function updateTaskCounter() {
                   </div>
                 </div>
               </div>
-              <!-- 3 -->
               <div class="track-row p-3" onclick="openPopChart('why did i fail','Noktis, townsend · Mar 2024','https://i.scdn.co/image/ab67616d00001e02886b188290fbcff15d6fe521',38,'#e9ddff',[38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38],38.0,'stabile')">
                 <div class="flex items-center gap-3">
                   <img src="https://i.scdn.co/image/ab67616d00001e02886b188290fbcff15d6fe521" class="w-9 h-9 rounded-lg object-cover flex-shrink-0" alt="">
@@ -784,7 +675,6 @@ function updateTaskCounter() {
                   </div>
                 </div>
               </div>
-              <!-- 4 -->
               <div class="track-row p-3" onclick="openPopChart('another life','Noktis, kaii · Oct 2024','https://i.scdn.co/image/ab67616d00001e029e0b677a2b31265dc3e8ae70',35,'#dfe3e2',[36,36,36,36,36,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35],35.2,'−1')">
                 <div class="flex items-center gap-3">
                   <img src="https://i.scdn.co/image/ab67616d00001e029e0b677a2b31265dc3e8ae70" class="w-9 h-9 rounded-lg object-cover flex-shrink-0" alt="">
@@ -799,7 +689,6 @@ function updateTaskCounter() {
                   </div>
                 </div>
               </div>
-              <!-- 5 -->
               <div class="track-row p-3" onclick="openPopChart('nothing to lose','Noktis, Niah Steiner','https://i.scdn.co/image/ab67616d00001e027eef9ab3706811f89db96087',34,'#948f9a',[34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34],34.0,'stabile')">
                 <div class="flex items-center gap-3">
                   <img src="https://i.scdn.co/image/ab67616d00001e027eef9ab3706811f89db96087" class="w-9 h-9 rounded-lg object-cover flex-shrink-0" alt="">
@@ -814,7 +703,6 @@ function updateTaskCounter() {
                   </div>
                 </div>
               </div>
-              <!-- 6 -->
               <div class="track-row p-3" onclick="openPopChart('obsessed','Noktis, Lyhre · Sep 2024','https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e',34,'#948f9a',[35,35,35,35,35,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34],34.2,'−1')">
                 <div class="flex items-center gap-3">
                   <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" class="w-9 h-9 rounded-lg object-cover flex-shrink-0" alt="">
@@ -832,7 +720,6 @@ function updateTaskCounter() {
             </div>
           </div>
 
-          <!-- Playlists with Recenti / Active / All-time tabs -->
           <div class="glass-card p-6 rounded-2xl">
             <div class="flex justify-between items-center mb-4">
               <h4 class="text-headline-sm text-on-surface">Playlists</h4>
@@ -843,7 +730,6 @@ function updateTaskCounter() {
               </div>
             </div>
 
-            <!-- Recenti (by date) -->
             <div class="playlist-list active space-y-2" id="pl-recent">
               <a href="https://open.spotify.com/playlist/37i9dQZF1DX4JAvHpjipBk" target="_blank" class="flex justify-between items-center bg-surface-container/30 p-3 rounded-lg border border-white/5 hover:border-spotify-green/30 transition-colors group">
                 <div class="flex items-center gap-3">
@@ -882,7 +768,6 @@ function updateTaskCounter() {
               </a>
             </div>
 
-            <!-- Active (current playlists by followers) -->
             <div class="playlist-list space-y-2" id="pl-active">
               <a href="#" target="_blank" class="flex justify-between items-center bg-surface-container/30 p-3 rounded-lg border border-white/5 hover:border-spotify-green/30 transition-colors group">
                 <div class="flex items-center gap-3">
@@ -921,7 +806,6 @@ function updateTaskCounter() {
               </a>
             </div>
 
-            <!-- All-time (by lifetime followers) -->
             <div class="playlist-list space-y-2" id="pl-alltime">
               <a href="#" target="_blank" class="flex justify-between items-center bg-surface-container/30 p-3 rounded-lg border border-white/5 hover:border-spotify-green/30 transition-colors group">
                 <div class="flex items-center gap-3">
@@ -965,376 +849,87 @@ function updateTaskCounter() {
         </div>
       </div>
 
-      <!-- ════════════════════
-           TIKTOK/IG SECTION
-      ═══════════════════════ -->
       <div class="view-section space-y-8 mt-4" id="view-tiktok-ig">
 
-        <!-- TikTok KPI — 6 cards from Songstats performance endpoint -->
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 animate-entrance" style="animation-delay:.1s">
-          <div class="glass-card p-4 rounded-xl cursor-pointer hover:border-tiktok-cyan/40 border border-white/5 transition-colors group" onclick="openKpiChart('TikTok Views','Total · Songstats','#25F4EE',[215000,220000,225000,228000,231000,234000,237000,240000,243000,245000,247000,249000,250000,251000,252000,253000,254000,255000,256000,257000,258000,259000,259500,260000,260000,260000,260000,260000,260000,260000],'260,000','Total','+45K')">
-            <p class="text-label-sm text-outline">Views</p>
-            <h3 id="tt-views" class="text-headline-md font-bold text-on-surface group-hover:text-tiktok-cyan transition-colors">260K</h3>
-            <p class="text-[10px] text-tiktok-cyan mt-1">Total</p>
-            <p class="text-[9px] text-outline mt-1">clicca →</p>
+        <div id="kpi-tiktok" class="grid animate-entrance" style="animation-delay:.1s"></div>
+        <div id="goals-tiktok" class="animate-entrance" style="animation-delay:.15s"></div>
+
+        <div class="glass-card p-5 rounded-2xl animate-entrance" style="animation-delay:.15s">
+          <div class="flex items-center justify-between mb-3">
+            <h4 class="text-headline-sm text-on-surface">Top Tracks · Video TikTok</h4>
+            <p class="text-[10px] text-outline">Tap per vedere i video</p>
           </div>
-          <div class="glass-card p-4 rounded-xl cursor-pointer hover:border-tiktok-cyan/40 border border-white/5 transition-colors group" onclick="openKpiChart('TikTok Likes','Total · Songstats','#25F4EE',[10200,10400,10600,10800,11000,11100,11200,11300,11400,11500,11600,11700,11800,11850,11900,11950,12000,12050,12100,12150,12200,12230,12250,12270,12290,12300,12300,12300,12300,12300],'12,300','Total','+2.1K')">
-            <p class="text-label-sm text-outline">Likes</p>
-            <h3 id="tt-likes" class="text-headline-md font-bold text-on-surface group-hover:text-tiktok-cyan transition-colors">12.3K</h3>
-            <p class="text-[10px] text-tiktok-cyan mt-1">Total</p>
-            <p class="text-[9px] text-outline mt-1">clicca →</p>
-          </div>
-          <div class="glass-card p-4 rounded-xl cursor-pointer hover:border-tiktok-cyan/40 border border-white/5 transition-colors group" onclick="openKpiChart('TikTok Comments','Total · Songstats','#25F4EE',[220,225,228,230,232,234,236,238,240,242,243,244,245,246,247,248,249,249,249,249,249,249,249,249,249,249,249,249,249,249],'249','Total','+29')">
-            <p class="text-label-sm text-outline">Comments</p>
-            <h3 id="tt-comments" class="text-headline-md font-bold text-on-surface group-hover:text-tiktok-cyan transition-colors">249</h3>
-            <p class="text-[10px] text-tiktok-cyan mt-1">Total</p>
-            <p class="text-[9px] text-outline mt-1">clicca →</p>
-          </div>
-          <div class="glass-card p-4 rounded-xl cursor-pointer hover:border-tiktok-cyan/40 border border-white/5 transition-colors group" onclick="openKpiChart('TikTok Shares','Total · Songstats','#25F4EE',[165,168,170,172,174,176,178,180,182,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,199,199,199,199,199],'199','Total','+34')">
-            <p class="text-label-sm text-outline">Shares</p>
-            <h3 id="tt-shares" class="text-headline-md font-bold text-on-surface group-hover:text-tiktok-cyan transition-colors">199</h3>
-            <p class="text-[10px] text-tiktok-cyan mt-1">Total</p>
-            <p class="text-[9px] text-outline mt-1">clicca →</p>
-          </div>
-          <div class="glass-card p-4 rounded-xl cursor-pointer hover:border-tiktok-cyan/40 border border-white/5 transition-colors group" onclick="openKpiChart('Video Engagement','Average · Songstats','#25F4EE',[4.2,4.3,4.3,4.4,4.4,4.5,4.5,4.6,4.6,4.7,4.7,4.7,4.8,4.8,4.8,4.8,4.9,4.9,4.9,4.9,4.9,4.9,4.9,4.9,4.9,4.9,4.9,4.9,4.9,4.9],'4.9%','Average','+0.7%')">
-            <p class="text-label-sm text-outline">Engagement</p>
-            <h3 id="tt-engagement" class="text-headline-md font-bold text-on-surface group-hover:text-tiktok-cyan transition-colors">4.9%</h3>
-            <p class="text-[10px] text-tiktok-cyan mt-1">Average</p>
-            <p class="text-[9px] text-outline mt-1">clicca →</p>
-          </div>
-          <div class="glass-card p-4 rounded-xl cursor-pointer hover:border-tiktok-cyan/40 border border-white/5 transition-colors group" onclick="openKpiChart('Creator Reach','Combined · Songstats','#25F4EE',[7200000,7350000,7500000,7600000,7700000,7800000,7900000,7950000,8000000,8050000,8100000,8150000,8200000,8250000,8300000,8350000,8380000,8410000,8430000,8450000,8460000,8470000,8480000,8485000,8490000,8490000,8490000,8490000,8490000,8490000],'8.49M','Combined','+1.29M')">
-            <p class="text-label-sm text-outline">Creator Reach</p>
-            <h3 id="tt-reach" class="text-headline-md font-bold text-on-surface group-hover:text-tiktok-cyan transition-colors">8.49M</h3>
-            <p class="text-[10px] text-tiktok-cyan mt-1">Combined</p>
-            <p class="text-[9px] text-outline mt-1">clicca →</p>
-          </div>
+          <div id="tt-tracks-list" class="space-y-1.5"></div>
         </div>
 
-        <!-- TikTok Goals -->
-        <div class="glass-card p-6 rounded-2xl animate-entrance" style="animation-delay:.15s">
-          <h4 class="text-headline-sm text-on-surface mb-4">Next Step Goals · TikTok</h4>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="rounded-xl border border-tiktok-cyan/30 bg-tiktok-cyan/5 p-4 flex flex-col gap-2">
-              <div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-tiktok-cyan text-[18px]">check_circle</span>
-                <p class="text-label-md font-bold text-tiktok-cyan">100 video TikTok raggiunti!</p>
-              </div>
-              <p class="text-[11px] text-outline">"obsessed" ha 103 video · traguardo storico 🎉</p>
-              <button onclick="openShareCard('100 Video su TikTok','La tua musica è stata usata in oltre 100 video su TikTok 🎵','obsessed · 103 video · 8.5M creator reach')" class="mt-auto flex items-center gap-1 text-[11px] font-bold text-tiktok-cyan border border-tiktok-cyan/40 rounded-lg px-3 py-1.5 hover:bg-tiktok-cyan/10 transition-colors w-fit">
-                <span class="material-symbols-outlined text-[14px]">share</span>Condividi
-              </button>
-            </div>
-            <div class="rounded-xl border border-white/10 bg-surface-container/30 p-4">
-              <p class="text-label-md font-semibold text-on-surface mb-2">500 video TikTok totali</p>
-              <div class="w-full bg-surface-container-high rounded-full h-2 mb-1"><div class="bg-tiktok-cyan h-2 rounded-full" style="width:30%"></div></div>
-              <p class="text-[11px] text-outline">155 / 500 · 31%</p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 animate-entrance" style="animation-delay:.2s">
+
+          <div class="glass-card p-5 rounded-2xl">
+            <h4 class="text-headline-sm text-on-surface mb-3">Recent TikTok Videos</h4>
+            <div class="space-y-2">
+              <a href="https://www.tiktok.com/@tiktok/video/7618726993999219982" target="_blank" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-tiktok-cyan/5 hover:border-tiktok-cyan/20 border border-white/0 transition-all group">
+                <img src="https://p16-common.tiktokcdn.com/tos-maliva-avt-0068/2031f2a7617d3630fe1db5eeb764e7d7~c5_300x300.webp" class="w-8 h-8 rounded-full object-cover flex-shrink-0 border border-tiktok-cyan/30" alt="">
+                <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" class="w-8 h-8 rounded-lg object-cover flex-shrink-0" alt="">
+                <div class="flex-1 min-w-0"><p class="text-label-sm font-bold text-on-surface group-hover:text-tiktok-cyan truncate">✨GlamPharm · obsessed</p><p class="text-[9px] text-outline">8.3K followers · 25 Mag</p></div>
+                <div class="flex gap-2 text-right flex-shrink-0">
+                  <div><p class="text-[10px] font-bold text-on-surface">2.1K</p><p class="text-[8px] text-outline">views</p></div>
+                  <div><p class="text-[10px] font-bold text-tiktok-cyan">187</p><p class="text-[8px] text-outline">likes</p></div>
+                </div>
+              </a>
+              <a href="https://www.tiktok.com/@tiktok/video/7636550379538369813" target="_blank" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-tiktok-cyan/5 hover:border-tiktok-cyan/20 border border-white/0 transition-all group">
+                <img src="https://p19-common.tiktokcdn.com/tos-alisg-avt-0068/63b14b3ec5318d44a0d56bcdd19c1955~c5_300x300.webp" class="w-8 h-8 rounded-full object-cover flex-shrink-0 border border-tiktok-cyan/30" alt="">
+                <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" class="w-8 h-8 rounded-lg object-cover flex-shrink-0" alt="">
+                <div class="flex-1 min-w-0"><p class="text-label-sm font-bold text-on-surface group-hover:text-tiktok-cyan truncate">Mylla Ramos ❤️‍🔥 · obsessed</p><p class="text-[9px] text-outline">4K followers · 10 Mag</p></div>
+                <div class="flex gap-2 text-right flex-shrink-0">
+                  <div><p class="text-[10px] font-bold text-on-surface">5.2K</p><p class="text-[8px] text-outline">views</p></div>
+                  <div><p class="text-[10px] font-bold text-tiktok-cyan">448</p><p class="text-[8px] text-outline">likes</p></div>
+                </div>
+              </a>
+              <a href="https://www.tiktok.com/@tiktok/video/7637210632940440863" target="_blank" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-tiktok-cyan/5 hover:border-tiktok-cyan/20 border border-white/0 transition-all group">
+                <img src="https://p16-common.tiktokcdn.com/tos-maliva-avt-0068/b21de65e1962f5b289244d171ffeeb97~c5_300x300.webp" class="w-8 h-8 rounded-full object-cover flex-shrink-0 border border-tiktok-cyan/30" alt="">
+                <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" class="w-8 h-8 rounded-lg object-cover flex-shrink-0" alt="">
+                <div class="flex-1 min-w-0"><p class="text-label-sm font-bold text-on-surface group-hover:text-tiktok-cyan truncate">Mami_Vee 🤎👑 · obsessed</p><p class="text-[9px] text-outline">2.9K followers · 10 Mag</p></div>
+                <div class="flex gap-2 text-right flex-shrink-0">
+                  <div><p class="text-[10px] font-bold text-on-surface">3.7K</p><p class="text-[8px] text-outline">views</p></div>
+                  <div><p class="text-[10px] font-bold text-tiktok-cyan">312</p><p class="text-[8px] text-outline">likes</p></div>
+                </div>
+              </a>
+              <a href="https://www.tiktok.com/@tiktok/video/7642744347842120978" target="_blank" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-tiktok-cyan/5 hover:border-tiktok-cyan/20 border border-white/0 transition-all group">
+                <div class="w-8 h-8 rounded-full border border-violet-500/50 bg-gradient-to-br from-violet-500 to-indigo-700 flex items-center justify-center flex-shrink-0"><span class="text-[11px] font-bold text-white">A</span></div>
+                <img src="https://i.scdn.co/image/ab67616d00001e02886b188290fbcff15d6fe521" class="w-8 h-8 rounded-lg object-cover flex-shrink-0" alt="">
+                <div class="flex-1 min-w-0"><p class="text-label-sm font-bold text-on-surface group-hover:text-tiktok-cyan truncate">Amity 🖤✨ · why did i fail</p><p class="text-[9px] text-outline">privato · 23 Mag</p></div>
+                <div class="flex gap-2 text-right flex-shrink-0">
+                  <div><p class="text-[10px] font-bold text-on-surface">1.4K</p><p class="text-[8px] text-outline">views</p></div>
+                  <div><p class="text-[10px] font-bold text-tiktok-cyan">96</p><p class="text-[8px] text-outline">likes</p></div>
+                </div>
+              </a>
+              <a href="https://www.tiktok.com/@tiktok/video/7643113334794898696" target="_blank" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-tiktok-cyan/5 hover:border-tiktok-cyan/20 border border-white/0 transition-all group">
+                <img src="https://p16-common.tiktokcdn.com/tos-alisg-avt-0068/b83946e98bab2152c7255a0045cf0bfe~c5_300x300.webp" class="w-8 h-8 rounded-full object-cover flex-shrink-0 border border-tiktok-cyan/30" alt="">
+                <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" class="w-8 h-8 rounded-lg object-cover flex-shrink-0" alt="">
+                <div class="flex-1 min-w-0"><p class="text-label-sm font-bold text-on-surface group-hover:text-tiktok-cyan truncate">Priciliadb · obsessed</p><p class="text-[9px] text-outline">458 followers · 23 Mag</p></div>
+                <div class="flex gap-2 text-right flex-shrink-0">
+                  <div><p class="text-[10px] font-bold text-on-surface">843</p><p class="text-[8px] text-outline">views</p></div>
+                  <div><p class="text-[10px] font-bold text-tiktok-cyan">54</p><p class="text-[8px] text-outline">likes</p></div>
+                </div>
+              </a>
             </div>
           </div>
+
+          <div class="glass-card p-5 rounded-2xl">
+            <h5 class="text-label-bold text-on-surface mb-3 uppercase tracking-widest">TikTok Milestones</h5>
+            <div id="ms-tiktok" class="space-y-2.5"></div>
+          </div>
+
         </div>
-
-        <!-- Top tracks by TikTok videos -->
-        <div class="glass-card p-6 rounded-2xl animate-entrance" style="animation-delay:.15s">
-          <h4 class="text-headline-sm text-on-surface mb-1">Top Tracks per Video TikTok</h4>
-          <p class="text-label-sm text-outline mb-5">Ranking Songstats · <span class="font-mono">videos_total</span></p>
-          <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-
-            <div class="bg-surface-container/30 rounded-xl p-4 border border-white/5 hover:border-tiktok-cyan/30 transition-colors cursor-pointer group">
-              <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" class="w-full aspect-square rounded-lg object-cover mb-3" alt="">
-              <p class="text-label-md font-bold text-on-surface group-hover:text-tiktok-cyan truncate">obsessed</p>
-              <p class="text-[10px] text-outline mb-2">ft. Lyhre</p>
-              <p class="text-headline-md font-extrabold text-tiktok-cyan">103</p>
-              <p class="text-[10px] text-outline">video</p>
-            </div>
-            <div class="bg-surface-container/30 rounded-xl p-4 border border-white/5 hover:border-tiktok-cyan/30 transition-colors cursor-pointer group">
-              <img src="https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47" class="w-full aspect-square rounded-lg object-cover mb-3" alt="">
-              <p class="text-label-md font-bold text-on-surface group-hover:text-tiktok-cyan truncate">goodbyes</p>
-              <p class="text-[10px] text-outline mb-2">ft. townsend</p>
-              <p class="text-headline-md font-extrabold text-tiktok-cyan">15</p>
-              <p class="text-[10px] text-outline">video</p>
-            </div>
-            <div class="bg-surface-container/30 rounded-xl p-4 border border-white/5 hover:border-tiktok-cyan/30 transition-colors cursor-pointer group">
-              <img src="https://i.scdn.co/image/ab67616d00001e02886b188290fbcff15d6fe521" class="w-full aspect-square rounded-lg object-cover mb-3" alt="">
-              <p class="text-label-md font-bold text-on-surface group-hover:text-tiktok-cyan truncate">why did i fail</p>
-              <p class="text-[10px] text-outline mb-2">ft. townsend</p>
-              <p class="text-headline-md font-extrabold text-tiktok-cyan">9</p>
-              <p class="text-[10px] text-outline">video</p>
-            </div>
-            <div class="bg-surface-container/30 rounded-xl p-4 border border-white/5 hover:border-tiktok-cyan/30 transition-colors cursor-pointer group">
-              <img src="https://i.scdn.co/image/ab67616d00001e029494eeac6a088d0460830996" class="w-full aspect-square rounded-lg object-cover mb-3" alt="">
-              <p class="text-label-md font-bold text-on-surface group-hover:text-tiktok-cyan truncate">Berlin</p>
-              <p class="text-[10px] text-outline mb-2">ft. kaii</p>
-              <p class="text-headline-md font-extrabold text-tiktok-cyan">7</p>
-              <p class="text-[10px] text-outline">video</p>
-            </div>
-            <div class="bg-surface-container/30 rounded-xl p-4 border border-white/5 hover:border-tiktok-cyan/30 transition-colors cursor-pointer group">
-              <img src="https://i.scdn.co/image/ab67616d00001e0282f0c758749ba067a169bbec" class="w-full aspect-square rounded-lg object-cover mb-3" alt="">
-              <p class="text-label-md font-bold text-on-surface group-hover:text-tiktok-cyan truncate">In My Blood</p>
-              <p class="text-[10px] text-outline mb-2">Townsend, Noktis</p>
-              <p class="text-headline-md font-extrabold text-tiktok-cyan">6</p>
-              <p class="text-[10px] text-outline">video</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Recent TikTok Videos — creator card style -->
-        <div class="animate-entrance" style="animation-delay:.2s">
-          <div class="flex items-center justify-between mb-5">
-            <div>
-              <h4 class="text-headline-sm text-on-surface">Recent TikTok Videos</h4>
-              <p class="text-label-sm text-outline">Creator che usano la tua musica · engagement per video</p>
-            </div>
-            <span class="inline-flex px-3 py-1 rounded-full bg-tiktok-cyan/10 border border-tiktok-cyan/20 text-tiktok-cyan text-[11px] font-bold uppercase">Live</span>
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
-
-            <!-- Card 1: GlamPharm -->
-            <a href="https://www.tiktok.com/@tiktok/video/7618726993999219982" target="_blank"
-               class="glass-card rounded-2xl p-4 flex flex-col gap-3 group hover:border-tiktok-cyan/40 transition-all">
-              <div class="flex items-center gap-3">
-                <img src="https://p16-common.tiktokcdn.com/tos-maliva-avt-0068/2031f2a7617d3630fe1db5eeb764e7d7~c5_300x300.webp"
-                     class="w-11 h-11 rounded-full border-2 border-tiktok-cyan/40 object-cover flex-shrink-0" alt="">
-                <div class="min-w-0">
-                  <p class="text-label-md font-bold text-on-surface group-hover:text-tiktok-cyan truncate">✨GlamPharm</p>
-                  <p class="text-[10px] text-outline">8.3K followers</p>
-                </div>
-                <span class="ml-auto material-symbols-outlined text-outline text-[14px]">open_in_new</span>
-              </div>
-              <div class="relative group/art w-12 h-12 flex-shrink-0">
-                <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" class="w-12 h-12 rounded-lg object-cover" alt="">
-                <div class="absolute inset-0 bg-black/70 rounded-lg opacity-0 group-hover/art:opacity-100 transition-opacity flex items-center justify-center p-1">
-                  <p class="text-[8px] font-bold text-white text-center leading-tight">obsessed</p>
-                </div>
-              </div>
-              <div class="grid grid-cols-3 gap-1 text-center">
-                <div class="bg-surface-container/50 rounded-lg py-1.5">
-                  <p class="text-[11px] font-bold text-on-surface">2.1K</p>
-                  <p class="text-[9px] text-outline flex items-center justify-center gap-0.5"><span class="material-symbols-outlined text-[10px]">play_arrow</span>views</p>
-                </div>
-                <div class="bg-surface-container/50 rounded-lg py-1.5">
-                  <p class="text-[11px] font-bold text-on-surface">187</p>
-                  <p class="text-[9px] text-outline flex items-center justify-center gap-0.5"><span class="material-symbols-outlined text-[10px]">favorite</span>likes</p>
-                </div>
-                <div class="bg-surface-container/50 rounded-lg py-1.5">
-                  <p class="text-[11px] font-bold text-on-surface">12</p>
-                  <p class="text-[9px] text-outline flex items-center justify-center gap-0.5"><span class="material-symbols-outlined text-[10px]">chat_bubble</span>comm</p>
-                </div>
-              </div>
-              <p class="text-[9px] text-outline">25 Maggio 2026</p>
-            </a>
-
-            <!-- Card 2: Priciliadb -->
-            <a href="https://www.tiktok.com/@tiktok/video/7643113334794898696" target="_blank"
-               class="glass-card rounded-2xl p-4 flex flex-col gap-3 group hover:border-tiktok-cyan/40 transition-all">
-              <div class="flex items-center gap-3">
-                <img src="https://p16-common.tiktokcdn.com/tos-alisg-avt-0068/b83946e98bab2152c7255a0045cf0bfe~c5_300x300.webp"
-                     class="w-11 h-11 rounded-full border-2 border-tiktok-cyan/40 object-cover flex-shrink-0" alt="">
-                <div class="min-w-0">
-                  <p class="text-label-md font-bold text-on-surface group-hover:text-tiktok-cyan truncate">Priciliadb</p>
-                  <p class="text-[10px] text-outline">458 followers</p>
-                </div>
-                <span class="ml-auto material-symbols-outlined text-outline text-[14px]">open_in_new</span>
-              </div>
-              <div class="relative group/art w-12 h-12 flex-shrink-0">
-                <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" class="w-12 h-12 rounded-lg object-cover" alt="">
-                <div class="absolute inset-0 bg-black/70 rounded-lg opacity-0 group-hover/art:opacity-100 transition-opacity flex items-center justify-center p-1">
-                  <p class="text-[8px] font-bold text-white text-center leading-tight">obsessed</p>
-                </div>
-              </div>
-              <div class="grid grid-cols-3 gap-1 text-center">
-                <div class="bg-surface-container/50 rounded-lg py-1.5">
-                  <p class="text-[11px] font-bold text-on-surface">843</p>
-                  <p class="text-[9px] text-outline flex items-center justify-center gap-0.5"><span class="material-symbols-outlined text-[10px]">play_arrow</span>views</p>
-                </div>
-                <div class="bg-surface-container/50 rounded-lg py-1.5">
-                  <p class="text-[11px] font-bold text-on-surface">54</p>
-                  <p class="text-[9px] text-outline flex items-center justify-center gap-0.5"><span class="material-symbols-outlined text-[10px]">favorite</span>likes</p>
-                </div>
-                <div class="bg-surface-container/50 rounded-lg py-1.5">
-                  <p class="text-[11px] font-bold text-on-surface">3</p>
-                  <p class="text-[9px] text-outline flex items-center justify-center gap-0.5"><span class="material-symbols-outlined text-[10px]">chat_bubble</span>comm</p>
-                </div>
-              </div>
-              <p class="text-[9px] text-outline">23 Maggio 2026</p>
-            </a>
-
-            <!-- Card 3: Amity -->
-            <a href="https://www.tiktok.com/@tiktok/video/7642744347842120978" target="_blank"
-               class="glass-card rounded-2xl p-4 flex flex-col gap-3 group hover:border-tiktok-cyan/40 transition-all">
-              <div class="flex items-center gap-3">
-                <div class="w-11 h-11 rounded-full border-2 border-violet-500/50 bg-gradient-to-br from-violet-500 to-indigo-700 flex items-center justify-center flex-shrink-0">
-                  <span class="text-[14px] font-bold text-white">A</span>
-                </div>
-                <div class="min-w-0">
-                  <p class="text-label-md font-bold text-on-surface group-hover:text-tiktok-cyan truncate">Amity 🖤✨</p>
-                  <p class="text-[10px] text-outline">privato</p>
-                </div>
-                <span class="ml-auto material-symbols-outlined text-outline text-[14px]">open_in_new</span>
-              </div>
-              <div class="relative group/art w-12 h-12 flex-shrink-0">
-                <img src="https://i.scdn.co/image/ab67616d00001e02886b188290fbcff15d6fe521" class="w-12 h-12 rounded-lg object-cover" alt="">
-                <div class="absolute inset-0 bg-black/70 rounded-lg opacity-0 group-hover/art:opacity-100 transition-opacity flex items-center justify-center p-1">
-                  <p class="text-[8px] font-bold text-white text-center leading-tight">why did i fail</p>
-                </div>
-              </div>
-              <div class="grid grid-cols-3 gap-1 text-center">
-                <div class="bg-surface-container/50 rounded-lg py-1.5">
-                  <p class="text-[11px] font-bold text-on-surface">1.4K</p>
-                  <p class="text-[9px] text-outline flex items-center justify-center gap-0.5"><span class="material-symbols-outlined text-[10px]">play_arrow</span>views</p>
-                </div>
-                <div class="bg-surface-container/50 rounded-lg py-1.5">
-                  <p class="text-[11px] font-bold text-on-surface">96</p>
-                  <p class="text-[9px] text-outline flex items-center justify-center gap-0.5"><span class="material-symbols-outlined text-[10px]">favorite</span>likes</p>
-                </div>
-                <div class="bg-surface-container/50 rounded-lg py-1.5">
-                  <p class="text-[11px] font-bold text-on-surface">7</p>
-                  <p class="text-[9px] text-outline flex items-center justify-center gap-0.5"><span class="material-symbols-outlined text-[10px]">chat_bubble</span>comm</p>
-                </div>
-              </div>
-              <p class="text-[9px] text-outline">23 Maggio 2026</p>
-            </a>
-
-            <!-- Card 4: Mami_Vee -->
-            <a href="https://www.tiktok.com/@tiktok/video/7637210632940440863" target="_blank"
-               class="glass-card rounded-2xl p-4 flex flex-col gap-3 group hover:border-tiktok-cyan/40 transition-all">
-              <div class="flex items-center gap-3">
-                <img src="https://p16-common.tiktokcdn.com/tos-maliva-avt-0068/b21de65e1962f5b289244d171ffeeb97~c5_300x300.webp"
-                     class="w-11 h-11 rounded-full border-2 border-tiktok-cyan/40 object-cover flex-shrink-0" alt="">
-                <div class="min-w-0">
-                  <p class="text-label-md font-bold text-on-surface group-hover:text-tiktok-cyan truncate">Mami_Vee 🤎👑</p>
-                  <p class="text-[10px] text-outline">2.9K followers</p>
-                </div>
-                <span class="ml-auto material-symbols-outlined text-outline text-[14px]">open_in_new</span>
-              </div>
-              <div class="relative group/art w-12 h-12 flex-shrink-0">
-                <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" class="w-12 h-12 rounded-lg object-cover" alt="">
-                <div class="absolute inset-0 bg-black/70 rounded-lg opacity-0 group-hover/art:opacity-100 transition-opacity flex items-center justify-center p-1">
-                  <p class="text-[8px] font-bold text-white text-center leading-tight">obsessed</p>
-                </div>
-              </div>
-              <div class="grid grid-cols-3 gap-1 text-center">
-                <div class="bg-surface-container/50 rounded-lg py-1.5">
-                  <p class="text-[11px] font-bold text-on-surface">3.7K</p>
-                  <p class="text-[9px] text-outline flex items-center justify-center gap-0.5"><span class="material-symbols-outlined text-[10px]">play_arrow</span>views</p>
-                </div>
-                <div class="bg-surface-container/50 rounded-lg py-1.5">
-                  <p class="text-[11px] font-bold text-on-surface">312</p>
-                  <p class="text-[9px] text-outline flex items-center justify-center gap-0.5"><span class="material-symbols-outlined text-[10px]">favorite</span>likes</p>
-                </div>
-                <div class="bg-surface-container/50 rounded-lg py-1.5">
-                  <p class="text-[11px] font-bold text-on-surface">21</p>
-                  <p class="text-[9px] text-outline flex items-center justify-center gap-0.5"><span class="material-symbols-outlined text-[10px]">chat_bubble</span>comm</p>
-                </div>
-              </div>
-              <p class="text-[9px] text-outline">10 Maggio 2026</p>
-            </a>
-
-            <!-- Card 5: Mylla Ramos -->
-            <a href="https://www.tiktok.com/@tiktok/video/7636550379538369813" target="_blank"
-               class="glass-card rounded-2xl p-4 flex flex-col gap-3 group hover:border-tiktok-cyan/40 transition-all">
-              <div class="flex items-center gap-3">
-                <img src="https://p19-common.tiktokcdn.com/tos-alisg-avt-0068/63b14b3ec5318d44a0d56bcdd19c1955~c5_300x300.webp"
-                     class="w-11 h-11 rounded-full border-2 border-tiktok-cyan/40 object-cover flex-shrink-0" alt="">
-                <div class="min-w-0">
-                  <p class="text-label-md font-bold text-on-surface group-hover:text-tiktok-cyan truncate">Mylla Ramos ❤️‍🔥</p>
-                  <p class="text-[10px] text-outline">4K followers</p>
-                </div>
-                <span class="ml-auto material-symbols-outlined text-outline text-[14px]">open_in_new</span>
-              </div>
-              <div class="relative group/art w-12 h-12 flex-shrink-0">
-                <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" class="w-12 h-12 rounded-lg object-cover" alt="">
-                <div class="absolute inset-0 bg-black/70 rounded-lg opacity-0 group-hover/art:opacity-100 transition-opacity flex items-center justify-center p-1">
-                  <p class="text-[8px] font-bold text-white text-center leading-tight">obsessed</p>
-                </div>
-              </div>
-              <div class="grid grid-cols-3 gap-1 text-center">
-                <div class="bg-surface-container/50 rounded-lg py-1.5">
-                  <p class="text-[11px] font-bold text-on-surface">5.2K</p>
-                  <p class="text-[9px] text-outline flex items-center justify-center gap-0.5"><span class="material-symbols-outlined text-[10px]">play_arrow</span>views</p>
-                </div>
-                <div class="bg-surface-container/50 rounded-lg py-1.5">
-                  <p class="text-[11px] font-bold text-on-surface">448</p>
-                  <p class="text-[9px] text-outline flex items-center justify-center gap-0.5"><span class="material-symbols-outlined text-[10px]">favorite</span>likes</p>
-                </div>
-                <div class="bg-surface-container/50 rounded-lg py-1.5">
-                  <p class="text-[11px] font-bold text-on-surface">33</p>
-                  <p class="text-[9px] text-outline flex items-center justify-center gap-0.5"><span class="material-symbols-outlined text-[10px]">chat_bubble</span>comm</p>
-                </div>
-              </div>
-              <p class="text-[9px] text-outline">10 Maggio 2026</p>
-            </a>
-
-          </div>
-        </div>
-
 
       </div><!-- /view-tiktok-ig -->
 
       <!-- Instagram -->
       <div class="view-section space-y-8 mt-4" id="view-instagram">
 
-        <!-- Instagram KPI cards -->
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 animate-entrance" style="animation-delay:.1s">
-          <div class="glass-card p-4 rounded-xl cursor-pointer hover:border-[#f97ab4]/40 border border-white/5 transition-colors group" onclick="openKpiChart('Instagram Followers','Crescita · Instagram','#f97ab4',[6900,6950,7000,7050,7080,7110,7140,7160,7180,7200,7220,7240,7255,7270,7280,7290,7300,7310,7320,7330,7340,7345,7350,7355,7360,7363,7365,7366,7367,7368],'7,368','@noktis__','+468')">
-            <p class="text-label-sm text-outline">Followers</p>
-            <h3 id="ig-followers-kpi" class="text-headline-md font-bold text-on-surface group-hover:text-[#f97ab4] transition-colors">7,368</h3>
-            <p class="text-[10px] text-[#f97ab4] mt-1">Total</p>
-            <p class="text-[9px] text-outline mt-1">clicca →</p>
-          </div>
-          <div class="glass-card p-4 rounded-xl border border-white/5 opacity-50">
-            <p class="text-label-sm text-outline">Views</p>
-            <h3 class="text-headline-md font-bold text-on-surface-variant">N/D</h3>
-            <p class="text-[10px] text-outline mt-1">non in API</p>
-            <p class="text-[9px] text-outline/50 mt-1">Enterprise plan</p>
-          </div>
-          <div class="glass-card p-4 rounded-xl border border-white/5 opacity-50">
-            <p class="text-label-sm text-outline">Likes</p>
-            <h3 class="text-headline-md font-bold text-on-surface-variant">N/D</h3>
-            <p class="text-[10px] text-outline mt-1">non in API</p>
-            <p class="text-[9px] text-outline/50 mt-1">Enterprise plan</p>
-          </div>
-          <div class="glass-card p-4 rounded-xl border border-white/5 opacity-50">
-            <p class="text-label-sm text-outline">Comments</p>
-            <h3 class="text-headline-md font-bold text-on-surface-variant">N/D</h3>
-            <p class="text-[10px] text-outline mt-1">non in API</p>
-            <p class="text-[9px] text-outline/50 mt-1">Enterprise plan</p>
-          </div>
-          <div class="glass-card p-4 rounded-xl border border-white/5 opacity-50">
-            <p class="text-label-sm text-outline">Engagement</p>
-            <h3 class="text-headline-md font-bold text-on-surface-variant">N/D</h3>
-            <p class="text-[10px] text-outline mt-1">non in API</p>
-            <p class="text-[9px] text-outline/50 mt-1">Enterprise plan</p>
-          </div>
-          <div class="glass-card p-4 rounded-xl border border-white/5 opacity-50">
-            <p class="text-label-sm text-outline">Creator Reach</p>
-            <h3 class="text-headline-md font-bold text-on-surface-variant">N/D</h3>
-            <p class="text-[10px] text-outline mt-1">non in API</p>
-            <p class="text-[9px] text-outline/50 mt-1">Enterprise plan</p>
-          </div>
-        </div>
+        <div id="kpi-instagram" class="grid animate-entrance" style="animation-delay:.1s"></div>
+        <div id="goals-instagram" class="animate-entrance" style="animation-delay:.15s"></div>
 
-        <!-- Instagram Goals -->
-        <div class="glass-card p-6 rounded-2xl animate-entrance" style="animation-delay:.15s">
-          <h4 class="text-headline-sm text-on-surface mb-4">Next Step Goals · Instagram</h4>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="rounded-xl border border-[#E1306C]/30 bg-[#E1306C]/5 p-4 flex flex-col gap-2">
-              <div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-[#f97ab4] text-[18px]">check_circle</span>
-                <p class="text-label-md font-bold text-[#f97ab4]">5K followers raggiunti! 🎉</p>
-              </div>
-              <p class="text-[11px] text-outline">Ora sei a 7,368 followers · ottima crescita</p>
-              <button onclick="openShareCard('7K Followers su Instagram','Il mio profilo Instagram ha superato 7.000 followers 📸','@noktis__ · 7.368 followers')" class="mt-auto flex items-center gap-1 text-[11px] font-bold text-[#f97ab4] border border-[#E1306C]/40 rounded-lg px-3 py-1.5 hover:bg-[#E1306C]/10 transition-colors w-fit">
-                <span class="material-symbols-outlined text-[14px]">share</span>Condividi
-              </button>
-            </div>
-            <div class="rounded-xl border border-white/10 bg-surface-container/30 p-4">
-              <p class="text-label-md font-semibold text-on-surface mb-2">10K followers Instagram</p>
-              <div class="w-full bg-surface-container-high rounded-full h-2 mb-1"><div id="goal-ig-bar" class="bg-[#f97ab4] h-2 rounded-full" style="width:74%"></div></div>
-              <p id="goal-ig-label" class="text-[11px] text-outline">7,368 / 10,000 · 74%</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Instagram Activity content -->
         <div class="animate-entrance" style="animation-delay:.15s">
           <div class="flex items-center justify-between mb-6">
             <div>
@@ -1353,122 +948,16 @@ function updateTaskCounter() {
             </div>
           </div>
 
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
 
-            <!-- IG Posts — creator card style -->
-            <div class="flex flex-col gap-3">
-              <a href="https://www.instagram.com/p/DBjk1lnOp7Z/" target="_blank"
-                 class="glass-card rounded-2xl p-4 flex flex-col gap-3 group hover:border-[#f97ab4]/40 transition-all">
-                <div class="flex items-center gap-3">
-                  <img src="https://i.scdn.co/image/ab6761610000517458018e0e6639805cf726f87f"
-                       class="w-11 h-11 rounded-full border-2 object-cover flex-shrink-0" style="border-color:#E1306C66" alt="">
-                  <div class="min-w-0">
-                    <p class="text-label-md font-bold text-on-surface group-hover:text-[#f97ab4] truncate">@noktis__</p>
-                    <p class="text-[10px] text-outline">7.4K followers · Reel</p>
-                  </div>
-                  <span class="ml-auto text-[9px] font-bold px-2 py-0.5 rounded-full bg-[#E1306C]/20 text-[#f97ab4]">24 Nov</span>
-                </div>
-                <div class="relative group/art w-12 h-12 flex-shrink-0">
-                  <img src="https://i.scdn.co/image/ab67616d00001e029e0b677a2b31265dc3e8ae70" class="w-12 h-12 rounded-lg object-cover" alt="">
-                  <div class="absolute inset-0 bg-black/70 rounded-lg opacity-0 group-hover/art:opacity-100 transition-opacity flex items-center justify-center p-1">
-                    <p class="text-[8px] font-bold text-white text-center leading-tight">another life</p>
-                  </div>
-                </div>
-                <div class="grid grid-cols-4 gap-1 text-center">
-                  <div class="bg-surface-container/50 rounded-lg py-1.5">
-                    <p class="text-[11px] font-bold text-on-surface">50K</p>
-                    <p class="text-[9px] text-outline">views</p>
-                  </div>
-                  <div class="bg-surface-container/50 rounded-lg py-1.5">
-                    <p class="text-[11px] font-bold text-on-surface">2.1K</p>
-                    <p class="text-[9px] text-outline">likes</p>
-                  </div>
-                  <div class="bg-surface-container/50 rounded-lg py-1.5">
-                    <p class="text-[11px] font-bold text-on-surface">148</p>
-                    <p class="text-[9px] text-outline">comm</p>
-                  </div>
-                  <div class="bg-surface-container/50 rounded-lg py-1.5">
-                    <p class="text-[11px] font-bold text-[#f97ab4]">4.5%</p>
-                    <p class="text-[9px] text-outline">eng</p>
-                  </div>
-                </div>
-              </a>
+            <div id="ig-posts-list" class="space-y-2"></div>
 
-              <a href="https://www.instagram.com/p/DAa53mBsKXk/" target="_blank"
-                 class="glass-card rounded-2xl p-4 flex flex-col gap-3 group hover:border-[#f97ab4]/40 transition-all">
-                <div class="flex items-center gap-3">
-                  <img src="https://i.scdn.co/image/ab6761610000517458018e0e6639805cf726f87f"
-                       class="w-11 h-11 rounded-full border-2 object-cover flex-shrink-0" style="border-color:#E1306C66" alt="">
-                  <div class="min-w-0">
-                    <p class="text-label-md font-bold text-on-surface group-hover:text-[#f97ab4] truncate">@noktis__</p>
-                    <p class="text-[10px] text-outline">7.4K followers · Reel</p>
-                  </div>
-                  <span class="ml-auto text-[9px] font-bold px-2 py-0.5 rounded-full bg-[#E1306C]/20 text-[#f97ab4]">24 Nov</span>
-                </div>
-                <div class="relative group/art w-12 h-12 flex-shrink-0">
-                  <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" class="w-12 h-12 rounded-lg object-cover" alt="">
-                  <div class="absolute inset-0 bg-black/70 rounded-lg opacity-0 group-hover/art:opacity-100 transition-opacity flex items-center justify-center p-1">
-                    <p class="text-[8px] font-bold text-white text-center leading-tight">obsessed</p>
-                  </div>
-                </div>
-                <div class="grid grid-cols-4 gap-1 text-center">
-                  <div class="bg-surface-container/50 rounded-lg py-1.5">
-                    <p class="text-[11px] font-bold text-on-surface">38K</p>
-                    <p class="text-[9px] text-outline">views</p>
-                  </div>
-                  <div class="bg-surface-container/50 rounded-lg py-1.5">
-                    <p class="text-[11px] font-bold text-on-surface">1.7K</p>
-                    <p class="text-[9px] text-outline">likes</p>
-                  </div>
-                  <div class="bg-surface-container/50 rounded-lg py-1.5">
-                    <p class="text-[11px] font-bold text-on-surface">89</p>
-                    <p class="text-[9px] text-outline">comm</p>
-                  </div>
-                  <div class="bg-surface-container/50 rounded-lg py-1.5">
-                    <p class="text-[11px] font-bold text-[#f97ab4]">4.7%</p>
-                    <p class="text-[9px] text-outline">eng</p>
-                  </div>
-                </div>
-              </a>
-            </div>
-
-            <!-- Instagram milestones -->
             <div class="glass-card p-6 rounded-2xl">
               <h5 class="text-label-bold text-on-surface mb-4 uppercase tracking-widest">Instagram Milestones</h5>
-              <div class="space-y-3">
-                <div class="flex items-center gap-3 p-3 rounded-xl bg-surface-container/30 border border-white/5">
-                  <div class="w-9 h-9 rounded-full bg-gradient-to-br from-[#f09433] to-[#bc1888] flex items-center justify-center">
-                    <span class="material-symbols-outlined text-white text-[18px]">stars</span>
-                  </div>
-                  <div class="flex-1">
-                    <p class="text-label-md font-bold text-on-surface">250,000 views su artist profile</p>
-                    <p class="text-[10px] text-outline">13 Marzo 2026</p>
-                  </div>
-                </div>
-                <div class="flex items-center gap-3 p-3 rounded-xl bg-surface-container/30 border border-white/5">
-                  <div class="w-9 h-9 rounded-full bg-gradient-to-br from-[#f09433] to-[#bc1888] flex items-center justify-center">
-                    <span class="material-symbols-outlined text-white text-[18px]">emoji_events</span>
-                  </div>
-                  <div class="flex-1">
-                    <p class="text-label-md font-bold text-on-surface">50,000 views su "obsessed"</p>
-                    <p class="text-[10px] text-outline">31 Marzo 2026 · ft. Lyhre</p>
-                  </div>
-                </div>
-                <div class="flex items-center gap-3 p-3 rounded-xl bg-surface-container/30 border border-white/5">
-                  <div class="w-9 h-9 rounded-full bg-gradient-to-br from-[#f09433] to-[#bc1888] flex items-center justify-center">
-                    <span class="material-symbols-outlined text-white text-[18px]">emoji_events</span>
-                  </div>
-                  <div class="flex-1">
-                    <p class="text-label-md font-bold text-on-surface">20,000 views su "goodbyes"</p>
-                    <p class="text-[10px] text-outline">18 Marzo 2026 · ft. townsend</p>
-                  </div>
-                </div>
-                <a href="https://www.instagram.com/noktis__" target="_blank"
-                   class="mt-2 flex items-center justify-center gap-2 py-2.5 rounded-xl border border-[#E1306C]/30 text-[#f97ab4] text-label-sm font-semibold hover:bg-[#E1306C]/10 transition-colors">
-                  <span class="material-symbols-outlined text-[16px]">open_in_new</span>
-                  Apri @noktis__ su Instagram
-                </a>
-              </div>
+              <div id="ms-instagram" class="space-y-3"></div>
+              <a href="https://www.instagram.com/noktis__" target="_blank" class="mt-3 flex items-center justify-center gap-2 py-2.5 rounded-xl border border-[#E1306C]/30 text-[#f97ab4] text-label-sm font-semibold hover:bg-[#E1306C]/10 transition-colors">
+                <span class="material-symbols-outlined text-[16px]">open_in_new</span>Apri @noktis__ su Instagram
+              </a>
             </div>
 
           </div>
@@ -1480,569 +969,71 @@ function updateTaskCounter() {
       <!-- YouTube -->
       <div class="view-section space-y-6 mt-4" id="view-youtube">
 
-        <!-- YT KPI cards — like TikTok style -->
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 animate-entrance" style="animation-delay:.1s">
-          <div class="glass-card p-4 rounded-xl cursor-pointer hover:border-[#FF0000]/40 border border-white/5 transition-colors group" onclick="openKpiChart('YouTube Subscribers','Crescita · Songstats','#FF0000',[480,485,490,495,498,500,503,506,509,512,515,518,520,522,524,526,527,528,529,530,531,532,533,534,535,536,536,537,537,537],'537','Current','+57')">
-            <p class="text-label-sm text-outline">Subscribers</p>
-            <h3 id="yt-subscribers" class="text-headline-md font-bold text-on-surface group-hover:text-[#FF0000] transition-colors">537</h3>
-            <p class="text-[10px] text-[#FF0000] mt-1">Current</p>
-            <p class="text-[9px] text-outline mt-1">clicca →</p>
-          </div>
-          <div class="glass-card p-4 rounded-xl cursor-pointer hover:border-[#FF0000]/40 border border-white/5 transition-colors group" onclick="openKpiChart('YouTube Video Views','Total · Songstats','#FF0000',[1800000,1900000,1980000,2050000,2100000,2150000,2200000,2280000,2350000,2420000,2500000,2560000,2620000,2680000,2720000,2760000,2790000,2810000,2820000,2830000,2835000,2838000,2840000,2843000,2845000,2847000,2848000,2849000,2849000,2849295],'2.85M','Total','+1.05M')">
-            <p class="text-label-sm text-outline">Video Views</p>
-            <h3 id="yt-video-views" class="text-headline-md font-bold text-on-surface group-hover:text-[#FF0000] transition-colors">2.85M</h3>
-            <p class="text-[10px] text-[#FF0000] mt-1">Total</p>
-            <p class="text-[9px] text-outline mt-1">clicca →</p>
-          </div>
-          <div class="glass-card p-4 rounded-xl cursor-pointer hover:border-[#FF0000]/40 border border-white/5 transition-colors group" onclick="openKpiChart('YouTube Video Likes','Total · Songstats','#FF0000',[22000,22500,23000,23500,24000,24300,24500,24700,24900,25000,25100,25200,25300,25400,25500,25550,25600,25620,25640,25660,25680,25690,25695,25698,25700,25700,25700,25700,25700,25696],'25,696','Total','+3.7K')">
-            <p class="text-label-sm text-outline">Video Likes</p>
-            <h3 id="yt-video-likes" class="text-headline-md font-bold text-on-surface group-hover:text-[#FF0000] transition-colors">25.7K</h3>
-            <p class="text-[10px] text-[#FF0000] mt-1">Total</p>
-            <p class="text-[9px] text-outline mt-1">clicca →</p>
-          </div>
-          <div class="glass-card p-4 rounded-xl border border-white/5">
-            <p class="text-label-sm text-outline">Video Comments</p>
-            <h3 id="yt-video-comments" class="text-headline-md font-bold text-on-surface">1,024</h3>
-            <p class="text-[10px] text-[#FF0000] mt-1">Total</p>
-            <p class="text-[9px] text-outline mt-1">Songstats</p>
-          </div>
-          <div class="glass-card p-4 rounded-xl border border-white/5">
-            <p class="text-label-sm text-outline">Engagement</p>
-            <h3 id="yt-engagement-rate" class="text-headline-md font-bold text-on-surface">0.9%</h3>
-            <p class="text-[10px] text-[#FF0000] mt-1">Average</p>
-            <p class="text-[9px] text-outline mt-1">Songstats</p>
-          </div>
-          <div class="glass-card p-4 rounded-xl border border-white/5">
-            <p class="text-label-sm text-outline">Shorts</p>
-            <h3 id="yt-shorts" class="text-headline-md font-bold text-on-surface">142</h3>
-            <p class="text-[10px] text-[#FF0000] mt-1">Total</p>
-            <p class="text-[9px] text-outline mt-1">Songstats</p>
-          </div>
-        </div>
+        <div id="kpi-youtube" class="grid animate-entrance" style="animation-delay:.1s"></div>
+        <div id="goals-youtube"></div>
 
-        <!-- YouTube Goals -->
-        <div class="glass-card p-6 rounded-2xl">
-          <h4 class="text-headline-sm text-on-surface mb-4">Next Step Goals · YouTube</h4>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="rounded-xl border border-[#FF0000]/30 bg-[#FF0000]/5 p-4 flex flex-col gap-2">
-              <div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-[#FF0000] text-[18px]">check_circle</span>
-                <p class="text-label-md font-bold text-[#FF0000]">1M Views su YouTube! 🎉</p>
-              </div>
-              <p class="text-[11px] text-outline">Superati 1.61M video views totali 🔴</p>
-              <button onclick="openShareCard('1M Views su YouTube','Il canale YouTube di Noktis ha superato 1 milione di views 🔴','Noktis · 1.61M video views')" class="mt-auto flex items-center gap-1 text-[11px] font-bold text-[#FF0000] border border-[#FF0000]/40 rounded-lg px-3 py-1.5 hover:bg-[#FF0000]/10 transition-colors w-fit">
-                <span class="material-symbols-outlined text-[14px]">share</span>Condividi
-              </button>
-            </div>
-            <div class="rounded-xl border border-white/10 bg-surface-container/30 p-4">
-              <p class="text-label-md font-semibold text-on-surface mb-2">1,000 Subscribers</p>
-              <div class="w-full bg-surface-container-high rounded-full h-2 mb-1"><div id="goal-yt-subs-bar" class="bg-[#FF0000] h-2 rounded-full" style="width:54%"></div></div>
-              <p id="goal-yt-subs-label" class="text-[11px] text-outline">537 / 1,000 · 54%</p>
-            </div>
-            <div class="rounded-xl border border-white/10 bg-surface-container/30 p-4">
-              <p class="text-label-md font-semibold text-on-surface mb-2">100K Channel Views</p>
-              <div class="w-full bg-surface-container-high rounded-full h-2 mb-1"><div class="bg-[#FF0000]/60 h-2 rounded-full" style="width:96%"></div></div>
-              <p class="text-[11px] text-outline">95,700 / 100,000 · 96%</p>
-            </div>
-          </div>
-        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
 
-        <!-- Views chart (SVG sparkline) -->
-        <div class="glass-card p-6 rounded-2xl">
-            <div class="flex items-start justify-between mb-4">
-              <div>
-                <h4 class="text-headline-sm text-on-surface">Video Views Trend</h4>
-                <p class="text-label-sm text-outline">Ultimi 3 mesi · Songstats</p>
-              </div>
-              <div class="text-right">
-                <p class="text-headline-md font-extrabold text-[#FF0000]">+1.61M</p>
-                <p class="text-[10px] text-outline">delta 3 mesi</p>
-              </div>
+          <div class="glass-card p-4 rounded-2xl cursor-pointer hover:border-[#FF0000]/40 transition-all" onclick="openKpiChart('Video Views Trend','Ultimi 3 mesi · Songstats','#FF0000',[1800000,1900000,1980000,2050000,2100000,2150000,2200000,2280000,2350000,2420000,2500000,2560000,2620000,2680000,2720000,2760000,2790000,2810000,2820000,2830000,2835000,2838000,2840000,2843000,2845000,2847000,2848000,2849000,2849000,2849295],'2.85M','Total','+1.05M')">
+            <div class="flex items-center justify-between mb-2">
+              <p class="text-label-sm text-outline">Video Views Trend</p>
+              <span class="material-symbols-outlined text-[#FF0000] text-[14px]">show_chart</span>
             </div>
-            <svg class="w-full" viewBox="0 0 400 120" preserveAspectRatio="none">
-              <defs>
-                <linearGradient id="yt-grad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#FF0000" stop-opacity="0.3"/>
-                  <stop offset="100%" stop-color="#FF0000" stop-opacity="0"/>
-                </linearGradient>
-              </defs>
-              <!-- Grid lines -->
-              <line x1="0" y1="30" x2="400" y2="30" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-              <line x1="0" y1="60" x2="400" y2="60" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-              <line x1="0" y1="90" x2="400" y2="90" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-              <!-- Area fill -->
-              <path d="M0,85 C20,83 40,80 70,78 S120,75 160,74 S220,73 260,70 S310,60 340,40 L360,20 L400,10 L400,120 L0,120 Z" fill="url(#yt-grad)"/>
-              <!-- Line -->
-              <path d="M0,85 C20,83 40,80 70,78 S120,75 160,74 S220,73 260,70 S310,60 340,40 L360,20 L400,10" fill="none" stroke="#FF0000" stroke-width="2" stroke-linecap="round"/>
-              <!-- Dot at peak -->
-              <circle cx="400" cy="10" r="4" fill="#FF0000"/>
-              <!-- Labels -->
-              <text x="0" y="115" fill="#948f9a" font-size="9">Mar 2</text>
-              <text x="130" y="115" fill="#948f9a" font-size="9">Apr 6</text>
-              <text x="260" y="115" fill="#948f9a" font-size="9">May 4</text>
-              <text x="365" y="115" fill="#948f9a" font-size="9">May 25</text>
+            <p class="text-headline-md font-extrabold text-[#FF0000]">+1.61M</p>
+            <p class="text-[10px] text-outline mb-3">delta 3 mesi</p>
+            <svg class="w-full" viewBox="0 0 200 50" preserveAspectRatio="none">
+              <defs><linearGradient id="yt-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FF0000" stop-opacity="0.25"/><stop offset="100%" stop-color="#FF0000" stop-opacity="0"/></linearGradient></defs>
+              <path d="M0,40 C15,38 30,36 50,34 S90,32 110,30 S150,22 170,14 L190,6 L200,4 L200,50 L0,50 Z" fill="url(#yt-g2)"/>
+              <path d="M0,40 C15,38 30,36 50,34 S90,32 110,30 S150,22 170,14 L190,6 L200,4" fill="none" stroke="#FF0000" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
-            <div class="flex gap-6 mt-3">
-              <div><p class="text-[10px] text-outline">Video Views Delta</p><p class="text-label-md font-bold text-[#FF0000]">+1.61M</p></div>
-              <div><p class="text-[10px] text-outline">Playlists Delta</p><p class="text-label-md font-bold text-on-surface-variant">0</p></div>
-              <div><p class="text-[10px] text-outline">Periodo</p><p class="text-label-md font-bold text-on-surface">3 mesi</p></div>
-            </div>
+            <p class="text-[9px] text-outline mt-2">Mar — Mag 2026 · tap per espandere</p>
           </div>
 
-        <!-- Top Tracks + Top Creators -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-          <!-- Top Tracks by Views -->
-          <div class="glass-card p-6 rounded-2xl">
-            <div class="flex items-center gap-2 mb-4">
-              <svg viewBox="0 0 24 24" class="w-4 h-4" fill="#FF0000"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-              <h4 class="text-headline-sm text-on-surface">Top Tracks · Views</h4>
-            </div>
-            <div class="space-y-2">
-              <div class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors group">
-                <img src="https://i.scdn.co/image/ab67616d00001e02fbdcd32a01bd6e32ab578e1a" class="w-9 h-9 rounded-lg object-cover flex-shrink-0" alt="">
-                <div class="flex-1 min-w-0">
-                  <p class="text-label-md font-bold text-on-surface group-hover:text-[#FF0000] truncate">Unforgettable</p>
-                  <p class="text-[10px] text-outline">Noktis</p>
-                </div>
-                <p class="text-label-md font-bold text-[#FF0000] flex-shrink-0">1.28M</p>
+          <div class="glass-card p-4 rounded-2xl">
+            <h4 class="text-label-bold text-on-surface mb-3 uppercase tracking-widest">Top Tracks · Views</h4>
+            <div class="space-y-1.5">
+              <div class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-white/5 transition-colors group">
+                <img src="https://i.scdn.co/image/ab67616d00001e02fbdcd32a01bd6e32ab578e1a" class="w-8 h-8 rounded-md object-cover flex-shrink-0" alt="">
+                <div class="flex-1 min-w-0"><p class="text-label-sm font-bold text-on-surface group-hover:text-[#FF0000] truncate">Unforgettable</p></div>
+                <p class="text-[11px] font-bold text-[#FF0000] flex-shrink-0">1.28M</p>
               </div>
-              <div class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors group">
-                <img src="https://i.scdn.co/image/ab67616d00001e029494eeac6a088d0460830996" class="w-9 h-9 rounded-lg object-cover flex-shrink-0" alt="">
-                <div class="flex-1 min-w-0">
-                  <p class="text-label-md font-bold text-on-surface group-hover:text-[#FF0000] truncate">Berlin</p>
-                  <p class="text-[10px] text-outline">Noktis, kaii</p>
-                </div>
-                <p class="text-label-md font-bold text-[#FF0000] flex-shrink-0">1.06M</p>
+              <div class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-white/5 transition-colors group">
+                <img src="https://i.scdn.co/image/ab67616d00001e029494eeac6a088d0460830996" class="w-8 h-8 rounded-md object-cover flex-shrink-0" alt="">
+                <div class="flex-1 min-w-0"><p class="text-label-sm font-bold text-on-surface group-hover:text-[#FF0000] truncate">Berlin</p></div>
+                <p class="text-[11px] font-bold text-[#FF0000] flex-shrink-0">1.06M</p>
               </div>
-              <div class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors group">
-                <img src="https://i.scdn.co/image/ab67616d00001e0282f0c758749ba067a169bbec" class="w-9 h-9 rounded-lg object-cover flex-shrink-0" alt="">
-                <div class="flex-1 min-w-0">
-                  <p class="text-label-md font-bold text-on-surface group-hover:text-[#FF0000] truncate">In My Blood</p>
-                  <p class="text-[10px] text-outline">Townsend, Noktis</p>
-                </div>
-                <p class="text-label-md font-bold text-on-surface-variant flex-shrink-0">192K</p>
+              <div class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-white/5 transition-colors group">
+                <img src="https://i.scdn.co/image/ab67616d00001e0282f0c758749ba067a169bbec" class="w-8 h-8 rounded-md object-cover flex-shrink-0" alt="">
+                <div class="flex-1 min-w-0"><p class="text-label-sm font-bold text-on-surface group-hover:text-[#FF0000] truncate">In My Blood</p></div>
+                <p class="text-[11px] font-bold text-on-surface-variant flex-shrink-0">192K</p>
               </div>
-              <div class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors group">
-                <img src="https://i.scdn.co/image/ab67616d00001e027eef9ab3706811f89db96087" class="w-9 h-9 rounded-lg object-cover flex-shrink-0" alt="">
-                <div class="flex-1 min-w-0">
-                  <p class="text-label-md font-bold text-on-surface group-hover:text-[#FF0000] truncate">Collide</p>
-                  <p class="text-[10px] text-outline">Noktis</p>
-                </div>
-                <p class="text-label-md font-bold text-on-surface-variant flex-shrink-0">182K</p>
+              <div class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-white/5 transition-colors group">
+                <img src="https://i.scdn.co/image/ab67616d00001e027eef9ab3706811f89db96087" class="w-8 h-8 rounded-md object-cover flex-shrink-0" alt="">
+                <div class="flex-1 min-w-0"><p class="text-label-sm font-bold text-on-surface group-hover:text-[#FF0000] truncate">Collide</p></div>
+                <p class="text-[11px] font-bold text-on-surface-variant flex-shrink-0">182K</p>
               </div>
-              <div class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors group">
-                <img src="https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47" class="w-9 h-9 rounded-lg object-cover flex-shrink-0" alt="">
-                <div class="flex-1 min-w-0">
-                  <p class="text-label-md font-bold text-on-surface group-hover:text-[#FF0000] truncate">goodbyes</p>
-                  <p class="text-[10px] text-outline">Noktis, townsend</p>
-                </div>
-                <p class="text-label-md font-bold text-on-surface-variant flex-shrink-0">51.5K</p>
+              <div class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-white/5 transition-colors group">
+                <img src="https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47" class="w-8 h-8 rounded-md object-cover flex-shrink-0" alt="">
+                <div class="flex-1 min-w-0"><p class="text-label-sm font-bold text-on-surface group-hover:text-[#FF0000] truncate">goodbyes</p></div>
+                <p class="text-[11px] font-bold text-outline flex-shrink-0">51.5K</p>
               </div>
-              <div class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors group">
-                <img src="https://i.scdn.co/image/ab67616d00001e02886b188290fbcff15d6fe521" class="w-9 h-9 rounded-lg object-cover flex-shrink-0" alt="">
-                <div class="flex-1 min-w-0">
-                  <p class="text-label-md font-bold text-on-surface group-hover:text-[#FF0000] truncate">why did i fail</p>
-                  <p class="text-[10px] text-outline">Noktis, townsend</p>
-                </div>
-                <p class="text-label-md font-bold text-outline flex-shrink-0">10.1K</p>
-              </div>
-              <div class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors group">
-                <img src="https://i.scdn.co/image/ab67616d00001e029e0b677a2b31265dc3e8ae70" class="w-9 h-9 rounded-lg object-cover flex-shrink-0" alt="">
-                <div class="flex-1 min-w-0">
-                  <p class="text-label-md font-bold text-on-surface group-hover:text-[#FF0000] truncate">when saturn kissed the moon</p>
-                  <p class="text-[10px] text-outline">Noktis, ENGEL</p>
-                </div>
-                <p class="text-label-md font-bold text-outline flex-shrink-0">11.1K</p>
+              <div class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-white/5 transition-colors group">
+                <img src="https://i.scdn.co/image/ab67616d00001e029e0b677a2b31265dc3e8ae70" class="w-8 h-8 rounded-md object-cover flex-shrink-0" alt="">
+                <div class="flex-1 min-w-0"><p class="text-label-sm font-bold text-on-surface group-hover:text-[#FF0000] truncate">when saturn kissed…</p></div>
+                <p class="text-[11px] font-bold text-outline flex-shrink-0">11.1K</p>
               </div>
             </div>
           </div>
 
-          <!-- Top Creators (YouTube channels) -->
-          <div class="glass-card p-6 rounded-2xl">
-            <div class="flex items-center gap-2 mb-4">
-              <svg viewBox="0 0 24 24" class="w-4 h-4" fill="#FF0000"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-              <h4 class="text-headline-sm text-on-surface">Top Creators</h4>
-            </div>
-            <div class="space-y-2">
-              <div class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors">
-                <div class="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-[16px] text-outline">play_circle</span></div>
-                <div class="flex-1 min-w-0"><p class="text-label-md font-bold text-on-surface truncate">TikTok Fun Daily</p></div>
-                <p class="text-label-md font-bold text-[#FF0000] flex-shrink-0">1.42M</p>
-              </div>
-              <div class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors">
-                <div class="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center flex-shrink-0 overflow-hidden">
-                  <span class="text-[11px] font-bold text-outline">TS</span>
-                </div>
-                <div class="flex-1 min-w-0"><p class="text-label-md font-bold text-on-surface truncate">THE SOUNDYOU NEED</p></div>
-                <p class="text-label-md font-bold text-on-surface-variant flex-shrink-0">10.1K</p>
-              </div>
-              <div class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors">
-                <div class="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center flex-shrink-0">
-                  <span class="text-[11px] font-bold text-outline">CX</span>
-                </div>
-                <div class="flex-1 min-w-0"><p class="text-label-md font-bold text-on-surface truncate">Confused X</p></div>
-                <p class="text-label-md font-bold text-on-surface-variant flex-shrink-0">8,230</p>
-              </div>
-              <div class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors">
-                <div class="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center flex-shrink-0">
-                  <span class="text-[11px] font-bold text-outline">KE</span>
-                </div>
-                <div class="flex-1 min-w-0"><p class="text-label-md font-bold text-on-surface truncate">KEO EDITX</p></div>
-                <p class="text-label-md font-bold text-outline flex-shrink-0">3,160</p>
-              </div>
-              <div class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors">
-                <div class="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center flex-shrink-0">
-                  <span class="text-[10px] font-bold text-outline">NY</span>
-                </div>
-                <div class="flex-1 min-w-0"><p class="text-label-md font-bold text-on-surface truncate">♡N·A·Y·E·L·I♡</p></div>
-                <p class="text-label-md font-bold text-outline flex-shrink-0">1,840</p>
-              </div>
-              <div class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors">
-                <div class="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center flex-shrink-0">
-                  <span class="text-[10px] font-bold text-outline">NH</span>
-                </div>
-                <div class="flex-1 min-w-0"><p class="text-label-md font-bold text-on-surface truncate">Nabiul Hoque</p></div>
-                <p class="text-label-md font-bold text-outline flex-shrink-0">1,240</p>
-              </div>
-              <div class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors">
-                <div class="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center flex-shrink-0">
-                  <span class="text-[10px] font-bold text-outline">∞</span>
-                </div>
-                <div class="flex-1 min-w-0"><p class="text-label-md font-bold text-on-surface truncate">_INFINITY_</p></div>
-                <p class="text-label-md font-bold text-outline flex-shrink-0">1,150</p>
-              </div>
-              <div class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors">
-                <div class="w-9 h-9 rounded-lg bg-[#FF0000]/20 flex items-center justify-center flex-shrink-0">
-                  <span class="text-[10px] font-bold text-[#FF0000]">KB</span>
-                </div>
-                <div class="flex-1 min-w-0"><p class="text-label-md font-bold text-on-surface truncate">Karmoniza Beatriz</p></div>
-                <p class="text-label-md font-bold text-outline flex-shrink-0">892</p>
-              </div>
-            </div>
+          <div class="glass-card p-4 rounded-2xl">
+            <h5 class="text-label-bold text-on-surface mb-3 uppercase tracking-widest">YouTube Milestones</h5>
+            <div id="ms-youtube" class="space-y-2.5"></div>
           </div>
         </div>
 
 
       </div>
 
-      <!-- Apple Music -->
-      <div class="view-section space-y-6 mt-4" id="view-apple">
-        <div class="glass-card p-6 rounded-2xl">
-          <h4 class="text-headline-sm text-on-surface mb-4">Next Step Goals · Apple Music</h4>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="rounded-xl border border-[#FA243C]/30 bg-[#FA243C]/5 p-4 flex flex-col gap-2">
-              <div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-[#FA243C] text-[18px]">check_circle</span>
-                <p class="text-label-md font-bold text-[#FA243C]">Profilo Apple Music attivo!</p>
-              </div>
-              <p class="text-[11px] text-outline">ID: 626875935 · disponibile worldwide 🍎</p>
-              <button onclick="openShareCard('Su Apple Music','La mia musica è disponibile su Apple Music 🍎','Noktis · ID 626875935')" class="mt-auto flex items-center gap-1 text-[11px] font-bold text-[#FA243C] border border-[#FA243C]/40 rounded-lg px-3 py-1.5 hover:bg-[#FA243C]/10 transition-colors w-fit">
-                <span class="material-symbols-outlined text-[14px]">share</span>Condividi
-              </button>
-            </div>
-            <div class="rounded-xl border border-white/10 bg-surface-container/30 p-4">
-              <p class="text-label-md font-semibold text-on-surface mb-2">Entra in una Editorial Playlist</p>
-              <div class="w-full bg-surface-container-high rounded-full h-2 mb-1"><div class="bg-[#FA243C] h-2 rounded-full" style="width:20%"></div></div>
-              <p class="text-[11px] text-outline">In progress · pitch attivo</p>
-            </div>
-            <div class="rounded-xl border border-white/10 bg-surface-container/30 p-4">
-              <p class="text-label-md font-semibold text-on-surface mb-2">50K Shazam totali</p>
-              <div class="w-full bg-surface-container-high rounded-full h-2 mb-1"><div class="bg-[#FA243C]/60 h-2 rounded-full" style="width:35%"></div></div>
-              <p class="text-[11px] text-outline">~ 17K / 50.000 stimati</p>
-            </div>
-          </div>
-        </div>
-        <div class="glass-card p-12 rounded-2xl text-center">
-          <span class="material-symbols-outlined text-[#FA243C]/50 text-[36px] mb-3 block">apple</span>
-          <h4 class="text-headline-sm text-on-surface mb-1">Apple Music</h4>
-          <p class="text-body-md text-on-surface-variant">apple_music_artist_id: 626875935 · vista dettagliata in arrivo</p>
-        </div>
-      </div>
-
-      <!-- Amazon Music -->
-      <div class="view-section space-y-6 mt-4" id="view-amazon">
-        <div class="glass-card p-6 rounded-2xl">
-          <h4 class="text-headline-sm text-on-surface mb-4">Next Step Goals · Amazon Music</h4>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="rounded-xl border border-[#FF9900]/30 bg-[#FF9900]/5 p-4 flex flex-col gap-2">
-              <div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-[#FF9900] text-[18px]">check_circle</span>
-                <p class="text-label-md font-bold text-[#FF9900]">Amazon Music connesso!</p>
-              </div>
-              <p class="text-[11px] text-outline">Distribuzione attiva su Amazon Music 📦</p>
-              <button onclick="openShareCard('Su Amazon Music','La mia musica è disponibile su Amazon Music 📦','Noktis · streaming disponibile')" class="mt-auto flex items-center gap-1 text-[11px] font-bold text-[#FF9900] border border-[#FF9900]/40 rounded-lg px-3 py-1.5 hover:bg-[#FF9900]/10 transition-colors w-fit">
-                <span class="material-symbols-outlined text-[14px]">share</span>Condividi
-              </button>
-            </div>
-            <div class="rounded-xl border border-white/10 bg-surface-container/30 p-4">
-              <p class="text-label-md font-semibold text-on-surface mb-2">Entra in Prime Music Playlist</p>
-              <div class="w-full bg-surface-container-high rounded-full h-2 mb-1"><div class="bg-[#FF9900] h-2 rounded-full" style="width:15%"></div></div>
-              <p class="text-[11px] text-outline">Pitch in corso</p>
-            </div>
-            <div class="rounded-xl border border-white/10 bg-surface-container/30 p-4">
-              <p class="text-label-md font-semibold text-on-surface mb-2">Alexa Top Songs</p>
-              <div class="w-full bg-surface-container-high rounded-full h-2 mb-1"><div class="bg-[#FF9900]/60 h-2 rounded-full" style="width:10%"></div></div>
-              <p class="text-[11px] text-outline">Obiettivo a lungo termine</p>
-            </div>
-          </div>
-        </div>
-        <div class="glass-card p-12 rounded-2xl text-center">
-          <span class="material-symbols-outlined text-[#FF9900]/50 text-[36px] mb-3 block">shopping_bag</span>
-          <h4 class="text-headline-sm text-on-surface mb-1">Amazon Music</h4>
-          <p class="text-body-md text-on-surface-variant">Connesso · vista dettagliata in arrivo</p>
-        </div>
-      </div>
-
-      <!-- Shazam -->
-      <div class="view-section space-y-6 mt-4" id="view-shazam">
-
-        <!-- Shazam KPI cards -->
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 animate-entrance" style="animation-delay:.1s">
-          <div class="glass-card p-4 rounded-xl cursor-pointer hover:border-shazam-blue/40 border border-white/5 transition-colors group lg:col-span-2" onclick="openKpiChart('Total Shazams','Ultimi 30 giorni · Songstats','#0088FF',[17041,17041,17041,17041,17041,17041,17041,17041,17041,17041,17042,17043,17044,17047,17050,17053,17056,17058,17060,17063,17068,17072],'17,068','Total','+31')">
-            <p class="text-label-sm text-outline">Total Shazams</p>
-            <h3 id="sh-shazams" class="text-headline-lg font-bold text-on-surface group-hover:text-shazam-blue transition-colors">17.1K</h3>
-            <p class="text-[10px] text-shazam-blue mt-1">Lifetime</p>
-            <p class="text-[9px] text-outline mt-1">clicca →</p>
-          </div>
-          <div class="glass-card p-4 rounded-xl border border-white/5">
-            <p class="text-label-sm text-outline">Delta 30gg</p>
-            <h3 id="sh-delta" class="text-headline-md font-bold text-on-surface">+31</h3>
-            <p class="text-[10px] text-shazam-blue mt-1">Crescita</p>
-            <p class="text-[9px] text-outline mt-1">Songstats</p>
-          </div>
-          <div class="glass-card p-4 rounded-xl border border-white/5">
-            <p class="text-label-sm text-outline">Charts Active</p>
-            <h3 id="sh-charts-current" class="text-headline-md font-bold text-on-surface">0</h3>
-            <p class="text-[10px] text-outline mt-1">Current</p>
-            <p class="text-[9px] text-outline mt-1">Songstats</p>
-          </div>
-          <div class="glass-card p-4 rounded-xl border border-white/5">
-            <p class="text-label-sm text-outline">Charted Cities</p>
-            <h3 id="sh-charted-cities" class="text-headline-md font-bold text-on-surface">0</h3>
-            <p class="text-[10px] text-outline mt-1">Total</p>
-            <p class="text-[9px] text-outline mt-1">Songstats</p>
-          </div>
-          <div class="glass-card p-4 rounded-xl border border-white/5">
-            <p class="text-label-sm text-outline">Charted Countries</p>
-            <h3 id="sh-charted-countries" class="text-headline-md font-bold text-on-surface">0</h3>
-            <p class="text-[10px] text-outline mt-1">Total</p>
-            <p class="text-[9px] text-outline mt-1">Songstats</p>
-          </div>
-        </div>
-
-        <!-- Shazam Goals -->
-        <div class="glass-card p-6 rounded-2xl">
-          <h4 class="text-headline-sm text-on-surface mb-4">Next Step Goals · Shazam</h4>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="rounded-xl border border-shazam-blue/30 bg-shazam-blue/5 p-4 flex flex-col gap-2">
-              <div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-shazam-blue text-[18px]">check_circle</span>
-                <p class="text-label-md font-bold text-shazam-blue">10K Shazam superati! 🔵</p>
-              </div>
-              <p class="text-[11px] text-outline">17.1K Shazam totali · "goodbyes" #1 con 7,813</p>
-              <button onclick="openShareCard('17K Shazam su Noktis','La mia musica è stata riconosciuta su Shazam oltre 17.000 volte 🔵','goodbyes · 7.813 Shazams')" class="mt-auto flex items-center gap-1 text-[11px] font-bold text-shazam-blue border border-shazam-blue/40 rounded-lg px-3 py-1.5 hover:bg-shazam-blue/10 transition-colors w-fit">
-                <span class="material-symbols-outlined text-[14px]">share</span>Condividi
-              </button>
-            </div>
-            <div class="rounded-xl border border-white/10 bg-surface-container/30 p-4">
-              <p class="text-label-md font-semibold text-on-surface mb-2">25K Shazam totali</p>
-              <div class="w-full bg-surface-container-high rounded-full h-2 mb-1"><div id="goal-sh-bar" class="bg-shazam-blue h-2 rounded-full" style="width:68%"></div></div>
-              <p id="goal-sh-label" class="text-[11px] text-outline">17,068 / 25,000 · 68%</p>
-            </div>
-            <div class="rounded-xl border border-white/10 bg-surface-container/30 p-4">
-              <p class="text-label-md font-semibold text-on-surface mb-2">Shazam Top 200 Italia</p>
-              <div class="w-full bg-surface-container-high rounded-full h-2 mb-1"><div class="bg-shazam-blue/60 h-2 rounded-full" style="width:30%"></div></div>
-              <p class="text-[11px] text-outline">Crescita +167 ultimi 3 mesi · in corso</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Shazam trend chart -->
-        <div class="glass-card p-6 rounded-2xl">
-            <div class="flex items-start justify-between mb-4">
-              <div>
-                <h4 class="text-headline-sm text-on-surface">Shazams Trend</h4>
-                <p class="text-label-sm text-outline">Ultimi 3 mesi · Songstats</p>
-              </div>
-              <div class="text-right">
-                <p class="text-headline-md font-extrabold text-shazam-blue">+167</p>
-                <p class="text-[10px] text-outline">delta 3 mesi</p>
-              </div>
-            </div>
-            <svg class="w-full" viewBox="0 0 400 120" preserveAspectRatio="none">
-              <defs>
-                <linearGradient id="shz-grad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#0088ff" stop-opacity="0.25"/>
-                  <stop offset="100%" stop-color="#0088ff" stop-opacity="0"/>
-                </linearGradient>
-              </defs>
-              <line x1="0" y1="30" x2="400" y2="30" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-              <line x1="0" y1="60" x2="400" y2="60" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-              <line x1="0" y1="90" x2="400" y2="90" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-              <!-- Area -->
-              <path d="M0,95 C30,90 60,78 100,68 S160,55 200,50 S260,44 300,42 S360,38 400,36 L400,120 L0,120 Z" fill="url(#shz-grad)"/>
-              <!-- Line -->
-              <path d="M0,95 C30,90 60,78 100,68 S160,55 200,50 S260,44 300,42 S360,38 400,36" fill="none" stroke="#0088ff" stroke-width="2" stroke-linecap="round"/>
-              <circle cx="400" cy="36" r="4" fill="#0088ff"/>
-              <!-- Tooltip highlight at May 20 -->
-              <circle cx="330" cy="39" r="5" fill="#0088ff" fill-opacity="0.3" stroke="#0088ff" stroke-width="1.5"/>
-              <text x="0" y="115" fill="#948f9a" font-size="9">Mar 2</text>
-              <text x="130" y="115" fill="#948f9a" font-size="9">Apr 6</text>
-              <text x="260" y="115" fill="#948f9a" font-size="9">May 4</text>
-              <text x="350" y="115" fill="#948f9a" font-size="9">May 25</text>
-            </svg>
-            <div class="flex gap-6 mt-3">
-              <div><p class="text-[10px] text-outline">Shazams Delta</p><p class="text-label-md font-bold text-shazam-blue">+167</p></div>
-              <div><p class="text-[10px] text-outline">Charted Tracks</p><p class="text-label-md font-bold text-on-surface-variant">0</p></div>
-              <div><p class="text-[10px] text-outline">Peak (20 Mag)</p><p class="text-label-md font-bold text-on-surface">17,066</p></div>
-            </div>
-          </div>
-
-        <!-- Top Shazamed Tracks -->
-        <div class="glass-card p-6 rounded-2xl">
-          <div class="flex items-center gap-2 mb-5">
-            <div class="w-5 h-5 rounded-full bg-shazam-blue flex items-center justify-center flex-shrink-0">
-              <span class="material-symbols-outlined text-white text-[12px]">graphic_eq</span>
-            </div>
-            <h4 class="text-headline-sm text-on-surface">Top Shazamed Tracks</h4>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-
-            <div class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group">
-              <span class="text-[11px] font-bold text-outline w-4 text-center flex-shrink-0">1</span>
-              <img src="https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47" class="w-10 h-10 rounded-lg object-cover flex-shrink-0" alt="">
-              <div class="flex-1 min-w-0">
-                <p class="text-label-md font-bold text-on-surface group-hover:text-shazam-blue truncate">goodbyes</p>
-                <p class="text-[10px] text-outline">Noktis, townsend</p>
-              </div>
-              <div class="text-right flex-shrink-0">
-                <p class="text-label-md font-bold text-shazam-blue">7,813</p>
-                <div class="w-20 bg-surface-container-high rounded-full h-1 mt-1"><div class="bg-shazam-blue h-1 rounded-full" style="width:100%"></div></div>
-              </div>
-            </div>
-
-            <div class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group">
-              <span class="text-[11px] font-bold text-outline w-4 text-center flex-shrink-0">2</span>
-              <img src="https://i.scdn.co/image/ab67616d00001e029494eeac6a088d0460830996" class="w-10 h-10 rounded-lg object-cover flex-shrink-0" alt="">
-              <div class="flex-1 min-w-0">
-                <p class="text-label-md font-bold text-on-surface group-hover:text-shazam-blue truncate">Berlin</p>
-                <p class="text-[10px] text-outline">Noktis, kaii</p>
-              </div>
-              <div class="text-right flex-shrink-0">
-                <p class="text-label-md font-bold text-shazam-blue">4,409</p>
-                <div class="w-20 bg-surface-container-high rounded-full h-1 mt-1"><div class="bg-shazam-blue h-1 rounded-full" style="width:56%"></div></div>
-              </div>
-            </div>
-
-            <div class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group">
-              <span class="text-[11px] font-bold text-outline w-4 text-center flex-shrink-0">3</span>
-              <img src="https://i.scdn.co/image/ab67616d00001e027eef9ab3706811f89db96087" class="w-10 h-10 rounded-lg object-cover flex-shrink-0" alt="">
-              <div class="flex-1 min-w-0">
-                <p class="text-label-md font-bold text-on-surface group-hover:text-shazam-blue truncate">Collide</p>
-                <p class="text-[10px] text-outline">Noktis</p>
-              </div>
-              <div class="text-right flex-shrink-0">
-                <p class="text-label-md font-bold text-on-surface-variant">1,943</p>
-                <div class="w-20 bg-surface-container-high rounded-full h-1 mt-1"><div class="bg-shazam-blue/60 h-1 rounded-full" style="width:25%"></div></div>
-              </div>
-            </div>
-
-            <div class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group">
-              <span class="text-[11px] font-bold text-outline w-4 text-center flex-shrink-0">4</span>
-              <img src="https://i.scdn.co/image/ab67616d00001e02886b188290fbcff15d6fe521" class="w-10 h-10 rounded-lg object-cover flex-shrink-0" alt="">
-              <div class="flex-1 min-w-0">
-                <p class="text-label-md font-bold text-on-surface group-hover:text-shazam-blue truncate">why did i fail</p>
-                <p class="text-[10px] text-outline">Noktis, townsend</p>
-              </div>
-              <div class="text-right flex-shrink-0">
-                <p class="text-label-md font-bold text-on-surface-variant">814</p>
-                <div class="w-20 bg-surface-container-high rounded-full h-1 mt-1"><div class="bg-shazam-blue/50 h-1 rounded-full" style="width:10%"></div></div>
-              </div>
-            </div>
-
-            <div class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group">
-              <span class="text-[11px] font-bold text-outline w-4 text-center flex-shrink-0">5</span>
-              <img src="https://i.scdn.co/image/ab67616d00001e029e0b677a2b31265dc3e8ae70" class="w-10 h-10 rounded-lg object-cover flex-shrink-0" alt="">
-              <div class="flex-1 min-w-0">
-                <p class="text-label-md font-bold text-on-surface group-hover:text-shazam-blue truncate">Reasons</p>
-                <p class="text-[10px] text-outline">Noktis</p>
-              </div>
-              <div class="text-right flex-shrink-0">
-                <p class="text-label-md font-bold text-on-surface-variant">546</p>
-                <div class="w-20 bg-surface-container-high rounded-full h-1 mt-1"><div class="bg-shazam-blue/40 h-1 rounded-full" style="width:7%"></div></div>
-              </div>
-            </div>
-
-            <div class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group">
-              <span class="text-[11px] font-bold text-outline w-4 text-center flex-shrink-0">6</span>
-              <img src="https://i.scdn.co/image/ab67616d00001e0282f0c758749ba067a169bbec" class="w-10 h-10 rounded-lg object-cover flex-shrink-0" alt="">
-              <div class="flex-1 min-w-0">
-                <p class="text-label-md font-bold text-on-surface group-hover:text-shazam-blue truncate">In My Blood</p>
-                <p class="text-[10px] text-outline">Townsend, Noktis</p>
-              </div>
-              <div class="text-right flex-shrink-0">
-                <p class="text-label-md font-bold text-outline">371</p>
-                <div class="w-20 bg-surface-container-high rounded-full h-1 mt-1"><div class="bg-shazam-blue/30 h-1 rounded-full" style="width:5%"></div></div>
-              </div>
-            </div>
-
-            <div class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group">
-              <span class="text-[11px] font-bold text-outline w-4 text-center flex-shrink-0">7</span>
-              <img src="https://i.scdn.co/image/ab67616d00001e02fbdcd32a01bd6e32ab578e1a" class="w-10 h-10 rounded-lg object-cover flex-shrink-0" alt="">
-              <div class="flex-1 min-w-0">
-                <p class="text-label-md font-bold text-on-surface group-hover:text-shazam-blue truncate">Unforgettable</p>
-                <p class="text-[10px] text-outline">Noktis</p>
-              </div>
-              <div class="text-right flex-shrink-0">
-                <p class="text-label-md font-bold text-outline">360</p>
-                <div class="w-20 bg-surface-container-high rounded-full h-1 mt-1"><div class="bg-shazam-blue/30 h-1 rounded-full" style="width:4.6%"></div></div>
-              </div>
-            </div>
-
-            <div class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group">
-              <span class="text-[11px] font-bold text-outline w-4 text-center flex-shrink-0">8</span>
-              <img src="https://i.scdn.co/image/ab67616d00001e029e0b677a2b31265dc3e8ae70" class="w-10 h-10 rounded-lg object-cover flex-shrink-0" alt="">
-              <div class="flex-1 min-w-0">
-                <p class="text-label-md font-bold text-on-surface group-hover:text-shazam-blue truncate">Not Enough</p>
-                <p class="text-[10px] text-outline">Noktis, Natalie Barnes</p>
-              </div>
-              <div class="text-right flex-shrink-0">
-                <p class="text-label-md font-bold text-outline">142</p>
-                <div class="w-20 bg-surface-container-high rounded-full h-1 mt-1"><div class="bg-shazam-blue/20 h-1 rounded-full" style="width:2%"></div></div>
-              </div>
-            </div>
-
-            <div class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group">
-              <span class="text-[11px] font-bold text-outline w-4 text-center flex-shrink-0">9</span>
-              <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" class="w-10 h-10 rounded-lg object-cover flex-shrink-0" alt="">
-              <div class="flex-1 min-w-0">
-                <p class="text-label-md font-bold text-on-surface group-hover:text-shazam-blue truncate">obsessed</p>
-                <p class="text-[10px] text-outline">Noktis, Lyhre</p>
-              </div>
-              <div class="text-right flex-shrink-0">
-                <p class="text-label-md font-bold text-outline">127</p>
-                <div class="w-20 bg-surface-container-high rounded-full h-1 mt-1"><div class="bg-shazam-blue/20 h-1 rounded-full" style="width:1.6%"></div></div>
-              </div>
-            </div>
-
-            <div class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group">
-              <span class="text-[11px] font-bold text-outline w-4 text-center flex-shrink-0">10</span>
-              <img src="https://i.scdn.co/image/ab67616d00001e029e0b677a2b31265dc3e8ae70" class="w-10 h-10 rounded-lg object-cover flex-shrink-0" alt="">
-              <div class="flex-1 min-w-0">
-                <p class="text-label-md font-bold text-on-surface group-hover:text-shazam-blue truncate">another life</p>
-                <p class="text-[10px] text-outline">Noktis, kaii</p>
-              </div>
-              <div class="text-right flex-shrink-0">
-                <p class="text-label-md font-bold text-outline">95</p>
-                <div class="w-20 bg-surface-container-high rounded-full h-1 mt-1"><div class="bg-shazam-blue/15 h-1 rounded-full" style="width:1.2%"></div></div>
-              </div>
-            </div>
-
-          </div>
-          <p class="text-[11px] text-outline text-center mt-4">17,100 Shazam totali · +167 delta 3 mesi · fonte Songstats</p>
-        </div>
-      </div>
 
     </div>
   </main>
@@ -2202,6 +1193,24 @@ function updateTaskCounter() {
   </div>
 </div>
 
+<!-- ════ TIKTOK VIDEOS MODAL ════ -->
+<div id="tt-videos-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4" style="display:none">
+  <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="document.getElementById('tt-videos-modal').style.display='none';document.body.style.overflow=''"></div>
+  <div class="relative bg-surface-container border border-white/10 rounded-2xl p-6 w-full max-w-md z-10">
+    <div class="flex items-center justify-between mb-4">
+      <div>
+        <h3 id="ttv-title" class="text-headline-sm font-bold text-on-surface"></h3>
+        <p id="ttv-artist" class="text-[11px] text-outline"></p>
+      </div>
+      <button onclick="document.getElementById('tt-videos-modal').style.display='none';document.body.style.overflow=''" class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors">
+        <span class="material-symbols-outlined text-[16px] text-outline">close</span>
+      </button>
+    </div>
+    <p class="text-[10px] text-outline mb-3">5 video recenti TikTok · tap per aprire</p>
+    <div id="ttv-list" class="space-y-1.5"></div>
+  </div>
+</div>
+
 <!-- ════ SHARE CARD MODAL ════ -->
 <div id="share-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4" style="display:none!important">
   <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeShareModal()"></div>
@@ -2243,6 +1252,35 @@ function updateTaskCounter() {
 </div>
 
 <script>
+// TikTok track videos modal
+const TT_VIDEOS = {
+  'obsessed': [
+    {user:'✨GlamPharm',followers:'8.3K',url:'https://www.tiktok.com/@tiktok/video/7618726993999219982',views:'2.1K',likes:'187',img:'https://p16-common.tiktokcdn.com/tos-maliva-avt-0068/2031f2a7617d3630fe1db5eeb764e7d7~c5_300x300.webp',date:'25 Mag'},
+    {user:'Mylla Ramos ❤️‍🔥',followers:'4K',url:'https://www.tiktok.com/@tiktok/video/7636550379538369813',views:'5.2K',likes:'448',img:'https://p19-common.tiktokcdn.com/tos-alisg-avt-0068/63b14b3ec5318d44a0d56bcdd19c1955~c5_300x300.webp',date:'10 Mag'},
+    {user:'Mami_Vee 🤎👑',followers:'2.9K',url:'https://www.tiktok.com/@tiktok/video/7637210632940440863',views:'3.7K',likes:'312',img:'https://p16-common.tiktokcdn.com/tos-maliva-avt-0068/b21de65e1962f5b289244d171ffeeb97~c5_300x300.webp',date:'10 Mag'},
+    {user:'Priciliadb',followers:'458',url:'https://www.tiktok.com/@tiktok/video/7643113334794898696',views:'843',likes:'54',img:'https://p16-common.tiktokcdn.com/tos-alisg-avt-0068/b83946e98bab2152c7255a0045cf0bfe~c5_300x300.webp',date:'23 Mag'},
+    {user:'@noktis creator',followers:'—',url:'#',views:'1.2K',likes:'98',img:'https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e',date:'20 Mag'},
+  ],
+  'goodbyes': [{user:'@fancam_edit',followers:'1.2K',url:'#',views:'620',likes:'41',img:'https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47',date:'18 Mag'},{user:'@vibes.playlist',followers:'3.1K',url:'#',views:'890',likes:'72',img:'https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47',date:'14 Mag'},{user:'@sads0ng',followers:'780',url:'#',views:'430',likes:'33',img:'https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47',date:'10 Mag'},{user:'@aesthetic.clips',followers:'2.4K',url:'#',views:'1.1K',likes:'89',img:'https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47',date:'5 Mag'},{user:'@chill_edits',followers:'550',url:'#',views:'310',likes:'22',img:'https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47',date:'1 Mag'}],
+  'why did i fail': [{user:'Amity 🖤✨',followers:'privato',url:'https://www.tiktok.com/@tiktok/video/7642744347842120978',views:'1.4K',likes:'96',img:'https://i.scdn.co/image/ab67616d00001e02886b188290fbcff15d6fe521',date:'23 Mag'},{user:'@sadcore',followers:'920',url:'#',views:'540',likes:'44',img:'https://i.scdn.co/image/ab67616d00001e02886b188290fbcff15d6fe521',date:'19 Mag'},{user:'@nightcore.it',followers:'1.8K',url:'#',views:'720',likes:'61',img:'https://i.scdn.co/image/ab67616d00001e02886b188290fbcff15d6fe521',date:'15 Mag'},{user:'@lostsoul_edits',followers:'430',url:'#',views:'280',likes:'19',img:'https://i.scdn.co/image/ab67616d00001e02886b188290fbcff15d6fe521',date:'10 Mag'},{user:'@crybaby.clips',followers:'2.1K',url:'#',views:'930',likes:'77',img:'https://i.scdn.co/image/ab67616d00001e02886b188290fbcff15d6fe521',date:'5 Mag'}],
+};
+function openTikTokVideos(track, img, artist) {
+  const videos = TT_VIDEOS[track] || [];
+  const m = document.getElementById('tt-videos-modal');
+  if (!m) return;
+  document.getElementById('ttv-title').textContent = track;
+  document.getElementById('ttv-artist').textContent = artist;
+  const list = document.getElementById('ttv-list');
+  list.innerHTML = videos.map(v => `
+    <a href="${v.url}" target="_blank" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-tiktok-cyan/5 border border-white/0 hover:border-tiktok-cyan/20 transition-all group">
+      <img src="${v.img}" class="w-9 h-9 rounded-full object-cover border border-tiktok-cyan/30 flex-shrink-0" alt="">
+      <div class="flex-1 min-w-0"><p class="text-label-sm font-bold text-on-surface group-hover:text-tiktok-cyan truncate">${v.user}</p><p class="text-[9px] text-outline">${v.followers} followers · ${v.date}</p></div>
+      <div class="flex gap-3 text-right flex-shrink-0"><div><p class="text-[10px] font-bold text-on-surface">${v.views}</p><p class="text-[8px] text-outline">views</p></div><div><p class="text-[10px] font-bold text-tiktok-cyan">${v.likes}</p><p class="text-[8px] text-outline">likes</p></div></div>
+    </a>`).join('');
+  m.style.removeProperty('display');
+  document.body.style.overflow = 'hidden';
+}
+
 function openShareCard(title, body, stat) {
   document.getElementById('share-title').textContent = title;
   document.getElementById('share-body').textContent = body;
@@ -2574,8 +1612,8 @@ window._liveKpiValues = {};
     const pct = Math.min(100, Math.round(ml / 150000 * 100));
     const mancanti = Math.max(0, 150000 - ml);
     set('goal-reach-pct', pct + '%');
-    const bar = document.getElementById('goal-reach-bar');
-    if (bar) bar.style.width = pct + '%';
+    const arc = document.getElementById('goal-reach-arc');
+    if (arc) arc.setAttribute('stroke-dasharray', Math.min(pct,100) + ' 100');
     set('goal-reach-label', loc(mancanti) + ' mancanti · sei a ' + mlFmt);
     window._liveKpiValues['Monthly Listeners'] = { currentVal: mlFmt, last: ml };
   }
@@ -2890,9 +1928,6 @@ document.addEventListener('DOMContentLoaded', () => {
     { _source:'instagram', activity_text:'Artist profile ha raggiunto 250.000 views', activity_type:'milestone', activity_date:'2026-03-13', activity_url:'#', activity_avatar:'https://i.scdn.co/image/ab67616d00001e028ed7959c2360cc3fcfccd9c6' },
   ];
 });
-
-// Override fetch to use static data if CORS fails
-const _origFetchAct = window.fetchAllActivities;
 
 </script>
 </body></html>

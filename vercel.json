@@ -1,15 +1,10 @@
 {
   "rewrites": [
-    { "source": "/api/artist_info",        "destination": "/api/proxy/artist_info" },
     { "source": "/api/songstats",          "destination": "/api/proxy/songstats" },
     { "source": "/api/historic_stats",     "destination": "/api/proxy/historic_stats" },
+    { "source": "/api/activities",         "destination": "/api/proxy/activities" },
     { "source": "/api/playlists/current",  "destination": "/api/proxy/playlists/current" },
     { "source": "/api/playlists/all",      "destination": "/api/proxy/playlists/all" },
-    { "source": "/api/activities",         "destination": "/api/proxy/activities" },
-    { "source": "/api/audience",           "destination": "/api/proxy/audience" },
-    { "source": "/api/top_tracks",         "destination": "/api/proxy/top_tracks" },
-    { "source": "/api/catalog",            "destination": "/api/proxy/catalog" },
-    { "source": "/api/track_stats",        "destination": "/api/proxy/track_stats" },
     { "source": "/(.*)",                   "destination": "/public/$1" }
   ]
 }

@@ -10,73 +10,41 @@
 tailwind.config = {
   theme: {
     extend: {
-      fontFamily: { sans: ['Inter','sans-serif'] },
+      fontFamily: { sans: ['Inter', 'sans-serif'] },
       colors: {
-        // Soundvertise palette: viola + neutri. Niente rosso/verde.
-        bg:        '#0A0716',
-        surface:   '#15102A',
-        elevated:  '#1E1740',
-        border:    '#2A2150',
-        muted:     '#9690B8',
-        text:      '#ECE9F7',
-        accent:    '#9D7BFF',
-        'accent-2':'#C8B5FF',
-        'accent-soft':'#5B3FBF',
+        bg:       'rgba(10, 7, 22, 0.55)',
+        surface:  'rgba(30, 23, 64, 0.45)',
+        elevated: 'rgba(30, 23, 64, 0.65)',
+        muted:    '#B4AED4',
+        text:     '#FFFFFF',
+        accent:   '#9D7BFF',
+        accent2:  '#C8B5FF',
+      },
+      backgroundImage: {
+        sfondo: "url('sfondo.webp')",
       },
     },
   },
 };
 </script>
-<style type="text/tailwindcss">
-  @layer base {
-    html, body { @apply text-text font-sans antialiased; }
-    body {
-      background: linear-gradient(180deg, rgba(10,7,22,0.85) 0%, rgba(10,7,22,0.95) 100%), url('sfondo.webp') center/cover fixed no-repeat;
-      min-height: 100vh;
-    }
-    .material-symbols-outlined { font-variation-settings: 'opsz' 20; vertical-align: middle; }
-  }
-  @layer components {
-    .glass    { @apply bg-surface/40 backdrop-blur-xl border border-white/10; }
-    .card     { @apply glass rounded-2xl p-5 shadow-xl shadow-black/30; }
-    .row      { @apply flex items-center gap-3 py-2.5 px-2 rounded-lg; }
-    .row-btn  { @apply cursor-pointer hover:bg-white/5 transition-colors; }
-    .pill     { @apply inline-flex items-center gap-1 text-xs font-semibold text-muted bg-white/5 border border-white/10 rounded-full px-2.5 py-1; }
-    .tab      { @apply px-4 py-2 text-sm font-semibold text-muted border-b-2 border-transparent cursor-pointer; }
-    .tab-on   { @apply text-text border-accent; }
-    .metric   { @apply text-left glass rounded-xl p-4 w-full; }
-    .metric-clickable { @apply hover:border-accent/60 cursor-pointer; }
-    .modal    { @apply fixed inset-0 z-50 flex items-center justify-center p-4; }
-    .modal[hidden] { display: none; }
-    .modal-bg { @apply absolute inset-0 bg-black/70 backdrop-blur-sm; }
-    .modal-box{ @apply relative w-full max-w-xl bg-surface/90 backdrop-blur-xl border border-white/10 rounded-2xl flex flex-col overflow-hidden max-h-[85vh] shadow-2xl; }
-    .input    { @apply bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-text placeholder-muted focus:outline-none focus:border-accent w-full; }
-    .btn      { @apply bg-accent text-bg font-semibold rounded-lg px-4 py-2 text-sm hover:opacity-90; }
-    .btn-ghost{ @apply bg-white/5 border border-white/10 text-text font-medium rounded-lg px-3 py-2 text-sm hover:border-accent/60; }
-    .section-title { @apply text-sm font-bold uppercase tracking-wider text-muted mb-3; }
-    .stat-label  { @apply text-xs text-muted font-medium; }
-    .stat-value  { @apply text-2xl font-bold text-text mt-1 tabular-nums; }
-    .delta-up    { @apply text-accent-2 text-xs font-semibold; }
-    .delta-down  { @apply text-muted text-xs font-semibold; }
-  }
-</style>
 </head>
-<body class="min-h-screen">
+<body class="font-sans antialiased min-h-screen bg-sfondo bg-cover bg-center bg-fixed bg-no-repeat text-text">
 
 <!-- ──────────────── HEADER ──────────────── -->
-<header class="border-b border-white/10 bg-surface/50 backdrop-blur-xl sticky top-0 z-30">
+<header class="border-b border-white/10 bg-bg backdrop-blur-xl sticky top-0 z-30">
   <div class="max-w-5xl mx-auto px-5 py-4 flex items-center gap-4 flex-wrap">
     <div class="flex items-center gap-2 mr-auto">
-      <span class="material-symbols-outlined text-accent">graphic_eq</span>
+      <span class="material-symbols-outlined text-accent align-middle">graphic_eq</span>
       <span class="font-extrabold text-base">Soundvertise</span>
     </div>
     <form id="artist-form" class="flex items-center gap-2 w-full sm:w-auto">
-      <input id="artist-input" class="input sm:w-72" placeholder="Spotify Artist ID o URL" autocomplete="off"/>
-      <button class="btn" type="submit">Carica</button>
+      <input id="artist-input"
+             class="bg-white/10 border border-white/10 rounded-lg px-3 py-2 text-sm text-text placeholder-muted focus:outline-none focus:border-accent w-full sm:w-72"
+             placeholder="Spotify Artist ID o URL" autocomplete="off"/>
+      <button class="bg-accent text-bg font-semibold rounded-lg px-4 py-2 text-sm hover:opacity-90" type="submit">Carica</button>
     </form>
   </div>
 
-  <!-- Artist banner -->
   <div id="artist-banner" hidden class="max-w-5xl mx-auto px-5 pb-4 flex items-center gap-4">
     <img id="artist-avatar" class="w-14 h-14 rounded-full border border-white/10" alt=""/>
     <div class="min-w-0">
@@ -89,48 +57,40 @@ tailwind.config = {
 <!-- ──────────────── MAIN ──────────────── -->
 <main class="max-w-5xl mx-auto px-5 py-6">
 
-  <!-- Empty state -->
-  <section id="empty-state" class="card text-center py-16">
+  <section id="empty-state" class="bg-surface backdrop-blur-xl border border-white/10 rounded-2xl p-5 text-center py-16 shadow-xl shadow-black/30">
     <span class="material-symbols-outlined text-5xl text-muted mb-3 block">search</span>
     <h2 class="text-lg font-bold mb-2">Inserisci uno Spotify Artist ID</h2>
     <p class="text-sm text-muted max-w-md mx-auto">
-      Incolla un ID artista Spotify (es. <code class="text-accent">0brsGLNpCQEHXNblDDKWK0</code>)
-      o un URL di profilo Spotify. I dati di tutte le piattaforme verranno caricati automaticamente.
+      Incolla un ID artista Spotify o un URL di profilo Spotify per caricare i dati delle piattaforme.
     </p>
   </section>
 
-  <!-- Error state -->
-  <section id="error-state" hidden class="card text-center py-10 border-accent/40">
+  <section id="error-state" hidden class="bg-surface backdrop-blur-xl border border-accent/40 rounded-2xl p-5 text-center py-10">
     <span class="material-symbols-outlined text-3xl text-accent mb-2 block">error</span>
     <p id="error-msg" class="text-sm text-muted">—</p>
   </section>
 
-  <!-- Dashboard -->
   <section id="dashboard" hidden>
-
-    <!-- Tabs -->
     <nav class="flex items-center gap-1 border-b border-white/10 mb-6 overflow-x-auto">
-      <button data-tab="spotify"   class="tab tab-on">Spotify</button>
-      <button data-tab="tiktok"    class="tab">TikTok</button>
-      <button data-tab="instagram" class="tab">Instagram</button>
+      <button data-tab="spotify"   class="px-4 py-2 text-sm font-semibold border-b-2 cursor-pointer text-text border-accent">Spotify</button>
+      <button data-tab="tiktok"    class="px-4 py-2 text-sm font-semibold border-b-2 cursor-pointer text-muted border-transparent">TikTok</button>
+      <button data-tab="instagram" class="px-4 py-2 text-sm font-semibold border-b-2 cursor-pointer text-muted border-transparent">Instagram</button>
     </nav>
 
-    <!-- Each tab is rendered with the same template (see #tab-template) -->
     <div id="tab-spotify"   data-platform="spotify"></div>
     <div id="tab-tiktok"    data-platform="tiktok"    hidden></div>
     <div id="tab-instagram" data-platform="instagram" hidden></div>
-
   </section>
 </main>
 
 <!-- ──────────────── LIST MODAL ──────────────── -->
-<div id="list-modal" class="modal" hidden>
-  <div class="modal-bg" data-close></div>
-  <div class="modal-box">
+<div id="list-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4" hidden>
+  <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" data-close></div>
+  <div class="relative w-full max-w-xl bg-elevated backdrop-blur-xl border border-white/10 rounded-2xl flex flex-col overflow-hidden max-h-[85vh] shadow-2xl">
     <div class="flex items-center gap-3 p-4 border-b border-white/10">
       <h3 id="list-title" class="font-bold text-base flex-1 truncate">—</h3>
-      <span id="list-count" class="pill">0</span>
-      <button class="btn-ghost !p-2" data-close aria-label="Chiudi">
+      <span id="list-count" class="inline-flex items-center text-xs font-semibold text-muted bg-white/10 border border-white/10 rounded-full px-2.5 py-1">0</span>
+      <button class="bg-white/10 border border-white/10 rounded-lg p-2 hover:border-accent/60" data-close aria-label="Chiudi">
         <span class="material-symbols-outlined">close</span>
       </button>
     </div>
@@ -139,12 +99,12 @@ tailwind.config = {
 </div>
 
 <!-- ──────────────── CHART MODAL ──────────────── -->
-<div id="chart-modal" class="modal" hidden>
-  <div class="modal-bg" data-close></div>
-  <div class="modal-box max-w-2xl">
+<div id="chart-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4" hidden>
+  <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" data-close></div>
+  <div class="relative w-full max-w-2xl bg-elevated backdrop-blur-xl border border-white/10 rounded-2xl flex flex-col overflow-hidden shadow-2xl">
     <div class="flex items-center gap-3 p-4 border-b border-white/10">
       <h3 id="chart-title" class="font-bold text-base flex-1 truncate">—</h3>
-      <button class="btn-ghost !p-2" data-close aria-label="Chiudi">
+      <button class="bg-white/10 border border-white/10 rounded-lg p-2 hover:border-accent/60" data-close aria-label="Chiudi">
         <span class="material-symbols-outlined">close</span>
       </button>
     </div>
@@ -175,53 +135,43 @@ tailwind.config = {
 <!-- ──────────────── TAB TEMPLATE ──────────────── -->
 <template id="tab-template">
   <div class="space-y-6">
-
-    <!-- Hero metrics (3 cards) — uniform across platforms -->
     <div class="grid grid-cols-3 gap-3" data-slot="metrics"></div>
 
-    <!-- Latest release (Spotify only): track-specific stats -->
-    <div class="card" data-slot="release" hidden>
-      <p class="section-title">Last Release</p>
+    <div class="bg-surface backdrop-blur-xl border border-white/10 rounded-2xl p-5 shadow-xl shadow-black/30" data-slot="release" hidden>
+      <p class="text-sm font-bold uppercase tracking-wider text-muted mb-3">Last Release</p>
       <div class="flex items-center gap-4 mb-4">
         <img data-slot="release-art" class="w-20 h-20 rounded-xl border border-white/10 shadow-lg" alt=""/>
         <div class="min-w-0 flex-1">
           <p data-slot="release-title" class="text-lg font-extrabold truncate">—</p>
           <p data-slot="release-date"  class="text-xs text-muted mt-1">—</p>
-          <span data-slot="release-pill" class="pill mt-2"><span class="material-symbols-outlined text-accent !text-sm">radio_button_checked</span>in rotazione</span>
+          <span class="inline-flex items-center gap-1 mt-2 text-xs font-semibold text-muted bg-white/10 border border-white/10 rounded-full px-2.5 py-1">
+            <span class="material-symbols-outlined text-accent text-sm">radio_button_checked</span>in rotazione
+          </span>
         </div>
       </div>
       <div data-slot="release-metrics" class="grid grid-cols-3 gap-3"></div>
     </div>
 
-    <!-- Recent activity — opens list modal -->
-    <div class="card">
+    <div class="bg-surface backdrop-blur-xl border border-white/10 rounded-2xl p-5 shadow-xl shadow-black/30">
       <div class="flex items-center justify-between mb-3">
-        <p class="section-title !mb-0">Recent Milestones</p>
-        <button class="text-xs text-accent font-semibold hover:text-accent-2" data-slot="activity-more">Vedi tutto</button>
+        <p class="text-sm font-bold uppercase tracking-wider text-muted">Recent Milestones</p>
+        <button class="text-xs text-accent font-semibold hover:text-accent2" data-slot="activity-more">Vedi tutto</button>
       </div>
       <ul data-slot="activity-list" class="divide-y divide-white/5"></ul>
     </div>
-
-    <!-- Audience (compact) -->
-    <div class="card">
-      <p class="section-title">Audience</p>
-      <ul data-slot="audience-list" class="grid grid-cols-1 sm:grid-cols-2 gap-x-6"></ul>
-    </div>
-
   </div>
 </template>
 
-<!-- ──────────────── COMPONENTS (small templates) ──────────────── -->
 <template id="metric-template">
-  <button class="metric">
-    <p class="stat-label" data-slot="label">—</p>
-    <p class="stat-value" data-slot="value">—</p>
+  <button class="text-left bg-surface backdrop-blur-xl border border-white/10 rounded-xl p-4 w-full">
+    <p class="text-xs text-muted font-medium" data-slot="label">—</p>
+    <p class="text-2xl font-bold text-text mt-1 tabular-nums" data-slot="value">—</p>
     <p class="text-xs mt-1" data-slot="delta"></p>
   </button>
 </template>
 
 <template id="row-template">
-  <li class="row">
+  <li class="flex items-center gap-3 py-2.5 px-2 rounded-lg">
     <img data-slot="img" class="w-9 h-9 rounded-lg border border-white/10 flex-shrink-0 object-cover" alt=""/>
     <div class="min-w-0 flex-1">
       <p data-slot="label" class="text-sm font-semibold truncate">—</p>
@@ -252,13 +202,8 @@ const fmtDelta = (cur, prev) => {
 };
 const fmtDate = iso => {
   if (!iso) return '';
-  const d = new Date(iso);
-  return d.toLocaleDateString('it-IT', { day:'numeric', month:'short', year:'numeric' });
+  return new Date(iso).toLocaleDateString('it-IT', { day:'numeric', month:'short', year:'numeric' });
 };
-const flag = cc => cc
-  ? `<img src="https://flagcdn.com/w20/${cc.toLowerCase()}.png" class="w-5 h-3.5 rounded-sm object-cover border border-border" alt="${cc}"/>`
-  : '';
-
 const parseSpotifyId = s => {
   s = (s || '').trim();
   const m = s.match(/open\.spotify\.com\/(?:intl-[a-z]+\/)?artist\/([A-Za-z0-9]+)/);
@@ -267,15 +212,19 @@ const parseSpotifyId = s => {
   return null;
 };
 
-// ───────── API wrapper ─────────
-const api = async (route, params = {}) => {
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const api = async (route, params = {}, attempt = 0) => {
   const qs = new URLSearchParams(params).toString();
   const r = await fetch(`/api/${route}${qs ? '?' + qs : ''}`);
+  if (r.status === 429 && attempt < 3) {
+    await sleep(1000 * (attempt + 1));
+    return api(route, params, attempt + 1);
+  }
   if (!r.ok) throw new Error(`${route}: HTTP ${r.status}`);
   return r.json();
 };
 
-// ───────── render: metric card ─────────
+// ───────── component: metric card ─────────
 function renderMetric(slot, { label, value, delta, onClick, tooltip }) {
   const node = $('#metric-template').content.firstElementChild.cloneNode(true);
   node.querySelector('[data-slot=label]').textContent = label;
@@ -283,11 +232,11 @@ function renderMetric(slot, { label, value, delta, onClick, tooltip }) {
   const deltaEl = node.querySelector('[data-slot=delta]');
   if (delta) {
     deltaEl.textContent = delta;
-    deltaEl.className = 'text-xs mt-1 font-semibold ' + (delta.startsWith('-') ? 'text-muted' : 'text-accent-2');
+    deltaEl.className = 'text-xs mt-1 font-semibold ' + (delta.startsWith('-') ? 'text-muted' : 'text-accent2');
   }
   if (tooltip) node.title = tooltip;
   if (onClick) {
-    node.classList.add('metric-clickable');
+    node.classList.add('hover:border-accent/60', 'cursor-pointer');
     node.addEventListener('click', onClick);
   } else {
     node.disabled = true;
@@ -296,17 +245,17 @@ function renderMetric(slot, { label, value, delta, onClick, tooltip }) {
   slot.appendChild(node);
 }
 
-// ───────── render: row (image + label + value) ─────────
+// ───────── component: row ─────────
 function renderRow(slot, { img, label, sub, value, onClick, href }) {
   const tpl = $('#row-template').content.firstElementChild.cloneNode(true);
   const imgEl = tpl.querySelector('[data-slot=img]');
   if (img) imgEl.src = img;
   else imgEl.remove();
   tpl.querySelector('[data-slot=label]').textContent = label || '—';
-  tpl.querySelector('[data-slot=sub]').innerHTML  = sub  || '';
+  tpl.querySelector('[data-slot=sub]').textContent   = sub  || '';
   tpl.querySelector('[data-slot=value]').textContent = value || '';
   if (onClick || href) {
-    tpl.classList.add('row-btn');
+    tpl.classList.add('cursor-pointer', 'hover:bg-white/5', 'transition-colors');
     if (href) tpl.addEventListener('click', () => window.open(href, '_blank', 'noopener'));
     if (onClick) tpl.addEventListener('click', onClick);
   }
@@ -342,16 +291,15 @@ function openChart(title, points, stats) {
   $('#chart-area').setAttribute('d', area);
   chartState = { points, coords, W, H };
   $('#chart-stats').innerHTML = stats.map(s => `
-    <div class="glass rounded-xl p-3">
-      <p class="stat-label">${s.label}</p>
-      <p class="stat-value !text-lg">${s.value}</p>
+    <div class="bg-surface backdrop-blur-xl border border-white/10 rounded-xl p-3">
+      <p class="text-xs text-muted font-medium">${s.label}</p>
+      <p class="text-lg font-bold text-text mt-1 tabular-nums">${s.value}</p>
     </div>`).join('');
   $('#chart-modal').hidden = false;
 }
 
-// Chart hover interaction (set up once)
 (() => {
-  const svg = $('#chart-svg'), tip = $('#chart-tip'), wrap = $('#chart-wrap');
+  const svg = $('#chart-svg'), tip = $('#chart-tip');
   const cursor = $('#chart-cursor'), dot = $('#chart-dot');
   const hide = () => { tip.hidden = true; cursor.setAttribute('x1', -10); cursor.setAttribute('x2', -10); dot.setAttribute('cx', -10); };
   svg.addEventListener('mouseleave', hide);
@@ -359,59 +307,60 @@ function openChart(title, points, stats) {
     if (!chartState) return;
     const { points, coords, W, H } = chartState;
     const rect = svg.getBoundingClientRect();
-    const xRatio = (e.clientX - rect.left) / rect.width;
-    const svgX = xRatio * W;
+    const svgX = ((e.clientX - rect.left) / rect.width) * W;
     let nearest = 0, best = Infinity;
     coords.forEach(([cx], i) => { const d = Math.abs(cx - svgX); if (d < best) { best = d; nearest = i; } });
     const [cx, cy] = coords[nearest];
     cursor.setAttribute('x1', cx); cursor.setAttribute('x2', cx);
     dot.setAttribute('cx', cx); dot.setAttribute('cy', cy);
     tip.hidden = false;
-    const px = (cx / W) * rect.width;
-    const py = (cy / H) * rect.height;
-    tip.style.left = px + 'px';
-    tip.style.top  = (py - 8) + 'px';
+    tip.style.left = ((cx / W) * rect.width) + 'px';
+    tip.style.top  = (((cy / H) * rect.height) - 8) + 'px';
     $('#chart-tip-date').textContent = fmtDate(points[nearest].date);
     $('#chart-tip-val').textContent  = fmt(points[nearest].value);
   });
 })();
 
-// close handlers (delegation, once)
+// close handlers
 document.addEventListener('click', e => {
-  if (e.target.closest('[data-close]')) {
-    e.target.closest('.modal').hidden = true;
-  }
+  if (e.target.closest('[data-close]')) e.target.closest('.fixed').hidden = true;
 });
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') $$('.modal').forEach(m => m.hidden = true);
+  if (e.key === 'Escape') $$('#list-modal, #chart-modal').forEach(m => m.hidden = true);
 });
 
 // ───────── tab switching ─────────
 $$('[data-tab]').forEach(btn => {
   btn.addEventListener('click', () => {
     const id = btn.dataset.tab;
-    $$('[data-tab]').forEach(b => b.classList.toggle('tab-on', b === btn));
+    $$('[data-tab]').forEach(b => {
+      const on = b === btn;
+      b.classList.toggle('text-text', on);
+      b.classList.toggle('border-accent', on);
+      b.classList.toggle('text-muted', !on);
+      b.classList.toggle('border-transparent', !on);
+    });
     $$('#tab-spotify, #tab-tiktok, #tab-instagram').forEach(p => p.hidden = (p.id !== 'tab-' + id));
   });
 });
 
-// ───────── platform config (uniform schema) ─────────
+// ───────── platform config ─────────
 const PLATFORMS = {
   spotify: {
     label: 'Spotify',
     metrics: [
-      { key: 'followers_total',      label: 'Followers',         historic: 'followers_total'      },
-      { key: 'monthly_listeners_current', label: 'Monthly listeners', historic: 'monthly_listeners_current', tooltip: 'Ascoltatori mensili (ultimi 28gg)' },
-      { key: 'streams_total',        label: 'Streams totali',    historic: 'streams_total'        },
+      { key: 'followers_total',           label: 'Followers',         historic: 'followers_total' },
+      { key: 'monthly_listeners_current', label: 'Monthly listeners', historic: 'monthly_listeners_current', tooltip: 'Ascoltatori mensili (ultimi 28 giorni)' },
+      { key: 'streams_total',             label: 'Streams totali',    historic: 'streams_total' },
     ],
     showRelease: true,
   },
   tiktok: {
     label: 'TikTok',
     metrics: [
-      { key: 'followers_total', label: 'Followers',     historic: 'followers_total' },
-      { key: 'likes_total',     label: 'Likes totali',  historic: 'likes_total'     },
-      { key: 'videos_total',    label: 'Video con audio', historic: 'videos_total'  },
+      { key: 'followers_total', label: 'Followers',       historic: 'followers_total' },
+      { key: 'likes_total',     label: 'Likes totali',    historic: 'likes_total' },
+      { key: 'videos_total',    label: 'Video con audio', historic: 'videos_total' },
     ],
     showRelease: false,
   },
@@ -420,22 +369,15 @@ const PLATFORMS = {
     metrics: [
       { key: 'followers_total', label: 'Followers', historic: 'followers_total' },
       { key: 'following_total', label: 'Following', historic: 'following_total' },
-      { key: 'posts_total',     label: 'Post',      historic: 'posts_total'     },
+      { key: 'posts_total',     label: 'Post',      historic: 'posts_total' },
     ],
     showRelease: false,
   },
 };
 
 // ───────── state ─────────
-const state = {
-  spotifyId: null,
-  artistInfo: null,
-  stats: {},       // { spotify: {...}, tiktok: {...}, instagram: {...} }
-  historic: {},    // historic_stats payload, indexed by source
-  activities: [],  // raw activities
-  audience: {},    // audience payload by source
-  topTrack: null,
-};
+const state = { spotifyId: null, artistInfo: null, stats: {}, historic: {}, activities: [], topTrack: null };
+const indexBy = (arr, key) => Object.fromEntries(arr.map(x => [x[key], x.data || x]));
 
 // ───────── main loader ─────────
 async function loadArtist(spotifyId) {
@@ -445,55 +387,41 @@ async function loadArtist(spotifyId) {
   $('#empty-state').hidden = true;
   $('#error-state').hidden = true;
   $('#dashboard').hidden   = false;
-  // Reset UI to skeletons
   Object.keys(PLATFORMS).forEach(p => mountTab(p, true));
 
   const params = { spotify_artist_id: spotifyId };
-
   try {
-    // 1. Artist info (header) ─ blocking
     const info = (await api('artist_info', params)).artist_info || {};
     state.artistInfo = info;
     renderArtistBanner(info);
 
-    // 2. Parallel fetches
-    const [stats, historic, activities, audience, catalog] = await Promise.all([
+    const [stats, historic, activities, catalog] = await Promise.all([
       api('songstats',      params).catch(() => ({ stats: [] })),
       api('historic_stats', params).catch(() => ({ stats: [] })),
       api('activities',     { ...params, limit: 100 }).catch(() => ({ activities: [] })),
-      api('audience',       params).catch(() => ({ audience: [] })),
       api('catalog',        params).catch(() => ({ tracks: [] })),
     ]);
 
     state.stats      = indexBy(stats.stats || [], 'source');
     state.historic   = indexBy(historic.stats || [], 'source');
     state.activities = activities.activities || activities.data || [];
-    state.audience   = indexBy(audience.audience || [], 'source');
 
-    // Pick most recent track from catalog and fetch its stats
     const tracks = (catalog.tracks || catalog.data || []).slice();
     tracks.sort((a, b) => new Date(b.released || b.release_date || 0) - new Date(a.released || a.release_date || 0));
     const latest = tracks[0];
     if (latest && latest.isrc) {
       try {
-        const ts = await api('track_stats', { isrc: latest.isrc, songstats_artist_id: state.artistInfo.songstats_artist_id, with_playlists: 'true' });
-        const bySource = indexBy(ts.stats || [], 'source');
-        state.topTrack = { ...latest, stats: bySource };
+        const ts = await api('track_stats', { isrc: latest.isrc, songstats_artist_id: info.songstats_artist_id });
+        state.topTrack = { ...latest, stats: indexBy(ts.stats || [], 'source') };
       } catch { state.topTrack = latest; }
     } else { state.topTrack = null; }
 
     Object.keys(PLATFORMS).forEach(p => mountTab(p, false));
   } catch (e) {
-    showError(e.message || 'Errore caricamento dati.');
+    $('#dashboard').hidden = true;
+    $('#error-state').hidden = false;
+    $('#error-msg').textContent = e.message || 'Errore caricamento dati.';
   }
-}
-
-const indexBy = (arr, key) => Object.fromEntries(arr.map(x => [x[key], x.data || x]));
-
-function showError(msg) {
-  $('#dashboard').hidden    = true;
-  $('#error-state').hidden  = false;
-  $('#error-msg').textContent = msg;
 }
 
 function renderArtistBanner(info) {
@@ -504,17 +432,15 @@ function renderArtistBanner(info) {
   $('#artist-meta').textContent = [info.country, genres].filter(Boolean).join(' · ');
 }
 
-// ───────── mount one tab (reuses template) ─────────
+// ───────── mount one tab ─────────
 function mountTab(platform, loading) {
   const cfg = PLATFORMS[platform];
   const root = document.getElementById('tab-' + platform);
   root.innerHTML = '';
   const tpl = $('#tab-template').content.firstElementChild.cloneNode(true);
   root.appendChild(tpl);
-
   const slot = name => tpl.querySelector(`[data-slot=${name}]`);
 
-  // --- 1. Metrics
   const stats = state.stats[platform] || {};
   const hist  = (state.historic[platform] || {}).history || [];
   cfg.metrics.forEach(m => {
@@ -526,99 +452,52 @@ function mountTab(platform, loading) {
       value: loading ? '…' : fmt(cur),
       delta: !loading ? fmtDelta(cur, prev) : '',
       tooltip: m.tooltip,
-      onClick: series.length > 1 ? () => openChart(`${cfg.label} · ${m.label}`,
-        series,
-        [
-          { label: 'Attuale',  value: fmt(cur) },
-          { label: '7gg fa',   value: fmt(prev) },
-          { label: 'Δ 7gg',    value: fmtDelta(cur, prev) || '—' },
-        ]) : null,
+      onClick: series.length > 1 ? () => openChart(`${cfg.label} · ${m.label}`, series, [
+        { label: 'Attuale', value: fmt(cur) },
+        { label: '7gg fa',  value: fmt(prev) },
+        { label: 'Δ 7gg',   value: fmtDelta(cur, prev) || '—' },
+      ]) : null,
     });
   });
 
-  // --- 2. Latest release (Spotify only) — track-specific stats
   if (cfg.showRelease) {
     const t = state.topTrack;
     if (t) {
       slot('release').hidden = false;
-      slot('release-art').src   = t.avatar || t.image || '';
+      slot('release-art').src = t.avatar || t.image || '';
       slot('release-title').textContent = t.title || t.name || '—';
-      slot('release-date').textContent  = [t.artist_name || state.artistInfo?.name, fmtDate(t.released || t.release_date)].filter(Boolean).join(' · ');
-      const sp = (t.stats?.spotify) || {};
-      const tk = (t.stats?.tiktok)  || {};
-      const sh = (t.stats?.shazam)  || {};
-      const metricsSlot = slot('release-metrics');
-      metricsSlot.innerHTML = '';
-      const trackMetrics = [
-        { label: 'Popularity',   value: sp.popularity_current != null ? sp.popularity_current + '/100' : '—' },
-        { label: 'Streams',      value: fmt(sp.streams_total) },
-        { label: 'Playlist Att.',value: fmt(sp.playlists_current), onClick: t.isrc ? () => openTrackPlaylists(t) : null },
+      slot('release-date').textContent  = [state.artistInfo?.name, fmtDate(t.released || t.release_date)].filter(Boolean).join(' · ');
+      const sp = t.stats?.spotify || {}, tk = t.stats?.tiktok || {}, sh = t.stats?.shazam || {};
+      const ms = slot('release-metrics');
+      [
+        { label: 'Popularity',     value: sp.popularity_current != null ? sp.popularity_current + '/100' : '—' },
+        { label: 'Streams',        value: fmt(sp.streams_total) },
+        { label: 'Playlist Att.',  value: fmt(sp.playlists_current), onClick: t.isrc ? () => openTrackPlaylists(t) : null },
         { label: 'Playlist Reach', value: fmt(sp.playlist_reach_current) },
-        { label: 'TikTok Video', value: fmt(tk.videos_total) },
-        { label: 'Shazams',      value: fmt(sh.shazams_total) },
-      ];
-      trackMetrics.forEach(m => renderMetric(metricsSlot, m));
+        { label: 'TikTok Video',   value: fmt(tk.videos_total) },
+        { label: 'Shazams',        value: fmt(sh.shazams_total) },
+      ].forEach(m => renderMetric(ms, m));
     }
   }
 
-  // --- 3. Recent activity (filter by source if available)
-  const acts = (state.activities || []).filter(a =>
-    !a.source || a.source === platform || (platform === 'instagram' && a.source === 'instagram')
-  );
+  const acts = (state.activities || []).filter(a => !a.source || a.source === platform);
   const top5 = acts.slice(0, 5);
   if (loading || !top5.length) {
     slot('activity-list').innerHTML = `<li class="text-sm text-muted py-3">${loading ? 'Caricamento…' : 'Nessuna attività recente.'}</li>`;
   } else {
     top5.forEach(a => renderRow(slot('activity-list'), activityRow(a)));
   }
-  slot('activity-more').addEventListener('click', () => openList(
-    `${cfg.label} · Attività recenti`,
-    acts.slice(0, 100).map(activityRow),
-  ));
-
-  // --- 4. Audience (compact, top 6)
-  const aud = state.audience[platform] || {};
-  const top = audienceItems(aud).slice(0, 6);
-  if (!top.length) {
-    slot('audience-list').innerHTML = `<li class="text-sm text-muted py-3">Dati audience non disponibili.</li>`;
-  } else {
-    top.forEach(({ label, sub, value, cc }) => renderRow(slot('audience-list'), {
-      img: null, label: (cc ? `${flag(cc)} ` : '') + label, sub, value,
-    }));
-  }
+  slot('activity-more').addEventListener('click', () =>
+    openList(`${cfg.label} · Attività recenti`, acts.slice(0, 100).map(activityRow)));
 }
 
-// activity → row props
-function activityRow(a) {
-  return {
-    img:   a.activity_avatar || a.avatar || null,
-    label: a.activity_text || a.text || a.title || 'Attività',
-    sub:   fmtDate(a.activity_date || a.date),
-    value: a.followers ? fmt(a.followers) : '',
-    href:  a.activity_url || a.url || null,
-  };
-}
-
-// audience payload → uniform items
-function audienceItems(aud) {
-  if (!aud) return [];
-  // Spotify: top_cities; TikTok/Instagram: top_countries
-  if (aud.top_cities) {
-    return aud.top_cities.map(c => ({
-      label: c.city, cc: c.country_code,
-      sub: c.country_name || c.country_code,
-      value: fmt(c.listeners || c.followers || c.value),
-    }));
-  }
-  if (aud.top_countries) {
-    return aud.top_countries.map(c => ({
-      label: c.country_name || c.country, cc: c.country_code || c.country,
-      sub: '',
-      value: fmt(c.listeners || c.followers || c.value),
-    }));
-  }
-  return [];
-}
+const activityRow = a => ({
+  img:   a.activity_avatar || a.avatar || null,
+  label: a.activity_text || a.text || a.title || 'Attività',
+  sub:   fmtDate(a.activity_date || a.date),
+  value: a.followers ? fmt(a.followers) : '',
+  href:  a.activity_url || a.url || null,
+});
 
 // ───────── track playlists (reuses list modal) ─────────
 async function openTrackPlaylists(track) {
@@ -644,18 +523,15 @@ async function openTrackPlaylists(track) {
 }
 
 // ───────── boot ─────────
+window.openTrackPlaylists = openTrackPlaylists;
 $('#artist-form').addEventListener('submit', e => {
   e.preventDefault();
   const id = parseSpotifyId($('#artist-input').value);
   if (!id) { alert('ID artista Spotify non valido.'); return; }
   loadArtist(id);
 });
-
 const saved = localStorage.getItem('spotifyId');
-if (saved) {
-  $('#artist-input').value = saved;
-  loadArtist(saved);
-}
+if (saved) { $('#artist-input').value = saved; loadArtist(saved); }
 
 </script>
 </body>

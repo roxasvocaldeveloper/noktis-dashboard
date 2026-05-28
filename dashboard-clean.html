@@ -1,0 +1,1927 @@
+<!DOCTYPE html>
+<html lang="it" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noktis · Soundvertise Creator Dashboard</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Schoolbell&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        fontFamily: {
+          sans:    ['Montserrat', 'system-ui', 'sans-serif'],
+          display: ['Schoolbell', 'cursive'],
+        },
+        colors: {
+          bg:         '#000000',
+          surface:    '#0F0A1A',
+          surface2:   '#1A0F2E',
+          card:       '#8b4cb7',
+          cardSoft:   '#6d3a91',
+          border:     'rgba(255,255,255,0.12)',
+          muted:      'rgba(255,255,255,0.72)',
+          primary:    '#9747FF',
+          primaryDark:'#7C3AED',
+          blue:       '#116dff',
+          blueDark:   '#0053d8',
+          positive:   '#5FFF7D',
+        },
+        backgroundImage: {
+          'app': "linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.35) 100%), url('/sfondo.webp')",
+        },
+      },
+    },
+  };
+</script>
+<style>
+.goal-done {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0.5rem;
+  background: linear-gradient(to right, #116dff, #0053d8);
+  padding: 0.5rem 0.75rem;
+  box-shadow: 0 4px 14px rgba(17,109,255,0.45), inset 0 1px 0 rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.goal-done-text {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+}
+</style>
+</head>
+
+<body class="min-h-screen bg-bg bg-app bg-cover bg-fixed bg-center text-white font-sans antialiased">
+
+<!-- ═══ SVG PLATFORM LOGO SPRITE ═══ -->
+<svg class="hidden" aria-hidden="true">
+  <symbol id="logo-spotify"   viewBox="0 0 24 24"><path fill="white" d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></symbol>
+  <symbol id="logo-tiktok"    viewBox="0 0 24 24"><path fill="white" d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.27 8.27 0 004.84 1.56V6.8a4.85 4.85 0 01-1.07-.11z"/></symbol>
+  <symbol id="logo-instagram" viewBox="0 0 24 24"><path fill="white" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12s.014 3.668.072 4.948c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.668-.014 4.948-.072c4.354-.2 6.782-2.618 6.979-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></symbol>
+  <symbol id="logo-youtube"   viewBox="0 0 24 24"><path fill="white" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></symbol>
+  <symbol id="logo-shazam"    viewBox="0 0 24 24"><path fill="white" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.4 17.4c-.3.3-.7.4-1.1.4-.4 0-.7-.1-1-.3-2.1-1.5-4-2-5.7-1.4-.5.2-1 0-1.2-.5s0-1 .5-1.2c2.2-.8 4.6-.2 7.1 1.5.4.3.5.9.4 1.5zm1.3-2.5c-.4.4-1 .4-1.4.1-2.6-2-6-2.5-8.9-1.4-.5.2-1.1-.1-1.3-.6s.1-1.1.6-1.3c3.4-1.3 7.4-.7 10.5 1.6.4.3.5.9.1 1.6z"/></symbol>
+</svg>
+
+<!-- ═══ HEADER / HERO ═══ -->
+<header class="border-b border-border">
+  <div class="mx-auto max-w-6xl px-6 py-8 flex flex-col items-center gap-4 relative">
+
+    <!-- Settings button (top-right assoluto) -->
+    <button class="absolute right-6 top-6 flex h-9 w-9 items-center justify-center rounded-full border border-border text-white transition hover:border-blue hover:bg-primary/10" aria-label="Settings">
+      <span class="material-symbols-outlined text-base">settings</span>
+    </button>
+
+    <!-- Artist name sopra la foto -->
+    <h1 class="text-4xl text-white leading-none" style="font-family:'Schoolbell',cursive">Noktis</h1>
+
+    <!-- Artist photo -->
+    <img src="https://i.scdn.co/image/ab6761610000517458018e0e6639805cf726f87f" alt="Noktis"
+         class="h-28 w-28 rounded-full ring-2 ring-primary ring-offset-2 ring-offset-black object-cover">
+
+    <!-- Analytics sotto la foto -->
+    <p class="text-4xl text-white" style="font-family:'Schoolbell',cursive">Analytics</p>
+
+    <!-- Platform tabs centrati -->
+    <nav class="flex flex-wrap justify-center gap-2 pt-2">
+      <button data-tab="overview" data-active
+        class="flex items-center gap-2 rounded-full border border-primary/40 px-5 py-2 text-xs font-bold uppercase tracking-wider text-white transition data-[active]:border-primary data-[active]:bg-primary hover:border-primary">
+        <span class="material-symbols-outlined text-base">dashboard</span>Overview
+      </button>
+      <button data-tab="streaming"
+        class="flex items-center gap-2 rounded-full border border-primary/40 px-5 py-2 text-xs font-bold uppercase tracking-wider text-white transition data-[active]:border-primary data-[active]:bg-primary hover:border-primary">
+        <span class="material-symbols-outlined text-base">graphic_eq</span>Streaming
+      </button>
+      <button data-tab="socials"
+        class="flex items-center gap-2 rounded-full border border-primary/40 px-5 py-2 text-xs font-bold uppercase tracking-wider text-white transition data-[active]:border-primary data-[active]:bg-primary hover:border-primary">
+        <span class="material-symbols-outlined text-base">groups</span>Socials
+      </button>
+      <button data-tab="youtube"
+        class="flex items-center gap-2 rounded-full border border-primary/40 px-5 py-2 text-xs font-bold uppercase tracking-wider text-white transition data-[active]:border-primary data-[active]:bg-primary hover:border-primary">
+        <span class="material-symbols-outlined text-base">smart_display</span>YouTube
+      </button>
+    </nav>
+
+  </div>
+</header>
+
+<main class="mx-auto max-w-6xl px-6 py-6 space-y-6">
+
+  <!-- ════════════════════════════════════════
+       VIEW: OVERVIEW
+       ════════════════════════════════════════ -->
+  <section data-view="overview" class="space-y-5">
+
+    <!-- KPI GRID — loghi platform accanto al label -->
+    <div class="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5">
+
+      <button data-kpi-chart="sp-listeners" class="group flex flex-col gap-1 items-center rounded-xl bg-gradient-to-r from-blue to-blueDark backdrop-blur-3xl shadow-xl p-4 text-center transition hover:-translate-y-1 hover:border-blue">
+        <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-3.5 w-3.5 shrink-0"><use href="#logo-spotify"/></svg>Monthly Listeners</p>
+        <h3 class="text-xl font-black group-hover:text-white">111,686</h3>
+        <span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-2 py-0.5 text-xs font-bold text-positive">+54.5K · monthly</span>
+      </button>
+
+      <button data-kpi-chart="sp-playlists" class="group flex flex-col gap-1 items-center rounded-xl bg-gradient-to-r from-blue to-blueDark backdrop-blur-3xl shadow-xl p-4 text-center transition hover:-translate-y-1 hover:border-blue">
+        <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-3.5 w-3.5 shrink-0"><use href="#logo-spotify"/></svg>Playlists</p>
+        <h3 class="text-xl font-black group-hover:text-white">151</h3>
+        <span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-2 py-0.5 text-xs font-bold text-positive">+23 · 30gg</span>
+      </button>
+
+      <button data-kpi-chart="tt-videos" class="group flex flex-col gap-1 items-center rounded-xl bg-gradient-to-r from-blue to-blueDark backdrop-blur-3xl shadow-xl p-4 text-center transition hover:-translate-y-1 hover:border-blue">
+        <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-3.5 w-3.5 shrink-0"><use href="#logo-tiktok"/></svg>Videos</p>
+        <h3 class="text-xl font-black group-hover:text-white">151</h3>
+        <span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-2 py-0.5 text-xs font-bold text-white">260K views</span>
+      </button>
+
+      <button data-kpi-chart="ig-followers" class="group flex flex-col gap-1 items-center rounded-xl bg-gradient-to-r from-blue to-blueDark backdrop-blur-3xl shadow-xl p-4 text-center transition hover:-translate-y-1 hover:border-blue">
+        <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-3.5 w-3.5 shrink-0"><use href="#logo-instagram"/></svg>Followers</p>
+        <h3 class="text-xl font-black group-hover:text-white">7,368</h3>
+        <span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-2 py-0.5 text-xs font-bold text-white">@noktis__</span>
+      </button>
+      <button data-kpi-chart="sh-total" class="group flex flex-col gap-1 items-center rounded-xl bg-gradient-to-r from-blue to-blueDark backdrop-blur-3xl shadow-xl p-4 text-center transition hover:-translate-y-1 hover:opacity-90">
+        <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-3.5 w-3.5 shrink-0"><use href="#logo-shazam"/></svg>Total Shazams</p>
+        <h3 class="text-xl font-black group-hover:text-white">17,072</h3>
+        <span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-2 py-0.5 text-xs font-bold text-positive">+272 · 3 mesi</span>
+      </button>
+
+    </div>
+
+    <!-- RECENT ACTIVITIES + MILESTONES — priorità massima, prima di tutto -->
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+
+      <section class="overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-r from-card/50 to-cardSoft/50 backdrop-blur-3xl shadow-xl">
+        <header class="flex items-center justify-between border-b border-border px-4 py-3">
+          <h4 class="text-sm font-black">Recent Activities</h4>
+          <button id="open-activities-modal" class="cursor-pointer rounded-full border border-white/30 bg-transparent px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white transition hover:border-white hover:bg-white/10">View All</button>
+        </header>
+        <!-- [platform-logo] [thumb] [title/sub] [date] -->
+        <div>
+          <a href="#" class="flex items-center gap-3 border-b border-border px-4 py-2.5 last:border-0 hover:bg-white/5">
+            <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
+            <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84c50045346e894c55bf5dcb0f" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold truncate">Playlisted su "TOP POP HITS"</p>
+              <p class="text-xs text-muted truncate">by Analias · 18.8K followers</p>
+            </div>
+            <span class="text-xs text-muted whitespace-nowrap">25 Mag</span>
+          </a>
+          <a href="#" class="flex items-center gap-3 border-b border-border px-4 py-2.5 last:border-0 hover:bg-white/5">
+            <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
+            <img src="https://i.scdn.co/image/ab67616d00001e028ed7959c2360cc3fcfccd9c6" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold truncate">"i killed all your plants" → Road Trip Summer</p>
+              <p class="text-xs text-muted truncate">Curator · 10.1K followers</p>
+            </div>
+            <span class="text-xs text-muted whitespace-nowrap">23 Mag</span>
+          </a>
+          <a href="#" class="flex items-center gap-3 border-b border-border px-4 py-2.5 last:border-0 hover:bg-white/5">
+            <svg class="h-5 w-5 shrink-0"><use href="#logo-tiktok"/></svg>
+            <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold truncate">Mylla Ramos ha usato "obsessed" — 5.2K views</p>
+              <p class="text-xs text-muted truncate">TikTok · 10 Maggio</p>
+            </div>
+            <span class="text-xs text-muted whitespace-nowrap">10 Mag</span>
+          </a>
+          <a href="#" class="flex items-center gap-3 border-b border-border px-4 py-2.5 last:border-0 hover:bg-white/5">
+            <svg class="h-5 w-5 shrink-0"><use href="#logo-instagram"/></svg>
+            <img src="https://i.scdn.co/image/ab67616d00001e029e0b677a2b31265dc3e8ae70" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold truncate">Reel "another life" — 50K views</p>
+              <p class="text-xs text-muted truncate">@noktis__ · 7 Maggio</p>
+            </div>
+            <span class="text-xs text-muted whitespace-nowrap">7 Mag</span>
+          </a>
+          <a href="#" class="flex items-center gap-3 border-b border-border px-4 py-2.5 last:border-0 hover:bg-white/5">
+            <svg class="h-5 w-5 shrink-0"><use href="#logo-shazam"/></svg>
+            <img src="https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold truncate">"goodbyes" shazammata 200 volte questa settimana</p>
+              <p class="text-xs text-muted truncate">Shazam · 5 Maggio</p>
+            </div>
+            <span class="text-xs text-muted whitespace-nowrap">5 Mag</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-r from-card/50 to-cardSoft/50 backdrop-blur-3xl shadow-xl">
+        <header class="flex items-center justify-between border-b border-border px-4 py-3">
+          <h4 class="text-sm font-black">Recent Milestones</h4>
+          <button id="open-milestones-modal" class="cursor-pointer rounded-full border border-white/30 bg-transparent px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white transition hover:border-white hover:bg-white/10">View All</button>
+        </header>
+        <div>
+          <a href="#" class="flex items-center gap-3 border-b border-border px-4 py-2.5 last:border-0 hover:bg-white/5">
+            <svg class="h-5 w-5 shrink-0"><use href="#logo-tiktok"/></svg>
+            <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold truncate">"obsessed" — 100 video TikTok</p>
+              <p class="text-xs text-muted truncate">Traguardo storico · ft. Lyhre</p>
+            </div>
+            <span class="text-xs text-muted whitespace-nowrap">8 Mag</span>
+          </a>
+          <a href="#" class="flex items-center gap-3 border-b border-border px-4 py-2.5 last:border-0 hover:bg-white/5">
+            <svg class="h-5 w-5 shrink-0"><use href="#logo-instagram"/></svg>
+            <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold truncate">"obsessed" — 50K views IG</p>
+              <p class="text-xs text-muted truncate">Milestone Reel</p>
+            </div>
+            <span class="text-xs text-muted whitespace-nowrap">31 Mar</span>
+          </a>
+          <a href="#" class="flex items-center gap-3 border-b border-border px-4 py-2.5 last:border-0 hover:bg-white/5">
+            <img src="https://i.scdn.co/image/ab67616d00001e02fbdcd32a01bd6e32ab578e1a" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold truncate">1M Views YouTube</p>
+              <p class="text-xs text-muted truncate">Canale superato</p>
+            </div>
+            <span class="text-xs text-muted whitespace-nowrap">Feb</span>
+          </a>
+          <a href="#" class="flex items-center gap-3 border-b border-border px-4 py-2.5 last:border-0 hover:bg-white/5">
+            <svg class="h-5 w-5 shrink-0"><use href="#logo-shazam"/></svg>
+            <img src="https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold truncate">10K Shazam superati</p>
+              <p class="text-xs text-muted truncate">17.1K totali · "goodbyes" #1</p>
+            </div>
+            <span class="text-xs text-muted whitespace-nowrap">Gen</span>
+          </a>
+          <a href="#" class="flex items-center gap-3 border-b border-border px-4 py-2.5 last:border-0 hover:bg-white/5">
+            <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
+            <img src="https://i.scdn.co/image/ab67616d00001e028ed7959c2360cc3fcfccd9c6" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold truncate">100K Monthly Listeners</p>
+              <p class="text-xs text-muted truncate">Spotify · traguardo storico </p>
+            </div>
+            <span class="text-xs text-muted whitespace-nowrap">Apr</span>
+          </a>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- LAST RELEASE + GOALS + TASKS -->
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
+
+      <!-- Last Release -->
+      <section class="rounded-2xl border border-white/10 bg-gradient-to-r from-card/50 to-cardSoft/50 backdrop-blur-3xl shadow-xl p-5">
+        <h4 class="mb-3 text-base font-black">Last Release</h4>
+        <!-- Cover + title -->
+        <div class="flex items-center gap-3 mb-4">
+          <img src="https://i.scdn.co/image/ab67616d00001e028ed7959c2360cc3fcfccd9c6" alt="" class="h-14 w-14 rounded-xl shrink-0">
+          <div class="min-w-0">
+            <p class="font-bold truncate">i killed all your plants</p>
+            <p class="text-xs text-muted">Noktis · Apr 2026</p>
+          </div>
+        </div>
+        <!-- 3 mini KPI cards -->
+        <div class="grid grid-cols-3 gap-2">
+          <button data-kpi-chart="track-killed" class="group flex flex-col items-center gap-0.5 rounded-xl bg-gradient-to-r from-blue to-blueDark p-3 text-center transition hover:opacity-80">
+            <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white/80"><svg class="h-3 w-3 shrink-0"><use href="#logo-spotify"/></svg>Popularity</p>
+            <p class="text-lg font-black group-hover:text-white">47</p>
+            <span class="inline-flex items-center rounded-full border border-white/25 bg-black/30 px-1.5 py-0.5 text-xs font-bold text-positive">+17</span>
+          </button>
+          <button data-kpi-chart="sp-playlists" class="group flex flex-col items-center gap-0.5 rounded-xl bg-gradient-to-r from-blue to-blueDark p-3 text-center transition hover:opacity-80">
+            <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white/80"><svg class="h-3 w-3 shrink-0"><use href="#logo-spotify"/></svg>Playlists</p>
+            <p class="text-lg font-black group-hover:text-white">60</p>
+            <span class="inline-flex items-center rounded-full border border-white/25 bg-black/30 px-1.5 py-0.5 text-xs font-bold text-positive">+8</span>
+          </button>
+          <button data-kpi-chart="sh-total" class="group flex flex-col items-center gap-0.5 rounded-xl bg-gradient-to-r from-blue to-blueDark p-3 text-center transition hover:opacity-80">
+            <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white/80"><svg class="h-3 w-3 shrink-0"><use href="#logo-shazam"/></svg>Shazam</p>
+            <p class="text-lg font-black group-hover:text-white">4.2K</p>
+            <span class="inline-flex items-center rounded-full border border-white/25 bg-black/30 px-1.5 py-0.5 text-xs font-bold text-positive">+200</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Goals — compact -->
+      <section class="rounded-2xl border border-white/10 bg-gradient-to-r from-card/50 to-cardSoft/50 backdrop-blur-3xl shadow-xl p-4">
+        <h4 class="mb-2.5 text-sm font-black">Next Step Goals</h4>
+        <!-- Completed -->
+        <div class="goal-done mb-2.5">
+          <span class="goal-done-text">100K Monthly Listeners</span>
+          <span class="material-symbols-outlined text-sm text-white/50">check_circle</span>
+        </div>
+        <!-- Progress bars -->
+        <div class="space-y-2">
+          <div>
+            <div class="flex items-center justify-between mb-0.5">
+              <p class="text-xs font-semibold">150K Monthly Listeners</p>
+              <p class="text-xs text-muted">75%</p>
+            </div>
+            <div class="h-1.5 rounded-full bg-white/10"><div class="h-full rounded-full bg-blue w-[74%]"></div></div>
+            <p class="mt-0.5 text-xs text-muted">111,686 / 150,000</p>
+          </div>
+          <div>
+            <div class="flex items-center justify-between mb-0.5">
+              <p class="text-xs font-semibold">Top 50 Italia</p>
+              <p class="text-xs text-muted">42%</p>
+            </div>
+            <div class="h-1.5 rounded-full bg-white/10"><div class="h-full rounded-full bg-blue w-[42%]"></div></div>
+            <p class="mt-0.5 text-xs text-muted">Pop. 47 → 65+</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Weekly Tasks -->
+      <section class="rounded-2xl border border-white/10 bg-gradient-to-r from-card/50 to-cardSoft/50 backdrop-blur-3xl shadow-xl p-4">
+        <header class="mb-2.5 flex items-center justify-between">
+          <h4 class="text-sm font-black">Weekly Tasks</h4>
+          <span class="rounded-full border border-border bg-surface2 px-2 py-0.5 text-xs font-bold text-muted">3 PENDING</span>
+        </header>
+        <div class="space-y-2">
+          <label class="task-label flex cursor-pointer items-start gap-3 rounded-xl border border-white/10 bg-surface2/40 px-3 py-2 transition hover:border-blue/40"><input type="checkbox" class="mt-0.5 h-4 w-4 rounded border-border bg-transparent accent-blue">
+            <div>
+              <p class="text-xs font-semibold">Promuovi "obsessed" su TikTok</p>
+              <p class="text-xs text-muted">Track con più video (103)</p>
+            </div>
+          </label>
+          <label class="task-label flex cursor-pointer items-start gap-3 rounded-xl border border-white/10 bg-surface2/40 px-3 py-2 transition hover:border-blue/40"><input type="checkbox" class="mt-0.5 h-4 w-4 rounded border-border bg-transparent accent-blue">
+            <div>
+              <p class="text-xs font-semibold">Reel su "i killed all your plants"</p>
+              <p class="text-xs text-muted">Popolarità in crescita: 47</p>
+            </div>
+          </label>
+          <label class="task-label flex cursor-pointer items-start gap-3 rounded-xl border border-white/10 bg-surface2/40 px-3 py-2 transition hover:border-blue/40"><input type="checkbox" class="mt-0.5 h-4 w-4 rounded border-border bg-transparent accent-blue">
+            <div>
+              <p class="text-xs font-semibold">Ringrazia curator "Nordic Noir"</p>
+              <p class="text-xs text-muted">Tomas Raae · 8K followers</p>
+            </div>
+          </label>
+        </div>
+      </section>
+
+    </div>
+
+  </section>
+
+  <!-- ════════════════════════════════════════
+       VIEW: STREAMING (Spotify + Shazam)
+       ════════════════════════════════════════ -->
+  <section data-view="streaming" class="space-y-5 hidden">
+
+    <!-- KPI GRID con loghi -->
+    <div class="grid grid-cols-2 gap-3 md:grid-cols-5">
+      <button data-kpi-chart="sp-monthly" class="group flex flex-col gap-1 items-center rounded-xl bg-gradient-to-r from-blue to-blueDark backdrop-blur-3xl shadow-xl p-4 text-center transition hover:-translate-y-1 hover:border-blue">
+        <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-3.5 w-3.5 shrink-0"><use href="#logo-spotify"/></svg>Monthly Listeners</p>
+        <h3 class="text-xl font-black group-hover:text-white">111.7K</h3>
+        <span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-2 py-0.5 text-xs font-bold text-positive">+54.5K · 30gg</span>
+      </button>
+      <button data-kpi-chart="sp-streams" class="group flex flex-col gap-1 items-center rounded-xl bg-gradient-to-r from-blue to-blueDark backdrop-blur-3xl shadow-xl p-4 text-center transition hover:-translate-y-1 hover:border-blue">
+        <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-3.5 w-3.5 shrink-0"><use href="#logo-spotify"/></svg>Total Streams</p>
+        <h3 class="text-xl font-black group-hover:text-white">9.9M</h3>
+        <span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-2 py-0.5 text-xs font-bold text-positive">+800K · 30gg</span>
+      </button>
+      <button data-kpi-chart="sp-popularity" class="group flex flex-col gap-1 items-center rounded-xl bg-gradient-to-r from-blue to-blueDark backdrop-blur-3xl shadow-xl p-4 text-center transition hover:-translate-y-1 hover:border-blue">
+        <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-3.5 w-3.5 shrink-0"><use href="#logo-spotify"/></svg>Popularity Score</p>
+        <h3 class="text-xl font-black group-hover:text-white">33/100</h3>
+        <p class="text-xs text-muted">avg 34.4% · peak 37</p>
+      </button>
+      <button data-kpi-chart="sp-followers" class="group flex flex-col gap-1 items-center rounded-xl bg-gradient-to-r from-blue to-blueDark backdrop-blur-3xl shadow-xl p-4 text-center transition hover:-translate-y-1 hover:border-blue">
+        <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-3.5 w-3.5 shrink-0"><use href="#logo-spotify"/></svg>Followers</p>
+        <h3 class="text-xl font-black group-hover:text-white">6,423</h3>
+        <span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-2 py-0.5 text-xs font-bold text-positive">+323 · 30gg</span>
+      </button>
+      <button data-kpi-chart="sh-total" class="group flex flex-col gap-1 items-center rounded-xl bg-gradient-to-r from-blue to-blueDark backdrop-blur-3xl shadow-xl p-4 text-center transition hover:-translate-y-1 hover:border-blue">
+        <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-3.5 w-3.5 shrink-0"><use href="#logo-shazam"/></svg>Total Shazams</p>
+        <h3 class="text-xl font-black group-hover:text-white">17,072</h3>
+        <span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-2 py-0.5 text-xs font-bold text-positive">+272 · 3 mesi</span>
+      </button>
+    </div>
+
+    <!-- Goals compact -->
+    <section class="rounded-2xl border border-white/10 bg-gradient-to-r from-card/50 to-cardSoft/50 backdrop-blur-3xl shadow-xl p-4">
+      <h4 class="mb-2.5 text-sm font-black flex items-center gap-1.5"><svg class="h-4 w-4"><use href="#logo-spotify"/></svg>Next Step Goals · Spotify</h4>
+      <div class="grid gap-3 md:grid-cols-3">
+        <div class="goal-done">
+          <div><span class="goal-done-text">100 playlist attive</span><p class="text-xs text-white/50">Sei in 151 </p></div>
+          <span class="material-symbols-outlined text-sm text-white/50">check_circle</span>
+        </div>
+        <div class="rounded-lg border border-white/10 bg-surface2/40 px-3 py-2">
+          <div class="flex justify-between mb-0.5"><p class="text-xs font-semibold">200 playlist</p><p class="text-xs text-muted">75%</p></div>
+          <div class="h-1.5 rounded-full bg-white/10"><div class="h-full rounded-full bg-blue w-[75%]"></div></div>
+          <p class="mt-0.5 text-xs text-muted">151 / 200</p>
+        </div>
+        <div class="rounded-lg border border-white/10 bg-surface2/40 px-3 py-2">
+          <div class="flex justify-between mb-0.5"><p class="text-xs font-semibold">Popularity 50</p><p class="text-xs text-muted">94%</p></div>
+          <div class="h-1.5 rounded-full bg-white/10"><div class="h-full rounded-full bg-blue w-[94%]"></div></div>
+          <p class="mt-0.5 text-xs text-muted">47 / 50 · quasi!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Popularity tracks (5) + Playlists (5) -->
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+
+      <section class="rounded-2xl border border-white/10 bg-gradient-to-r from-card/50 to-cardSoft/50 backdrop-blur-3xl shadow-xl p-5">
+        <header class="mb-3 flex items-center justify-between">
+          <div>
+            <h4 class="text-base font-black">Popularity by Track</h4>
+            <p class="text-xs text-muted">Scala 0 → 100 · trend 30gg</p>
+          </div>
+          <button id="open-tracks-modal" class="cursor-pointer rounded-full border border-white/30 bg-transparent px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white transition hover:border-white hover:bg-white/10">View All</button>
+        </header>
+        <div class="space-y-1">
+          <button data-kpi-chart="track-killed" class="flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left hover:bg-white/5">
+            <img src="https://i.scdn.co/image/ab67616d00001e028ed7959c2360cc3fcfccd9c6" alt="" class="h-9 w-9 rounded-lg">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">i killed all your plants</p><p class="text-xs text-muted">Apr 2026</p></div>
+            <div class="flex items-center gap-2 shrink-0"><span class="text-base font-black text-white">47</span><span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-1.5 py-0.5 text-xs font-bold text-positive">+17</span></div>
+          </button>
+          <button data-kpi-chart="track-goodbyes" class="flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left hover:bg-white/5">
+            <img src="https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47" alt="" class="h-9 w-9 rounded-lg">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">goodbyes</p><p class="text-xs text-muted">ft. townsend · Sep 2022</p></div>
+            <div class="flex items-center gap-2 shrink-0"><span class="text-base font-black text-white">41</span><span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-1.5 py-0.5 text-xs font-bold text-muted">−2</span></div>
+          </button>
+          <button data-kpi-chart="track-fail" class="flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left hover:bg-white/5">
+            <img src="https://i.scdn.co/image/ab67616d00001e02886b188290fbcff15d6fe521" alt="" class="h-9 w-9 rounded-lg">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">why did i fail</p><p class="text-xs text-muted">ft. townsend · Mar 2024</p></div>
+            <div class="flex items-center gap-2 shrink-0"><span class="text-base font-black text-white">38</span><span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-1.5 py-0.5 text-xs font-bold text-muted">—</span></div>
+          </button>
+          <button data-kpi-chart="track-obsessed" class="flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left hover:bg-white/5">
+            <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" alt="" class="h-9 w-9 rounded-lg">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">obsessed</p><p class="text-xs text-muted">ft. Lyhre · Nov 2023</p></div>
+            <div class="flex items-center gap-2 shrink-0"><span class="text-base font-black text-white">35</span><span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-1.5 py-0.5 text-xs font-bold text-muted">−1</span></div>
+          </button>
+          <button data-kpi-chart="track-life" class="flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left hover:bg-white/5">
+            <img src="https://i.scdn.co/image/ab67616d00001e029e0b677a2b31265dc3e8ae70" alt="" class="h-9 w-9 rounded-lg">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">another life</p><p class="text-xs text-muted">Nov 2024</p></div>
+            <div class="flex items-center gap-2 shrink-0"><span class="text-base font-black text-white">30</span><span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-1.5 py-0.5 text-xs font-bold text-positive">+3</span></div>
+          </button>
+        </div>
+      </section>
+
+      <section class="overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-r from-card/50 to-cardSoft/50 backdrop-blur-3xl shadow-xl">
+        <header class="flex items-center justify-between border-b border-border px-4 py-3">
+          <h4 class="text-base font-black">Playlists</h4>
+          <div class="flex gap-2" role="tablist">
+            <button data-subtab="recent" data-active class="rounded-full border border-white/30 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white transition hover:border-white hover:bg-white/10 data-[active]:border-white data-[active]:bg-white/15">Recenti</button>
+            <button data-subtab="removed"             class="rounded-full border border-white/30 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white transition hover:border-white hover:bg-white/10 data-[active]:border-white data-[active]:bg-white/15">Removed</button>
+            <button id="open-playlists-modal"         class="rounded-full border border-white/30 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white transition hover:border-white hover:bg-white/10">View All</button>
+          </div>
+        </header>
+        <div data-subview="recent" class="divide-y divide-border">
+          <a href="#" class="flex items-center gap-3 px-4 py-2.5 hover:bg-white/5">
+            <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84c50045346e894c55bf5dcb0f" alt="" class="h-9 w-9 rounded-lg">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">TOP POP HITS</p><p class="text-xs text-muted">by Analias · 25 Mag</p></div>
+            <div class="text-right"><p class="text-sm font-bold text-white">18.8K</p><p class="text-xs text-muted">followers</p></div>
+          </a>
+          <a href="#" class="flex items-center gap-3 px-4 py-2.5 hover:bg-white/5">
+            <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84b8fef7bc9526cb1ad972acb6" alt="" class="h-9 w-9 rounded-lg">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Road Trip | Summer Hits 2026</p><p class="text-xs text-muted">by chrismeyer · 23 Mag</p></div>
+            <div class="text-right"><p class="text-sm font-bold text-white">10.1K</p><p class="text-xs text-muted">followers</p></div>
+          </a>
+          <a href="#" class="flex items-center gap-3 px-4 py-2.5 hover:bg-white/5">
+            <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84c50045346e894c55bf5dcb0f" alt="" class="h-9 w-9 rounded-lg">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Indie Vibes 2026</p><p class="text-xs text-muted">by musiclover · 20 Mag</p></div>
+            <div class="text-right"><p class="text-sm font-bold text-white">7.4K</p><p class="text-xs text-muted">followers</p></div>
+          </a>
+          <a href="#" class="flex items-center gap-3 px-4 py-2.5 hover:bg-white/5">
+            <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84b8fef7bc9526cb1ad972acb6" alt="" class="h-9 w-9 rounded-lg">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Nordic Noir</p><p class="text-xs text-muted">by Tomas Raae · 18 Mag</p></div>
+            <div class="text-right"><p class="text-sm font-bold text-white">8.1K</p><p class="text-xs text-muted">followers</p></div>
+          </a>
+          <a href="#" class="flex items-center gap-3 px-4 py-2.5 hover:bg-white/5">
+            <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84c50045346e894c55bf5dcb0f" alt="" class="h-9 w-9 rounded-lg">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Chill & Alt</p><p class="text-xs text-muted">by playlist.it · 15 Mag</p></div>
+            <div class="text-right"><p class="text-sm font-bold text-white">5.2K</p><p class="text-xs text-muted">followers</p></div>
+          </a>
+        </div>
+        <div data-subview="active" class="divide-y divide-border hidden">
+          <a href="#" class="flex items-center gap-3 px-4 py-2.5 hover:bg-white/5">
+            <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84c50045346e894c55bf5dcb0f" alt="" class="h-9 w-9 rounded-lg">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">TOP POP HITS</p><p class="text-xs text-muted">attiva</p></div>
+            <div class="text-right"><p class="text-sm font-bold text-white">18.8K</p><p class="text-xs text-muted">followers</p></div>
+          </a>
+        </div>
+        <div data-subview="alltime" class="divide-y divide-border hidden">
+          <a href="#" class="flex items-center gap-3 px-4 py-2.5 hover:bg-white/5">
+            <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84c50045346e894c55bf5dcb0f" alt="" class="h-9 w-9 rounded-lg">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">TOP POP HITS</p><p class="text-xs text-muted">lifetime</p></div>
+            <div class="text-right"><p class="text-sm font-bold text-white">18.8K</p><p class="text-xs text-muted">followers</p></div>
+          </a>
+        </div>
+      </section>
+
+    </div>
+
+  </section>
+
+  <!-- ════════════════════════════════════════
+       VIEW: SOCIALS (TikTok + Instagram unificati)
+       ════════════════════════════════════════ -->
+  <section data-view="socials" class="space-y-5 hidden">
+
+    <!-- KPI GRID — TikTok + Instagram insieme -->
+    <div class="grid grid-cols-2 gap-3 md:grid-cols-5">
+      <button data-kpi-chart="tt-views" class="group flex flex-col gap-1 items-center rounded-xl bg-gradient-to-r from-blue to-blueDark backdrop-blur-3xl shadow-xl p-4 text-center transition hover:-translate-y-1 hover:border-blue">
+        <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-3.5 w-3.5 shrink-0"><use href="#logo-tiktok"/></svg>Views</p>
+        <h3 class="text-xl font-black group-hover:text-white">260K</h3>
+        <span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-2 py-0.5 text-xs font-bold text-positive">+45K · 30gg</span>
+      </button>
+      <button data-kpi-chart="tt-likes" class="group flex flex-col gap-1 items-center rounded-xl bg-gradient-to-r from-blue to-blueDark backdrop-blur-3xl shadow-xl p-4 text-center transition hover:-translate-y-1 hover:border-blue">
+        <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-3.5 w-3.5 shrink-0"><use href="#logo-tiktok"/></svg>Likes</p>
+        <h3 class="text-xl font-black group-hover:text-white">12.3K</h3>
+        <span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-2 py-0.5 text-xs font-bold text-positive">+2.1K · 30gg</span>
+      </button>
+      <button data-kpi-chart="tt-shares" class="group flex flex-col gap-1 items-center rounded-xl bg-gradient-to-r from-blue to-blueDark backdrop-blur-3xl shadow-xl p-4 text-center transition hover:-translate-y-1 hover:border-blue">
+        <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-3.5 w-3.5 shrink-0"><use href="#logo-tiktok"/></svg>Shares</p>
+        <h3 class="text-xl font-black group-hover:text-white">199</h3>
+        <span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-2 py-0.5 text-xs font-bold text-positive">+34 · 30gg</span>
+      </button>
+      <button data-kpi-chart="ig-followers" class="group flex flex-col gap-1 items-center rounded-xl bg-gradient-to-r from-blue to-blueDark backdrop-blur-3xl shadow-xl p-4 text-center transition hover:-translate-y-1 hover:border-blue">
+        <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-3.5 w-3.5 shrink-0"><use href="#logo-instagram"/></svg>Followers</p>
+        <h3 class="text-xl font-black group-hover:text-white">7,368</h3>
+        <span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-2 py-0.5 text-xs font-bold text-positive">+468 · 30gg</span>
+      </button>
+      <div class="flex flex-col gap-1 rounded-xl bg-gradient-to-r from-blue to-blueDark backdrop-blur-3xl shadow-xl p-4 opacity-50">
+        <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-3.5 w-3.5 shrink-0"><use href="#logo-instagram"/></svg>IG Views</p>
+        <h3 class="text-xl font-black">N/D</h3>
+        <p class="text-xs text-muted">Enterprise plan</p>
+      </div>
+    </div>
+
+    <!-- Goals compact TikTok + Instagram -->
+    <section class="rounded-2xl border border-white/10 bg-gradient-to-r from-card/50 to-cardSoft/50 backdrop-blur-3xl shadow-xl p-4">
+      <h4 class="mb-2.5 text-sm font-black">Next Step Goals · Socials</h4>
+      <div class="grid gap-3 md:grid-cols-4">
+        <div class="goal-done">
+          <div><span class="goal-done-text"><svg class="h-3 w-3"><use href="#logo-tiktok"/></svg>100 video</span><p class="text-xs text-white/50">"obsessed" 103 </p></div>
+          <span class="material-symbols-outlined text-sm text-white/50">check_circle</span>
+        </div>
+        <div class="rounded-lg border border-white/10 bg-surface2/40 px-3 py-2">
+          <div class="flex justify-between mb-0.5"><p class="text-xs font-semibold flex items-center gap-1"><svg class="h-3 w-3"><use href="#logo-tiktok"/></svg>500 video</p><p class="text-xs text-muted">31%</p></div>
+          <div class="h-1.5 rounded-full bg-white/10"><div class="h-full rounded-full bg-blue w-[31%]"></div></div>
+          <p class="mt-0.5 text-xs text-muted">155 / 500</p>
+        </div>
+        <div class="goal-done">
+          <div><span class="goal-done-text"><svg class="h-3 w-3"><use href="#logo-instagram"/></svg>5K followers</span><p class="text-xs text-white/50">Ora 7,368 </p></div>
+          <span class="material-symbols-outlined text-sm text-white/50">check_circle</span>
+        </div>
+        <div class="rounded-lg border border-white/10 bg-surface2/40 px-3 py-2">
+          <div class="flex justify-between mb-0.5"><p class="text-xs font-semibold flex items-center gap-1"><svg class="h-3 w-3"><use href="#logo-instagram"/></svg>10K followers</p><p class="text-xs text-muted">74%</p></div>
+          <div class="h-1.5 rounded-full bg-white/10"><div class="h-full rounded-full bg-blue w-[74%]"></div></div>
+          <p class="mt-0.5 text-xs text-muted">7,368 / 10,000</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIDEO TIKTOK che usano i brani + Instagram Activity -->
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+
+      <!-- TikTok video feed per brano -->
+      <section class="overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-r from-card/50 to-cardSoft/50 backdrop-blur-3xl shadow-xl">
+        <header class="border-b border-border px-4 py-3 flex items-center justify-between">
+          <div>
+            <h4 class="text-base font-black flex items-center gap-2"><svg class="h-4 w-4"><use href="#logo-tiktok"/></svg>Video TikTok Recents</h4>
+            <p class="text-xs text-muted">Creator che hanno usato le tue tracce</p>
+          </div>
+          <button id="open-tiktok-modal" class="cursor-pointer rounded-full border border-white/30 bg-transparent px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white transition hover:border-white hover:bg-white/10">View All</button>
+        </header>
+        <div class="divide-y divide-border">
+          <button data-ttsong="obsessed" class="flex items-center gap-3 px-4 py-2.5 hover:bg-white/5 w-full text-left cursor-pointer">
+            <img src="https://api.dicebear.com/7.x/thumbs/svg?seed=mylla&backgroundColor=116dff&scale=80" alt="" class="h-8 w-8 shrink-0 rounded-full">
+            <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold truncate">Mylla Ramos</p>
+              <p class="text-xs text-muted truncate">obsessed · ft. Lyhre</p>
+            </div>
+            <div class="text-right shrink-0">
+              <p class="text-xs font-bold text-white">5.2K views</p>
+              <p class="text-xs text-white/60">10 Mag</p>
+            </div>
+          </button>
+          <button data-ttsong="obsessed" class="flex items-center gap-3 px-4 py-2.5 hover:bg-white/5 w-full text-left cursor-pointer">
+            <img src="https://api.dicebear.com/7.x/thumbs/svg?seed=luca&backgroundColor=0053d8&scale=80" alt="" class="h-8 w-8 shrink-0 rounded-full">
+            <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold truncate">luca.aesthetic</p>
+              <p class="text-xs text-muted truncate">obsessed · ft. Lyhre</p>
+            </div>
+            <div class="text-right shrink-0">
+              <p class="text-xs font-bold text-white">3.8K views</p>
+              <p class="text-xs text-white/60">8 Mag</p>
+            </div>
+          </button>
+          <button data-ttsong="obsessed" class="flex items-center gap-3 px-4 py-2.5 hover:bg-white/5 w-full text-left cursor-pointer">
+            <img src="https://api.dicebear.com/7.x/thumbs/svg?seed=sara&backgroundColor=8b4cb7&scale=80" alt="" class="h-8 w-8 shrink-0 rounded-full">
+            <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold truncate">sara_vibes</p>
+              <p class="text-xs text-muted truncate">obsessed · ft. Lyhre</p>
+            </div>
+            <div class="text-right shrink-0">
+              <p class="text-xs font-bold text-white">1.1K views</p>
+              <p class="text-xs text-white/60">6 Mag</p>
+            </div>
+          </button>
+          <button data-ttsong="goodbyes" class="flex items-center gap-3 px-4 py-2.5 hover:bg-white/5 w-full text-left cursor-pointer">
+            <img src="https://api.dicebear.com/7.x/thumbs/svg?seed=nightcore&backgroundColor=116dff&scale=80" alt="" class="h-8 w-8 shrink-0 rounded-full">
+            <img src="https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold truncate">nightcore.edits</p>
+              <p class="text-xs text-muted truncate">goodbyes · ft. townsend</p>
+            </div>
+            <div class="text-right shrink-0">
+              <p class="text-xs font-bold text-white">890 views</p>
+              <p class="text-xs text-white/60">4 Mag</p>
+            </div>
+          </button>
+          <button data-ttsong="goodbyes" class="flex items-center gap-3 px-4 py-2.5 hover:bg-white/5 w-full text-left cursor-pointer">
+            <img src="https://api.dicebear.com/7.x/thumbs/svg?seed=moodboard&backgroundColor=6d3a91&scale=80" alt="" class="h-8 w-8 shrink-0 rounded-full">
+            <img src="https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold truncate">moodboard.ita</p>
+              <p class="text-xs text-muted truncate">goodbyes · ft. townsend</p>
+            </div>
+            <div class="text-right shrink-0">
+              <p class="text-xs font-bold text-white">540 views</p>
+              <p class="text-xs text-white/60">2 Mag</p>
+            </div>
+          </button>
+        </div>
+      </section>
+
+      <!-- Instagram Activity -->
+      <section class="overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-r from-card/50 to-cardSoft/50 backdrop-blur-3xl shadow-xl">
+        <header class="border-b border-border px-4 py-3">
+          <h4 class="text-base font-black flex items-center gap-2"><svg class="h-4 w-4"><use href="#logo-instagram"/></svg>Instagram Activity</h4>
+          <p class="text-xs text-muted">@noktis__ · 7,368 followers</p>
+        </header>
+        <div class="divide-y divide-border">
+          <a href="#" class="flex items-center gap-3 px-4 py-2.5 hover:bg-white/5">
+            <img src="https://i.scdn.co/image/ab67616d00001e029e0b677a2b31265dc3e8ae70" alt="" class="h-9 w-9 rounded-lg">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">another life · Reel</p><p class="text-xs text-muted">24 Nov 2024</p></div>
+            <div class="flex gap-3 text-right shrink-0">
+              <div><p class="text-xs font-bold text-white">50K</p><p class="text-xs text-white/60">views</p></div>
+              <div><p class="text-xs font-bold text-white">2.1K</p><p class="text-xs text-white/60">likes</p></div>
+            </div>
+          </a>
+          <a href="#" class="flex items-center gap-3 px-4 py-2.5 hover:bg-white/5">
+            <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" alt="" class="h-9 w-9 rounded-lg">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">obsessed · Reel</p><p class="text-xs text-muted">24 Nov 2024</p></div>
+            <div class="flex gap-3 text-right shrink-0">
+              <div><p class="text-xs font-bold text-white">38K</p><p class="text-xs text-white/60">views</p></div>
+              <div><p class="text-xs font-bold text-white">1.7K</p><p class="text-xs text-white/60">likes</p></div>
+            </div>
+          </a>
+          <a href="#" class="flex items-center gap-3 px-4 py-2.5 hover:bg-white/5">
+            <img src="https://i.scdn.co/image/ab67616d00001e028ed7959c2360cc3fcfccd9c6" alt="" class="h-9 w-9 rounded-lg">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">i killed all your plants · Story</p><p class="text-xs text-muted">10 Mag 2026</p></div>
+            <div class="flex gap-3 text-right shrink-0">
+              <div><p class="text-xs font-bold text-white">12K</p><p class="text-xs text-white/60">views</p></div>
+              <div><p class="text-xs font-bold text-white">890</p><p class="text-xs text-white/60">likes</p></div>
+            </div>
+          </a>
+        </div>
+      </section>
+
+    </div>
+
+  </section>
+
+  <!-- ════════════════════════════════════════
+       VIEW: YOUTUBE
+       ════════════════════════════════════════ -->
+  <section data-view="youtube" class="space-y-5 hidden">
+
+    <div class="grid grid-cols-2 gap-3 md:grid-cols-5">
+      <button data-kpi-chart="yt-subs" class="group flex flex-col gap-1 items-center rounded-xl bg-gradient-to-r from-blue to-blueDark backdrop-blur-3xl shadow-xl p-4 text-center transition hover:-translate-y-1 hover:border-blue">
+        <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-3.5 w-3.5 shrink-0"><use href="#logo-youtube"/></svg>Subscribers</p>
+        <h3 class="text-xl font-black group-hover:text-white">537</h3>
+        <span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-2 py-0.5 text-xs font-bold text-positive">+57 · 30gg</span>
+      </button>
+      <button data-kpi-chart="yt-views" class="group flex flex-col gap-1 items-center rounded-xl bg-gradient-to-r from-blue to-blueDark backdrop-blur-3xl shadow-xl p-4 text-center transition hover:-translate-y-1 hover:border-blue">
+        <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-3.5 w-3.5 shrink-0"><use href="#logo-youtube"/></svg>Video Views</p>
+        <h3 class="text-xl font-black group-hover:text-white">2.85M</h3>
+        <span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-2 py-0.5 text-xs font-bold text-positive">+150K · 30gg</span>
+      </button>
+      <button data-kpi-chart="yt-likes" class="group flex flex-col gap-1 items-center rounded-xl bg-gradient-to-r from-blue to-blueDark backdrop-blur-3xl shadow-xl p-4 text-center transition hover:-translate-y-1 hover:border-blue">
+        <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-3.5 w-3.5 shrink-0"><use href="#logo-youtube"/></svg>Video Likes</p>
+        <h3 class="text-xl font-black group-hover:text-white">25.7K</h3>
+        <span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-2 py-0.5 text-xs font-bold text-positive">+3.7K · 30gg</span>
+      </button>
+      <div class="flex flex-col gap-1 items-center rounded-xl bg-gradient-to-r from-blue to-blueDark backdrop-blur-3xl shadow-xl p-4 text-center">
+        <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-3.5 w-3.5 shrink-0"><use href="#logo-youtube"/></svg>Comments</p>
+        <h3 class="text-xl font-black">1,024</h3>
+        <span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-2 py-0.5 text-xs font-bold text-white">Total</span>
+      </div>
+      <div class="flex flex-col gap-1 items-center rounded-xl bg-gradient-to-r from-blue to-blueDark backdrop-blur-3xl shadow-xl p-4 text-center">
+        <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-3.5 w-3.5 shrink-0"><use href="#logo-youtube"/></svg>Shorts</p>
+        <h3 class="text-xl font-black">142</h3>
+        <span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-2 py-0.5 text-xs font-bold text-white">Total</span>
+      </div>
+    </div>
+
+    <!-- Goals compact YouTube -->
+    <section class="rounded-2xl border border-white/10 bg-gradient-to-r from-card/50 to-cardSoft/50 backdrop-blur-3xl shadow-xl p-4">
+      <h4 class="mb-2.5 text-sm font-black flex items-center gap-1.5"><svg class="h-4 w-4"><use href="#logo-youtube"/></svg>Next Step Goals · YouTube</h4>
+      <div class="grid gap-3 md:grid-cols-3">
+        <div class="goal-done">
+          <div><span class="goal-done-text">1M Views YouTube</span><p class="text-xs text-white/50">2.85M totali </p></div>
+          <span class="material-symbols-outlined text-sm text-white/50">check_circle</span>
+        </div>
+        <div class="rounded-lg border border-white/10 bg-surface2/40 px-3 py-2">
+          <div class="flex justify-between mb-0.5"><p class="text-xs font-semibold">1,000 Subscribers</p><p class="text-xs text-muted">54%</p></div>
+          <div class="h-1.5 rounded-full bg-white/10"><div class="h-full rounded-full bg-blue w-[54%]"></div></div>
+          <p class="mt-0.5 text-xs text-muted">537 / 1,000</p>
+        </div>
+        <div class="rounded-lg border border-white/10 bg-surface2/40 px-3 py-2">
+          <div class="flex justify-between mb-0.5"><p class="text-xs font-semibold">100K Channel Views</p><p class="text-xs text-muted">96%</p></div>
+          <div class="h-1.5 rounded-full bg-white/10"><div class="h-full rounded-full bg-blue w-[96%]"></div></div>
+          <p class="mt-0.5 text-xs text-muted">95,700 / 100,000</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+
+      <section class="overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-r from-card/50 to-cardSoft/50 backdrop-blur-3xl shadow-xl">
+        <header class="flex items-center justify-between border-b border-border px-4 py-3">
+          <h4 class="text-base font-black">Top Tracks · Views</h4>
+          <button id="open-yt-tracks-modal" class="cursor-pointer rounded-full border border-white/30 bg-transparent px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white transition hover:border-white hover:bg-white/10">View All</button>
+        </header>
+        <div class="divide-y divide-border">
+          <button data-yt-track="unforgettable" class="flex w-full items-center gap-3 px-4 py-2.5 text-left hover:bg-white/5">
+            <img src="https://i.scdn.co/image/ab67616d00001e02fbdcd32a01bd6e32ab578e1a" alt="" class="h-9 w-9 rounded-lg shrink-0">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Unforgettable</p><p class="text-xs text-muted">2022</p></div>
+            <p class="text-sm font-bold text-white">1.28M</p>
+          </button>
+          <button data-yt-track="berlin" class="flex w-full items-center gap-3 px-4 py-2.5 text-left hover:bg-white/5">
+            <img src="https://i.scdn.co/image/ab67616d00001e029494eeac6a088d0460830996" alt="" class="h-9 w-9 rounded-lg shrink-0">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Berlin</p><p class="text-xs text-muted">2023</p></div>
+            <p class="text-sm font-bold text-white">1.06M</p>
+          </button>
+          <button data-yt-track="obsessed" class="flex w-full items-center gap-3 px-4 py-2.5 text-left hover:bg-white/5">
+            <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" alt="" class="h-9 w-9 rounded-lg shrink-0">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">obsessed</p><p class="text-xs text-muted">ft. Lyhre · 2023</p></div>
+            <p class="text-sm font-bold text-white">312K</p>
+          </button>
+          <button data-yt-track="goodbyes" class="flex w-full items-center gap-3 px-4 py-2.5 text-left hover:bg-white/5">
+            <img src="https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47" alt="" class="h-9 w-9 rounded-lg shrink-0">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">goodbyes</p><p class="text-xs text-muted">ft. townsend · 2022</p></div>
+            <p class="text-sm font-bold text-white">208K</p>
+          </button>
+        </div>
+      </section>
+
+      <section class="overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-r from-card/50 to-cardSoft/50 backdrop-blur-3xl shadow-xl">
+        <header class="flex items-center justify-between border-b border-border px-4 py-3">
+          <h4 class="text-base font-black flex items-center gap-2"><svg class="h-4 w-4"><use href="#logo-youtube"/></svg>YouTube Milestones</h4>
+          <span class="text-xs text-muted">canale · traguardi storici</span>
+        </header>
+        <div class="divide-y divide-border">
+          <a href="#" class="flex items-center gap-3 border-b border-border px-4 py-2.5 last:border-0 hover:bg-white/5">
+            <img src="https://i.scdn.co/image/ab67616d00001e02fbdcd32a01bd6e32ab578e1a" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold truncate">2M Views canale</p>
+              <p class="text-xs text-muted">Traguardo totale superato</p>
+            </div>
+            <span class="text-xs text-muted whitespace-nowrap">Mag 2026</span>
+          </a>
+          <a href="#" class="flex items-center gap-3 border-b border-border px-4 py-2.5 last:border-0 hover:bg-white/5">
+            <img src="https://i.scdn.co/image/ab67616d00001e02fbdcd32a01bd6e32ab578e1a" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold truncate">"Unforgettable" · 1M Views</p>
+              <p class="text-xs text-muted">Primo video a 1M</p>
+            </div>
+            <span class="text-xs text-muted whitespace-nowrap">Feb 2026</span>
+          </a>
+          <a href="#" class="flex items-center gap-3 border-b border-border px-4 py-2.5 last:border-0 hover:bg-white/5">
+            <img src="https://i.scdn.co/image/ab67616d00001e029494eeac6a088d0460830996" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold truncate">"Berlin" · 1M Views</p>
+              <p class="text-xs text-muted">Secondo video a 1M</p>
+            </div>
+            <span class="text-xs text-muted whitespace-nowrap">Feb 2026</span>
+          </a>
+          <a href="#" class="flex items-center gap-3 border-b border-border px-4 py-2.5 last:border-0 hover:bg-white/5">
+            <img src="https://i.scdn.co/image/ab67616d00001e029494eeac6a088d0460830996" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold truncate">500 Subscribers</p>
+              <p class="text-xs text-muted">Canale in crescita</p>
+            </div>
+            <span class="text-xs text-muted whitespace-nowrap">Gen 2026</span>
+          </a>
+          <a href="#" class="flex items-center gap-3 border-b border-border px-4 py-2.5 last:border-0 hover:bg-white/5">
+            <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold truncate">20K Video Likes totali</p>
+              <p class="text-xs text-muted">Traguardo engagement</p>
+            </div>
+            <span class="text-xs text-muted whitespace-nowrap">Dic 2025</span>
+          </a>
+        </div>
+      </section>
+
+    </div>
+
+  </section>
+
+</main>
+
+<!-- ═══ KPI CHART MODAL ═══ -->
+<dialog id="kpi-modal" class="rounded-2xl border border-white/10 bg-surface/95 backdrop-blur-xl p-0 backdrop:bg-black/70 backdrop:backdrop-blur-sm w-full max-w-xl text-white">
+  <div class="p-6">
+    <!-- Header -->
+    <div class="mb-4 flex items-start justify-between gap-4">
+      <div class="min-w-0">
+        <h3 data-modal-title class="truncate text-3xl font-black leading-tight text-white">KPI Title</h3>
+        <p data-modal-sub class="mt-1 text-sm text-muted truncate">Subtitle</p>
+      </div>
+      <button data-modal-close type="button" aria-label="Chiudi"
+              class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border border-border text-muted transition hover:border-white/30 hover:bg-white/10 hover:text-white">
+        <span class="material-symbols-outlined text-lg">close</span>
+      </button>
+    </div>
+    <!-- Chart con assi -->
+    <svg data-modal-chart class="w-full cursor-crosshair" viewBox="0 0 440 200"></svg>
+    <!-- Stats row -->
+    <div class="mt-4 grid grid-cols-3 divide-x divide-border border border-border rounded-xl overflow-hidden">
+      <div class="px-4 py-3">
+        <p data-modal-value class="text-xl font-black">—</p>
+        <p class="text-xs text-muted mt-0.5">Valore attuale</p>
+      </div>
+      <div class="px-4 py-3">
+        <p data-modal-delta class="text-xl font-black text-positive">—</p>
+        <p class="text-xs text-muted mt-0.5">Ultimi 30 giorni</p>
+      </div>
+      <div data-modal-tooltip class="px-4 py-3">
+        <p data-tooltip-value class="text-xl font-black">—</p>
+        <p data-tooltip-x class="text-xs text-muted mt-0.5">hover sul grafico</p>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<!-- ═══ INTERACTIONS ═══ -->
+<script>
+(() => {
+  // ─── API fetch helper con cache localStorage ──────────────────
+  const CACHE_PREFIX = 'sv-dashboard:';
+  const TTL_BY_PATH  = {
+    '/api/historic_stats':    30 * 60 * 1000,
+    '/api/playlists/all':     30 * 60 * 1000,
+    '/api/songstats':         10 * 60 * 1000,
+    '/api/playlists/current': 10 * 60 * 1000,
+    '/api/activities':         5 * 60 * 1000,
+  };
+  window.api = async function api(url, opts = {}) {
+    const ttl = TTL_BY_PATH[url.split('?')[0]] ?? 5 * 60 * 1000;
+    const key = CACHE_PREFIX + url;
+    try {
+      const raw = localStorage.getItem(key);
+      if (raw) {
+        const { t, data } = JSON.parse(raw);
+        if (Date.now() - t < ttl && !opts.force) return data;
+      }
+    } catch {}
+    const res = await fetch(url, { credentials: 'omit', ...opts });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    try { localStorage.setItem(key, JSON.stringify({ t: Date.now(), data })); } catch {}
+    return data;
+  };
+  window.clearApiCache = () => Object.keys(localStorage)
+    .filter(k => k.startsWith(CACHE_PREFIX)).forEach(k => localStorage.removeItem(k));
+
+  // ─── Tab switching (main + sub) ───────────────────────────────
+  function toggleTabs(group, attr, viewAttr) {
+    document.querySelectorAll(`[${attr}]`).forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute(attr);
+        const peers = btn.closest(group)?.querySelectorAll(`[${attr}]`) ?? document.querySelectorAll(`[${attr}]`);
+        peers.forEach(b => b.toggleAttribute('data-active', b === btn));
+        document.querySelectorAll(`[${viewAttr}]`).forEach(v => {
+          v.classList.toggle('hidden', v.getAttribute(viewAttr) !== id);
+        });
+      });
+    });
+  }
+  toggleTabs('nav', 'data-tab', 'data-view');
+  // Sub-tabs: scoped to nearest section parent
+  document.querySelectorAll('[data-subtab]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-subtab');
+      const section = btn.closest('[data-view], section');
+      section?.querySelectorAll('[data-subtab]').forEach(b => b.toggleAttribute('data-active', b === btn));
+      section?.querySelectorAll('[data-subview]').forEach(v => {
+        v.classList.toggle('hidden', v.getAttribute('data-subview') !== id);
+      });
+    });
+  });
+
+  // ─── KPI chart modal ──────────────────────────────────────────
+  const trend = (start, end, n = 30) => Array.from({length: n}, (_, i) => start + (end - start) * (i / (n - 1)));
+  const fmt = n => n >= 1e6 ? (n/1e6).toFixed(2)+'M' : n >= 1e3 ? (n/1e3).toFixed(1)+'K' : Math.round(n).toLocaleString('it-IT');
+  const day = i => { const d = new Date(); d.setDate(d.getDate() - (29-i)); return d.toLocaleDateString('it-IT',{day:'2-digit',month:'short'}); };
+
+  const KPI_DATA = {
+    'sp-listeners':  { label:'Spotify Monthly Listeners',  sub:'Ultimi 30 giorni',  color:'#9747FF', cc:'text-primary', value:'111,686', delta:'+54.5K · monthly',  points: trend(57200, 111686) },
+    'sp-monthly':    { label:'Spotify Monthly Listeners',  sub:'Ultimi 30 giorni',  color:'#9747FF', cc:'text-primary', value:'111.7K',  delta:'+54.5K · 30gg',    points: trend(57200, 111686) },
+    'sp-playlists':  { label:'Spotify Playlists',          sub:'Active · Songstats',color:'#9747FF', cc:'text-primary', value:'151',     delta:'+23 · 30gg',       points: trend(128, 151) },
+    'sp-streams':    { label:'Total Streams',              sub:'Spotify lifetime',  color:'#9747FF', cc:'text-primary', value:'9.9M',    delta:'+800K · 30gg',     points: trend(9.1e6, 9.9e6) },
+    'sp-popularity': { label:'Popularity Score',           sub:'Artist-level',      color:'#7C5CFF', cc:'text-primary', value:'33/100',  delta:'avg 34.4% · peak 37', points: trend(33, 37).map(n=>Math.round(n)) },
+    'sp-followers':  { label:'Spotify Followers',          sub:'Crescita',          color:'#9747FF', cc:'text-primary', value:'6,423',   delta:'+323 · 30gg',      points: trend(6100, 6423) },
+    'tt-views':      { label:'TikTok Views',               sub:'Total',             color:'#9747FF', cc:'text-primary', value:'260K',    delta:'+45K',             points: trend(215000, 260000) },
+    'tt-likes':      { label:'TikTok Likes',               sub:'Total',             color:'#9747FF', cc:'text-primary', value:'12.3K',   delta:'+2.1K',            points: trend(10200, 12300) },
+    'tt-comments':   { label:'TikTok Comments',            sub:'Total',             color:'#9747FF', cc:'text-primary', value:'249',     delta:'+29',              points: trend(220, 249).map(n=>Math.round(n)) },
+    'tt-shares':     { label:'TikTok Shares',              sub:'Total',             color:'#9747FF', cc:'text-primary', value:'199',     delta:'+34',              points: trend(165, 199).map(n=>Math.round(n)) },
+    'tt-videos':     { label:'TikTok Videos',              sub:'Active',            color:'#9747FF', cc:'text-primary', value:'151',     delta:'+21 · 30gg',       points: trend(130, 151).map(n=>Math.round(n)) },
+    'ig-followers':  { label:'Instagram Followers',        sub:'Crescita',          color:'#9747FF', cc:'text-primary', value:'7,368',   delta:'+468 · 30gg',      points: trend(6900, 7368) },
+    'yt-subs':       { label:'YouTube Subscribers',        sub:'Crescita',          color:'#9747FF', cc:'text-primary', value:'537',     delta:'+57 · 30gg',       points: trend(480, 537).map(n=>Math.round(n)) },
+    'yt-views':      { label:'YouTube Video Views',        sub:'Total',             color:'#9747FF', cc:'text-primary', value:'2.85M',   delta:'+150K · 30gg',     points: trend(2.7e6, 2.85e6) },
+    'yt-likes':      { label:'YouTube Video Likes',        sub:'Total',             color:'#9747FF', cc:'text-primary', value:'25.7K',   delta:'+3.7K · 30gg',     points: trend(22000, 25700) },
+    'sh-total':      { label:'Total Shazams',              sub:'Lifetime',          color:'#9747FF', cc:'text-primary', value:'17,072',  delta:'+272 · 3 mesi',    points: trend(16800, 17072) },
+    'track-killed':  { label:'i killed all your plants',   sub:'Popolarità track',  color:'#7C5CFF', cc:'text-primary', value:'47/100',  delta:'+17 vs 30gg fa',   points: trend(38, 47).map(n=>Math.round(n)) },
+    'track-goodbyes':{ label:'goodbyes',                   sub:'Popolarità track',  color:'#9747FF', cc:'text-primary', value:'41/100',  delta:'−2 vs 30gg fa',    points: trend(43, 41).map(n=>Math.round(n)) },
+    'track-fail':    { label:'why did i fail',             sub:'Popolarità track',  color:'#9747FF', cc:'text-primary', value:'38/100',  delta:'stabile',          points: trend(38, 38).map(n=>Math.round(n)) },
+    'track-obsessed':{ label:'obsessed',                   sub:'Popolarità track',  color:'#9747FF', cc:'text-primary', value:'35/100',  delta:'−1 vs 30gg fa',    points: trend(36, 35).map(n=>Math.round(n)) },
+    'track-life':    { label:'another life',               sub:'Popolarità track',  color:'#9747FF', cc:'text-primary', value:'30/100',  delta:'+3 vs 30gg fa',    points: trend(27, 30).map(n=>Math.round(n)) },
+  };
+
+  const modal = document.getElementById('kpi-modal');
+
+  function renderChart(svg, d) {
+    // Spazio per assi: padL (y-labels), padB (x-labels), padT, padR
+    const W = 440, H = 200, padL = 52, padR = 16, padT = 16, padB = 28;
+    const cw = W - padL - padR, ch = H - padT - padB;
+    const pts = d.points, n = pts.length;
+    const min = Math.min(...pts), max = Math.max(...pts);
+    const range = max - min || 1;
+    const xStep = cw / (n - 1);
+    // Coordinate relative all'area del grafico
+    const coords = pts.map((p, i) => [
+      padL + i * xStep,
+      padT + ch - ((p - min) / range) * ch
+    ]);
+    const linePath = coords.map((c, i) => (i === 0 ? 'M' : 'L') + c.join(',')).join(' ');
+    const areaPath = linePath + ` L${padL+cw},${padT+ch} L${padL},${padT+ch} Z`;
+
+    // Y-axis: 4 gridlines con labels
+    const yTicks = 4;
+    let yLines = '', yLabels = '';
+    for (let t = 0; t <= yTicks; t++) {
+      const val = min + (range * t / yTicks);
+      const y = padT + ch - (t / yTicks) * ch;
+      yLines  += `<line x1="${padL}" y1="${y}" x2="${padL+cw}" y2="${y}" stroke="rgba(255,255,255,0.07)"/>`;
+      yLabels += `<text x="${padL-6}" y="${y+4}" text-anchor="end" font-size="10" fill="rgba(255,255,255,0.4)" font-family="Inter,sans-serif">${fmt(val)}</text>`;
+    }
+
+    // X-axis: 4 date labels equidistanti
+    let xLabels = '';
+    [0, 9, 19, 29].forEach(i => {
+      const x = padL + i * xStep;
+      xLabels += `<text x="${x}" y="${H-6}" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.4)" font-family="Inter,sans-serif">${day(i)}</text>`;
+    });
+
+    svg.innerHTML = `
+      <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="${d.color}" stop-opacity="0.35"/>
+        <stop offset="100%" stop-color="${d.color}" stop-opacity="0"/>
+      </linearGradient></defs>
+      ${yLines}${yLabels}${xLabels}
+      <path d="${areaPath}" fill="url(#g)"/>
+      <path d="${linePath}" fill="none" stroke="${d.color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <line data-crosshair x1="0" y1="${padT}" x2="0" y2="${padT+ch}" stroke="${d.color}" stroke-width="1" stroke-dasharray="3,3" opacity="0"/>
+      <circle data-crosshair-dot r="5" fill="${d.color}" stroke="rgba(0,0,0,0.6)" stroke-width="2" opacity="0"/>
+      <rect data-chart-hit x="${padL}" y="${padT}" width="${cw}" height="${ch}" fill="transparent"/>`;
+
+    const hit    = svg.querySelector('[data-chart-hit]');
+    const xhair  = svg.querySelector('[data-crosshair]');
+    const dot    = svg.querySelector('[data-crosshair-dot]');
+    const tipVal = modal.querySelector('[data-tooltip-value]');
+    const tipX   = modal.querySelector('[data-tooltip-x]');
+
+    tipVal.textContent = '—';
+    tipX.textContent   = 'hover sul grafico';
+
+    hit.addEventListener('mousemove', (e) => {
+      const rect = svg.getBoundingClientRect();
+      const scaleX = W / rect.width;
+      const px = (e.clientX - rect.left) * scaleX - padL;
+      const i = Math.max(0, Math.min(n - 1, Math.round(px / xStep)));
+      const [cx, cy] = coords[i];
+      xhair.setAttribute('x1', cx); xhair.setAttribute('x2', cx); xhair.setAttribute('opacity', '0.7');
+      dot.setAttribute('cx', cx);   dot.setAttribute('cy', cy);   dot.setAttribute('opacity', '1');
+      tipVal.textContent = fmt(pts[i]);
+      tipVal.className   = 'text-xl font-bold ' + d.cc;
+      tipX.textContent   = day(i);
+      tipX.className     = 'text-xs text-muted mt-0.5';
+    });
+    hit.addEventListener('mouseleave', () => {
+      xhair.setAttribute('opacity', '0');
+      dot.setAttribute('opacity', '0');
+      tipVal.textContent = '—';
+      tipVal.className   = 'text-xl font-bold';
+      tipX.textContent   = 'hover sul grafico';
+      tipX.className     = 'text-xs text-muted mt-0.5';
+    });
+  }
+
+  document.querySelectorAll('[data-kpi-chart]').forEach(el => {
+    el.addEventListener('click', () => {
+      const d = KPI_DATA[el.getAttribute('data-kpi-chart')];
+      if (!d || !modal.showModal) return;
+      modal.querySelector('[data-modal-title]').textContent = d.label;
+      modal.querySelector('[data-modal-sub]').textContent   = d.sub;
+      modal.querySelector('[data-modal-value]').textContent = d.value;
+      const deltaEl = modal.querySelector('[data-modal-delta]');
+      deltaEl.textContent = d.delta;
+      deltaEl.className = 'text-xs ' + d.cc;
+      renderChart(modal.querySelector('[data-modal-chart]'), d);
+      modal.showModal();
+    });
+  });
+
+  document.querySelectorAll('[data-modal-close]').forEach(el => el.addEventListener('click', () => modal.close()));
+  modal.addEventListener('click', (e) => { if (e.target === modal) modal.close(); });
+})();
+</script>
+
+
+<!-- ═══ ALL ACTIVITIES MODAL ═══ -->
+<dialog id="activities-modal" class="rounded-2xl border border-white/10 bg-surface/95 backdrop-blur-xl p-0 backdrop:bg-black/70 backdrop:backdrop-blur-sm w-full max-w-2xl text-white">
+  <div class="flex flex-col max-h-[80vh]">
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b border-border px-5 py-4 shrink-0">
+      <h3 class="text-xl font-black">All Activities</h3>
+      <button id="close-activities-modal" class="flex h-9 w-9 items-center justify-center rounded-full border border-border text-white transition hover:border-white/30 hover:bg-white/10">
+        <span class="material-symbols-outlined text-lg">close</span>
+      </button>
+    </div>
+    <!-- Activity list -->
+    <div id="activities-list" class="overflow-y-auto divide-y divide-border">
+      <a href="#" data-platform="spotify" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84c50045346e894c55bf5dcb0f" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Playlisted su "TOP POP HITS"</p><p class="text-xs text-muted">by Analias · 18.8K followers</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">25 Mag</span>
+      </a>
+      <a href="#" data-platform="spotify" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
+        <img src="https://i.scdn.co/image/ab67616d00001e028ed7959c2360cc3fcfccd9c6" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">"i killed all your plants" in Road Trip Summer</p><p class="text-xs text-muted">Curator · 10.1K followers</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">23 Mag</span>
+      </a>
+      <a href="#" data-platform="spotify" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84b8fef7bc9526cb1ad972acb6" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Entrato in "Nordic Noir"</p><p class="text-xs text-muted">by Tomas Raae · 8K followers</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">18 Mag</span>
+      </a>
+      <a href="#" data-platform="spotify" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84c50045346e894c55bf5dcb0f" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Entrato in "Indie Vibes 2026"</p><p class="text-xs text-muted">by musiclover · 7.4K followers</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">20 Mag</span>
+      </a>
+      <a href="#" data-platform="spotify" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
+        <img src="https://i.scdn.co/image/ab67616d00001e028ed7959c2360cc3fcfccd9c6" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">+2,100 Streams questa settimana</p><p class="text-xs text-muted">"i killed all your plants" · in crescita</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">21 Mag</span>
+      </a>
+      <a href="#" data-platform="tiktok" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-tiktok"/></svg>
+        <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Mylla Ramos ha usato "obsessed" — 5.2K views</p><p class="text-xs text-muted">TikTok Creator</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">10 Mag</span>
+      </a>
+      <a href="#" data-platform="tiktok" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-tiktok"/></svg>
+        <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">luca.aesthetic ha usato "obsessed" — 3.8K views</p><p class="text-xs text-muted">TikTok Creator</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">8 Mag</span>
+      </a>
+      <a href="#" data-platform="tiktok" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-tiktok"/></svg>
+        <img src="https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">nightcore.edits ha usato "goodbyes" — 890 views</p><p class="text-xs text-muted">TikTok Creator</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">4 Mag</span>
+      </a>
+      <a href="#" data-platform="instagram" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-instagram"/></svg>
+        <img src="https://i.scdn.co/image/ab67616d00001e029e0b677a2b31265dc3e8ae70" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Reel "another life" — 50K views</p><p class="text-xs text-muted">@noktis__ · 2.1K likes</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">7 Mag</span>
+      </a>
+      <a href="#" data-platform="instagram" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-instagram"/></svg>
+        <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Reel "obsessed" — 38K views</p><p class="text-xs text-muted">@noktis__ · 1.7K likes</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">3 Mag</span>
+      </a>
+      <a href="#" data-platform="instagram" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-instagram"/></svg>
+        <img src="https://i.scdn.co/image/ab67616d00001e028ed7959c2360cc3fcfccd9c6" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Story "i killed all your plants" — 12K views</p><p class="text-xs text-muted">@noktis__ · 890 likes</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">10 Mag</span>
+      </a>
+      <a href="#" data-platform="youtube" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-youtube"/></svg>
+        <img src="https://i.scdn.co/image/ab67616d00001e02fbdcd32a01bd6e32ab578e1a" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">"Unforgettable" — 1.28M views raggiunte</p><p class="text-xs text-muted">YouTube · milestone</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">Feb</span>
+      </a>
+      <a href="#" data-platform="youtube" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-youtube"/></svg>
+        <img src="https://i.scdn.co/image/ab67616d00001e029494eeac6a088d0460830996" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">"Berlin" — 1.06M views raggiunte</p><p class="text-xs text-muted">YouTube · milestone</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">Feb</span>
+      </a>
+      <a href="#" data-platform="shazam" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-shazam"/></svg>
+        <img src="https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">"goodbyes" shazammata 200 volte questa settimana</p><p class="text-xs text-muted">Shazam · in crescita</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">5 Mag</span>
+      </a>
+      <a href="#" data-platform="shazam" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-shazam"/></svg>
+        <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">"obsessed" — 85 Shazam questa settimana</p><p class="text-xs text-muted">Shazam · totale 4,210</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">5 Mag</span>
+      </a>
+      <a href="#" data-platform="spotify" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
+        <img src="https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Entrato in "Chill Afternoons"</p><p class="text-xs text-muted">by mellow.curator · 5.2K followers</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">2 Mag</span>
+      </a>
+      <a href="#" data-platform="tiktok" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-tiktok"/></svg>
+        <img src="https://i.scdn.co/image/ab67616d00001e028ed7959c2360cc3fcfccd9c6" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">giulia.dreams ha usato "i killed all your plants" — 2.3K views</p><p class="text-xs text-muted">TikTok Creator</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">28 Apr</span>
+      </a>
+      <a href="#" data-platform="spotify" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
+        <img src="https://i.scdn.co/image/ab67616d00001e02fbdcd32a01bd6e32ab578e1a" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Entrato in "Dreamy Indie Pop"</p><p class="text-xs text-muted">by indie.picks · 12.5K followers</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">26 Apr</span>
+      </a>
+      <a href="#" data-platform="youtube" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-youtube"/></svg>
+        <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">"obsessed" — 300K views raggiunte</p><p class="text-xs text-muted">YouTube · milestone</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">22 Apr</span>
+      </a>
+      <a href="#" data-platform="instagram" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-instagram"/></svg>
+        <img src="https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Post "goodbyes" — 22K impressioni</p><p class="text-xs text-muted">@noktis__ · 1.1K likes</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">19 Apr</span>
+      </a>
+      <a href="#" data-platform="spotify" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
+        <img src="https://i.scdn.co/image/ab67616d00001e029494eeac6a088d0460830996" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Entrato in "Late Night Drive"</p><p class="text-xs text-muted">by nightowl.pl · 9.8K followers</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">16 Apr</span>
+      </a>
+      <a href="#" data-platform="tiktok" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-tiktok"/></svg>
+        <img src="https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">moodboard.ita ha usato "goodbyes" — 540 views</p><p class="text-xs text-muted">TikTok Creator</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">14 Apr</span>
+      </a>
+      <a href="#" data-platform="shazam" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-shazam"/></svg>
+        <img src="https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">"goodbyes" — 150 Shazam questa settimana</p><p class="text-xs text-muted">Shazam · totale 6,810</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">12 Apr</span>
+      </a>
+    </div><!-- /activities-list -->
+    <div id="activities-pagination" class="flex items-center justify-between border-t border-border px-5 py-3 shrink-0 hidden">
+      <button id="activities-pagination-prev" class="rounded-full border border-white/30 px-4 py-1.5 text-xs font-bold text-white transition hover:bg-white/10 disabled:opacity-30" disabled>Prev</button>
+      <span id="activities-pagination-info" class="text-xs text-muted"></span>
+      <button id="activities-pagination-next" class="rounded-full border border-white/30 px-4 py-1.5 text-xs font-bold text-white transition hover:bg-white/10">Next</button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(() => {
+  const actModal = document.getElementById('activities-modal');
+  document.getElementById('open-activities-modal')?.addEventListener('click', () => actModal.showModal());
+  document.getElementById('close-activities-modal')?.addEventListener('click', () => actModal.close());
+  actModal.addEventListener('click', (e) => { if (e.target === actModal) actModal.close(); });
+
+})();
+</script>
+
+
+<!-- ═══ ALL MILESTONES MODAL ═══ -->
+<dialog id="milestones-modal" class="rounded-2xl border border-white/10 bg-surface/95 backdrop-blur-xl p-0 backdrop:bg-black/70 backdrop:backdrop-blur-sm w-full max-w-2xl text-white">
+  <div class="flex flex-col max-h-[80vh]">
+    <div class="flex items-center justify-between border-b border-border px-5 py-4 shrink-0">
+      <h3 class="text-xl font-black">All Milestones</h3>
+      <button id="close-milestones-modal" class="flex h-9 w-9 items-center justify-center rounded-full border border-border text-white transition hover:border-white/30 hover:bg-white/10">
+        <span class="material-symbols-outlined text-lg">close</span>
+      </button>
+    </div>
+    <div class="overflow-y-auto divide-y divide-border">
+      <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-tiktok"/></svg>
+        <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">"obsessed" — 100 video TikTok</p><p class="text-xs text-muted">Traguardo storico · ft. Lyhre</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">8 Mag</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-instagram"/></svg>
+        <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">"obsessed" — 50K views IG</p><p class="text-xs text-muted">Milestone Reel</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">31 Mar</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-youtube"/></svg>
+        <img src="https://i.scdn.co/image/ab67616d00001e02fbdcd32a01bd6e32ab578e1a" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">1M Views YouTube</p><p class="text-xs text-muted">Canale superato</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">Feb</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-shazam"/></svg>
+        <img src="https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">10K Shazam superati</p><p class="text-xs text-muted">17.1K totali · "goodbyes" #1</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">Gen</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
+        <img src="https://i.scdn.co/image/ab67616d00001e028ed7959c2360cc3fcfccd9c6" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">100K Monthly Listeners</p><p class="text-xs text-muted">Spotify · traguardo storico</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">Apr</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
+        <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">9M Total Streams</p><p class="text-xs text-muted">Spotify lifetime</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">Mar</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84c50045346e894c55bf5dcb0f" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">150 Playlist attive su Spotify</p><p class="text-xs text-muted">Traguardo storico</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">Mag</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <svg class="h-5 w-5 shrink-0"><use href="#logo-instagram"/></svg>
+        <img src="https://i.scdn.co/image/ab67616d00001e029e0b677a2b31265dc3e8ae70" class="h-9 w-9 shrink-0 rounded-lg">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">5K Followers Instagram</p><p class="text-xs text-muted">@noktis__ · superato</p></div>
+        <span class="text-xs text-muted whitespace-nowrap">Feb</span>
+      </a>
+    </div>
+    <div id="milestones-pagination" class="flex items-center justify-between border-t border-border px-5 py-3 shrink-0 hidden">
+      <button id="milestones-pagination-prev" class="rounded-full border border-white/30 px-4 py-1.5 text-xs font-bold text-white transition hover:bg-white/10 disabled:opacity-30" disabled>Prev</button>
+      <span id="milestones-pagination-info" class="text-xs text-muted"></span>
+      <button id="milestones-pagination-next" class="rounded-full border border-white/30 px-4 py-1.5 text-xs font-bold text-white transition hover:bg-white/10">Next</button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(() => {
+  const mModal = document.getElementById('milestones-modal');
+  document.getElementById('open-milestones-modal')?.addEventListener('click', () => mModal.showModal());
+  document.getElementById('close-milestones-modal')?.addEventListener('click', () => mModal.close());
+  mModal.addEventListener('click', (e) => { if (e.target === mModal) mModal.close(); });
+})();
+</script>
+
+
+<!-- ═══ ALL PLAYLISTS MODAL ═══ -->
+<dialog id="playlists-modal" class="rounded-2xl border border-white/10 bg-surface/95 backdrop-blur-xl p-0 backdrop:bg-black/70 backdrop:backdrop-blur-sm w-full max-w-2xl text-white">
+  <div class="flex flex-col max-h-[80vh]">
+    <div class="flex items-center justify-between border-b border-border px-5 py-4 shrink-0">
+      <h3 class="text-xl font-black">All Playlists</h3>
+      <button id="close-playlists-modal" class="flex h-9 w-9 items-center justify-center rounded-full border border-border text-white transition hover:border-white/30 hover:bg-white/10">
+        <span class="material-symbols-outlined text-lg">close</span>
+      </button>
+    </div>
+    <!-- Switch Recenti / Removed -->
+    <div class="flex gap-2 px-5 py-3 border-b border-border shrink-0">
+      <button data-pfilter="all-recent" data-active class="rounded-full border border-white/30 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white transition hover:border-white hover:bg-white/10 data-[active]:border-white data-[active]:bg-white/15">Recenti</button>
+      <button data-pfilter="all-removed"             class="rounded-full border border-white/30 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white transition hover:border-white hover:bg-white/10 data-[active]:border-white data-[active]:bg-white/15">Removed</button>
+    </div>
+    <div class="overflow-y-auto">
+      <!-- Recenti list -->
+      <div data-pview="all-recent" class="divide-y divide-border">
+        <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+          <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84c50045346e894c55bf5dcb0f" class="h-9 w-9 rounded-lg">
+          <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">TOP POP HITS</p><p class="text-xs text-muted">by Analias · 25 Mag</p></div>
+          <div class="text-right"><p class="text-sm font-bold text-white">18.8K</p><p class="text-xs text-muted">followers</p></div>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+          <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84b8fef7bc9526cb1ad972acb6" class="h-9 w-9 rounded-lg">
+          <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Road Trip | Summer Hits 2026</p><p class="text-xs text-muted">by chrismeyer · 23 Mag</p></div>
+          <div class="text-right"><p class="text-sm font-bold text-white">10.1K</p><p class="text-xs text-muted">followers</p></div>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+          <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84c50045346e894c55bf5dcb0f" class="h-9 w-9 rounded-lg">
+          <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Indie Vibes 2026</p><p class="text-xs text-muted">by musiclover · 20 Mag</p></div>
+          <div class="text-right"><p class="text-sm font-bold text-white">7.4K</p><p class="text-xs text-muted">followers</p></div>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+          <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84b8fef7bc9526cb1ad972acb6" class="h-9 w-9 rounded-lg">
+          <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Nordic Noir</p><p class="text-xs text-muted">by Tomas Raae · 18 Mag</p></div>
+          <div class="text-right"><p class="text-sm font-bold text-white">8.1K</p><p class="text-xs text-muted">followers</p></div>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+          <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84c50045346e894c55bf5dcb0f" class="h-9 w-9 rounded-lg">
+          <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Chill &amp; Alt</p><p class="text-xs text-muted">by playlist.it · 15 Mag</p></div>
+          <div class="text-right"><p class="text-sm font-bold text-white">5.2K</p><p class="text-xs text-muted">followers</p></div>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+          <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84c50045346e894c55bf5dcb0f" class="h-9 w-9 rounded-lg">
+          <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Dreamy Indie</p><p class="text-xs text-muted">by vibesonly · 10 Mag</p></div>
+          <div class="text-right"><p class="text-sm font-bold text-white">4.8K</p><p class="text-xs text-muted">followers</p></div>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+          <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84b8fef7bc9526cb1ad972acb6" class="h-9 w-9 rounded-lg">
+          <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Alt Pop 2026</p><p class="text-xs text-muted">by altpopradio · 8 Mag</p></div>
+          <div class="text-right"><p class="text-sm font-bold text-white">6.3K</p><p class="text-xs text-muted">followers</p></div>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+          <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84c50045346e894c55bf5dcb0f" class="h-9 w-9 rounded-lg">
+          <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Bedroom Pop Essentials</p><p class="text-xs text-muted">by moodsetter · 5 Mag</p></div>
+          <div class="text-right"><p class="text-sm font-bold text-white">9.0K</p><p class="text-xs text-muted">followers</p></div>
+        </a>
+      </div>
+      <!-- Removed list -->
+      <div data-pview="all-removed" class="divide-y divide-border hidden">
+        <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+          <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84c50045346e894c55bf5dcb0f" class="h-9 w-9 rounded-lg">
+          <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Chill Vibes Only</p><p class="text-xs text-muted">Rimossa 12 Mag</p></div>
+          <div class="text-right"><p class="text-sm font-bold text-white">3.2K</p><p class="text-xs text-muted">followers</p></div>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+          <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84b8fef7bc9526cb1ad972acb6" class="h-9 w-9 rounded-lg">
+          <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Sad Hours</p><p class="text-xs text-muted">Rimossa 3 Mag</p></div>
+          <div class="text-right"><p class="text-sm font-bold text-white">5.7K</p><p class="text-xs text-muted">followers</p></div>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+          <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84c50045346e894c55bf5dcb0f" class="h-9 w-9 rounded-lg">
+          <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Lo-fi Bedroom Pop</p><p class="text-xs text-muted">Rimossa 28 Apr</p></div>
+          <div class="text-right"><p class="text-sm font-bold text-white">2.1K</p><p class="text-xs text-muted">followers</p></div>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+          <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84b8fef7bc9526cb1ad972acb6" class="h-9 w-9 rounded-lg">
+          <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Night Drive</p><p class="text-xs text-muted">Rimossa 20 Apr</p></div>
+          <div class="text-right"><p class="text-sm font-bold text-white">4.4K</p><p class="text-xs text-muted">followers</p></div>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+          <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84c50045346e894c55bf5dcb0f" class="h-9 w-9 rounded-lg">
+          <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Indie Feels</p><p class="text-xs text-muted">Rimossa 10 Apr</p></div>
+          <div class="text-right"><p class="text-sm font-bold text-white">1.9K</p><p class="text-xs text-muted">followers</p></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(() => {
+  // Playlists modal
+  const pModal = document.getElementById('playlists-modal');
+  document.getElementById('open-playlists-modal')?.addEventListener('click', () => pModal.showModal());
+  document.getElementById('close-playlists-modal')?.addEventListener('click', () => pModal.close());
+  pModal.addEventListener('click', (e) => { if (e.target === pModal) pModal.close(); });
+  document.querySelectorAll('[data-pfilter]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const f = btn.getAttribute('data-pfilter');
+      document.querySelectorAll('[data-pfilter]').forEach(b => b.toggleAttribute('data-active', b === btn));
+      document.querySelectorAll('[data-pview]').forEach(v => v.classList.toggle('hidden', v.dataset.pview !== f));
+    });
+  });
+
+  // Weekly tasks: toggle goal-done style on check
+  document.querySelectorAll('.task-label input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const label = cb.closest('.task-label');
+      if (cb.checked) {
+        label.style.background = 'linear-gradient(to right, #116dff, #0053d8)';
+        label.style.boxShadow = '0 4px 14px rgba(17,109,255,0.45), inset 0 1px 0 rgba(255,255,255,0.15)';
+        label.style.borderColor = 'rgba(255,255,255,0.2)';
+      } else {
+        label.style.background = '';
+        label.style.boxShadow = '';
+        label.style.borderColor = '';
+      }
+    });
+  });
+})();
+</script>
+
+
+<!-- ═══ ALL TRACKS POPULARITY MODAL ═══ -->
+<dialog id="tracks-modal" class="rounded-2xl border border-white/10 bg-surface/95 backdrop-blur-xl p-0 backdrop:bg-black/70 backdrop:backdrop-blur-sm w-full max-w-2xl text-white">
+  <div class="flex flex-col max-h-[80vh]">
+    <div class="flex items-center justify-between border-b border-border px-5 py-4 shrink-0">
+      <div>
+        <h3 class="text-xl font-black">Popularity by Track</h3>
+        <p class="text-xs text-muted mt-0.5">Scala 0 → 100 · clicca per aprire il grafico</p>
+      </div>
+      <button id="close-tracks-modal" class="flex h-9 w-9 items-center justify-center rounded-full border border-border text-white transition hover:border-white/30 hover:bg-white/10">
+        <span class="material-symbols-outlined text-lg">close</span>
+      </button>
+    </div>
+    <div class="overflow-y-auto divide-y divide-border">
+      <button data-kpi-chart="track-killed" class="flex w-full items-center gap-3 px-5 py-3 text-left hover:bg-white/5">
+        <img src="https://i.scdn.co/image/ab67616d00001e028ed7959c2360cc3fcfccd9c6" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">i killed all your plants</p><p class="text-xs text-muted">Apr 2026</p></div>
+        <div class="flex items-center gap-2 shrink-0">
+          <span class="text-lg font-black text-white w-8 text-right shrink-0">47</span>
+          <span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-2 py-0.5 text-xs font-bold text-positive">+17</span>
+        </div>
+      </button>
+      <button data-kpi-chart="track-goodbyes" class="flex w-full items-center gap-3 px-5 py-3 text-left hover:bg-white/5">
+        <img src="https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">goodbyes</p><p class="text-xs text-muted">ft. townsend · Sep 2022</p></div>
+        <div class="flex items-center gap-2 shrink-0">
+          <span class="text-lg font-black text-white w-8 text-right shrink-0">41</span>
+          <span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-2 py-0.5 text-xs font-bold text-muted">−2</span>
+        </div>
+      </button>
+      <button data-kpi-chart="track-fail" class="flex w-full items-center gap-3 px-5 py-3 text-left hover:bg-white/5">
+        <img src="https://i.scdn.co/image/ab67616d00001e02886b188290fbcff15d6fe521" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">why did i fail</p><p class="text-xs text-muted">ft. townsend · Mar 2024</p></div>
+        <div class="flex items-center gap-2 shrink-0">
+          <span class="text-lg font-black text-white w-8 text-right shrink-0">38</span>
+          <span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-2 py-0.5 text-xs font-bold text-muted">—</span>
+        </div>
+      </button>
+      <button data-kpi-chart="track-obsessed" class="flex w-full items-center gap-3 px-5 py-3 text-left hover:bg-white/5">
+        <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">obsessed</p><p class="text-xs text-muted">ft. Lyhre · Nov 2023</p></div>
+        <div class="flex items-center gap-2 shrink-0">
+          <span class="text-lg font-black text-white w-8 text-right shrink-0">35</span>
+          <span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-2 py-0.5 text-xs font-bold text-muted">−1</span>
+        </div>
+      </button>
+      <button data-kpi-chart="track-life" class="flex w-full items-center gap-3 px-5 py-3 text-left hover:bg-white/5">
+        <img src="https://i.scdn.co/image/ab67616d00001e029e0b677a2b31265dc3e8ae70" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">another life</p><p class="text-xs text-muted">Nov 2024</p></div>
+        <div class="flex items-center gap-2 shrink-0">
+          <span class="text-lg font-black text-white w-8 text-right shrink-0">30</span>
+          <span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-2 py-0.5 text-xs font-bold text-positive">+3</span>
+        </div>
+      </button>
+      <button data-kpi-chart="track-fail" class="flex w-full items-center gap-3 px-5 py-3 text-left hover:bg-white/5">
+        <img src="https://i.scdn.co/image/ab67616d00001e02886b188290fbcff15d6fe521" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">feel something</p><p class="text-xs text-muted">Mar 2023</p></div>
+        <div class="flex items-center gap-2 shrink-0">
+          <span class="text-lg font-black text-white w-8 text-right shrink-0">27</span>
+          <span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-2 py-0.5 text-xs font-bold text-muted">—</span>
+        </div>
+      </button>
+      <button data-kpi-chart="track-goodbyes" class="flex w-full items-center gap-3 px-5 py-3 text-left hover:bg-white/5">
+        <img src="https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">unforgettable</p><p class="text-xs text-muted">Jan 2022</p></div>
+        <div class="flex items-center gap-2 shrink-0">
+          <span class="text-lg font-black text-white w-8 text-right shrink-0">22</span>
+          <span class="inline-flex items-center rounded-full border border-white/25 bg-black/40 px-2 py-0.5 text-xs font-bold text-muted">−1</span>
+        </div>
+      </button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(() => {
+  const tModal = document.getElementById('tracks-modal');
+  const kpiModal = document.getElementById('kpi-modal');
+  document.getElementById('open-tracks-modal')?.addEventListener('click', () => tModal.showModal());
+  document.getElementById('close-tracks-modal')?.addEventListener('click', () => tModal.close());
+  tModal.addEventListener('click', (e) => { if (e.target === tModal) tModal.close(); });
+  // Clicking a track row opens the KPI chart modal (close tracks first)
+  tModal.querySelectorAll('[data-kpi-chart]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      tModal.close();
+    });
+  });
+})();
+</script>
+
+
+<!-- ═══ YOUTUBE TRACKS MODAL ═══ -->
+<dialog id="yt-tracks-modal" class="rounded-2xl border border-white/10 bg-surface/95 backdrop-blur-xl p-0 backdrop:bg-black/70 backdrop:backdrop-blur-sm w-full max-w-2xl text-white">
+  <div class="flex flex-col max-h-[85vh]">
+    <div class="flex items-center justify-between border-b border-border px-5 py-4 shrink-0">
+      <div class="flex items-center gap-3">
+        <button id="yt-tracks-back-btn" class="hidden flex h-8 w-8 items-center justify-center rounded-full border border-border text-white hover:bg-white/10 transition shrink-0">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        <div>
+          <h3 id="yt-tracks-modal-title" class="text-xl font-black flex items-center gap-2"><svg class="h-4 w-4"><use href="#logo-youtube"/></svg>Top Tracks · Views</h3>
+          <p id="yt-tracks-modal-sub" class="text-xs text-muted mt-0.5">Seleziona un brano per vedere i video</p>
+        </div>
+      </div>
+      <button id="close-yt-tracks-modal" class="flex h-9 w-9 items-center justify-center rounded-full border border-border text-white transition hover:border-white/30 hover:bg-white/10">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <!-- State 1: track selector -->
+    <div id="yt-track-select-view" class="overflow-y-auto divide-y divide-border flex-1">
+      <button data-yttrackselect="unforgettable" class="flex w-full items-center gap-4 px-5 py-4 hover:bg-white/5 text-left transition">
+        <img src="https://i.scdn.co/image/ab67616d00001e02fbdcd32a01bd6e32ab578e1a" class="h-14 w-14 rounded-xl shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold text-white">Unforgettable</p>
+          <p class="text-xs text-muted">2022</p>
+        </div>
+        <span class="text-xs text-muted shrink-0">1.28M views · 12 video →</span>
+      </button>
+      <button data-yttrackselect="berlin" class="flex w-full items-center gap-4 px-5 py-4 hover:bg-white/5 text-left transition">
+        <img src="https://i.scdn.co/image/ab67616d00001e029494eeac6a088d0460830996" class="h-14 w-14 rounded-xl shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold text-white">Berlin</p>
+          <p class="text-xs text-muted">2023</p>
+        </div>
+        <span class="text-xs text-muted shrink-0">1.06M views · 10 video →</span>
+      </button>
+      <button data-yttrackselect="obsessed" class="flex w-full items-center gap-4 px-5 py-4 hover:bg-white/5 text-left transition">
+        <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" class="h-14 w-14 rounded-xl shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold text-white">obsessed</p>
+          <p class="text-xs text-muted">ft. Lyhre · 2023</p>
+        </div>
+        <span class="text-xs text-muted shrink-0">312K views · 8 video →</span>
+      </button>
+      <button data-yttrackselect="goodbyes" class="flex w-full items-center gap-4 px-5 py-4 hover:bg-white/5 text-left transition">
+        <img src="https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47" class="h-14 w-14 rounded-xl shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold text-white">goodbyes</p>
+          <p class="text-xs text-muted">ft. townsend · 2022</p>
+        </div>
+        <span class="text-xs text-muted shrink-0">208K views · 8 video →</span>
+      </button>
+    </div>
+    <!-- State 2: video list -->
+    <div id="yt-video-list-wrap" class="hidden flex-col flex-1 overflow-hidden">
+      <div id="yt-tracks-video-list" class="overflow-y-auto divide-y divide-border flex-1"></div>
+      <div id="yt-tracks-pagination" class="flex items-center justify-between border-t border-border px-5 py-3 shrink-0 hidden">
+        <button id="yt-tracks-pg-prev" class="rounded-full border border-white/30 px-4 py-1.5 text-xs font-bold text-white transition hover:bg-white/10 disabled:opacity-30" disabled>Prev</button>
+        <span id="yt-tracks-pg-info" class="text-xs text-muted"></span>
+        <button id="yt-tracks-pg-next" class="rounded-full border border-white/30 px-4 py-1.5 text-xs font-bold text-white transition hover:bg-white/10">Next</button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<!-- ═══ TIKTOK VIDEOS MODAL ═══ -->
+<dialog id="tiktok-modal" class="rounded-2xl border border-white/10 bg-surface/95 backdrop-blur-xl p-0 backdrop:bg-black/70 backdrop:backdrop-blur-sm w-full max-w-2xl text-white">
+  <div class="flex flex-col max-h-[85vh]">
+    <div class="flex items-center justify-between border-b border-border px-5 py-4 shrink-0">
+      <div class="flex items-center gap-3">
+        <button id="tt-back-btn" class="hidden flex h-8 w-8 items-center justify-center rounded-full border border-border text-white hover:bg-white/10 transition shrink-0">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        <div>
+          <h3 id="tt-modal-title" class="text-xl font-black flex items-center gap-2"><svg class="h-4 w-4"><use href="#logo-tiktok"/></svg>Video TikTok Recents</h3>
+          <p id="tt-modal-sub" class="text-xs text-muted mt-0.5">Seleziona un brano per vedere i video</p>
+        </div>
+      </div>
+      <button id="close-tiktok-modal" class="flex h-9 w-9 items-center justify-center rounded-full border border-border text-white transition hover:border-white/30 hover:bg-white/10">
+        <span class="material-symbols-outlined text-lg">close</span>
+      </button>
+    </div>
+    <!-- State 1: song selector -->
+    <div id="tt-song-select-view" class="overflow-y-auto divide-y divide-border flex-1">
+      <button data-ttsongselector="obsessed" class="flex w-full items-center gap-4 px-5 py-4 hover:bg-white/5 text-left transition">
+        <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" class="h-14 w-14 rounded-xl shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold text-white">obsessed</p>
+          <p class="text-xs text-muted">ft. Lyhre · Nov 2023</p>
+        </div>
+        <span class="text-xs text-muted shrink-0">8 video →</span>
+      </button>
+      <button data-ttsongselector="goodbyes" class="flex w-full items-center gap-4 px-5 py-4 hover:bg-white/5 text-left transition">
+        <img src="https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47" class="h-14 w-14 rounded-xl shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold text-white">goodbyes</p>
+          <p class="text-xs text-muted">ft. townsend · Sep 2022</p>
+        </div>
+        <span class="text-xs text-muted shrink-0">5 video →</span>
+      </button>
+      <button data-ttsongselector="killed" class="flex w-full items-center gap-4 px-5 py-4 hover:bg-white/5 text-left transition">
+        <img src="https://i.scdn.co/image/ab67616d00001e028ed7959c2360cc3fcfccd9c6" class="h-14 w-14 rounded-xl shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold text-white">i killed all your plants</p>
+          <p class="text-xs text-muted">Apr 2026</p>
+        </div>
+        <span class="text-xs text-muted shrink-0">3 video →</span>
+      </button>
+      <button data-ttsongselector="another" class="flex w-full items-center gap-4 px-5 py-4 hover:bg-white/5 text-left transition">
+        <img src="https://i.scdn.co/image/ab67616d00001e029e0b677a2b31265dc3e8ae70" class="h-14 w-14 rounded-xl shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold text-white">another life</p>
+          <p class="text-xs text-muted">Nov 2024</p>
+        </div>
+        <span class="text-xs text-muted shrink-0">2 video →</span>
+      </button>
+      <button data-ttsongselector="fail" class="flex w-full items-center gap-4 px-5 py-4 hover:bg-white/5 text-left transition">
+        <img src="https://i.scdn.co/image/ab67616d00001e02886b188290fbcff15d6fe521" class="h-14 w-14 rounded-xl shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold text-white">why did i fail</p>
+          <p class="text-xs text-muted">ft. townsend · Mar 2024</p>
+        </div>
+        <span class="text-xs text-muted shrink-0">2 video →</span>
+      </button>
+    </div>
+    <!-- State 2: video list -->
+    <div id="tt-video-list-wrap" class="hidden flex-col flex-1 overflow-hidden">
+      <div id="tiktok-list" class="overflow-y-auto divide-y divide-border flex-1">
+
+      </div>
+      <div id="tiktok-pagination" class="flex items-center justify-between border-t border-border px-5 py-3 shrink-0">
+        <button id="tiktok-prev" class="rounded-full border border-white/30 px-4 py-1.5 text-xs font-bold text-white transition hover:bg-white/10 disabled:opacity-30" disabled>Prev</button>
+        <span id="tiktok-page-info" class="text-xs text-muted">Pag. 1 / 2</span>
+        <button id="tiktok-next" class="rounded-full border border-white/30 px-4 py-1.5 text-xs font-bold text-white transition hover:bg-white/10">Next</button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(() => {
+  // Generic paginator
+  function paginate(listId, prevId, nextId, infoId, perPage = 10) {
+    const list = document.getElementById(listId);
+    if (!list) return;
+    let page = 0;
+    function render() {
+      const rows = list.querySelectorAll(':scope > *');
+      const total = rows.length;
+      const pages = Math.ceil(total / perPage);
+      rows.forEach((r, i) => r.classList.toggle('hidden', i < page * perPage || i >= (page + 1) * perPage));
+      const info = document.getElementById(infoId);
+      if (info) info.textContent = `Pag. ${page + 1} / ${pages}`;
+      const prev = document.getElementById(prevId);
+      const next = document.getElementById(nextId);
+      if (prev) prev.disabled = page === 0;
+      if (next) next.disabled = page >= pages - 1;
+    }
+    document.getElementById(prevId)?.addEventListener('click', () => { page = Math.max(0, page-1); render(); });
+    document.getElementById(nextId)?.addEventListener('click', () => { page++; render(); });
+    render();
+  }
+
+  // YouTube Tracks modal — two-state: track-select → video-list
+  (function() {
+    const ytTracksModal = document.getElementById('yt-tracks-modal');
+
+    const YT_VIDEOS = {
+      unforgettable: [
+        {creator:'nova_beats',art:'fbdcd32a01bd6e32ab578e1a',name:'Nova Beats',desc:'Unforgettable · lyric edit',views:'2.1M views',date:'12 Apr 2026',bg:'116dff'},
+        {creator:'lux_edit',art:'fbdcd32a01bd6e32ab578e1a',name:'Lux Edit',desc:'this song is everything',views:'980K views',date:'8 Apr 2026',bg:'8b4cb7'},
+        {creator:'sofía_m',art:'fbdcd32a01bd6e32ab578e1a',name:'Sofía M.',desc:'Unforgettable slowed + reverb',views:'741K views',date:'3 Apr 2026',bg:'0053d8'},
+        {creator:'dreamwav',art:'fbdcd32a01bd6e32ab578e1a',name:'DreamWav',desc:'best tracks of 2022',views:'512K views',date:'28 Mar 2026',bg:'116dff'},
+        {creator:'ario_vx',art:'fbdcd32a01bd6e32ab578e1a',name:'Ario Vx',desc:'Noktis - Unforgettable cover',views:'389K views',date:'21 Mar 2026',bg:'6d3a91'},
+        {creator:'viralcuts',art:'fbdcd32a01bd6e32ab578e1a',name:'ViralCuts',desc:'playlist chill vol.4',views:'310K views',date:'15 Mar 2026',bg:'116dff'},
+        {creator:'luna_re',art:'fbdcd32a01bd6e32ab578e1a',name:'Luna Re',desc:'study with me',views:'205K views',date:'10 Mar 2026',bg:'8b4cb7'},
+        {creator:'beatdrop',art:'fbdcd32a01bd6e32ab578e1a',name:'BeatDrop',desc:'Unforgettable remix edit',views:'178K views',date:'5 Mar 2026',bg:'0053d8'},
+        {creator:'xander_z',art:'fbdcd32a01bd6e32ab578e1a',name:'Xander Z',desc:'top hits spring 2026',views:'144K views',date:'28 Feb 2026',bg:'116dff'},
+        {creator:'mel_wav',art:'fbdcd32a01bd6e32ab578e1a',name:'Mel Wav',desc:'Noktis best of compilation',views:'121K views',date:'20 Feb 2026',bg:'6d3a91'},
+        {creator:'sol_edit',art:'fbdcd32a01bd6e32ab578e1a',name:'Sol Edit',desc:'sunset playlist',views:'98K views',date:'14 Feb 2026',bg:'8b4cb7'},
+        {creator:'kwave99',art:'fbdcd32a01bd6e32ab578e1a',name:'KWave99',desc:'sad but beautiful',views:'87K views',date:'9 Feb 2026',bg:'116dff'},
+      ],
+      berlin: [
+        {creator:'berlinvibes',art:'9494eeac6a088d0460830996',name:'BerlinVibes',desc:'Berlin - midnight edit',views:'1.4M views',date:'10 Apr 2026',bg:'116dff'},
+        {creator:'nightdrive',art:'9494eeac6a088d0460830996',name:'NightDrive',desc:'driving at night - Berlin',views:'890K views',date:'5 Apr 2026',bg:'6d3a91'},
+        {creator:'remi_audio',art:'9494eeac6a088d0460830996',name:'Remi Audio',desc:'Berlin slowed reverb',views:'654K views',date:'30 Mar 2026',bg:'0053d8'},
+        {creator:'citylights',art:'9494eeac6a088d0460830996',name:'CityLights',desc:'urban playlist 2026',views:'430K views',date:'22 Mar 2026',bg:'116dff'},
+        {creator:'fx_cuts',art:'9494eeac6a088d0460830996',name:'FX Cuts',desc:'Berlin - aesthetic edit',views:'320K views',date:'16 Mar 2026',bg:'8b4cb7'},
+        {creator:'astro_mix',art:'9494eeac6a088d0460830996',name:'AstroMix',desc:'late night playlist',views:'250K views',date:'9 Mar 2026',bg:'116dff'},
+        {creator:'velv_edit',art:'9494eeac6a088d0460830996',name:'VelvEdit',desc:'Noktis Berlin fan cam',views:'187K views',date:'3 Mar 2026',bg:'6d3a91'},
+        {creator:'pulse_yt',art:'9494eeac6a088d0460830996',name:'PulseYT',desc:'best alternative 2026',views:'145K views',date:'25 Feb 2026',bg:'0053d8'},
+        {creator:'zona_r',art:'9494eeac6a088d0460830996',name:'Zona R',desc:'Berlin x Unforgettable mashup',views:'112K views',date:'18 Feb 2026',bg:'116dff'},
+        {creator:'echo_lab',art:'9494eeac6a088d0460830996',name:'EchoLab',desc:'Berlin instrumental cover',views:'99K views',date:'11 Feb 2026',bg:'8b4cb7'},
+      ],
+      obsessed: [
+        {creator:'mylla',art:'b39913eb889f37e592318e9e',name:'Mylla Ramos',desc:'obsessed ft. Lyhre edit',views:'520K views',date:'9 Apr 2026',bg:'116dff'},
+        {creator:'lyhre_fan',art:'b39913eb889f37e592318e9e',name:'Lyhre Fan',desc:'obsessed but better',views:'310K views',date:'4 Apr 2026',bg:'8b4cb7'},
+        {creator:'chillhouse',art:'b39913eb889f37e592318e9e',name:'ChillHouse',desc:'obsessed slowed reverb',views:'215K views',date:'28 Mar 2026',bg:'6d3a91'},
+        {creator:'pop_cuts',art:'b39913eb889f37e592318e9e',name:'PopCuts',desc:'Noktis x Lyhre best songs',views:'178K views',date:'20 Mar 2026',bg:'116dff'},
+        {creator:'wav_drop',art:'b39913eb889f37e592318e9e',name:'WavDrop',desc:'obsessed late night version',views:'134K views',date:'13 Mar 2026',bg:'0053d8'},
+        {creator:'sol_vibes',art:'b39913eb889f37e592318e9e',name:'SolVibes',desc:'playlist dreamy pop',views:'98K views',date:'6 Mar 2026',bg:'8b4cb7'},
+        {creator:'neon_mix',art:'b39913eb889f37e592318e9e',name:'NeonMix',desc:'obsessed x berlin mashup',views:'77K views',date:'28 Feb 2026',bg:'116dff'},
+        {creator:'aria_yt',art:'b39913eb889f37e592318e9e',name:'Aria YT',desc:'best collabs 2026',views:'62K views',date:'20 Feb 2026',bg:'6d3a91'},
+      ],
+      goodbyes: [
+        {creator:'townsend_fan',art:'8cfe25ed0d181a59b2adec47',name:'Townsend Fan',desc:'goodbyes ft. townsend edit',views:'410K views',date:'8 Apr 2026',bg:'116dff'},
+        {creator:'sad_wavs',art:'8cfe25ed0d181a59b2adec47',name:'SadWavs',desc:'goodbyes slowed + rain',views:'280K views',date:'2 Apr 2026',bg:'6d3a91'},
+        {creator:'latenight',art:'8cfe25ed0d181a59b2adec47',name:'LateNight',desc:'4am playlist vol.2',views:'198K views',date:'25 Mar 2026',bg:'0053d8'},
+        {creator:'neo_edit',art:'8cfe25ed0d181a59b2adec47',name:'NeoEdit',desc:'goodbyes aesthetic video',views:'156K views',date:'18 Mar 2026',bg:'8b4cb7'},
+        {creator:'iris_mix',art:'8cfe25ed0d181a59b2adec47',name:'IrisMix',desc:'Noktis goodbyes cover',views:'124K views',date:'10 Mar 2026',bg:'116dff'},
+        {creator:'zara_wav',art:'8cfe25ed0d181a59b2adec47',name:'Zara Wav',desc:'townsend x Noktis best tracks',views:'91K views',date:'3 Mar 2026',bg:'6d3a91'},
+        {creator:'deepcut',art:'8cfe25ed0d181a59b2adec47',name:'DeepCut',desc:'indie playlist 2026',views:'73K views',date:'24 Feb 2026',bg:'0053d8'},
+        {creator:'halo_yt',art:'8cfe25ed0d181a59b2adec47',name:'HaloYT',desc:'goodbyes instrumental cover',views:'58K views',date:'16 Feb 2026',bg:'116dff'},
+      ],
+    };
+
+    const YT_TRACK_LABELS = {
+      unforgettable:'Unforgettable', berlin:'Berlin', obsessed:'obsessed', goodbyes:'goodbyes'
+    };
+
+    const trackSelectView = document.getElementById('yt-track-select-view');
+    const videoWrap       = document.getElementById('yt-video-list-wrap');
+    const backBtn         = document.getElementById('yt-tracks-back-btn');
+    const titleEl         = document.getElementById('yt-tracks-modal-title');
+    const subEl           = document.getElementById('yt-tracks-modal-sub');
+    const videoList       = document.getElementById('yt-tracks-video-list');
+    const pgBar           = document.getElementById('yt-tracks-pagination');
+    const pgInfo          = document.getElementById('yt-tracks-pg-info');
+    const pgPrev          = document.getElementById('yt-tracks-pg-prev');
+    const pgNext          = document.getElementById('yt-tracks-pg-next');
+    let ytPage = 0;
+
+    function buildVideoRow(v) {
+      return '<div class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">' +
+        '<img src="https://api.dicebear.com/7.x/thumbs/svg?seed=' + v.creator + '&backgroundColor=' + v.bg + '&scale=80" class="h-8 w-8 shrink-0 rounded-full">' +
+        '<img src="https://i.scdn.co/image/ab67616d00001e02' + v.art + '" class="h-9 w-9 shrink-0 rounded-lg">' +
+        '<div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate text-white">' + v.name + '</p>' +
+        '<p class="text-xs text-white/60 truncate">' + v.desc + '</p></div>' +
+        '<div class="text-right shrink-0"><p class="text-xs font-bold text-white">' + v.views + '</p>' +
+        '<p class="text-xs text-white/60">' + v.date + '</p></div></div>';
+    }
+
+    function showTrackSelect() {
+      trackSelectView.classList.remove('hidden');
+      videoWrap.classList.add('hidden'); videoWrap.classList.remove('flex');
+      backBtn.classList.add('hidden');
+      titleEl.innerHTML = '<svg class="h-4 w-4"><use href="#logo-youtube"/></svg>Top Tracks · Views';
+      subEl.textContent = 'Seleziona un brano per vedere i video';
+    }
+
+    function showTrackVideos(trackId) {
+      const videos = YT_VIDEOS[trackId] || [];
+      const label  = YT_TRACK_LABELS[trackId] || trackId;
+      trackSelectView.classList.add('hidden');
+      videoWrap.classList.remove('hidden'); videoWrap.classList.add('flex');
+      backBtn.classList.remove('hidden');
+      titleEl.innerHTML = '<svg class="h-4 w-4"><use href="#logo-youtube"/></svg>' + label;
+      subEl.textContent = 'Video recenti che hanno usato questa traccia';
+      // Paginate
+      const perPage = 10;
+      const pages = Math.ceil(videos.length / perPage);
+      ytPage = 0;
+      function renderPage() {
+        videoList.innerHTML = videos.slice(ytPage * perPage, (ytPage+1) * perPage).map(buildVideoRow).join('');
+        pgInfo.textContent = pages > 1 ? 'Pag. ' + (ytPage+1) + ' / ' + pages : '';
+        pgPrev.disabled = ytPage === 0;
+        pgNext.disabled = ytPage >= pages - 1;
+        pgBar.classList.toggle('hidden', pages <= 1);
+      }
+      pgPrev.onclick = () => { ytPage = Math.max(0, ytPage-1); renderPage(); };
+      pgNext.onclick = () => { ytPage = Math.min(pages-1, ytPage+1); renderPage(); };
+      renderPage();
+    }
+
+    // View All → track select
+    document.getElementById('open-yt-tracks-modal')?.addEventListener('click', () => {
+      showTrackSelect();
+      ytTracksModal.showModal();
+    });
+    // Main card rows → direct video list
+    document.querySelectorAll('[data-yt-track]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        showTrackVideos(btn.dataset.ytTrack);
+        ytTracksModal.showModal();
+      });
+    });
+    // Track cards inside modal
+    document.querySelectorAll('[data-yttrackselect]').forEach(btn => {
+      btn.addEventListener('click', () => showTrackVideos(btn.dataset.yttrackselect));
+    });
+    // Back
+    backBtn.addEventListener('click', showTrackSelect);
+    // Close
+    document.getElementById('close-yt-tracks-modal')?.addEventListener('click', () => ytTracksModal.close());
+    ytTracksModal?.addEventListener('click', (e) => { if (e.target === ytTracksModal) ytTracksModal.close(); });
+  })();
+
+  // TikTok modal — two-state: song-select → video-list
+  (function() {
+    const ttModal     = document.getElementById('tiktok-modal');
+    const songView    = document.getElementById('tt-song-select-view');
+    const videoWrap   = document.getElementById('tt-video-list-wrap');
+    const backBtn     = document.getElementById('tt-back-btn');
+    const titleEl     = document.getElementById('tt-modal-title');
+    const subEl       = document.getElementById('tt-modal-sub');
+    const list        = document.getElementById('tiktok-list');
+
+    const SONG_LABELS = {
+      obsessed:'obsessed · ft. Lyhre', goodbyes:'goodbyes · ft. townsend',
+      killed:'i killed all your plants', another:'another life', fail:'why did i fail · ft. townsend'
+    };
+
+    function allRows() { return [...list.querySelectorAll('[data-song]')]; }
+
+    function showSongSelect() {
+      songView.classList.remove('hidden');
+      videoWrap.classList.add('hidden'); videoWrap.classList.remove('flex');
+      backBtn.classList.add('hidden');
+      titleEl.innerHTML = '<svg class="h-4 w-4"><use href="#logo-tiktok"/></svg>Video TikTok Recents';
+      subEl.textContent = 'Seleziona un brano per vedere i video';
+    }
+
+    function showVideoList(song) {
+      songView.classList.add('hidden');
+      videoWrap.classList.remove('hidden'); videoWrap.classList.add('flex');
+      backBtn.classList.remove('hidden');
+      const label = SONG_LABELS[song] || song;
+      titleEl.innerHTML = '<svg class="h-4 w-4"><use href="#logo-tiktok"/></svg>' + label;
+      subEl.textContent = 'Video dei creator che hanno usato questo brano';
+      // Filter
+      allRows().forEach(r => r.classList.toggle('hidden', r.dataset.song !== song));
+      // Reset pagination
+      paginate('tiktok-list', 'tiktok-prev', 'tiktok-next', 'tiktok-page-info');
+    }
+
+    // View All → song select
+    document.getElementById('open-tiktok-modal')?.addEventListener('click', () => {
+      showSongSelect();
+      ttModal.showModal();
+    });
+    // Main card rows → direct video list
+    document.querySelectorAll('[data-ttsong]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        showVideoList(btn.dataset.ttsong);
+        ttModal.showModal();
+      });
+    });
+    // Song selector cards inside modal
+    document.querySelectorAll('[data-ttsongselector]').forEach(btn => {
+      btn.addEventListener('click', () => showVideoList(btn.dataset.ttsongselector));
+    });
+    // Back
+    backBtn.addEventListener('click', showSongSelect);
+    // Close
+    document.getElementById('close-tiktok-modal')?.addEventListener('click', () => ttModal.close());
+    ttModal.addEventListener('click', (e) => { if (e.target === ttModal) ttModal.close(); });
+  })();
+
+  // Apply pagination to other modals too
+  // Activities modal
+  function wrapListForPagination(listEl, paginationContainerId) {
+    if (!listEl) return;
+    const rows = [...listEl.children].filter(el => !el.id || !el.id.includes('pagination'));
+    const total = rows.length;
+    if (total <= 10) return;
+    const pages = Math.ceil(total / 10);
+    let page = 0;
+    function render() {
+      rows.forEach((r, i) => r.classList.toggle('hidden', i < page * 10 || i >= (page + 1) * 10));
+      document.getElementById(paginationContainerId + '-info').textContent = `Pag. ${page+1} / ${pages}`;
+      document.getElementById(paginationContainerId + '-prev').disabled = page === 0;
+      document.getElementById(paginationContainerId + '-next').disabled = page >= pages - 1;
+    }
+    const pg = document.getElementById(paginationContainerId);
+    if (pg) {
+      pg.innerHTML = `<button id="${paginationContainerId}-prev" class="rounded-full border border-white/30 px-4 py-1.5 text-xs font-bold text-white transition hover:bg-white/10 disabled:opacity-30" disabled>Prev</button>
+      <span id="${paginationContainerId}-info" class="text-xs text-muted"></span>
+      <button id="${paginationContainerId}-next" class="rounded-full border border-white/30 px-4 py-1.5 text-xs font-bold text-white transition hover:bg-white/10">Next</button>`;
+      document.getElementById(paginationContainerId + '-prev').addEventListener('click', () => { page = Math.max(0,page-1); render(); });
+      document.getElementById(paginationContainerId + '-next').addEventListener('click', () => { page++; render(); });
+      pg.classList.remove('hidden');
+      render();
+    }
+  }
+
+  // Wire all modals pagination
+  [
+    ['activities-list',   'activities-pagination'],
+    ['milestones-modal',  'milestones-pagination'],
+    ['tiktok-list',       null],  // handled by paginate()
+  ].forEach(([listId, pgId]) => {
+    if (!pgId) return;
+    const list = document.getElementById(listId);
+    const pg   = document.getElementById(pgId);
+    if (list && pg) wrapListForPagination(list, pgId.replace('-pagination','') + '-pagination');
+  });
+
+  // Activities
+  const actList = document.getElementById('activities-list');
+  if (actList) wrapListForPagination(actList, 'activities-pagination');
+
+  // Milestones
+  const mList = document.querySelector('#milestones-modal .overflow-y-auto');
+  if (mList) { mList.id = 'milestones-list'; wrapListForPagination(mList, 'milestones-pagination'); }
+
+  // Playlists recenti (the visible one)
+  const pList = document.querySelector('[data-pview="all-recent"]');
+  if (pList) { pList.id = 'playlists-list'; wrapListForPagination(pList, 'playlists-pagination'); }
+
+  // Tracks
+  const trList = document.querySelector('#tracks-modal .overflow-y-auto');
+  if (trList) { trList.id = 'tracks-list'; wrapListForPagination(trList, 'tracks-pagination'); }
+})();
+</script>
+
+</body>
+</html>
