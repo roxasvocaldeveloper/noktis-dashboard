@@ -1548,7 +1548,7 @@
       <path d="${linePath}" fill="none" stroke="${d.color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
       <line data-crosshair x1="0" y1="${padT}" x2="0" y2="${padT+ch}" stroke="${d.color}" stroke-width="1" stroke-dasharray="3,3" opacity="0"/>
       <circle data-crosshair-dot r="5" fill="${d.color}" stroke="rgba(0,0,0,0.6)" stroke-width="2" opacity="0"/>
-      <rect data-chart-hit x="${padL}" y="${padT}" width="${cw}" height="${ch}" fill="transparent"/>`;
+      <rect data-chart-hit x="${padL}" y="0" width="${cw}" height="${H}" fill="transparent" style="touch-action:none"/>`;
 
     const hit    = svg.querySelector('[data-chart-hit]');
     const xhair  = svg.querySelector('[data-crosshair]');
@@ -1556,13 +1556,14 @@
     const tipVal = modal.querySelector('[data-tooltip-value]');
     const tipX   = modal.querySelector('[data-tooltip-x]');
 
+    const isMobile = () => window.matchMedia('(pointer: coarse)').matches;
     tipVal.textContent = '—';
-    tipX.textContent   = 'hover sul grafico';
+    tipX.textContent   = isMobile() ? 'tocca il grafico' : 'hover sul grafico';
 
-    hit.addEventListener('mousemove', (e) => {
+    function updateCrosshair(clientX) {
       const rect = svg.getBoundingClientRect();
       const scaleX = W / rect.width;
-      const px = (e.clientX - rect.left) * scaleX - padL;
+      const px = (clientX - rect.left) * scaleX - padL;
       const i = Math.max(0, Math.min(n - 1, Math.round(px / xStep)));
       const [cx, cy] = coords[i];
       xhair.setAttribute('x1', cx); xhair.setAttribute('x2', cx); xhair.setAttribute('opacity', '0.7');
@@ -1571,14 +1572,32 @@
       tipVal.className   = 'text-xl font-bold ' + d.cc;
       tipX.textContent   = day(i);
       tipX.className     = 'text-xs text-muted mt-0.5';
-    });
-    hit.addEventListener('mouseleave', () => {
+    }
+
+    function clearCrosshair() {
       xhair.setAttribute('opacity', '0');
       dot.setAttribute('opacity', '0');
       tipVal.textContent = '—';
       tipVal.className   = 'text-xl font-bold';
-      tipX.textContent   = 'hover sul grafico';
+      tipX.textContent   = isMobile() ? 'tocca il grafico' : 'hover sul grafico';
       tipX.className     = 'text-xs text-muted mt-0.5';
+    }
+
+    // Mouse
+    hit.addEventListener('mousemove', (e) => updateCrosshair(e.clientX));
+    hit.addEventListener('mouseleave', clearCrosshair);
+
+    // Touch
+    hit.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      updateCrosshair(e.touches[0].clientX);
+    }, { passive: false });
+    hit.addEventListener('touchmove', (e) => {
+      e.preventDefault();
+      updateCrosshair(e.touches[0].clientX);
+    }, { passive: false });
+    hit.addEventListener('touchend', () => {
+      // Keep last value visible on mobile instead of clearing
     });
   }
 
