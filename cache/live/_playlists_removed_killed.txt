@@ -1,0 +1,50 @@
+          <a href="https://open.spotify.com/playlist/1BUJp5GOjd5XDxQe4BAzz9" target="_blank" class="flex items-center gap-3 px-4 py-2 hover:bg-secondary-500/5">
+            <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000d72cab65f8a6132e42ab13b5dcf6" alt="" class="h-9 w-9 rounded-lg shrink-0">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Música triste en inglés ❤️‍🩹</p><p class="text-xs text-gray-400">Rimossa 26 Mag 2026</p></div>
+            <div class="text-right shrink-0"><p class="text-sm font-bold text-white">64K</p><p class="text-xs text-gray-400">followers</p></div>
+          </a>
+          <a href="https://open.spotify.com/playlist/4aCWHVMxgJ25hfEmwm3iMW" target="_blank" class="flex items-center gap-3 px-4 py-2 hover:bg-secondary-500/5">
+            <img src="https://mosaic.scdn.co/640/ab67616d00001e021391b1fdb63da53e5b112224ab67616d00001e027437083c2521a8c077b9cfd7ab67616d00001e029164bafe9aaa168d93f4816aab67616d00001e02b7e976d2b35c767f9012cb72" alt="" class="h-9 w-9 rounded-lg shrink-0">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Chill para estudiar</p><p class="text-xs text-gray-400">Rimossa 26 Mag 2026</p></div>
+            <div class="text-right shrink-0"><p class="text-sm font-bold text-white">14K</p><p class="text-xs text-gray-400">followers</p></div>
+          </a>
+          <a href="https://open.spotify.com/playlist/37i9dQZF1E4wqBILR7EaqE" target="_blank" class="flex items-center gap-3 px-4 py-2 hover:bg-secondary-500/5">
+            <img src="https://pickasso.spotifycdn.com/image/ab67c0de0000deef/dt/v1/img/radio/artist/4A2xXq0rdC0FX2g9tBCePf/en" alt="" class="h-9 w-9 rounded-lg shrink-0">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Chaitha Radio</p><p class="text-xs text-gray-400">Rimossa 24 Mag 2026</p></div>
+            <div class="text-right shrink-0"><p class="text-sm font-bold text-white">525</p><p class="text-xs text-gray-400">followers</p></div>
+          </a>
+          <a href="https://open.spotify.com/playlist/7q70hSaHZ0na0nTP6o8MpC" target="_blank" class="flex items-center gap-3 px-4 py-2 hover:bg-secondary-500/5">
+            <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84a82b0089cd83404c80d1ce50" alt="" class="h-9 w-9 rounded-lg shrink-0">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">sad tiktok songs 2026</p><p class="text-xs text-gray-400">Rimossa 19 Mag 2026</p></div>
+            <div class="text-right shrink-0"><p class="text-sm font-bold text-white">58K</p><p class="text-xs text-gray-400">followers</p></div>
+          </a>
+          <a href="https://open.spotify.com/playlist/3Uo6wcwipB5JtMBtDk1msK" target="_blank" class="flex items-center gap-3 px-4 py-2 hover:bg-secondary-500/5">
+            <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da842a974fd06e6de607556476f4" alt="" class="h-9 w-9 rounded-lg shrink-0">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">LAGU GALAU  TERBARU TERBAIK 2026</p><p class="text-xs text-gray-400">Rimossa 18 Mag 2026</p></div>
+            <div class="text-right shrink-0"><p class="text-sm font-bold text-white">226K</p><p class="text-xs text-gray-400">followers</p></div>
+          </a>
+          <a href="https://open.spotify.com/playlist/0uUQAv9ELJDsO9v1hsE2f9" target="_blank" class="flex items-center gap-3 px-4 py-2 hover:bg-secondary-500/5">
+            <img src="https://mosaic.scdn.co/640/ab67616d00001e0212b69bf576f5e80291f75161ab67616d00001e02617c314e94693fad9a26f798ab67616d00001e027aa8783ad8def37cc548a9cfab67616d00001e027c68face1dc58127f3a7b1cc" alt="" class="h-9 w-9 rounded-lg shrink-0">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">daniel caesar x frank ocean, cas, sza, wave to earth, rex orange, miguel, arctic monkey,</p><p class="text-xs text-gray-400">Rimossa 18 Mag 2026</p></div>
+            <div class="text-right shrink-0"><p class="text-sm font-bold text-white">141K</p><p class="text-xs text-gray-400">followers</p></div>
+          </a>
+          <a href="https://open.spotify.com/playlist/697PAHVGVcINgubwIFcDsE" target="_blank" class="flex items-center gap-3 px-4 py-2 hover:bg-secondary-500/5">
+            <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000d72c54819fe37ac31783e8fb40af" alt="" class="h-9 w-9 rounded-lg shrink-0">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Songs for Healing</p><p class="text-xs text-gray-400">Rimossa 15 Mag 2026</p></div>
+            <div class="text-right shrink-0"><p class="text-sm font-bold text-white">22K</p><p class="text-xs text-gray-400">followers</p></div>
+          </a>
+          <a href="https://open.spotify.com/playlist/0ESCG8q3uuWOyBYifTTXJR" target="_blank" class="flex items-center gap-3 px-4 py-2 hover:bg-secondary-500/5">
+            <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da842ea7d9365f005664b0f66a33" alt="" class="h-9 w-9 rounded-lg shrink-0">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Indie Folk Acoustic 2025</p><p class="text-xs text-gray-400">Rimossa 15 Mag 2026</p></div>
+            <div class="text-right shrink-0"><p class="text-sm font-bold text-white">13K</p><p class="text-xs text-gray-400">followers</p></div>
+          </a>
+          <a href="https://open.spotify.com/playlist/5qEt162kDEtwdoC1vPV8O7" target="_blank" class="flex items-center gap-3 px-4 py-2 hover:bg-secondary-500/5">
+            <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84e94d136bcd40f08f17323e2f" alt="" class="h-9 w-9 rounded-lg shrink-0">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Indie Lofi</p><p class="text-xs text-gray-400">Rimossa 6 Mag 2026</p></div>
+            <div class="text-right shrink-0"><p class="text-sm font-bold text-white">2K</p><p class="text-xs text-gray-400">followers</p></div>
+          </a>
+          <a href="https://open.spotify.com/playlist/53U6OHsVczqCbgHlG7hKmb" target="_blank" class="flex items-center gap-3 px-4 py-2 hover:bg-secondary-500/5">
+            <img src="https://image-cdn-fa.spotifycdn.com/image/ab67706c0000d72c1ca3c2fe21690f92c73cdc4e" alt="" class="h-9 w-9 rounded-lg shrink-0">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Vibes &amp; Bars</p><p class="text-xs text-gray-400">Rimossa 4 Mag 2026</p></div>
+            <div class="text-right shrink-0"><p class="text-sm font-bold text-white">32K</p><p class="text-xs text-gray-400">followers</p></div>
+          </a>
