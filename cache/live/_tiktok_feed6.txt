@@ -1,0 +1,36 @@
+          <a href="https://www.tiktok.com/@tiktok/video/7618726993999219982" target="_blank" class="flex items-center gap-3 px-4 py-2 hover:bg-secondary-500/5">
+            <img src="https://p16-common.tiktokcdn.com/tos-maliva-avt-0068/2031f2a7617d3630fe1db5eeb764e7d7~c5_300x300.webp" alt="" class="h-8 w-8 shrink-0 rounded-full object-cover" onerror="this.src='https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e'">
+            <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">✨GlamPharm | WFHM of 2 🩷💙🌊</p><p class="text-xs text-gray-400 truncate">obsessed</p></div>
+            <span class="text-xs text-gray-400 shrink-0">25 Mag</span>
+          </a>
+          <a href="https://www.tiktok.com/@tiktok/video/7643113334794898696" target="_blank" class="flex items-center gap-3 px-4 py-2 hover:bg-secondary-500/5">
+            <img src="https://p16-common.tiktokcdn.com/tos-alisg-avt-0068/b83946e98bab2152c7255a0045cf0bfe~c5_300x300.webp" alt="" class="h-8 w-8 shrink-0 rounded-full object-cover" onerror="this.src='https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e'">
+            <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Priciliadb</p><p class="text-xs text-gray-400 truncate">obsessed</p></div>
+            <span class="text-xs text-gray-400 shrink-0">23 Mag</span>
+          </a>
+          <a href="https://www.tiktok.com/@tiktok/video/7642744347842120978" target="_blank" class="flex items-center gap-3 px-4 py-2 hover:bg-secondary-500/5">
+            <img src="None" alt="" class="h-8 w-8 shrink-0 rounded-full object-cover" onerror="this.src='https://i.scdn.co/image/ab67616d00001e02886b188290fbcff15d6fe521'">
+            <img src="https://i.scdn.co/image/ab67616d00001e02886b188290fbcff15d6fe521" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Amity🖤✨</p><p class="text-xs text-gray-400 truncate">why did i fail</p></div>
+            <span class="text-xs text-gray-400 shrink-0">23 Mag</span>
+          </a>
+          <a href="https://www.tiktok.com/@tiktok/video/7637210632940440863" target="_blank" class="flex items-center gap-3 px-4 py-2 hover:bg-secondary-500/5">
+            <img src="https://p16-common.tiktokcdn.com/tos-maliva-avt-0068/d7ca69e1e4d978fd5a6bec0fd09952cc~c5_300x300.webp" alt="" class="h-8 w-8 shrink-0 rounded-full object-cover" onerror="this.src='https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e'">
+            <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Mami_Vee|TTS| UGC creator|🤎👑</p><p class="text-xs text-gray-400 truncate">obsessed</p></div>
+            <span class="text-xs text-gray-400 shrink-0">10 Mag</span>
+          </a>
+          <a href="https://www.tiktok.com/@tiktok/video/7636427625270922526" target="_blank" class="flex items-center gap-3 px-4 py-2 hover:bg-secondary-500/5">
+            <img src="https://p19.tiktokcdn-us.com/tos-useast5-avt-0068-tx/d8af8a73689f48adb818e52f6df209c5~c5_300x300.webp" alt="" class="h-8 w-8 shrink-0 rounded-full object-cover" onerror="this.src='https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e'">
+            <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Stephnailartz</p><p class="text-xs text-gray-400 truncate">obsessed</p></div>
+            <span class="text-xs text-gray-400 shrink-0">10 Mag</span>
+          </a>
+          <a href="https://www.tiktok.com/@tiktok/video/7636550379538369813" target="_blank" class="flex items-center gap-3 px-4 py-2 hover:bg-secondary-500/5">
+            <img src="https://p19-common.tiktokcdn.com/tos-alisg-avt-0068/63b14b3ec5318d44a0d56bcdd19c1955~c5_300x300.webp" alt="" class="h-8 w-8 shrink-0 rounded-full object-cover" onerror="this.src='https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e'">
+            <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Mylla Ramos ❤️‍🔥</p><p class="text-xs text-gray-400 truncate">obsessed</p></div>
+            <span class="text-xs text-gray-400 shrink-0">10 Mag</span>
+          </a>
