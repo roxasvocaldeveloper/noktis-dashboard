@@ -1,0 +1,50 @@
+          <a href="https://songstats.com/track/82iydl39/unforgettable" target="_blank" class="flex w-full items-center gap-3 px-4 py-2 text-left hover:bg-secondary-500/5">
+            <img src="https://i.scdn.co/image/ab67616d00001e024b50da3a7d3845656a45279a" alt="" class="h-9 w-9 rounded-lg shrink-0">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Unforgettable</p></div>
+            <p class="text-sm font-bold text-white shrink-0">1.28M</p>
+          </a>
+          <a href="https://songstats.com/track/1tibwdzy/berlin" target="_blank" class="flex w-full items-center gap-3 px-4 py-2 text-left hover:bg-secondary-500/5">
+            <img src="https://i.scdn.co/image/ab67616d00001e029494eeac6a088d0460830996" alt="" class="h-9 w-9 rounded-lg shrink-0">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Berlin</p></div>
+            <p class="text-sm font-bold text-white shrink-0">1.06M</p>
+          </a>
+          <a href="https://songstats.com/track/ruh1lp6f/in-my-blood" target="_blank" class="flex w-full items-center gap-3 px-4 py-2 text-left hover:bg-secondary-500/5">
+            <img src="https://i.scdn.co/image/ab67616d00001e0282f0c758749ba067a169bbec" alt="" class="h-9 w-9 rounded-lg shrink-0">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">In My Blood</p></div>
+            <p class="text-sm font-bold text-white shrink-0">193K</p>
+          </a>
+          <a href="https://songstats.com/track/1g4cb27p/collide" target="_blank" class="flex w-full items-center gap-3 px-4 py-2 text-left hover:bg-secondary-500/5">
+            <img src="https://i.scdn.co/image/ab67616d00001e02d3387c9110a05c86b17e9e70" alt="" class="h-9 w-9 rounded-lg shrink-0">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Collide</p></div>
+            <p class="text-sm font-bold text-white shrink-0">183K</p>
+          </a>
+          <a href="https://songstats.com/track/sztymlkb/goodbyes" target="_blank" class="flex w-full items-center gap-3 px-4 py-2 text-left hover:bg-secondary-500/5">
+            <img src="https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47" alt="" class="h-9 w-9 rounded-lg shrink-0">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">goodbyes</p></div>
+            <p class="text-sm font-bold text-white shrink-0">51K</p>
+          </a>
+          <a href="https://songstats.com/track/48jaslym/falling-to-pieces" target="_blank" class="flex w-full items-center gap-3 px-4 py-2 text-left hover:bg-secondary-500/5">
+            <img src="https://i.scdn.co/image/ab67616d00001e026e2119ccda04dd7aef615680" alt="" class="h-9 w-9 rounded-lg shrink-0">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Falling to Pieces</p></div>
+            <p class="text-sm font-bold text-white shrink-0">14K</p>
+          </a>
+          <a href="https://songstats.com/track/kh1w5dxl/when-saturn-kissed-the-moon" target="_blank" class="flex w-full items-center gap-3 px-4 py-2 text-left hover:bg-secondary-500/5">
+            <img src="https://i.scdn.co/image/ab67616d00001e020fb3eb78b5525402e701d974" alt="" class="h-9 w-9 rounded-lg shrink-0">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">when saturn kissed the moon</p></div>
+            <p class="text-sm font-bold text-white shrink-0">11K</p>
+          </a>
+          <a href="https://songstats.com/track/wr5q3a1f/why-did-i-fail" target="_blank" class="flex w-full items-center gap-3 px-4 py-2 text-left hover:bg-secondary-500/5">
+            <img src="https://i.scdn.co/image/ab67616d00001e02886b188290fbcff15d6fe521" alt="" class="h-9 w-9 rounded-lg shrink-0">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">why did i fail</p></div>
+            <p class="text-sm font-bold text-white shrink-0">10K</p>
+          </a>
+          <a href="https://songstats.com/track/tf4ys8bj/still-together" target="_blank" class="flex w-full items-center gap-3 px-4 py-2 text-left hover:bg-secondary-500/5">
+            <img src="https://i.scdn.co/image/ab67616d00001e02ebe1457d6ff9efd081ca317b" alt="" class="h-9 w-9 rounded-lg shrink-0">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Still Together</p></div>
+            <p class="text-sm font-bold text-white shrink-0">10K</p>
+          </a>
+          <a href="https://songstats.com/track/qa7zr8xb/nothing-more" target="_blank" class="flex w-full items-center gap-3 px-4 py-2 text-left hover:bg-secondary-500/5">
+            <img src="https://i.scdn.co/image/ab67616d00001e0210aa2c493f5fdf75629d4070" alt="" class="h-9 w-9 rounded-lg shrink-0">
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Nothing More</p></div>
+            <p class="text-sm font-bold text-white shrink-0">9K</p>
+          </a>
