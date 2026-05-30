@@ -1,0 +1,72 @@
+          <a href="http://open.spotify.com/playlist/58uiUgVw2c6vAXOsXQaq1N" target="_blank" class="flex items-center gap-3 border-b border-border px-4 py-2.5 last:border-0 hover:bg-white/5">
+            <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
+            <img src="https://i.scdn.co/image/ab67616d00001e028ed7959c2360cc3fcfccd9c6" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold truncate">&quot;i killed all your plants&quot; → THE CURE OLIVIA RODRIGO (SAD GIRL POP </p>
+              <p class="text-xs text-muted truncate">by Emerald · 213 followers</p>
+            </div>
+            <span class="text-xs text-muted whitespace-nowrap">30 Mag</span>
+          </a>
+          <a href="http://open.spotify.com/playlist/4EOqILOw9YMyc9mp7fWd0F" target="_blank" class="flex items-center gap-3 border-b border-border px-4 py-2.5 last:border-0 hover:bg-white/5">
+            <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
+            <img src="https://i.scdn.co/image/ab67616d00001e028ed7959c2360cc3fcfccd9c6" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold truncate">&quot;i killed all your plants&quot; → chill songs for low cortisol, stress, </p>
+              <p class="text-xs text-muted truncate">by Emerald · 340 followers</p>
+            </div>
+            <span class="text-xs text-muted whitespace-nowrap">28 Mag</span>
+          </a>
+          <a href="http://open.spotify.com/playlist/4EOqILOw9YMyc9mp7fWd0F" target="_blank" class="flex items-center gap-3 border-b border-border px-4 py-2.5 last:border-0 hover:bg-white/5">
+            <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
+            <img src="https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold truncate">&quot;goodbyes&quot; → chill songs for low cortisol, stress, </p>
+              <p class="text-xs text-muted truncate">by Emerald · 340 followers</p>
+            </div>
+            <span class="text-xs text-muted whitespace-nowrap">28 Mag</span>
+          </a>
+          <a href="http://open.spotify.com/playlist/4EOqILOw9YMyc9mp7fWd0F" target="_blank" class="flex items-center gap-3 border-b border-border px-4 py-2.5 last:border-0 hover:bg-white/5">
+            <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
+            <img src="https://i.scdn.co/image/ab67616d00001e02886b188290fbcff15d6fe521" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold truncate">&quot;why did i fail&quot; → chill songs for low cortisol, stress, </p>
+              <p class="text-xs text-muted truncate">by Emerald · 340 followers</p>
+            </div>
+            <span class="text-xs text-muted whitespace-nowrap">28 Mag</span>
+          </a>
+          <a href="http://open.spotify.com/playlist/4EOqILOw9YMyc9mp7fWd0F" target="_blank" class="flex items-center gap-3 border-b border-border px-4 py-2.5 last:border-0 hover:bg-white/5">
+            <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
+            <img src="https://i.scdn.co/image/ab67616d00001e029e0b677a2b31265dc3e8ae70" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold truncate">&quot;another life&quot; → chill songs for low cortisol, stress, </p>
+              <p class="text-xs text-muted truncate">by Emerald · 340 followers</p>
+            </div>
+            <span class="text-xs text-muted whitespace-nowrap">28 Mag</span>
+          </a>
+          <a href="http://open.spotify.com/playlist/4EOqILOw9YMyc9mp7fWd0F" target="_blank" class="flex items-center gap-3 border-b border-border px-4 py-2.5 last:border-0 hover:bg-white/5">
+            <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
+            <img src="https://i.scdn.co/image/ab67616d00001e027eef9ab3706811f89db96087" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold truncate">&quot;nothing to lose&quot; → chill songs for low cortisol, stress, </p>
+              <p class="text-xs text-muted truncate">by Emerald · 340 followers</p>
+            </div>
+            <span class="text-xs text-muted whitespace-nowrap">28 Mag</span>
+          </a>
+          <a href="http://open.spotify.com/playlist/4EOqILOw9YMyc9mp7fWd0F" target="_blank" class="flex items-center gap-3 border-b border-border px-4 py-2.5 last:border-0 hover:bg-white/5">
+            <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
+            <img src="https://i.scdn.co/image/ab67616d00001e020fb3eb78b5525402e701d974" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold truncate">&quot;when saturn kissed the moon&quot; → chill songs for low cortisol, stress, </p>
+              <p class="text-xs text-muted truncate">by Emerald · 340 followers</p>
+            </div>
+            <span class="text-xs text-muted whitespace-nowrap">28 Mag</span>
+          </a>
+          <a href="http://open.spotify.com/playlist/4EOqILOw9YMyc9mp7fWd0F" target="_blank" class="flex items-center gap-3 border-b border-border px-4 py-2.5 last:border-0 hover:bg-white/5">
+            <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
+            <img src="https://i.scdn.co/image/ab67616d00001e02b39913eb889f37e592318e9e" alt="" class="h-9 w-9 shrink-0 rounded-lg">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold truncate">&quot;obsessed&quot; → chill songs for low cortisol, stress, </p>
+              <p class="text-xs text-muted truncate">by Emerald · 340 followers</p>
+            </div>
+            <span class="text-xs text-muted whitespace-nowrap">28 Mag</span>
+          </a>
