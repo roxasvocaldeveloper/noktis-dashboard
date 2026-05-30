@@ -10,37 +10,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Schoolbell&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
 
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    darkMode: 'class',
-    theme: {
-      extend: {
-        fontFamily: {
-          sans:    ['Montserrat', 'system-ui', 'sans-serif'],
-          display: ['Schoolbell', 'cursive'],
-        },
-        colors: {
-          bg:         '#000000',
-          surface:    '#0F0A1A',
-          surface2:   '#1A0F2E',
-          card:       '#8b4cb7',
-          cardSoft:   '#6d3a91',
-          border:     'rgba(255,255,255,0.12)',
-          muted:      'rgba(255,255,255,0.72)',
-          primary:    '#9747FF',
-          primaryDark:'#7C3AED',
-          blue:       '#116dff',
-          blueDark:   '#0053d8',
-          positive:   '#5FFF7D',
-        },
-        backgroundImage: {
-          'app': "linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.35) 100%), url('/sfondo.webp')",
-        },
-      },
-    },
-  };
-</script>
 <style>
 .goal-done {
   display: flex;
@@ -71,6 +40,279 @@
   .purple-card      { overflow:hidden; border-radius:1rem; border:1px solid rgba(255,255,255,0.1); background:linear-gradient(to right,rgba(139,76,183,0.5),rgba(109,58,145,0.5)); backdrop-filter:blur(24px); box-shadow:0 20px 25px -5px rgba(0,0,0,0.1); }
   .view-all-btn     { cursor:pointer; border-radius:9999px; border:1px solid rgba(255,255,255,0.3); background:transparent; padding:0.375rem 1rem; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:#fff; transition:all .15s; }
   .view-all-btn:hover { border-color:#fff; background:rgba(255,255,255,0.1); }
+</style>
+  <link rel="stylesheet" href="https://soundvertise.co/build/assets/app-CF7IeWyy.css">
+  <link rel="stylesheet" href="https://soundvertise.co/build/assets/app-DLwYqeEM.css">
+<style>
+/* ── Dashboard custom properties ───────────────────────────── */
+:root {
+  --color-bg:       #000000;
+  --color-surface:  #0F0A1A;
+  --color-surface2: #1A0F2E;
+  --color-card:     #8b4cb7;
+  --color-cardsoft: #6d3a91;
+  --color-border:   rgba(255,255,255,0.12);
+  --color-muted:    rgba(255,255,255,0.72);
+  --color-positive: oklch(79.2% .209 151.711); /* green-400 */
+}
+
+/* ── Font ───────────────────────────────────────────────────── */
+body { font-family: 'Montserrat Variable', 'Montserrat', system-ui, sans-serif; }
+
+/* ── Background app ─────────────────────────────────────────── */
+.bg-app {
+  background-image: linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.35) 100%);
+  background-color: var(--color-bg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+.bg-bg      { background-color: var(--color-bg); }
+.bg-surface { background-color: var(--color-surface); }
+.bg-surface2 { background-color: var(--color-surface2); }
+
+/* ── Utility classes missing from SV ────────────────────────── */
+.font-black  { font-weight: 900; }
+.font-9 { font-weight: 900; }
+.text-3xl    { font-size: 1.875rem; line-height: 2.25rem; }
+.text-4xl    { font-size: 2.25rem; line-height: 2.5rem; }
+.w-9         { width: 2.25rem; }
+.h-9         { height: 2.25rem; }
+.h-10        { height: 2.5rem; }
+.h-11        { height: 2.75rem; }
+.h-px        { height: 1px; }
+.w-px        { width: 1px; }
+.h-1\.5      { height: 0.375rem; }
+.h-3\.5      { height: 0.875rem; }
+.w-3\.5      { width: 0.875rem; }
+.h-14        { height: 3.5rem; }
+.w-14        { width: 3.5rem; }
+.h-7         { height: 1.75rem; }
+.w-7         { width: 1.75rem; }
+.h-3         { height: 0.75rem; }
+.w-3         { width: 0.75rem; }
+.py-1\.5     { padding-block: 0.375rem; }
+.px-1\.5     { padding-inline: 0.375rem; }
+.py-0\.5     { padding-block: 0.125rem; }
+.px-2\.5     { padding-inline: 0.625rem; }
+.py-2\.5     { padding-block: 0.625rem; }
+.px-3\.5     { padding-inline: 0.875rem; }
+.py-3\.5     { padding-block: 0.875rem; }
+.p-5         { padding: 1.25rem; }
+.p-3         { padding: 0.75rem; }
+.pt-2        { padding-top: 0.5rem; }
+.pt-4        { padding-top: 1rem; }
+.pb-2        { padding-bottom: 0.5rem; }
+.pb-4        { padding-bottom: 1rem; }
+.mt-0\.5     { margin-top: 0.125rem; }
+.mb-0\.5     { margin-bottom: 0.125rem; }
+.mb-2\.5     { margin-bottom: 0.625rem; }
+.mt-3        { margin-top: 0.75rem; }
+.mt-4        { margin-top: 1rem; }
+.ml-auto     { margin-left: auto; }
+.mr-auto     { margin-right: auto; }
+.gap-0\.5    { gap: 0.125rem; }
+.gap-1\.5    { gap: 0.375rem; }
+.gap-5       { gap: 1.25rem; }
+.gap-x-4     { column-gap: 1rem; }
+.max-w-sm    { max-width: 24rem; }
+.max-h-\[80vh\]  { max-height: 80vh; }
+.max-h-\[85vh\]  { max-height: 85vh; }
+.space-y-2>*+* { margin-top: 0.5rem; }
+.space-y-3>*+* { margin-top: 0.75rem; }
+.space-y-4>*+* { margin-top: 1rem; }
+.space-y-5>*+* { margin-top: 1.25rem; }
+.divide-y>*+* { border-top-width: 1px; border-top-style: solid; }
+.divide-x>*+* { border-left-width: 1px; border-left-style: solid; }
+.divide-border>*+* { border-color: var(--color-border); }
+.last\:border-0:last-child { border-width: 0; }
+.shrink { flex-shrink: 1; }
+.grow   { flex-grow: 1; }
+.aspect-\[9\/16\] { aspect-ratio: 9/16; }
+.leading-none  { line-height: 1; }
+.leading-tight { line-height: 1.25; }
+.leading-snug  { line-height: 1.375; }
+.cursor-crosshair { cursor: crosshair; }
+.select-text   { user-select: text; }
+.whitespace-nowrap { white-space: nowrap; }
+.whitespace-pre-wrap { white-space: pre-wrap; }
+.max-w-none    { max-width: none; }
+.min-h-0       { min-height: 0; }
+.min-h-screen  { min-height: 100vh; }
+.rounded-3xl   { border-radius: 1.5rem; }
+.rounded-sm    { border-radius: 0.25rem; }
+.rounded-b-none { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.rounded-t-none { border-top-left-radius: 0; border-top-right-radius: 0; }
+
+/* ── Opacity ─────────────────────────────────────────────────── */
+.opacity-0   { opacity: 0; }
+.opacity-30  { opacity: 0.3; }
+.opacity-50  { opacity: 0.5; }
+.opacity-70  { opacity: 0.7; }
+.opacity-80  { opacity: 0.8; }
+.opacity-90  { opacity: 0.9; }
+.disabled\:opacity-30:disabled { opacity: 0.3; }
+
+/* ── Colors — dashboard palette ─────────────────────────────── */
+.text-muted   { color: var(--color-muted); }
+.text-positive{ color: var(--color-positive); }
+.text-primary { color: var(--color-primary-500); }
+.text-blue    { color: var(--color-primary-500); }
+
+.bg-blue      { background-color: var(--color-primary-500); }
+.bg-bluedark  { background-color: var(--color-primary-600); }
+.from-blue    { --tw-gradient-from: var(--color-primary-500); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+.to-bluedark  { --tw-gradient-to: var(--color-primary-600); }
+.border-blue  { border-color: var(--color-primary-500); }
+.hover\:border-blue:hover { border-color: var(--color-primary-500); }
+
+/* Alpha backgrounds */
+.bg-black\/30 { background-color: rgba(0,0,0,0.3); }
+.bg-black\/40 { background-color: rgba(0,0,0,0.4); }
+.bg-black\/50 { background-color: rgba(0,0,0,0.5); }
+.bg-black\/70 { background-color: rgba(0,0,0,0.7); }
+.bg-white\/5  { background-color: rgba(255,255,255,0.05); }
+.bg-white\/10 { background-color: rgba(255,255,255,0.10); }
+.bg-white\/15 { background-color: rgba(255,255,255,0.15); }
+.bg-white\/20 { background-color: rgba(255,255,255,0.20); }
+.bg-white\/25 { background-color: rgba(255,255,255,0.25); }
+.bg-surface\/95 { background-color: rgba(15,10,26,0.95); }
+.bg-surface2\/40 { background-color: rgba(26,15,46,0.4); }
+.bg-primary\/10  { background-color: rgba(17,109,255,0.1); }
+.bg-card { background-color: var(--color-card); }
+
+/* Alpha borders */
+.border-white\/10 { border-color: rgba(255,255,255,0.10); }
+.border-white\/15 { border-color: rgba(255,255,255,0.15); }
+.border-white\/20 { border-color: rgba(255,255,255,0.20); }
+.border-white\/25 { border-color: rgba(255,255,255,0.25); }
+.border-white\/30 { border-color: rgba(255,255,255,0.30); }
+.border-white\/40 { border-color: rgba(255,255,255,0.40); }
+.border-border    { border-color: var(--color-border); }
+.border-blue\/40  { border-color: rgba(17,109,255,0.4); }
+.border-primary\/40 { border-color: rgba(17,109,255,0.4); }
+
+/* Alpha text */
+.text-white\/50 { color: rgba(255,255,255,0.5); }
+.text-white\/60 { color: rgba(255,255,255,0.6); }
+.text-white\/80 { color: rgba(255,255,255,0.8); }
+
+/* Gradient card colors */
+.from-card\/50    { --tw-gradient-from: rgba(139,76,183,0.5); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to,transparent); }
+.to-cardsoft\/50  { --tw-gradient-to: rgba(109,58,145,0.5); }
+
+/* ── Backdrop variants ───────────────────────────────────────── */
+::backdrop { --tw-backdrop-bg: transparent; }
+.backdrop\:bg-black\/70::backdrop { background-color: rgba(0,0,0,0.7); }
+.backdrop\:bg-black\/80::backdrop { background-color: rgba(0,0,0,0.8); }
+.backdrop\:backdrop-blur-sm::backdrop { backdrop-filter: blur(4px); }
+
+/* ── Hover utilities ─────────────────────────────────────────── */
+.hover\:bg-white\/5:hover   { background-color: rgba(255,255,255,0.05); }
+.hover\:bg-white\/10:hover  { background-color: rgba(255,255,255,0.10); }
+.hover\:bg-white\/15:hover  { background-color: rgba(255,255,255,0.15); }
+.hover\:bg-white\/20:hover  { background-color: rgba(255,255,255,0.20); }
+.hover\:border-white:hover  { border-color: #fff; }
+.hover\:border-white\/30:hover { border-color: rgba(255,255,255,0.3); }
+.hover\:opacity-80:hover    { opacity: 0.80; }
+.hover\:opacity-90:hover    { opacity: 0.90; }
+.hover\:-translate-y-1:hover { transform: translateY(-4px); }
+.hover\:text-white:hover    { color: #fff; }
+.hover\:text-primary:hover  { color: var(--color-primary-500); }
+.group:hover .group-hover\:text-white { color: #fff; }
+
+/* ── Data-active (tab pills) ─────────────────────────────────── */
+[data-active].data-\[active\]\:border-white { border-color: #fff; }
+[data-active].data-\[active\]\:bg-white\/15 { background-color: rgba(255,255,255,0.15); }
+
+/* ── Translate/transform ─────────────────────────────────────── */
+.-translate-y-1 { transform: translateY(-0.25rem); }
+.translate-x-\[-50\%\] { transform: translateX(-50%); }
+
+/* ── Accent color ────────────────────────────────────────────── */
+.accent-blue { accent-color: var(--color-primary-500); }
+
+/* ── Grid columns ────────────────────────────────────────────── */
+.md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+.md\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0,1fr)); }
+.lg\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0,1fr)); }
+.lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+@media (min-width:768px) {
+  .md\:grid-cols-3 { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .md\:grid-cols-5 { grid-template-columns: repeat(5,minmax(0,1fr)); }
+}
+@media (min-width:1024px) {
+  .lg\:grid-cols-5 { grid-template-columns: repeat(5,minmax(0,1fr)); }
+  .lg\:grid-cols-2 { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+
+/* ── Dashboard component classes ────────────────────────────── */
+.kpi-card {
+  display: flex; flex-direction: column; gap: 0.25rem;
+  align-items: center; border-radius: 0.75rem;
+  background: linear-gradient(to right, var(--color-primary-500), var(--color-primary-600));
+  padding: 1rem; text-align: center;
+  transition: transform .2s; cursor: pointer;
+}
+.kpi-card:hover { transform: translateY(-4px); }
+.kpi-val { font-size: 1.25rem; font-weight: 900; color: #fff; }
+.group:hover .kpi-val { color: #fff; }
+
+.delta-pill {
+  display: inline-flex; align-items: center;
+  border-radius: 9999px; border-width: 1px; border-style: solid;
+  border-color: rgba(255,255,255,0.25);
+  background-color: rgba(0,0,0,0.4);
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem; font-weight: 700;
+}
+
+.modal-row {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  transition: background .15s;
+}
+.modal-row:hover { background: rgba(255,255,255,0.05); }
+.modal-row.\!px-4 { padding-inline: 1rem; }
+.modal-row.\!py-2\.5 { padding-block: 0.625rem; }
+
+.purple-card {
+  overflow: hidden; border-radius: 1rem;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: linear-gradient(to right,rgba(139,76,183,0.5),rgba(109,58,145,0.5));
+  backdrop-filter: blur(24px);
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+}
+
+.view-all-btn {
+  cursor: pointer; border-radius: 9999px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: transparent;
+  padding: 0.375rem 1rem;
+  font-size: 0.75rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .05em;
+  color: #fff; transition: all .15s;
+}
+.view-all-btn:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+
+.goal-done {
+  display: flex; align-items: center; justify-content: space-between;
+  border-radius: 0.5rem;
+  background: linear-gradient(to right, var(--color-primary-500), var(--color-primary-600));
+  padding: 0.5rem 0.75rem;
+  box-shadow: 0 4px 14px rgba(17,109,255,0.45), inset 0 1px 0 rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.goal-done-text {
+  font-size: 0.7rem; font-weight: 800;
+  letter-spacing: 0.04em; text-transform: uppercase; color: #fff;
+  display: flex; align-items: center; gap: 0.25rem;
+}
+.task-label { transition: all .2s; }
+
+/* ── Shadow / backdrop ───────────────────────────────────────── */
+.shadow-xl { box-shadow: 0 20px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.1); }
+.shadow-lg  { box-shadow: 0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1); }
 </style>
 </head>
 
@@ -160,7 +402,7 @@
         <h3 class="kpi-val">7,364</h3>
         <span class="delta-pill text-white">@noktis__</span>
       </button>
-      <button data-kpi-chart="sh-total" class="group flex flex-col gap-1 items-center rounded-xl bg-gradient-to-r from-blue to-blueDark backdrop-blur-3xl shadow-xl p-4 text-center transition hover:-translate-y-1 hover:opacity-90">
+      <button data-kpi-chart="sh-total" class="group flex flex-col gap-1 items-center rounded-xl bg-linear-to-r from-blue to-bluedark backdrop-blur-3xl shadow-xl p-4 text-center transition hover:-translate-y-1 hover:opacity-90">
         <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-3.5 w-3.5 shrink-0"><use href="#logo-shazam"/></svg>Total Shazams</p>
         <h3 class="kpi-val">17,072</h3>
         <span class="delta-pill text-positive">lifetime</span>
@@ -312,7 +554,7 @@
     <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
 
       <!-- Last Release -->
-      <section class="rounded-2xl border border-white/10 bg-gradient-to-r from-card/50 to-cardSoft/50 backdrop-blur-3xl shadow-xl p-5">
+      <section class="rounded-2xl border border-white/10 bg-linear-to-r from-card/50 to-cardsoft/50 backdrop-blur-3xl shadow-xl p-5">
         <h4 class="mb-3 text-base font-black">Last Release</h4>
         <!-- Cover + title -->
         <div class="flex items-center gap-3 mb-4">
@@ -324,17 +566,17 @@
         </div>
         <!-- 3 mini KPI cards -->
         <div class="grid grid-cols-3 gap-2">
-          <button data-kpi-chart="track-killed" class="group flex flex-col items-center gap-0.5 rounded-xl bg-gradient-to-r from-blue to-blueDark p-3 text-center transition hover:opacity-80">
+          <button data-kpi-chart="track-killed" class="group flex flex-col items-center gap-0.5 rounded-xl bg-linear-to-r from-blue to-bluedark p-3 text-center transition hover:opacity-80">
             <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white/80"><svg class="h-3 w-3 shrink-0"><use href="#logo-spotify"/></svg>Popularity</p>
             <p class="text-lg font-black group-hover:text-white">47</p>
             <span class="inline-flex items-center rounded-full border border-white/25 bg-black/30 px-1.5 py-0.5 text-xs font-bold text-positive">+17</span>
           </button>
-          <button id="open-track-playlists-modal" class="group flex flex-col items-center gap-0.5 rounded-xl bg-gradient-to-r from-blue to-blueDark p-3 text-center transition hover:opacity-80">
+          <button id="open-track-playlists-modal" class="group flex flex-col items-center gap-0.5 rounded-xl bg-linear-to-r from-blue to-bluedark p-3 text-center transition hover:opacity-80">
             <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white/80"><svg class="h-3 w-3 shrink-0"><use href="#logo-spotify"/></svg>Playlists</p>
             <p class="text-lg font-black group-hover:text-white">63</p>
             <span class="inline-flex items-center rounded-full border border-white/25 bg-black/30 px-1.5 py-0.5 text-xs font-bold text-positive">attive</span>
           </button>
-          <button data-kpi-chart="sh-total" class="group flex flex-col items-center gap-0.5 rounded-xl bg-gradient-to-r from-blue to-blueDark p-3 text-center transition hover:opacity-80">
+          <button data-kpi-chart="sh-total" class="group flex flex-col items-center gap-0.5 rounded-xl bg-linear-to-r from-blue to-bluedark p-3 text-center transition hover:opacity-80">
             <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white/80"><svg class="h-3 w-3 shrink-0"><use href="#logo-shazam"/></svg>Shazam</p>
             <p class="text-lg font-black group-hover:text-white">4.2K</p>
             <span class="inline-flex items-center rounded-full border border-white/25 bg-black/30 px-1.5 py-0.5 text-xs font-bold text-positive">+200</span>
@@ -343,7 +585,7 @@
       </section>
 
       <!-- Goals — compact -->
-      <section class="rounded-2xl border border-white/10 bg-gradient-to-r from-card/50 to-cardSoft/50 backdrop-blur-3xl shadow-xl p-4">
+      <section class="rounded-2xl border border-white/10 bg-linear-to-r from-card/50 to-cardsoft/50 backdrop-blur-3xl shadow-xl p-4">
         <h4 class="mb-2.5 text-sm font-black">Next Step Goals</h4>
         <!-- Completed -->
         <div data-goal="100K Monthly Listeners" class="goal-done mb-2.5">
@@ -375,7 +617,7 @@
       </section>
 
       <!-- Weekly Tasks -->
-      <section class="rounded-2xl border border-white/10 bg-gradient-to-r from-card/50 to-cardSoft/50 backdrop-blur-3xl shadow-xl p-4">
+      <section class="rounded-2xl border border-white/10 bg-linear-to-r from-card/50 to-cardsoft/50 backdrop-blur-3xl shadow-xl p-4">
         <header class="mb-2.5 flex items-center justify-between">
           <h4 class="text-sm font-black">Weekly Tasks</h4>
           <span class="rounded-full border border-border bg-surface2 px-2 py-0.5 text-xs font-bold text-muted">3 PENDING</span>
@@ -441,7 +683,7 @@
     </div>
 
     <!-- Goals compact -->
-    <section class="rounded-2xl border border-white/10 bg-gradient-to-r from-card/50 to-cardSoft/50 backdrop-blur-3xl shadow-xl p-4">
+    <section class="rounded-2xl border border-white/10 bg-linear-to-r from-card/50 to-cardsoft/50 backdrop-blur-3xl shadow-xl p-4">
       <h4 class="mb-2.5 text-sm font-black flex items-center gap-1.5"><svg class="h-4 w-4"><use href="#logo-spotify"/></svg>Next Step Goals · Spotify</h4>
       <div class="grid gap-3 md:grid-cols-3">
         <div data-goal="100 playlist attive" class="goal-done">
@@ -467,7 +709,7 @@
     <!-- Popularity tracks (5) + Playlists (5) -->
     <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
 
-      <section class="rounded-2xl border border-white/10 bg-gradient-to-r from-card/50 to-cardSoft/50 backdrop-blur-3xl shadow-xl p-5">
+      <section class="rounded-2xl border border-white/10 bg-linear-to-r from-card/50 to-cardsoft/50 backdrop-blur-3xl shadow-xl p-5">
         <header class="mb-3 flex items-center justify-between">
           <div>
             <h4 class="text-base font-black">Popularity by Track</h4>
@@ -661,7 +903,7 @@
     </div>
 
     <!-- Goals compact TikTok + Instagram -->
-    <section class="rounded-2xl border border-white/10 bg-gradient-to-r from-card/50 to-cardSoft/50 backdrop-blur-3xl shadow-xl p-4">
+    <section class="rounded-2xl border border-white/10 bg-linear-to-r from-card/50 to-cardsoft/50 backdrop-blur-3xl shadow-xl p-4">
       <h4 class="mb-2.5 text-sm font-black">Next Step Goals · Socials</h4>
       <div class="grid gap-3 md:grid-cols-4">
         <div data-goal="100 video" class="goal-done">
@@ -826,12 +1068,12 @@
         <h3 class="kpi-val">25.7K</h3>
         <span class="delta-pill text-positive">total</span>
       </button>
-      <div class="flex flex-col gap-1 items-center rounded-xl bg-gradient-to-r from-blue to-blueDark backdrop-blur-3xl shadow-xl p-4 text-center">
+      <div class="flex flex-col gap-1 items-center rounded-xl bg-linear-to-r from-blue to-bluedark backdrop-blur-3xl shadow-xl p-4 text-center">
         <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-3.5 w-3.5 shrink-0"><use href="#logo-youtube"/></svg>Comments</p>
         <h3 class="text-xl font-black">1,024</h3>
         <span class="delta-pill text-white">Total</span>
       </div>
-      <div class="flex flex-col gap-1 items-center rounded-xl bg-gradient-to-r from-blue to-blueDark backdrop-blur-3xl shadow-xl p-4 text-center">
+      <div class="flex flex-col gap-1 items-center rounded-xl bg-linear-to-r from-blue to-bluedark backdrop-blur-3xl shadow-xl p-4 text-center">
         <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-3.5 w-3.5 shrink-0"><use href="#logo-youtube"/></svg>Shorts</p>
         <h3 class="text-xl font-black">142</h3>
         <span class="delta-pill text-white">Total</span>
@@ -839,7 +1081,7 @@
     </div>
 
     <!-- Goals compact YouTube -->
-    <section class="rounded-2xl border border-white/10 bg-gradient-to-r from-card/50 to-cardSoft/50 backdrop-blur-3xl shadow-xl p-4">
+    <section class="rounded-2xl border border-white/10 bg-linear-to-r from-card/50 to-cardsoft/50 backdrop-blur-3xl shadow-xl p-4">
       <h4 class="mb-2.5 text-sm font-black flex items-center gap-1.5"><svg class="h-4 w-4"><use href="#logo-youtube"/></svg>Next Step Goals · YouTube</h4>
       <div class="grid gap-3 md:grid-cols-3">
         <div data-goal="1M Views YouTube" class="goal-done">
