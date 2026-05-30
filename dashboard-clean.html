@@ -329,10 +329,10 @@
             <p class="text-lg font-black group-hover:text-white">47</p>
             <span class="inline-flex items-center rounded-full border border-white/25 bg-black/30 px-1.5 py-0.5 text-xs font-bold text-positive">+17</span>
           </button>
-          <button data-kpi-chart="sp-playlists" class="group flex flex-col items-center gap-0.5 rounded-xl bg-gradient-to-r from-blue to-blueDark p-3 text-center transition hover:opacity-80">
+          <button id="open-track-playlists-modal" class="group flex flex-col items-center gap-0.5 rounded-xl bg-gradient-to-r from-blue to-blueDark p-3 text-center transition hover:opacity-80">
             <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white/80"><svg class="h-3 w-3 shrink-0"><use href="#logo-spotify"/></svg>Playlists</p>
-            <p class="text-lg font-black group-hover:text-white">60</p>
-            <span class="inline-flex items-center rounded-full border border-white/25 bg-black/30 px-1.5 py-0.5 text-xs font-bold text-positive">+8</span>
+            <p class="text-lg font-black group-hover:text-white">63</p>
+            <span class="inline-flex items-center rounded-full border border-white/25 bg-black/30 px-1.5 py-0.5 text-xs font-bold text-positive">attive</span>
           </button>
           <button data-kpi-chart="sh-total" class="group flex flex-col items-center gap-0.5 rounded-xl bg-gradient-to-r from-blue to-blueDark p-3 text-center transition hover:opacity-80">
             <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white/80"><svg class="h-3 w-3 shrink-0"><use href="#logo-shazam"/></svg>Shazam</p>
@@ -949,6 +949,721 @@
 </main>
 
 <!-- ═══ KPI CHART MODAL ═══ -->
+
+<!-- track-playlists-modal -->
+<dialog id="track-playlists-modal" class="rounded-2xl border border-white/10 bg-surface/95 backdrop-blur-xl p-0 backdrop:bg-black/70 backdrop:backdrop-blur-sm w-full max-w-2xl text-white">
+  <div class="flex flex-col max-h-[85vh]">
+    <div class="flex items-center justify-between border-b border-border px-5 py-4 shrink-0">
+      <div>
+        <h3 class="text-xl font-black flex items-center gap-2"><svg class="h-4 w-4"><use href="#logo-spotify"/></svg>Playlist Attive</h3>
+        <p class="text-xs text-muted mt-0.5">i killed all your plants · 63 attive · ordinate per followers</p>
+      </div>
+      <button id="close-track-playlists-modal" class="flex h-9 w-9 items-center justify-center rounded-full border border-border text-white transition hover:border-white/30 hover:bg-white/10">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div id="track-pl-list" class="overflow-y-auto divide-y divide-border flex-1">
+      <a href="https://open.spotify.com/playlist/1XE7rQIGl1NFtWEAfwn4b9" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da8479d4355c6772145b24c4fa79" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Calm songs but sad but comforting 🎀</p>
+          <p class="text-xs text-muted">by Milou &lt;3 · aggiunta 2026-05</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">177K</p>
+          <p class="text-xs text-muted">pos. #28</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/3iEcUrJhejNIHaxzyL64ZT" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84347b647b3344e38b139dcd14" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Tik Tok Saddest Songs 2026</p>
+          <p class="text-xs text-muted">by Dailypills · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">151K</p>
+          <p class="text-xs text-muted">pos. #3</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/5arFyak5nEhUf9kpsssXxT" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da842b30e5d2257fef73e41e0445" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Old School Blues 80’s &amp; 90’s R&amp;B, Slow love Songs </p>
+          <p class="text-xs text-muted">by Smith Aangdu · aggiunta 2026-05</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">110K</p>
+          <p class="text-xs text-muted">pos. #21</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/0hNC7EZKpU1x2pl0vymTVI" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000d72c8729acba5c9cfc00c8017eb3" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">feeling hurt it’s time to cry  </p>
+          <p class="text-xs text-muted">by adeliaa · aggiunta 2026-05</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">73K</p>
+          <p class="text-xs text-muted">pos. #27</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/63aOMpGXakIizfhsXu6p9E" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000d72c4b478c74b602230cbe8c7d0a" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Chill songs</p>
+          <p class="text-xs text-muted">by Lee Andrew Dumaguing · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">66K</p>
+          <p class="text-xs text-muted">pos. #51</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/7yIcBwrHVsW0c9hjhY2SIY" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da841acc0f752186f1b6375ef012" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Chill coffee  ☕  Slow songs to relax</p>
+          <p class="text-xs text-muted">by De Music · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">42K</p>
+          <p class="text-xs text-muted">pos. #30</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/26hsLxibRW8kdZoElQlNZ4" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84e3432f9a10186b26763d6b3c" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Chill Love Vibes </p>
+          <p class="text-xs text-muted">by Emerald · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">41K</p>
+          <p class="text-xs text-muted">pos. #3</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/4IKoiXaRoT1GqIGm52XJDd" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000d72cbfa125883bf2414b3f19a47e" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Pop Chillout</p>
+          <p class="text-xs text-muted">by Atlas · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">41K</p>
+          <p class="text-xs text-muted">pos. #4</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/5mcLFIPHUU0VJs8PgBMuyr" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da841449910ac1720374004b50cd" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Sad Songs to cry alone</p>
+          <p class="text-xs text-muted">by Larsen Blake · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">36K</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/7r0sBMMwsEaRuXCo64TBZQ" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da8496023a25485662b486999930" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">sad chill love songs  💔</p>
+          <p class="text-xs text-muted">by Dailypills · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">34K</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/3vrDUCknwHEtNetOS0HMpL" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000d72c3dd5826fd62b39ae1fe39eb1" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate"> Tiktok Sad &amp; Chill Love Songs 💕</p>
+          <p class="text-xs text-muted">by Vanitas · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">33K</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/7gAJ6XeUKaBaDk6i35PQ0u" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000d72c325851179b23751e95f0f2b3" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">songs to chill and fall in love  ❤️</p>
+          <p class="text-xs text-muted">by ASTRAL · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">30K</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/3osblc9ReVrFCxkQ0qusfO" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000d72c2350943a5ea56cdcdb387f7b" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">sad love songs to cry at night</p>
+          <p class="text-xs text-muted">by AestheticPlaylist · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">20K</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/7vgClGR5Rf4Mk3QBEnNXyX" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84c50045346e894c55bf5dcb0f" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">TOP POP HITS</p>
+          <p class="text-xs text-muted">by Analias · aggiunta 2026-05</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">19K</p>
+          <p class="text-xs text-muted">pos. #31</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/7LZB6lgYo5VCl5puE9VMrW" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000d72c871724aef6331cad197a5f01" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Sad Again</p>
+          <p class="text-xs text-muted">by Island Music · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">18K</p>
+          <p class="text-xs text-muted">pos. #4</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/1oFjrZ2eKxsnKCnz0b88wL" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000d72c422897e6530bd48a4841f5a9" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Sad Songs for broken heart</p>
+          <p class="text-xs text-muted">by Inner Peace · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">17K</p>
+          <p class="text-xs text-muted">pos. #41</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/4eTrsdb3x5PcjhkSK9o8HT" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da842ed3cd3474adf2140c764004" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Cafetería aesthetic ☕️</p>
+          <p class="text-xs text-muted">by Paloma Johana · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">15K</p>
+          <p class="text-xs text-muted">pos. #63</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/2SahpDsLiO9UnO8SIk955k" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84c1417ff4bff7f6558d8e1ca4" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Blue Hours</p>
+          <p class="text-xs text-muted">by BluebyOcean · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">12K</p>
+          <p class="text-xs text-muted">pos. #25</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/5eOHZRE0pWbS8k4mpZLzLb" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84ab5ace6c72ad6230ed62cc16" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">sad chill songs</p>
+          <p class="text-xs text-muted">by Viral Mood · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">12K</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/0lXkci3qcaEtV2zNUeDPTo" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-fa.spotifycdn.com/image/ab67706c0000da8429686a496dbe007578e5ab53" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Chill Pop Moments</p>
+          <p class="text-xs text-muted">by Visioner · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">12K</p>
+          <p class="text-xs text-muted">pos. #4</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/5Lqm82lYMY5NNq3T3KIuyI" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84b8fef7bc9526cb1ad972acb6" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Road Trip | Summer Hits 2026</p>
+          <p class="text-xs text-muted">by chrismeyer · aggiunta 2026-05</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">10K</p>
+          <p class="text-xs text-muted">pos. #20</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/5s5tiDZNdlrTsQhQYWfcrO" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da8475fe0e51956f8d4edb98e245" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Chill Pop Hits</p>
+          <p class="text-xs text-muted">by daydream · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">8K</p>
+          <p class="text-xs text-muted">pos. #3</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/2d2gVmPZ9c0qjqi6vQCQXx" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da842775f4f99f41bcb1d60c46bb" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">when the world falls asleep</p>
+          <p class="text-xs text-muted">by Emerald · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">5K</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/3iRxPXRvbyYgUXDumgym53" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da844f212f91a8c46e289aa413e6" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Cinematic Dark Pop </p>
+          <p class="text-xs text-muted">by Viral Mood · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">5K</p>
+          <p class="text-xs text-muted">pos. #7</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/63nFKW9vzR83TipMJBVuKa" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84eb372490c3dc70abbe11f867" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">música triste para chorar - tiktok sad videos</p>
+          <p class="text-xs text-muted">by Vanitas · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">5K</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/00VJhePRe5EsCQuY355nJi" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84af5382f373ce217242ed7361" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Noktis x townsend - goodbyes </p>
+          <p class="text-xs text-muted">by Emerald · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">4K</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/1FEiiPX9XS81qQJizBOPHW" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da842c1a5f15aa9eb25109cf1c24" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">i miss you - breakup songs</p>
+          <p class="text-xs text-muted">by Dailypills · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">4K</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/6KgiJ9lzHlyZgvGwY2G6jw" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://mosaic.scdn.co/640/ab67616d00001e02567808375ab783974642afd0ab67616d00001e029a336bfb6d40bbd90a507417ab67616d00001e02a9e75099d7065c71cc7ede72ab67616d00001e02e3d69e17dde129037a1f09e2" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">SO EASY (TO FALL IN LOVE) OLIVIA DEAN (NEO-SOUL R&amp;B CHILL SUMMER INDIE LOVERS MOOD FEEL GOOD COZY CA</p>
+          <p class="text-xs text-muted">by Emerald · aggiunta 2026-05</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">4K</p>
+          <p class="text-xs text-muted">pos. #5</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/1EZ44mwDGc3BTz9lb7qa5d" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84acc6b781a5e8f0ba9a21c2dd" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Golden Hour Acoustics ☀️🌙🌾🌊 Indie &amp; Folk</p>
+          <p class="text-xs text-muted">by Sunrise Coffee · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">3K</p>
+          <p class="text-xs text-muted">pos. #59</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/5b3VPRubQlA9iM9fyfTnB5" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-fa.spotifycdn.com/image/ab67706c0000da84d62c1ce7c59c1f1fcad5aac3" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Tiktok Chill Hits</p>
+          <p class="text-xs text-muted">by Vanitas · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">3K</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/7IgAcGiFo46Vcf7oFvdu6S" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84391024ed823f7ffb59eac22e" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Chill Pop Tiktok | Viral Hits  </p>
+          <p class="text-xs text-muted">by ASTRAL · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">3K</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/29excvdkJ9xCd9SCvZFZso" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000d72cf0c74a4bf4b5f43b5a5f6f65" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Chill Pop Vibes Only | Relaxed Mindset</p>
+          <p class="text-xs text-muted">by Tom Goss · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">2K</p>
+          <p class="text-xs text-muted">pos. #18</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/5KP37xR5rZ6lEiPMmrLyTg" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-fa.spotifycdn.com/image/ab67706c0000da846ebb8ba95e30228863f675a5" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">sad hours  💙  chill vibes only - tiktok 2026</p>
+          <p class="text-xs text-muted">by ASTRAL · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">2K</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/3EvMwMCGH7eJC5SYYmr9Bw" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84f6407cb62670553f33e1c2b3" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">soft love songs for late nights</p>
+          <p class="text-xs text-muted">by VYBES. · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">2K</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/4AScQKaAGLf0iYvwI8cg1H" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000d72c7abdee7c1837573e2052d45d" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">late night sadness</p>
+          <p class="text-xs text-muted">by Dailypills · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">2K</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/7dWroj8uoFb3H8y6EnPfPE" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84cb930e731a30661d44ac14b9" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Sad Love Emotional Songs Netflix &amp; Tiktok</p>
+          <p class="text-xs text-muted">by Emerald · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">2K</p>
+          <p class="text-xs text-muted">pos. #4</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/0qsvKbzoJhrQ0QmUfTgjSw" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da8415001d9022f21d2386170e44" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">songs to fall asleep to with tears in your eyes</p>
+          <p class="text-xs text-muted">by Vanitas · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">2K</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/0EDMxEfr4m4o1OCw3i6Mfk" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84264c0e63c1beb59bf9ad60c7" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Emotional Sad TikTok Songs 2026</p>
+          <p class="text-xs text-muted">by Larsen Blake · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">1K</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/22VKR4SiWRt94huueLnCgd" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da849af3926e8125f7824a5d5041" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Depressing Songs for when you feel empty</p>
+          <p class="text-xs text-muted">by Larsen Blake · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">1K</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/4VLkjiLLpSaWyGQwNUYjM4" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84cb4a8e6cfaa810853b68bfc8" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Dark Pop Cinematic </p>
+          <p class="text-xs text-muted">by Lunaris · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">1K</p>
+          <p class="text-xs text-muted">pos. #14</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/18RxQj8fYJyO6A4FPI8572" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000d72cb9fde54b04c9752f741a1010" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">suicide depressing songs </p>
+          <p class="text-xs text-muted">by Dailypills · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">1K</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/5bWCQffonoyi2x7UThvZh9" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da840bba586f5a6a382981d1fc5f" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Neon Pop Vibes | 2025</p>
+          <p class="text-xs text-muted">by chrismeyer · aggiunta 2026-05</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">994</p>
+          <p class="text-xs text-muted">pos. #50</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/3Jboiw0ZSZQGGKZ3mDZbnT" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84be29a82200ce261cf6baa179" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Sad Anime Songs 2026</p>
+          <p class="text-xs text-muted">by Larsen Blake · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">942</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/6bCKhkE4jyNyFmycQ8Yrlc" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da8461ed3ff0046daffc46d77121" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Indie Alt-Pop Tiktok Songs </p>
+          <p class="text-xs text-muted">by Viral Mood · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">863</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/4cWqmiaDR8SINIqXWJQfYR" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84d951b82a97e1600efe3e595e" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">slowed TikTok songs</p>
+          <p class="text-xs text-muted">by Dailypills · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">812</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/37SfghN6jOzhYpZ3tVa2Jq" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84ff8d140da7006bb174487b9f" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">THOSE tik tok sad songs 2026 /for your tiktok edits</p>
+          <p class="text-xs text-muted">by Emerald · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">809</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/2KuRGnIRnJOYCBgaoDTAyu" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84b600e53980afc313e4ed79dc" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">softly broken</p>
+          <p class="text-xs text-muted">by Emerald · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">741</p>
+          <p class="text-xs text-muted">pos. #3</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/37i9dQZF1E4yWzT4Jcvn8K" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://pickasso.spotifycdn.com/image/ab67c0de0000deef/dt/v1/img/radio/artist/0brsGLNpCQEHXNblDDKWK0/en" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Noktis Radio</p>
+          <p class="text-xs text-muted">by Spotify · aggiunta 2026-05</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">710</p>
+          <p class="text-xs text-muted">pos. #21</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/1XO7pZSnzFzX0jUHUoz6nd" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da8467e2dd468858df23d1cfe1c9" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">songs to cry to when you can’t sleep</p>
+          <p class="text-xs text-muted">by Emerald · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">700</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/6IPmdb91e2G0wmeN0B6vYw" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da841123947274e303314cf634ec" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Chill Midnight Indie 🌙 </p>
+          <p class="text-xs text-muted">by chrismeyer · aggiunta 2026-05</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">608</p>
+          <p class="text-xs text-muted">pos. #12</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/4Ndjq7jG4ZprKwBy3gEzVJ" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da843ec26710b8693fab50738f25" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">tiktok sad chill sleep songs 2026 ✨</p>
+          <p class="text-xs text-muted">by Emerald · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">501</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/77hSOXZsieL304jdNYO7jH" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84501625ae56625609fddfc069" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Tiktok Chillout 2026</p>
+          <p class="text-xs text-muted">by ASTRAL · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">483</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/3KGaeNS6lRqT7bwLGCwH6s" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84ac14f3473e2716529a7c1be4" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">overthinking at 3am</p>
+          <p class="text-xs text-muted">by Emerald · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">463</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/6duwVWEf4HnkAwoOML59ax" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da8419cb237c56b488e3c02be02b" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">TikTok Saddest Songs ❤️</p>
+          <p class="text-xs text-muted">by Viral Mood · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">412</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/1c8u1gWTXmyUl3MiegBRWk" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da841edc40aaf2b0f6a82097697c" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Rainy Days &amp; Sad Vibes only  🌧️</p>
+          <p class="text-xs text-muted">by VYBES. · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">362</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/4EOqILOw9YMyc9mp7fWd0F" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da846ced11f98f578cc6be81a99f" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">chill songs for low cortisol, stress, overthinking</p>
+          <p class="text-xs text-muted">by Emerald · aggiunta 2026-05</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">340</p>
+          <p class="text-xs text-muted">pos. #3</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/7udskYO7GGRXUaIpTG10O2" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-fa.spotifycdn.com/image/ab67706c0000da8439c87c4fdf6f3705b8b0f44f" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">driving home after a sad breakup</p>
+          <p class="text-xs text-muted">by Dailypills · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">288</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/5nPcZ3rqCltmRK4a6IC4SY" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-fa.spotifycdn.com/image/ab67706c0000da84ce0bd90084a7f10af7d168a2" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">off campus  ❤️</p>
+          <p class="text-xs text-muted">by Emerald · aggiunta 2026-05</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">282</p>
+          <p class="text-xs text-muted">pos. #4</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/5UgFD0INzWHzGbrq5hsv2d" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da844998efbe7a1a1b5c265d7f44" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">sad lonely late night songs </p>
+          <p class="text-xs text-muted">by Emerald · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">270</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/4dmFSvS7Xro5BAFG8wWWOp" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-fa.spotifycdn.com/image/ab67706c0000da8413d99a656a1190a3a8dce509" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">musik sedih tapi nyaman untuk tidur malam</p>
+          <p class="text-xs text-muted">by VYBES. · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">269</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/3r3YfRgL2TphX5rCz67Zt0" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84cc2af8847b0a517cae11ccd5" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">chillout songs from tiktok edits</p>
+          <p class="text-xs text-muted">by AestheticPlaylist · aggiunta 2026-04</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">263</p>
+          <p class="text-xs text-muted">pos. #2</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/39TGSehGN7LcMDJk3w0cE2" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://mosaic.scdn.co/640/ab67616d00001e021917a0f3f4152622a040913fab67616d00001e021b0de2abcdc89c8dc76c917eab67616d00001e028ed7959c2360cc3fcfccd9c6ab67616d00001e029999662eca3c5c0bbd630521" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">ANOTHER LOVE TOM ODELL (SAD PIANO DRAMATIC EMOTIONAL INDIE POP ANTHEM 2026)</p>
+          <p class="text-xs text-muted">by Emerald · aggiunta 2026-05</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">262</p>
+          <p class="text-xs text-muted">pos. #4</p>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/playlist/58uiUgVw2c6vAXOsXQaq1N" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-white/5">
+        <img src="https://mosaic.scdn.co/640/ab67616d00001e0279e480cbab8c7b86d277841aab67616d00001e02a91c10fe9472d9bd89802e5aab67616d00001e02b1e570fd1ab64d2ce318aee2ab67616d00001e02c25b53f0a34aa1bb4f77cb3e" alt="" class="h-10 w-10 rounded-lg shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">THE CURE OLIVIA RODRIGO (SAD GIRL POP ANGST HEARTBREAK BROKEN SOUR GUT VIBES MELANCHOLY DEPRESSING)</p>
+          <p class="text-xs text-muted">by Emerald · aggiunta 2026-05</p>
+        </div>
+        <div class="text-right shrink-0">
+          <p class="text-sm font-bold text-white">213</p>
+          <p class="text-xs text-muted">pos. #5</p>
+        </div>
+      </a>
+    </div>
+    <div id="track-pl-pagination" class="flex items-center justify-between border-t border-border px-5 py-3 shrink-0 hidden">
+      <button id="track-pl-prev" class="rounded-full border border-white/30 px-4 py-1.5 text-xs font-bold text-white transition hover:bg-white/10 disabled:opacity-30" disabled>Prev</button>
+      <span id="track-pl-info" class="text-xs text-muted"></span>
+      <button id="track-pl-next" class="rounded-full border border-white/30 px-4 py-1.5 text-xs font-bold text-white transition hover:bg-white/10">Next</button>
+    </div>
+  </div>
+</dialog>
 <dialog id="kpi-modal" class="rounded-2xl border border-white/10 bg-surface/95 backdrop-blur-xl p-0 backdrop:bg-black/70 backdrop:backdrop-blur-sm w-full max-w-xl text-white">
   <div class="p-6">
     <!-- Header -->
@@ -2125,6 +2840,16 @@
     }
   });
 })();
+
+  // Track playlists modal
+  (function() {
+    const tplModal = document.getElementById('track-playlists-modal');
+    document.getElementById('open-track-playlists-modal')?.addEventListener('click', () => tplModal.showModal());
+    document.getElementById('close-track-playlists-modal')?.addEventListener('click', () => tplModal.close());
+    tplModal?.addEventListener('click', function(e) { if (e.target === tplModal) tplModal.close(); });
+    const tplList = document.getElementById('track-pl-list');
+    if (tplList) wrapListForPagination(tplList, 'track-pl-pagination');
+  })();
 </script>
 
 </body>
