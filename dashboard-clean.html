@@ -2402,11 +2402,13 @@
       <path d="${linePath}" fill="none" stroke="${d.color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
       <line data-crosshair x1="0" y1="${padT}" x2="0" y2="${padT+ch}" stroke="${d.color}" stroke-width="1" stroke-dasharray="3,3" opacity="0"/>
       <circle data-crosshair-dot r="5" fill="${d.color}" stroke="rgba(0,0,0,0.6)" stroke-width="2" opacity="0"/>
+      <text data-crosshair-val font-size="12" font-weight="700" fill="#fff" font-family="Montserrat,sans-serif" paint-order="stroke" stroke="#0a0a0a" stroke-width="3.5" opacity="0"></text>
       <rect data-chart-hit x="${padL}" y="0" width="${cw}" height="${H}" fill="transparent" style="touch-action:none"/>`;
 
     const hit    = svg.querySelector('[data-chart-hit]');
     const xhair  = svg.querySelector('[data-crosshair]');
     const dot    = svg.querySelector('[data-crosshair-dot]');
+    const valLbl = svg.querySelector('[data-crosshair-val]');
     const tipVal = modal.querySelector('[data-tooltip-value]');
     const tipX   = modal.querySelector('[data-tooltip-x]');
 
@@ -2422,6 +2424,13 @@
       const [cx, cy] = coords[i];
       xhair.setAttribute('x1', cx); xhair.setAttribute('x2', cx); xhair.setAttribute('opacity', '0.7');
       dot.setAttribute('cx', cx);   dot.setAttribute('cy', cy);   dot.setAttribute('opacity', '1');
+      // Valore visibile sulla linea
+      valLbl.textContent = fmt(pts[i]);
+      const right = i < n-3;
+      valLbl.setAttribute('x', right ? cx+9 : cx-9);
+      valLbl.setAttribute('y', cy-9);
+      valLbl.setAttribute('text-anchor', right ? 'start' : 'end');
+      valLbl.setAttribute('opacity', '1');
       tipVal.textContent = fmt(pts[i]);
       tipVal.className   = 'text-xl font-bold ' + d.cc;
       tipX.textContent   = day(i);
@@ -2431,6 +2440,7 @@
     function clearCrosshair() {
       xhair.setAttribute('opacity', '0');
       dot.setAttribute('opacity', '0');
+      valLbl.setAttribute('opacity', '0');
       tipVal.textContent = '—';
       tipVal.className   = 'text-xl font-bold';
       tipX.textContent   = isMobile() ? 'tocca il grafico' : 'hover sul grafico';
@@ -2820,6 +2830,7 @@
   svg.innerHTML = grid + paths +
     '<line id="cmp-xh" x1="0" y1="'+padT+'" x2="0" y2="'+(padT+ch)+'" stroke="rgba(255,255,255,0.4)" stroke-dasharray="3,3" opacity="0"/>' +
     CMP.series.map(s=>'<circle class="cmp-dot" r="4" fill="'+s.color+'" stroke="#0a0a0a" stroke-width="1.5" opacity="0"/>').join('') +
+    CMP.series.map(s=>'<text class="cmp-val" font-size="11" font-weight="700" fill="'+s.color+'" font-family="Montserrat,sans-serif" paint-order="stroke" stroke="#0a0a0a" stroke-width="3" opacity="0"></text>').join('') +
     '<rect x="'+padL+'" y="0" width="'+cw+'" height="'+H+'" fill="transparent" style="cursor:crosshair"/>';
 
   // Legenda con artwork + titolo + gain (ordinata per gain desc)
@@ -2834,6 +2845,7 @@
 
   const xh = document.getElementById('cmp-xh');
   const dots = [...svg.querySelectorAll('.cmp-dot')];
+  const vals = [...svg.querySelectorAll('.cmp-val')];
   const tip = document.getElementById('cmp-tip');
   const hit = svg.querySelector('rect');
 
@@ -2844,13 +2856,24 @@
     const i = Math.max(0, Math.min(n-1, Math.round(px/xStep)));
     const cx = X(i);
     xh.setAttribute('x1',cx); xh.setAttribute('x2',cx); xh.setAttribute('opacity','0.6');
-    CMP.series.forEach((s,k)=>{ dots[k].setAttribute('cx',cx); dots[k].setAttribute('cy',Y(s.growth[i])); dots[k].setAttribute('opacity','1'); });
+    CMP.series.forEach((s,k)=>{
+      const cy = Y(s.growth[i]);
+      dots[k].setAttribute('cx',cx); dots[k].setAttribute('cy',cy); dots[k].setAttribute('opacity','1');
+      // Valore sulla linea: a sinistra o destra del punto a seconda della posizione
+      const vt = vals[k];
+      vt.textContent = '+'+fmtK(s.growth[i]);
+      const right = i < n-3;
+      vt.setAttribute('x', right ? cx+8 : cx-8);
+      vt.setAttribute('y', cy-6);
+      vt.setAttribute('text-anchor', right ? 'start' : 'end');
+      vt.setAttribute('opacity', s.growth[i] > 0 ? '1' : '0');
+    });
     const d = new Date(CMP.dates[i]);
     const ds = d.toLocaleDateString('it-IT',{day:'2-digit',month:'short'});
     // Ordina le serie per valore al giorno i (desc) nel tooltip
     const rows = CMP.series.map(s=>({l:s.label,c:s.color,v:s.growth[i]})).sort((a,b)=>b.v-a.v);
-    tip.innerHTML = '<p class="text-xs font-bold text-white mb-1">'+ds+'</p>' +
-      rows.map(rw=>'<p class="flex items-center justify-between gap-3 text-xs"><span class="flex items-center gap-1.5"><span style="width:7px;height:7px;border-radius:50%;background:'+rw.c+';display:inline-block"></span><span class="text-gray-400">'+rw.l+'</span></span><span class="text-white font-semibold">+'+fmtK(rw.v)+'</span></p>').join('');
+    tip.innerHTML = '<p class="text-xs font-bold text-white mb-1.5">'+ds+'</p>' +
+      rows.map(rw=>'<p class="flex items-center justify-between gap-6 text-xs mb-0.5"><span class="flex items-center gap-2"><span style="width:8px;height:8px;border-radius:50%;background:'+rw.c+';display:inline-block;flex-shrink:0"></span><span class="text-gray-400">'+rw.l+'</span></span><span class="text-white font-semibold">+'+fmtK(rw.v)+'</span></p>').join('');
     // Posiziona il tooltip vicino al cursore (dentro il contenitore relative)
     tip.classList.remove('hidden');
     const cxPx = (cx/W)*r.width;
@@ -2863,7 +2886,7 @@
   hit.addEventListener('mousemove', e=>move(e.clientX, e.clientY));
   hit.addEventListener('touchstart', e=>{e.preventDefault();move(e.touches[0].clientX);},{passive:false});
   hit.addEventListener('touchmove', e=>{e.preventDefault();move(e.touches[0].clientX);},{passive:false});
-  hit.addEventListener('mouseleave', ()=>{ xh.setAttribute('opacity','0'); dots.forEach(d=>d.setAttribute('opacity','0')); tip.classList.add('hidden'); });
+  hit.addEventListener('mouseleave', ()=>{ xh.setAttribute('opacity','0'); dots.forEach(d=>d.setAttribute('opacity','0')); vals.forEach(v=>v.setAttribute('opacity','0')); tip.classList.add('hidden'); });
 })();
 </script>
 </body>
