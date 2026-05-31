@@ -144,7 +144,7 @@
       <section class="rounded-2xl border border-secondary-500/20 bg-linear-to-r from-secondary-500/50 to-secondary-600/50 backdrop-blur-3xl  p-4">
         <header class="mb-2 flex items-center justify-between">
           <h4 class="text-sm font-bold">Weekly Tasks</h4>
-          <span class="rounded-full border border-secondary-500/20 bg-black-900 px-2 py-1 text-xs font-bold text-gray-400">3 PENDING</span>
+          <span id="tasks-badge" class="rounded-full border border-secondary-500/20 bg-black-900 px-2 py-1 text-xs font-bold text-gray-400">3 PENDING</span>
         </header>
         <div class="space-y-2">
           <label class="task-label flex cursor-pointer items-start gap-3 rounded-xl border border-secondary-500/20 bg-black/50 px-3 py-2 transition hover:border-primary-500/40"><input type="checkbox" class="mt-1 h-4 w-4 rounded border-secondary-500/20 bg-transparent accent-secondary-500">
@@ -2561,7 +2561,26 @@
 (() => {
 
   // Weekly tasks: toggle goal-done style on check
-  document.querySelectorAll('.task-label input[type="checkbox"]').forEach(cb => {
+  const taskCbs = document.querySelectorAll('.task-label input[type="checkbox"]');
+  const tasksBadge = document.getElementById('tasks-badge');
+  function updateTasksBadge() {
+    const total = taskCbs.length;
+    const done = [...taskCbs].filter(c => c.checked).length;
+    const pending = total - done;
+    if (!tasksBadge) return;
+    if (pending === 0) {
+      tasksBadge.textContent = '✓ COMPLETED';
+      tasksBadge.classList.remove('text-gray-400','border-secondary-500/20','bg-black-900');
+      tasksBadge.classList.add('text-white','border-primary-500');
+      tasksBadge.style.background = 'linear-gradient(to right, #116dff, #0053d8)';
+    } else {
+      tasksBadge.textContent = pending + ' PENDING';
+      tasksBadge.classList.add('text-gray-400','border-secondary-500/20','bg-black-900');
+      tasksBadge.classList.remove('text-white','border-primary-500');
+      tasksBadge.style.background = '';
+    }
+  }
+  taskCbs.forEach(cb => {
     cb.addEventListener('change', () => {
       const label = cb.closest('.task-label');
       if (cb.checked) {
@@ -2573,6 +2592,7 @@
         label.style.boxShadow = '';
         label.style.borderColor = '';
       }
+      updateTasksBadge();
     });
   });
 })();
