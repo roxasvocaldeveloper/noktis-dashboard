@@ -1,0 +1,81 @@
+      <a href="https://www.youtube.com/watch?v=bKYVEy4eXHQ&lc=UgyaPPDDY0WJC7CHngJ4AaABAg" target="_blank" class="flex items-start gap-3 border-b border-secondary-500/20 px-4 py-3 last:border-0 hover:bg-secondary-500/5">
+        <img src="https://yt3.ggpht.com/ytc/AIdro_m5QYOTwUIlwmp9hb2FJYxXHT09N-0jcjj_h1dGWzDXKg=s240-c-k-c0x00ffffff-no-rj" alt="" class="h-9 w-9 rounded-full shrink-0 object-cover" onerror="this.src='https://i.scdn.co/image/ab67616d00001e029494eeac6a088d0460830996'">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm text-white"><span class="font-semibold">Veronika Chlíbková</span> <span class="text-gray-400">su Berlin</span></p>
+          <p class="text-sm text-white/90 mt-0.5">😊</p>
+          <p class="text-xs text-gray-400 mt-1">2 Gen 2026 · ♥ 0</p>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=bKYVEy4eXHQ&lc=UgyGGN-NZQyXI5WLWS54AaABAg" target="_blank" class="flex items-start gap-3 border-b border-secondary-500/20 px-4 py-3 last:border-0 hover:bg-secondary-500/5">
+        <img src="https://yt3.ggpht.com/ytc/AIdro_n2rSpUyQKWyo9myQo3Ix3kjzCLsZMYp4VD8iUT0vo=s240-c-k-c0x00ffffff-no-rj" alt="" class="h-9 w-9 rounded-full shrink-0 object-cover" onerror="this.src='https://i.scdn.co/image/ab67616d00001e029494eeac6a088d0460830996'">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm text-white"><span class="font-semibold">Krešimir Vurnek</span> <span class="text-gray-400">su Berlin</span></p>
+          <p class="text-sm text-white/90 mt-0.5">Up</p>
+          <p class="text-xs text-gray-400 mt-1">13 Ott 2025 · ♥ 0</p>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=X4Du6ee8VkE&lc=UgzclA9YA2DU8pzcCGN4AaABAg" target="_blank" class="flex items-start gap-3 border-b border-secondary-500/20 px-4 py-3 last:border-0 hover:bg-secondary-500/5">
+        <img src="https://yt3.ggpht.com/qWputkQaY5M1qj04sY5M9pbJMRDrKtShNxuO-VtR5cAO3v1hU4g1wVCFUESxis6hKGTCx5GJwg=s240-c-k-c0x00ffffff-no-rj" alt="" class="h-9 w-9 rounded-full shrink-0 object-cover" onerror="this.src='https://i.scdn.co/image/ab67616d00001e02d3387c9110a05c86b17e9e70'">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm text-white"><span class="font-semibold">KLASIKS</span> <span class="text-gray-400">su Collide</span></p>
+          <p class="text-sm text-white/90 mt-0.5">❤</p>
+          <p class="text-xs text-gray-400 mt-1">5 Feb 2024 · ♥ 0</p>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=maEGO9vF6P0&lc=UgzdjkbHiM4yOghTd2l4AaABAg" target="_blank" class="flex items-start gap-3 border-b border-secondary-500/20 px-4 py-3 last:border-0 hover:bg-secondary-500/5">
+        <img src="https://yt3.ggpht.com/ytc/AIdro_lKP7dAAXb6cEg0KrVG2PRBivyFD8OKgjkefTA_dg-96nE=s240-c-k-c0x00ffffff-no-rj" alt="" class="h-9 w-9 rounded-full shrink-0 object-cover" onerror="this.src='https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47'">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm text-white"><span class="font-semibold">Darkiriona</span> <span class="text-gray-400">su goodbyes</span></p>
+          <p class="text-sm text-white/90 mt-0.5">Song is a mood. And nice voice</p>
+          <p class="text-xs text-gray-400 mt-1">3 Giu 2023 · ♥ 1</p>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=X4Du6ee8VkE&lc=Ugwsgl2_5_b57fKU1uJ4AaABAg" target="_blank" class="flex items-start gap-3 border-b border-secondary-500/20 px-4 py-3 last:border-0 hover:bg-secondary-500/5">
+        <img src="https://yt3.ggpht.com/Or3yFk2MgR3Ibx0fbxF3VUBQZ5KG8G9UWg_FYYjJGN6ZjaESiog6cjOYKLewIpeKf6w4NtEzeG0=s240-c-k-c0x00ffffff-no-rj" alt="" class="h-9 w-9 rounded-full shrink-0 object-cover" onerror="this.src='https://i.scdn.co/image/ab67616d00001e02d3387c9110a05c86b17e9e70'">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm text-white"><span class="font-semibold">ASMR Journal.Rosa1Handmade Ooak</span> <span class="text-gray-400">su Collide</span></p>
+          <p class="text-sm text-white/90 mt-0.5">Amazing°•○●☆°•○●☆✨️</p>
+          <p class="text-xs text-gray-400 mt-1">15 Ott 2022 · ♥ 0</p>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=maEGO9vF6P0&lc=Ugy8f21Asvad0MpHJSd4AaABAg" target="_blank" class="flex items-start gap-3 border-b border-secondary-500/20 px-4 py-3 last:border-0 hover:bg-secondary-500/5">
+        <img src="https://yt3.ggpht.com/lPLQsiO5o8HPD-QsaT1BJbOGkGDCLiZKPJwZfwjg_ONEkiv2vt5y3xSvYexk4gtF-_uVYS_VCw=s240-c-k-c0x00ffffff-no-rj" alt="" class="h-9 w-9 rounded-full shrink-0 object-cover" onerror="this.src='https://i.scdn.co/image/ab67616d00001e028cfe25ed0d181a59b2adec47'">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm text-white"><span class="font-semibold">S A N J I D A</span> <span class="text-gray-400">su goodbyes</span></p>
+          <p class="text-sm text-white/90 mt-0.5">Always love your songs...♥️♥️</p>
+          <p class="text-xs text-gray-400 mt-1">3 Ott 2022 · ♥ 1</p>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=bKYVEy4eXHQ&lc=UgzhYGMh_twpMyv4vrx4AaABAg" target="_blank" class="flex items-start gap-3 border-b border-secondary-500/20 px-4 py-3 last:border-0 hover:bg-secondary-500/5">
+        <img src="https://yt3.ggpht.com/m3_uHAzYDTisQbI5LVpRjdi-J2Djq4IqoEsWarw9uLtOC8LUP3AFcIggS54_ZZXHGwDW5KjZ2Q=s240-c-k-c0x00ffffff-no-rj" alt="" class="h-9 w-9 rounded-full shrink-0 object-cover" onerror="this.src='https://i.scdn.co/image/ab67616d00001e029494eeac6a088d0460830996'">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm text-white"><span class="font-semibold">beraher</span> <span class="text-gray-400">su Berlin</span></p>
+          <p class="text-sm text-white/90 mt-0.5">I&#x27;ve been to berlin for 3 weeks and it was amazing I miss everything about Berlin it&#x27;s suc</p>
+          <p class="text-xs text-gray-400 mt-1">29 Set 2022 · ♥ 2</p>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=bKYVEy4eXHQ&lc=UgyWpoW-U3NNs8AIBFd4AaABAg" target="_blank" class="flex items-start gap-3 border-b border-secondary-500/20 px-4 py-3 last:border-0 hover:bg-secondary-500/5">
+        <img src="https://yt3.ggpht.com/5Ugvg5AkvOhDfFmw6ZgUgW5FKTDXLiiKbOcmiNWUzngUGs8CdLF7SFPtfjFbJ5-Q7zWh6rMWik4=s240-c-k-c0x00ffffff-no-rj" alt="" class="h-9 w-9 rounded-full shrink-0 object-cover" onerror="this.src='https://i.scdn.co/image/ab67616d00001e029494eeac6a088d0460830996'">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm text-white"><span class="font-semibold">Cʟᴏᴜᴅʏ Eʏᴇᴢᵠ</span> <span class="text-gray-400">su Berlin</span></p>
+          <p class="text-sm text-white/90 mt-0.5">Wait, am I the only one who thought the bird in the background was some dirt on my device?</p>
+          <p class="text-xs text-gray-400 mt-1">28 Mag 2022 · ♥ 0</p>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=gOkkhjnsQhk&lc=Ugylr7TSV5df3roK88N4AaABAg" target="_blank" class="flex items-start gap-3 border-b border-secondary-500/20 px-4 py-3 last:border-0 hover:bg-secondary-500/5">
+        <img src="https://yt3.ggpht.com/U6LrVw0eHXe5hPvckVUChf4alqIpmhuCOw7JC5GGdWmfI4t5RQig_D_Ya8Vrq-h_R8LF4Y9m=s240-c-k-c0x00ffffff-no-rj" alt="" class="h-9 w-9 rounded-full shrink-0 object-cover" onerror="this.src='https://i.scdn.co/image/ab67616d00001e02d3387c9110a05c86b17e9e70'">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm text-white"><span class="font-semibold">lenaa</span> <span class="text-gray-400">su Collide</span></p>
+          <p class="text-sm text-white/90 mt-0.5">i love this song😍</p>
+          <p class="text-xs text-gray-400 mt-1">22 Apr 2022 · ♥ 1</p>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=bKYVEy4eXHQ&lc=UgwKkdAFA1BGwaM8ZRx4AaABAg" target="_blank" class="flex items-start gap-3 border-b border-secondary-500/20 px-4 py-3 last:border-0 hover:bg-secondary-500/5">
+        <img src="https://yt3.ggpht.com/ytc/AIdro_kbaRqQ2KC7tbHUbG_FmNZ34d1tsQcwucAZJMX8ec87zTPc=s240-c-k-c0x00ffffff-no-rj" alt="" class="h-9 w-9 rounded-full shrink-0 object-cover" onerror="this.src='https://i.scdn.co/image/ab67616d00001e029494eeac6a088d0460830996'">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm text-white"><span class="font-semibold">Manuela Becker</span> <span class="text-gray-400">su Berlin</span></p>
+          <p class="text-sm text-white/90 mt-0.5">Making &quot;Kurzgesagt&quot; and everyone thought it was from the UK
+Making &quot;Moskau&quot; and everyone t</p>
+          <p class="text-xs text-gray-400 mt-1">12 Apr 2022 · ♥ 0</p>
+        </div>
+      </a>
