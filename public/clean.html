@@ -74,37 +74,99 @@
        ════════════════════════════════════════ -->
   <section data-view="overview" class="space-y-6">
 
-    <!-- KPI GRID — loghi platform accanto al label -->
-    <div class="grid grid-cols-2 gap-3 md:grid-cols-3">
+    <!-- LAST RELEASE + GOALS + TASKS -->
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
 
-      <button data-kpi-chart="sp-listeners" class="flex flex-col gap-1 items-center rounded-xl bg-linear-to-r from-primary-500 to-primary-600 p-4 text-center transition hover:-translate-y-1 cursor-pointer">
-        <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-4 w-3 shrink-0"><use href="#logo-spotify"/></svg>Monthly Listeners</p>
-        <h3 class="text-xl font-bold text-white">106,249</h3>
-        <span class="inline-flex items-center rounded-full border border-secondary-500/20 bg-black/50 px-2 py-1 text-xs font-bold text-green-400">monthly</span>
-      </button>
+      <!-- Last Release -->
+      <section class="rounded-2xl border border-secondary-500/20 bg-linear-to-r from-secondary-500/50 to-secondary-600/50 backdrop-blur-3xl  p-4">
+        <h4 class="mb-3 text-base font-bold">Last Release</h4>
+        <!-- Cover + title -->
+        <div class="flex items-center gap-3 mb-4">
+          <img src="https://i.scdn.co/image/ab67616d00001e028ed7959c2360cc3fcfccd9c6" alt="" class="h-14 w-14 rounded-xl shrink-0">
+          <div class="min-w-0">
+            <p class="font-bold truncate">i killed all your plants</p>
+            <p class="text-xs text-gray-400">Noktis · Apr 2026</p>
+          </div>
+        </div>
+        <!-- 3 mini KPI cards -->
+        <div class="grid grid-cols-3 gap-2">
+          <button data-kpi-chart="track-killed" class="flex flex-col items-center gap-0.5 rounded-xl bg-linear-to-r from-primary-500 to-primary-600 p-3 text-center transition hover:opacity-100">
+            <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white/70"><svg class="h-3 w-3 shrink-0"><use href="#logo-spotify"/></svg>Popularity</p>
+            <p class="text-lg font-bold text-white">47</p>
+            <span class="inline-flex items-center rounded-full border border-secondary-500/20 bg-black/20 px-2 py-1 text-xs font-bold text-green-400">+17</span>
+          </button>
+          <button id="open-track-playlists-modal" class="flex flex-col items-center gap-0.5 rounded-xl bg-linear-to-r from-primary-500 to-primary-600 p-3 text-center transition hover:opacity-100">
+            <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white/70"><svg class="h-3 w-3 shrink-0"><use href="#logo-spotify"/></svg>Playlists</p>
+            <p class="text-lg font-bold text-white">63</p>
+            <span class="inline-flex items-center rounded-full border border-secondary-500/20 bg-black/20 px-2 py-1 text-xs font-bold text-green-400">attive</span>
+          </button>
+          <button data-kpi-chart="sh-total" class="flex flex-col items-center gap-0.5 rounded-xl bg-linear-to-r from-primary-500 to-primary-600 p-3 text-center transition hover:opacity-100">
+            <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white/70"><svg class="h-3 w-3 shrink-0"><use href="#logo-shazam"/></svg>Shazam</p>
+            <p class="text-lg font-bold text-white">4.2K</p>
+            <span class="inline-flex items-center rounded-full border border-secondary-500/20 bg-black/20 px-2 py-1 text-xs font-bold text-green-400">+200</span>
+          </button>
+        </div>
+      </section>
 
-      <button data-kpi-chart="sp-playlists" class="flex flex-col gap-1 items-center rounded-xl bg-linear-to-r from-primary-500 to-primary-600 p-4 text-center transition hover:-translate-y-1 cursor-pointer">
-        <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-4 w-3 shrink-0"><use href="#logo-spotify"/></svg>Playlists</p>
-        <h3 class="text-xl font-bold text-white">155</h3>
-        <span class="inline-flex items-center rounded-full border border-secondary-500/20 bg-black/50 px-2 py-1 text-xs font-bold text-green-400">attive</span>
-      </button>
+      <!-- Goals — compact -->
+      <section class="rounded-2xl border border-secondary-500/20 bg-linear-to-r from-secondary-500/50 to-secondary-600/50 backdrop-blur-3xl  p-4">
+        <h4 class="mb-2 text-sm font-bold">Next Step Goals</h4>
+        <!-- Completed -->
+        <div data-goal="100K Monthly Listeners" class="flex items-center justify-between rounded-xl bg-linear-to-r from-primary-500 to-primary-600 px-3 py-2 border border-primary-500 mb-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-white flex items-center gap-1">100K Monthly Listeners</span>
+          <div class="flex items-center gap-2 shrink-0">
+            <span class="material-symbols-outlined text-sm text-white/70">check_circle</span>
+            <button class="share-goal-btn rounded-full border border-secondary-500/20 bg-black/20 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white transition hover:bg-secondary-500/10" style="font-size:0.6rem;letter-spacing:.08em">Share</button>
+          </div>
+        </div>
+        <!-- Progress bars -->
+        <div class="space-y-2">
+          <div>
+            <div class="flex items-center justify-between mb-0">
+              <p class="text-xs font-semibold">150K Monthly Listeners</p>
+              <p class="text-xs text-gray-400">75%</p>
+            </div>
+            <div class="h-1 rounded-full bg-black/20"><div class="h-full rounded-full bg-primary-500 w-[71%]"></div></div>
+            <p class="mt-1 text-xs text-gray-400">106,249 / 150,000</p>
+          </div>
+          <div>
+            <div class="flex items-center justify-between mb-0">
+              <p class="text-xs font-semibold">Top 50 Italia</p>
+              <p class="text-xs text-gray-400">42%</p>
+            </div>
+            <div class="h-1 rounded-full bg-black/20"><div class="h-full rounded-full bg-primary-500 w-[42%]"></div></div>
+            <p class="mt-1 text-xs text-gray-400">Pop. 47 → 65+</p>
+          </div>
+        </div>
+      </section>
 
-      <button data-kpi-chart="tt-videos" class="flex flex-col gap-1 items-center rounded-xl bg-linear-to-r from-primary-500 to-primary-600 p-4 text-center transition hover:-translate-y-1 cursor-pointer">
-        <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-4 w-3 shrink-0"><use href="#logo-tiktok"/></svg>Videos</p>
-        <h3 class="text-xl font-bold text-white">156</h3>
-        <span class="inline-flex items-center rounded-full border border-secondary-500/20 bg-black/50 px-2 py-1 text-xs font-bold text-white">260K views</span>
-      </button>
-
-      <button data-kpi-chart="ig-followers" class="flex flex-col gap-1 items-center rounded-xl bg-linear-to-r from-primary-500 to-primary-600 p-4 text-center transition hover:-translate-y-1 cursor-pointer">
-        <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-4 w-3 shrink-0"><use href="#logo-instagram"/></svg>Followers</p>
-        <h3 class="text-xl font-bold text-white">7,364</h3>
-        <span class="inline-flex items-center rounded-full border border-secondary-500/20 bg-black/50 px-2 py-1 text-xs font-bold text-white">@noktis__</span>
-      </button>
-      <button data-kpi-chart="sh-total" class="flex flex-col gap-1 items-center rounded-xl bg-linear-to-r from-primary-500 to-primary-600 backdrop-blur-3xl  p-4 text-center transition hover:-translate-y-1 hover:opacity-90">
-        <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-4 w-3 shrink-0"><use href="#logo-shazam"/></svg>Total Shazams</p>
-        <h3 class="text-xl font-bold text-white">17,072</h3>
-        <span class="inline-flex items-center rounded-full border border-secondary-500/20 bg-black/50 px-2 py-1 text-xs font-bold text-green-400">lifetime</span>
-      </button>
+      <!-- Weekly Tasks -->
+      <section class="rounded-2xl border border-secondary-500/20 bg-linear-to-r from-secondary-500/50 to-secondary-600/50 backdrop-blur-3xl  p-4">
+        <header class="mb-2 flex items-center justify-between">
+          <h4 class="text-sm font-bold">Weekly Tasks</h4>
+          <span class="rounded-full border border-secondary-500/20 bg-black-900 px-2 py-1 text-xs font-bold text-gray-400">3 PENDING</span>
+        </header>
+        <div class="space-y-2">
+          <label class="task-label flex cursor-pointer items-start gap-3 rounded-xl border border-secondary-500/20 bg-black/50 px-3 py-2 transition hover:border-primary-500/40"><input type="checkbox" class="mt-1 h-4 w-4 rounded border-secondary-500/20 bg-transparent accent-secondary-500">
+            <div>
+              <p class="text-xs font-semibold">Promuovi "obsessed" su TikTok</p>
+              <p class="text-xs text-gray-400">Track con più video (103)</p>
+            </div>
+          </label>
+          <label class="task-label flex cursor-pointer items-start gap-3 rounded-xl border border-secondary-500/20 bg-black/50 px-3 py-2 transition hover:border-primary-500/40"><input type="checkbox" class="mt-1 h-4 w-4 rounded border-secondary-500/20 bg-transparent accent-secondary-500">
+            <div>
+              <p class="text-xs font-semibold">Reel su "i killed all your plants"</p>
+              <p class="text-xs text-gray-400">Popolarità in crescita: 47</p>
+            </div>
+          </label>
+          <label class="task-label flex cursor-pointer items-start gap-3 rounded-xl border border-secondary-500/20 bg-black/50 px-3 py-2 transition hover:border-primary-500/40"><input type="checkbox" class="mt-1 h-4 w-4 rounded border-secondary-500/20 bg-transparent accent-secondary-500">
+            <div>
+              <p class="text-xs font-semibold">Ringrazia curator "Nordic Noir"</p>
+              <p class="text-xs text-gray-400">Tomas Raae · 8K followers</p>
+            </div>
+          </label>
+        </div>
+      </section>
 
     </div>
 
@@ -253,103 +315,6 @@
       </section>
 
     </div>
-
-    <!-- LAST RELEASE + GOALS + TASKS -->
-    <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
-
-      <!-- Last Release -->
-      <section class="rounded-2xl border border-secondary-500/20 bg-linear-to-r from-secondary-500/50 to-secondary-600/50 backdrop-blur-3xl  p-4">
-        <h4 class="mb-3 text-base font-bold">Last Release</h4>
-        <!-- Cover + title -->
-        <div class="flex items-center gap-3 mb-4">
-          <img src="https://i.scdn.co/image/ab67616d00001e028ed7959c2360cc3fcfccd9c6" alt="" class="h-14 w-14 rounded-xl shrink-0">
-          <div class="min-w-0">
-            <p class="font-bold truncate">i killed all your plants</p>
-            <p class="text-xs text-gray-400">Noktis · Apr 2026</p>
-          </div>
-        </div>
-        <!-- 3 mini KPI cards -->
-        <div class="grid grid-cols-3 gap-2">
-          <button data-kpi-chart="track-killed" class="flex flex-col items-center gap-0.5 rounded-xl bg-linear-to-r from-primary-500 to-primary-600 p-3 text-center transition hover:opacity-100">
-            <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white/70"><svg class="h-3 w-3 shrink-0"><use href="#logo-spotify"/></svg>Popularity</p>
-            <p class="text-lg font-bold text-white">47</p>
-            <span class="inline-flex items-center rounded-full border border-secondary-500/20 bg-black/20 px-2 py-1 text-xs font-bold text-green-400">+17</span>
-          </button>
-          <button id="open-track-playlists-modal" class="flex flex-col items-center gap-0.5 rounded-xl bg-linear-to-r from-primary-500 to-primary-600 p-3 text-center transition hover:opacity-100">
-            <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white/70"><svg class="h-3 w-3 shrink-0"><use href="#logo-spotify"/></svg>Playlists</p>
-            <p class="text-lg font-bold text-white">63</p>
-            <span class="inline-flex items-center rounded-full border border-secondary-500/20 bg-black/20 px-2 py-1 text-xs font-bold text-green-400">attive</span>
-          </button>
-          <button data-kpi-chart="sh-total" class="flex flex-col items-center gap-0.5 rounded-xl bg-linear-to-r from-primary-500 to-primary-600 p-3 text-center transition hover:opacity-100">
-            <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white/70"><svg class="h-3 w-3 shrink-0"><use href="#logo-shazam"/></svg>Shazam</p>
-            <p class="text-lg font-bold text-white">4.2K</p>
-            <span class="inline-flex items-center rounded-full border border-secondary-500/20 bg-black/20 px-2 py-1 text-xs font-bold text-green-400">+200</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- Goals — compact -->
-      <section class="rounded-2xl border border-secondary-500/20 bg-linear-to-r from-secondary-500/50 to-secondary-600/50 backdrop-blur-3xl  p-4">
-        <h4 class="mb-2 text-sm font-bold">Next Step Goals</h4>
-        <!-- Completed -->
-        <div data-goal="100K Monthly Listeners" class="flex items-center justify-between rounded-xl bg-linear-to-r from-primary-500 to-primary-600 px-3 py-2 border border-primary-500 mb-2">
-          <span class="text-xs font-bold uppercase tracking-wider text-white flex items-center gap-1">100K Monthly Listeners</span>
-          <div class="flex items-center gap-2 shrink-0">
-            <span class="material-symbols-outlined text-sm text-white/70">check_circle</span>
-            <button class="share-goal-btn rounded-full border border-secondary-500/20 bg-black/20 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white transition hover:bg-secondary-500/10" style="font-size:0.6rem;letter-spacing:.08em">Share</button>
-          </div>
-        </div>
-        <!-- Progress bars -->
-        <div class="space-y-2">
-          <div>
-            <div class="flex items-center justify-between mb-0">
-              <p class="text-xs font-semibold">150K Monthly Listeners</p>
-              <p class="text-xs text-gray-400">75%</p>
-            </div>
-            <div class="h-1 rounded-full bg-black/20"><div class="h-full rounded-full bg-primary-500 w-[71%]"></div></div>
-            <p class="mt-1 text-xs text-gray-400">106,249 / 150,000</p>
-          </div>
-          <div>
-            <div class="flex items-center justify-between mb-0">
-              <p class="text-xs font-semibold">Top 50 Italia</p>
-              <p class="text-xs text-gray-400">42%</p>
-            </div>
-            <div class="h-1 rounded-full bg-black/20"><div class="h-full rounded-full bg-primary-500 w-[42%]"></div></div>
-            <p class="mt-1 text-xs text-gray-400">Pop. 47 → 65+</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Weekly Tasks -->
-      <section class="rounded-2xl border border-secondary-500/20 bg-linear-to-r from-secondary-500/50 to-secondary-600/50 backdrop-blur-3xl  p-4">
-        <header class="mb-2 flex items-center justify-between">
-          <h4 class="text-sm font-bold">Weekly Tasks</h4>
-          <span class="rounded-full border border-secondary-500/20 bg-black-900 px-2 py-1 text-xs font-bold text-gray-400">3 PENDING</span>
-        </header>
-        <div class="space-y-2">
-          <label class="task-label flex cursor-pointer items-start gap-3 rounded-xl border border-secondary-500/20 bg-black/50 px-3 py-2 transition hover:border-primary-500/40"><input type="checkbox" class="mt-1 h-4 w-4 rounded border-secondary-500/20 bg-transparent accent-secondary-500">
-            <div>
-              <p class="text-xs font-semibold">Promuovi "obsessed" su TikTok</p>
-              <p class="text-xs text-gray-400">Track con più video (103)</p>
-            </div>
-          </label>
-          <label class="task-label flex cursor-pointer items-start gap-3 rounded-xl border border-secondary-500/20 bg-black/50 px-3 py-2 transition hover:border-primary-500/40"><input type="checkbox" class="mt-1 h-4 w-4 rounded border-secondary-500/20 bg-transparent accent-secondary-500">
-            <div>
-              <p class="text-xs font-semibold">Reel su "i killed all your plants"</p>
-              <p class="text-xs text-gray-400">Popolarità in crescita: 47</p>
-            </div>
-          </label>
-          <label class="task-label flex cursor-pointer items-start gap-3 rounded-xl border border-secondary-500/20 bg-black/50 px-3 py-2 transition hover:border-primary-500/40"><input type="checkbox" class="mt-1 h-4 w-4 rounded border-secondary-500/20 bg-transparent accent-secondary-500">
-            <div>
-              <p class="text-xs font-semibold">Ringrazia curator "Nordic Noir"</p>
-              <p class="text-xs text-gray-400">Tomas Raae · 8K followers</p>
-            </div>
-          </label>
-        </div>
-      </section>
-
-    </div>
-
   </section>
 
   <!-- ════════════════════════════════════════
@@ -368,6 +333,11 @@
         <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-4 w-3 shrink-0"><use href="#logo-spotify"/></svg>Total Streams</p>
         <h3 class="text-xl font-bold text-white">9.9M</h3>
         <span class="inline-flex items-center rounded-full border border-secondary-500/20 bg-black/50 px-2 py-1 text-xs font-bold text-green-400">lifetime</span>
+      </button>
+      <button data-kpi-chart="sp-playlists" class="flex flex-col gap-1 items-center rounded-xl bg-linear-to-r from-primary-500 to-primary-600 p-4 text-center transition hover:-translate-y-1 cursor-pointer">
+        <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-4 w-3 shrink-0"><use href="#logo-spotify"/></svg>Playlists</p>
+        <h3 class="text-xl font-bold text-white">155</h3>
+        <span class="inline-flex items-center rounded-full border border-secondary-500/20 bg-black/50 px-2 py-1 text-xs font-bold text-green-400">attive</span>
       </button>
       <button data-kpi-chart="sp-popularity" class="flex flex-col gap-1 items-center rounded-xl bg-linear-to-r from-primary-500 to-primary-600 p-4 text-center transition hover:-translate-y-1 cursor-pointer">
         <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-4 w-3 shrink-0"><use href="#logo-spotify"/></svg>Popularity Score</p>
@@ -632,6 +602,11 @@
       <button data-kpi-chart="tt-views" class="flex flex-col gap-1 items-center rounded-xl bg-linear-to-r from-primary-500 to-primary-600 p-4 text-center transition hover:-translate-y-1 cursor-pointer">
         <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-4 w-3 shrink-0"><use href="#logo-tiktok"/></svg>Views</p>
         <h3 class="text-xl font-bold text-white">260K</h3>
+        <span class="inline-flex items-center rounded-full border border-secondary-500/20 bg-black/50 px-2 py-1 text-xs font-bold text-green-400">total</span>
+      </button>
+      <button data-kpi-chart="tt-videos" class="flex flex-col gap-1 items-center rounded-xl bg-linear-to-r from-primary-500 to-primary-600 p-4 text-center transition hover:-translate-y-1 cursor-pointer">
+        <p class="flex items-center justify-center gap-1 text-xs font-semibold text-white"><svg class="h-4 w-3 shrink-0"><use href="#logo-tiktok"/></svg>Videos</p>
+        <h3 class="text-xl font-bold text-white">156</h3>
         <span class="inline-flex items-center rounded-full border border-secondary-500/20 bg-black/50 px-2 py-1 text-xs font-bold text-green-400">total</span>
       </button>
       <button data-kpi-chart="tt-likes" class="flex flex-col gap-1 items-center rounded-xl bg-linear-to-r from-primary-500 to-primary-600 p-4 text-center transition hover:-translate-y-1 cursor-pointer">
