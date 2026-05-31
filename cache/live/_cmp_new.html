@@ -11,7 +11,7 @@
   const xStep = cw/(n-1);
   const X = i => padL + i*xStep;
   const Y = v => padT + ch - (v/maxV)*ch;
-  const fmtK = v => v>=1000 ? (v/1000).toFixed(1)+'K' : Math.round(v);
+  const fmtK = v => Math.round(v).toLocaleString('it-IT');
 
   // Gridlines
   let grid='';
