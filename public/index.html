@@ -315,6 +315,26 @@
       </section>
 
     </div>
+
+    <!-- COMPARE GROWTH CHART · Top 5 tracks · 30gg -->
+    <section class="overflow-hidden rounded-2xl border border-secondary-500/20 bg-linear-to-r from-secondary-500/50 to-secondary-600/50 backdrop-blur-xl">
+      <header class="flex items-center justify-between border-b border-secondary-500/20 px-4 py-3">
+        <div class="flex items-center gap-2">
+          <svg class="h-4 w-4"><use href="#logo-spotify"/></svg>
+          <h4 class="text-sm font-bold">Crescita Stream · Top 5 brani</h4>
+        </div>
+        <span class="text-xs text-gray-400">ultimi 30 giorni</span>
+      </header>
+      <div class="p-4">
+        <!-- Legend -->
+        <div id="cmp-legend" class="flex flex-wrap gap-x-4 gap-y-1 mb-3"></div>
+        <!-- SVG chart -->
+        <svg id="cmp-chart" class="w-full" viewBox="0 0 760 280" preserveAspectRatio="none"></svg>
+        <!-- Tooltip -->
+        <div id="cmp-tip" class="text-xs text-gray-400 mt-2">Passa sul grafico per i dettagli giorno per giorno</div>
+      </div>
+    </section>
+
   </section>
 
   <!-- ════════════════════════════════════════
@@ -2598,6 +2618,8 @@
   // Tracks
   const trList = document.querySelector('#tracks-modal .overflow-y-auto');
   if (trList) { trList.id = 'tracks-list'; wrapListForPagination(trList, 'tracks-pagination'); }
+
+
 })();
 </script>
 <!-- ═══ SHARE GOAL MODAL ═══ -->
@@ -2765,5 +2787,73 @@
   })();
 </script>
 
+
+<script>
+// ─── Compare Growth Chart (Top 5 tracks · 30gg) ──────────────────
+  (function() {
+    const CMP = {"dates":["2026-05-02","2026-05-03","2026-05-04","2026-05-05","2026-05-06","2026-05-07","2026-05-08","2026-05-09","2026-05-10","2026-05-11","2026-05-12","2026-05-13","2026-05-14","2026-05-15","2026-05-16","2026-05-17","2026-05-18","2026-05-19","2026-05-20","2026-05-21","2026-05-22","2026-05-23","2026-05-24","2026-05-25","2026-05-26","2026-05-27","2026-05-28","2026-05-29","2026-05-30","2026-05-31"],"series":[{"label":"goodbyes","color":"#5FE0B0","growth":[0,0,0,0,0,8593,8593,8593,8593,8593,8593,8593,8593,18431,18431,18431,18431,18431,18431,18431,26768,26768,26768,26768,26768,26768,26768,35137,35137,35137],"gain":35137},{"label":"Not Enough","color":"#FF6B9D","growth":[0,0,0,0,0,2206,2206,2206,2206,2206,2206,2206,2206,4893,4893,4893,4893,4893,4893,4893,7261,7261,7261,7261,7261,7261,7261,9377,9377,9377],"gain":9377},{"label":"Unforgettable","color":"#FFA94D","growth":[0,0,0,0,0,2327,2327,2327,2327,2327,2327,2327,2327,4866,4866,4866,4866,4866,4866,4866,7136,7136,7136,7136,7136,7136,7136,9456,9456,9456],"gain":9456},{"label":"why did i fail","color":"#7C9CFF","growth":[0,837,837,2477,2477,4122,4122,4122,4122,4122,4122,8661,8661,8661,8661,8661,12524,12524,12524,12524,15588,15588,15588,17679,17679,19120,19120,20611,20611,20611],"gain":20611},{"label":"Berlin","color":"#9747FF","growth":[0,0,0,0,0,302,302,302,302,302,302,302,302,616,616,616,616,616,616,616,971,971,971,971,971,971,971,1220,1220,1220],"gain":1220}]};
+    const svg = document.getElementById('cmp-chart');
+    if (!svg) return;
+    const W=760, H=280, padL=8, padR=8, padT=12, padB=24;
+    const cw=W-padL-padR, ch=H-padT-padB;
+    const n = CMP.dates.length;
+    const allVals = CMP.series.flatMap(s => s.growth);
+    const maxV = Math.max(...allVals, 1);
+    const xStep = cw/(n-1);
+    const X = i => padL + i*xStep;
+    const Y = v => padT + ch - (v/maxV)*ch;
+    const fmtK = v => v>=1000 ? (v/1000).toFixed(1)+'K' : Math.round(v);
+
+    // Gridlines orizzontali (4)
+    let grid='';
+    for(let t=0;t<=4;t++){
+      const gv = maxV*t/4, gy = Y(gv);
+      grid += `<line x1="${padL}" y1="${gy}" x2="${padL+cw}" y2="${gy}" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>`;
+      grid += `<text x="${padL+2}" y="${gy-3}" font-size="9" fill="rgba(255,255,255,0.35)" font-family="Montserrat,sans-serif">+${fmtK(gv)}</text>`;
+    }
+    // Linee
+    let paths='';
+    CMP.series.forEach(s=>{
+      const pts = s.growth.map((v,i)=>`${X(i)},${Y(v)}`).join(' ');
+      paths += `<polyline points="${pts}" fill="none" stroke="${s.color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+    });
+    // Crosshair + hit area
+    svg.innerHTML = grid + paths +
+      `<line id="cmp-xh" x1="0" y1="${padT}" x2="0" y2="${padT+ch}" stroke="rgba(255,255,255,0.4)" stroke-dasharray="3,3" opacity="0"/>` +
+      CMP.series.map(s=>`<circle class="cmp-dot" r="4" fill="${s.color}" stroke="#0a0a0a" stroke-width="1.5" opacity="0"/>`).join('') +
+      `<rect x="${padL}" y="0" width="${cw}" height="${H}" fill="transparent" style="cursor:crosshair"/>`;
+
+    // Legenda
+    const legend = document.getElementById('cmp-legend');
+    legend.innerHTML = CMP.series.map(s=>
+      `<span class="inline-flex items-center gap-1.5 text-xs">
+        <span style="width:10px;height:10px;border-radius:50%;background:${s.color};display:inline-block"></span>
+        <span class="text-white font-semibold">${s.label}</span>
+        <span class="text-green-400 font-bold">+${fmtK(s.gain)}</span>
+      </span>`).join('');
+
+    const xh = document.getElementById('cmp-xh');
+    const dots = [...svg.querySelectorAll('.cmp-dot')];
+    const tip = document.getElementById('cmp-tip');
+    const hit = svg.querySelector('rect');
+
+    function move(clientX){
+      const r = svg.getBoundingClientRect();
+      const px = (clientX - r.left) * (W/r.width) - padL;
+      const i = Math.max(0, Math.min(n-1, Math.round(px/xStep)));
+      const cx = X(i);
+      xh.setAttribute('x1',cx); xh.setAttribute('x2',cx); xh.setAttribute('opacity','0.6');
+      CMP.series.forEach((s,k)=>{ dots[k].setAttribute('cx',cx); dots[k].setAttribute('cy',Y(s.growth[i])); dots[k].setAttribute('opacity','1'); });
+      const d = new Date(CMP.dates[i]);
+      const ds = d.toLocaleDateString('it-IT',{day:'2-digit',month:'short'});
+      tip.innerHTML = `<span class="text-white font-semibold">${ds}</span> · ` +
+        CMP.series.map(s=>`<span style="color:${s.color}">${s.label.split(' ')[0]}</span> +${fmtK(s.growth[i])}`).join(' · ');
+    }
+    hit.addEventListener('mousemove', e=>move(e.clientX));
+    hit.addEventListener('touchstart', e=>{e.preventDefault();move(e.touches[0].clientX);},{passive:false});
+    hit.addEventListener('touchmove', e=>{e.preventDefault();move(e.touches[0].clientX);},{passive:false});
+    hit.addEventListener('mouseleave', ()=>{ xh.setAttribute('opacity','0'); dots.forEach(d=>d.setAttribute('opacity','0')); tip.textContent='Passa sul grafico per i dettagli giorno per giorno'; });
+  })();
+</script>
 </body>
 </html>
