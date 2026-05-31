@@ -1,100 +1,100 @@
       <a href="#" class="flex items-center gap-3 border-b border-secondary-500/20 px-4 py-2 last:border-0 hover:bg-secondary-500/5">
         <svg class="h-5 w-5 shrink-0"><use href="#logo-youtube"/></svg>
         <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">2 Million Views</p><p class="text-xs text-gray-400 capitalize">youtube</p></div>
-        <span class="text-xs text-gray-400 shrink-0">Mag 2026</span>
+        <span class="text-xs text-gray-400 shrink-0">22 Mag 2026</span>
       </a>
       <a href="#" class="flex items-center gap-3 border-b border-secondary-500/20 px-4 py-2 last:border-0 hover:bg-secondary-500/5">
         <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
         <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">100,000 Monthly Listeners</p><p class="text-xs text-gray-400 capitalize">spotify</p></div>
-        <span class="text-xs text-gray-400 shrink-0">Mag 2026</span>
+        <span class="text-xs text-gray-400 shrink-0">16 Mag 2026</span>
       </a>
       <a href="#" class="flex items-center gap-3 border-b border-secondary-500/20 px-4 py-2 last:border-0 hover:bg-secondary-500/5">
         <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
         <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">3 Million Streams</p><p class="text-xs text-gray-400 capitalize">spotify</p></div>
-        <span class="text-xs text-gray-400 shrink-0">Mag 2026</span>
+        <span class="text-xs text-gray-400 shrink-0">16 Mag 2026</span>
       </a>
       <a href="#" class="flex items-center gap-3 border-b border-secondary-500/20 px-4 py-2 last:border-0 hover:bg-secondary-500/5">
         <svg class="h-5 w-5 shrink-0"><use href="#logo-youtube"/></svg>
         <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">5000 Views</p><p class="text-xs text-gray-400 capitalize">youtube</p></div>
-        <span class="text-xs text-gray-400 shrink-0">Mag 2026</span>
+        <span class="text-xs text-gray-400 shrink-0">15 Mag 2026</span>
       </a>
       <a href="#" class="flex items-center gap-3 border-b border-secondary-500/20 px-4 py-2 last:border-0 hover:bg-secondary-500/5">
         <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
         <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">100,000 Streams</p><p class="text-xs text-gray-400 capitalize">spotify</p></div>
-        <span class="text-xs text-gray-400 shrink-0">Mag 2026</span>
+        <span class="text-xs text-gray-400 shrink-0">14 Mag 2026</span>
       </a>
       <a href="#" class="flex items-center gap-3 border-b border-secondary-500/20 px-4 py-2 last:border-0 hover:bg-secondary-500/5">
         <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
         <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">75,000 Streams</p><p class="text-xs text-gray-400 capitalize">spotify</p></div>
-        <span class="text-xs text-gray-400 shrink-0">Mag 2026</span>
+        <span class="text-xs text-gray-400 shrink-0">11 Mag 2026</span>
       </a>
       <a href="#" class="flex items-center gap-3 border-b border-secondary-500/20 px-4 py-2 last:border-0 hover:bg-secondary-500/5">
         <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
         <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">75,000 Monthly Listeners</p><p class="text-xs text-gray-400 capitalize">spotify</p></div>
-        <span class="text-xs text-gray-400 shrink-0">Mag 2026</span>
+        <span class="text-xs text-gray-400 shrink-0">8 Mag 2026</span>
       </a>
       <a href="#" class="flex items-center gap-3 border-b border-secondary-500/20 px-4 py-2 last:border-0 hover:bg-secondary-500/5">
         <svg class="h-5 w-5 shrink-0"><use href="#logo-tiktok"/></svg>
         <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">100 Videos</p><p class="text-xs text-gray-400 capitalize">tiktok</p></div>
-        <span class="text-xs text-gray-400 shrink-0">Mag 2026</span>
+        <span class="text-xs text-gray-400 shrink-0">8 Mag 2026</span>
       </a>
       <a href="#" class="flex items-center gap-3 border-b border-secondary-500/20 px-4 py-2 last:border-0 hover:bg-secondary-500/5">
         <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
         <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">50,000 Streams</p><p class="text-xs text-gray-400 capitalize">spotify</p></div>
-        <span class="text-xs text-gray-400 shrink-0">Mag 2026</span>
+        <span class="text-xs text-gray-400 shrink-0">4 Mag 2026</span>
       </a>
       <a href="#" class="flex items-center gap-3 border-b border-secondary-500/20 px-4 py-2 last:border-0 hover:bg-secondary-500/5">
         <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
         <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">40,000 Streams</p><p class="text-xs text-gray-400 capitalize">spotify</p></div>
-        <span class="text-xs text-gray-400 shrink-0">Mag 2026</span>
+        <span class="text-xs text-gray-400 shrink-0">1 Mag 2026</span>
       </a>
       <a href="#" class="flex items-center gap-3 border-b border-secondary-500/20 px-4 py-2 last:border-0 hover:bg-secondary-500/5">
         <svg class="h-5 w-5 shrink-0"><use href="#logo-youtube"/></svg>
         <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">50,000 Views</p><p class="text-xs text-gray-400 capitalize">youtube</p></div>
-        <span class="text-xs text-gray-400 shrink-0">Apr 2026</span>
+        <span class="text-xs text-gray-400 shrink-0">29 Apr 2026</span>
       </a>
       <a href="#" class="flex items-center gap-3 border-b border-secondary-500/20 px-4 py-2 last:border-0 hover:bg-secondary-500/5">
         <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
         <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">30,000 Streams</p><p class="text-xs text-gray-400 capitalize">spotify</p></div>
-        <span class="text-xs text-gray-400 shrink-0">Apr 2026</span>
+        <span class="text-xs text-gray-400 shrink-0">27 Apr 2026</span>
       </a>
       <a href="#" class="flex items-center gap-3 border-b border-secondary-500/20 px-4 py-2 last:border-0 hover:bg-secondary-500/5">
         <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
         <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">500,000 Streams</p><p class="text-xs text-gray-400 capitalize">spotify</p></div>
-        <span class="text-xs text-gray-400 shrink-0">Apr 2026</span>
+        <span class="text-xs text-gray-400 shrink-0">24 Apr 2026</span>
       </a>
       <a href="#" class="flex items-center gap-3 border-b border-secondary-500/20 px-4 py-2 last:border-0 hover:bg-secondary-500/5">
         <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
         <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">1 Million Playlist Listeners</p><p class="text-xs text-gray-400 capitalize">spotify</p></div>
-        <span class="text-xs text-gray-400 shrink-0">Apr 2026</span>
+        <span class="text-xs text-gray-400 shrink-0">23 Apr 2026</span>
       </a>
       <a href="#" class="flex items-center gap-3 border-b border-secondary-500/20 px-4 py-2 last:border-0 hover:bg-secondary-500/5">
         <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
         <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">20,000 Streams</p><p class="text-xs text-gray-400 capitalize">spotify</p></div>
-        <span class="text-xs text-gray-400 shrink-0">Apr 2026</span>
+        <span class="text-xs text-gray-400 shrink-0">22 Apr 2026</span>
       </a>
       <a href="#" class="flex items-center gap-3 border-b border-secondary-500/20 px-4 py-2 last:border-0 hover:bg-secondary-500/5">
         <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
         <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">50,000 Monthly Listeners</p><p class="text-xs text-gray-400 capitalize">spotify</p></div>
-        <span class="text-xs text-gray-400 shrink-0">Apr 2026</span>
+        <span class="text-xs text-gray-400 shrink-0">22 Apr 2026</span>
       </a>
       <a href="#" class="flex items-center gap-3 border-b border-secondary-500/20 px-4 py-2 last:border-0 hover:bg-secondary-500/5">
         <svg class="h-5 w-5 shrink-0"><use href="#logo-tiktok"/></svg>
         <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">250,000 Views</p><p class="text-xs text-gray-400 capitalize">tiktok</p></div>
-        <span class="text-xs text-gray-400 shrink-0">Apr 2026</span>
+        <span class="text-xs text-gray-400 shrink-0">20 Apr 2026</span>
       </a>
       <a href="#" class="flex items-center gap-3 border-b border-secondary-500/20 px-4 py-2 last:border-0 hover:bg-secondary-500/5">
         <svg class="h-5 w-5 shrink-0"><use href="#logo-youtube"/></svg>
         <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">10,000 Views</p><p class="text-xs text-gray-400 capitalize">youtube</p></div>
-        <span class="text-xs text-gray-400 shrink-0">Apr 2026</span>
+        <span class="text-xs text-gray-400 shrink-0">20 Apr 2026</span>
       </a>
       <a href="#" class="flex items-center gap-3 border-b border-secondary-500/20 px-4 py-2 last:border-0 hover:bg-secondary-500/5">
         <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
         <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">10,000 Streams</p><p class="text-xs text-gray-400 capitalize">spotify</p></div>
-        <span class="text-xs text-gray-400 shrink-0">Apr 2026</span>
+        <span class="text-xs text-gray-400 shrink-0">18 Apr 2026</span>
       </a>
       <a href="#" class="flex items-center gap-3 border-b border-secondary-500/20 px-4 py-2 last:border-0 hover:bg-secondary-500/5">
         <svg class="h-5 w-5 shrink-0"><use href="#logo-spotify"/></svg>
         <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">750,000 Playlist Listeners</p><p class="text-xs text-gray-400 capitalize">spotify</p></div>
-        <span class="text-xs text-gray-400 shrink-0">Apr 2026</span>
+        <span class="text-xs text-gray-400 shrink-0">18 Apr 2026</span>
       </a>
