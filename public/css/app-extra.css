@@ -1,0 +1,16 @@
+.border-primary-500\/40{border-color:color-mix(in oklab, var(--color-primary-500) 40%, transparent)}
+.divide-x > :not([hidden]) ~ :not([hidden]){--tw-divide-x-reverse:0;border-inline-width:calc(1px * var(--tw-divide-x-reverse)) calc(calc(1px * calc(1 - var(--tw-divide-x-reverse))) * -1);border-inline-style:var(--tw-border-style)}
+.mb-1\.5{margin-bottom:calc(var(--spacing) * 1.5)}
+.ring-offset-2{--tw-ring-offset-shadow:var(--tw-ring-inset,) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-offset-width:2px}
+.ring-offset-black{--tw-ring-offset-color:var(--color-black-900)}
+.text-white\/90{color:color-mix(in oklab, var(--color-white) 90%, transparent)}
+.top-6{top:calc(var(--spacing) * 6)}
+.w-28{width:calc(var(--spacing) * 28)}
+.w-\[31\%\]{width:31%}
+.w-\[42\%\]{width:42%}
+.w-\[54\%\]{width:54%}
+.w-\[71\%\]{width:71%}
+.w-\[74\%\]{width:74%}
+.w-\[75\%\]{width:75%}
+.w-\[94\%\]{width:94%}
+.w-\[96\%\]{width:96%}
