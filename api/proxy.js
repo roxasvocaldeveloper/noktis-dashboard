@@ -30,6 +30,8 @@ const ROUTES = {
   'playlists/current':  { upstream: 'artists/top_playlists',  edgeTtl: 21600,  swr: 86400, memTtl: 300 },
   // Playlists lifetime: cambiano raramente, 24h edge / 7gg SWR
   'playlists/all':      { upstream: 'artists/top_playlists',  edgeTtl: 86400,  swr: 604800, memTtl: 600 },
+  // Track stats + video (Instagram/TikTok/YouTube per-track): 6h edge / 24h SWR
+  'track_stats':        { upstream: 'tracks/stats',           edgeTtl: 21600,  swr: 86400, memTtl: 300 },
 };
 
 // ─── In-memory cache (Layer 2) ──────────────────────────────────

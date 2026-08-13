@@ -27,6 +27,7 @@ const ROUTES = {
   '/api/activities':          { upstream: 'artists/activities',     memTtl: 300 },
   '/api/playlists/current':   { upstream: 'artists/top_playlists',  memTtl: 300 },
   '/api/playlists/all':       { upstream: 'artists/top_playlists',  memTtl: 600 },
+  '/api/track_stats':         { upstream: 'tracks/stats',           memTtl: 300 },
 };
 
 // ─── In-memory cache + inflight coalesce ────────────────────────
