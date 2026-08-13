@@ -455,10 +455,10 @@
             <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Unforgettable</p><p class="text-xs text-gray-400">Lug 2021</p></div>
             <div class="flex items-center gap-2 shrink-0"><span class="text-base font-bold text-white">32</span><span class="inline-flex items-center rounded-full border border-secondary-500/20 bg-black/50 px-2 py-1 text-xs font-bold text-gray-400">stabile</span></div>
           </button>
-          <button  class="flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left hover:bg-secondary-500/5">
+          <button data-kpi-chart="track-berlin" class="flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left hover:bg-secondary-500/5">
             <img src="https://i.scdn.co/image/ab67616d00001e029494eeac6a088d0460830996" alt="" class="h-9 w-9 rounded-lg shrink-0">
-            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Berlin</p><p class="text-xs text-gray-400">—</p></div>
-            <div class="flex items-center gap-2 shrink-0"><span class="text-base font-bold text-white">17</span><span class="inline-flex items-center rounded-full border border-secondary-500/20 bg-black/50 px-2 py-1 text-xs font-bold text-gray-400">—</span></div>
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Berlin</p><p class="text-xs text-gray-400">ft. kaii · Ago 2020</p></div>
+            <div class="flex items-center gap-2 shrink-0"><span class="text-base font-bold text-white">17</span><span class="inline-flex items-center rounded-full border border-secondary-500/20 bg-black/50 px-2 py-1 text-xs font-bold text-red-400">−7</span></div>
           </button>
         
         </div>
@@ -2670,12 +2670,12 @@
           <span class="inline-flex items-center rounded-full border border-secondary-500/20 bg-black/50 px-2 py-1 text-xs font-bold text-gray-400">stabile</span>
         </div>
       </button>
-      <button  class="flex w-full items-center gap-3 border-b border-secondary-500/20 px-5 py-3 text-left hover:bg-secondary-500/5">
+      <button data-kpi-chart="track-berlin" class="flex w-full items-center gap-3 border-b border-secondary-500/20 px-5 py-3 text-left hover:bg-secondary-500/5">
         <img src="https://i.scdn.co/image/ab67616d00001e029494eeac6a088d0460830996" class="h-8 w-10 rounded-lg shrink-0">
-        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Berlin</p><p class="text-xs text-gray-400">—</p></div>
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">Berlin</p><p class="text-xs text-gray-400">ft. kaii · Ago 2020</p></div>
         <div class="flex items-center gap-2 shrink-0">
           <span class="text-lg font-bold text-white w-8 text-right shrink-0">17</span>
-          <span class="inline-flex items-center rounded-full border border-secondary-500/20 bg-black/50 px-2 py-1 text-xs font-bold text-gray-400">—</span>
+          <span class="inline-flex items-center rounded-full border border-secondary-500/20 bg-black/50 px-2 py-1 text-xs font-bold text-red-400">−7</span>
         </div>
       </button>
     
@@ -3523,7 +3523,8 @@
     'track-obsessed':  { label:'obsessed', sub:'Popolarità track', color:'#9747FF', cc:'text-primary-500', value:'34/100', delta:'stabile', points: [34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34] },
     'track-saturn':  { label:'when saturn kissed the moon', sub:'Popolarità track', color:'#9747FF', cc:'text-primary-500', value:'33/100', delta:'−1', points: [34,34,34,34,34,34,34,34,34,34,34,34,34,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33] },
     'track-unforgettable':  { label:'Unforgettable', sub:'Popolarità track', color:'#9747FF', cc:'text-primary-500', value:'32/100', delta:'stabile', points: [32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32] },
-    'track-not_enough':  { label:'Not Enough', sub:'Popolarità track', color:'#9747FF', cc:'text-primary-500', value:'32/100', delta:'stabile', points: [32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32] }
+    'track-not_enough':  { label:'Not Enough', sub:'Popolarità track', color:'#9747FF', cc:'text-primary-500', value:'32/100', delta:'stabile', points: [32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32] },
+    'track-berlin':  { label:'Berlin', sub:'Popolarità track', color:'#9747FF', cc:'text-primary-500', value:'17/100', delta:'−7', points: [24,26,31,32,36,33,33,33,29,26,30,31,33,36,37,36,26,23,21,20,17,17,20,20,18,17,17,17,18,17] }
   };
 
   const modal = document.getElementById('kpi-modal');
